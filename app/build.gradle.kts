@@ -77,4 +77,5 @@ dependencies {
     implementation(libs.navigation.compose)
 
     implementation(project(":core:network"))
+    implementation(project(":feature:main"))
 }

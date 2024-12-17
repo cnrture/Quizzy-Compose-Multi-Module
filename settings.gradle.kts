@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Quiz App Compose"
 include(":app")
+include(":core:network")
+include(":feature:main")
