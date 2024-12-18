@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt.plugin)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlinx.serialization.plugin)
 }
 
 android {
@@ -47,8 +48,6 @@ android {
 }
 
 dependencies {
-
-
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -68,13 +67,13 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 
-    // Hilt
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
 
-    // Navigation
     implementation(libs.navigation.compose)
+
+    implementation(libs.kotlinx.serialization)
 
     implementation(project(":core:network"))
     implementation(project(":feature:main"))
