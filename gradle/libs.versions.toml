@@ -13,11 +13,11 @@ activity-compose = "1.9.3"
 compose-bom = "2024.12.01"
 coilVersion = "2.7.0"
 retrofit = "2.11.0"
-hilt = "2.52"
+hilt = "2.53.1"
 hiltNavigationCompose = "1.2.0"
 navigation = "2.8.5"
 ktlint = "11.3.2"
-detekt = "1.23.5"
+detekt = "1.23.6"
 googleServices = "4.4.2"
 firebase = "33.7.0"
 kotlinxSerialization = "1.7.3"
@@ -51,6 +51,12 @@ detekt = { group = "io.gitlab.arturbosch", name = "detekt", version.ref = "detek
 firebase = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
+android-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+compose-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+kotlin-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
+ksp-plugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
@@ -62,3 +68,12 @@ ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 kotlinx-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+quiz-android-application = { id = "quiz.android.application" }
+quiz-android-application-compose = { id = "quiz.android.application.compose" }
+quiz-android-application-firebase = { id = "quiz.android.application.firebase" }
+quiz-android-feature = { id = "quiz.android.feature" }
+quiz-android-library = { id = "quiz.android.library" }
+quiz-android-library-compose = { id = "quiz.android.library.compose" }
+quiz-hilt = { id = "quiz.hilt" }
+quiz-jvm-library = { id = "quiz.jvm.library" }

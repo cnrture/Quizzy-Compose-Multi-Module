@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -19,7 +20,8 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Quiz App Compose"
+rootProject.name = "QuizAppCompose"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 include(":core:network")
 include(":feature:main")
