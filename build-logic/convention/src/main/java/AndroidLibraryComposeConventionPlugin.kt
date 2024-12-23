@@ -23,6 +23,7 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
                 dependencies {
                     val bom = libs.findLibrary("compose-bom").get()
                     "implementation"(platform(bom))
+                    "implementation"(libs.findLibrary("material3").get())
                     "androidTestImplementation"(platform(bom))
                     "implementation"(libs.findLibrary("compose-ui-tooling-preview").get())
                     "debugImplementation"(libs.findLibrary("compose-ui-tooling").get())
