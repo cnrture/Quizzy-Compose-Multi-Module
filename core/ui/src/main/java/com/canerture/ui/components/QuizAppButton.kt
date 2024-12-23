@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,7 +44,7 @@ fun QuizAppButton(
                 border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.black),
                 contentPadding = PaddingValues(vertical = 16.dp, horizontal = 24.dp),
             ) {
-                Text(
+                QuizAppText(
                     text = text,
                     color = QuizAppTheme.colors.white,
                     style = textStyle,
@@ -64,7 +63,7 @@ fun QuizAppButton(
                 border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.black),
                 contentPadding = PaddingValues(vertical = 16.dp, horizontal = 24.dp),
             ) {
-                Text(
+                QuizAppText(
                     text = text,
                     color = QuizAppTheme.colors.black,
                     style = textStyle,
