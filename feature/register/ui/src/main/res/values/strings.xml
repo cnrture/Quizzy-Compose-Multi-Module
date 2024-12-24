@@ -11,4 +11,19 @@
     <string name="terms_of_conditions_span">Terms of Conditions</string>
     <string name="privacy_policy_span">Privacy of Policy</string>
     <string name="welcome">Welcome!</string>
+
+    <string name="login_message">It’s great to see you again! Log in now!</string>
+    <string name="login_email_username">Email or Username</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Log In</string>
+
+    <string name="register_message">Join us now and let’s get started!</string>
+    <string name="register_email">Email</string>
+    <string name="register_username">Username</string>
+    <string name="register_confirm_password">Confirm Password</string>
+    <string name="register">Sign Up</string>
+    <string name="already_have_an_account">Already have an account? Log In</string>
+    <string name="already_have_an_account_span">Log In</string>
 </resources>

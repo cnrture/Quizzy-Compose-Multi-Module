@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -27,13 +29,18 @@ fun QuizAppTextField(
     value: String,
     label: String,
     onValueChange: (String) -> Unit,
+    isSingleLine: Boolean = true,
     isPassword: Boolean = false,
     icon: ImageVector? = null,
 ) {
     val leadingIcon: @Composable (() -> Unit)? = icon?.let {
         {
             Icon(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .size(24.dp),
                 imageVector = icon,
+                tint = QuizAppTheme.colors.black,
                 contentDescription = null,
             )
         }
@@ -45,8 +52,12 @@ fun QuizAppTextField(
     val trailingIcon: @Composable (() -> Unit)? = if (isPassword) {
         {
             Icon(
-                modifier = Modifier.clickable { visibility = !visibility },
+                modifier = Modifier
+                    .padding(16.dp)
+                    .size(24.dp)
+                    .clickable { visibility = !visibility },
                 imageVector = if (visibility) QuizAppTheme.icons.visibilityOn else QuizAppTheme.icons.visibilityOff,
+                tint = QuizAppTheme.colors.black,
                 contentDescription = null,
             )
         }
@@ -65,6 +76,8 @@ fun QuizAppTextField(
             )
         },
         textStyle = QuizAppTheme.typography.paragraph1,
+        singleLine = isSingleLine,
+        maxLines = if (isSingleLine) 1 else Int.MAX_VALUE,
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedContainerColor = QuizAppTheme.colors.white,
             focusedContainerColor = QuizAppTheme.colors.white,
@@ -81,7 +94,7 @@ fun QuizAppTextField(
 
 @Preview(showBackground = true)
 @Composable
-fun QuizAppTextFieldPreview() {
+private fun QuizAppTextFieldPreview() {
     Column {
         QuizAppTextField(
             value = "cnrture",

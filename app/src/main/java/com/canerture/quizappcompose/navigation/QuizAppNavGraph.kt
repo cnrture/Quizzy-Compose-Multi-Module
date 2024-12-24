@@ -4,6 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.canerture.login.ui.navigation.LoginRoute
+import com.canerture.login.ui.navigation.loginScreen
+import com.canerture.register.ui.navigation.RegisterRoute
+import com.canerture.register.ui.navigation.registerScreen
 import com.canerture.ui.navigation.SplashRoute
 import com.canerture.ui.navigation.splashScreen
 import com.canerture.welcome.ui.navigation.WelcomeRoute
@@ -19,13 +23,26 @@ fun QuizAppNavGraph(
         startDestination = SplashRoute,
         modifier = modifier,
     ) {
-        splashScreen(onNavigateWelcome = { navController.navigate(WelcomeRoute) })
+        splashScreen(
+            onNavigateWelcome = { navController.navigate(WelcomeRoute) }
+        )
         welcomeScreen(
+            onNavigateLogin = { navController.navigate(LoginRoute) },
+            onNavigateRegister = { navController.navigate(RegisterRoute) }
+        )
+        loginScreen(
+            onNavigateBack = { navController.popBackStack() },
+            onNavigateRegister = { navController.navigate(RegisterRoute) },
+            onNavigateHome = {
+                //navController.navigate(WelcomeRoute)
+            }
+        )
+        registerScreen(
+            onNavigateBack = { navController.popBackStack() },
             onNavigateLogin = {
-                //navController.navigate(WelcomeRoute)
-            },
-            onNavigateRegister = {
-                //navController.navigate(WelcomeRoute)
+                navController.navigate(LoginRoute) {
+                    popUpTo(RegisterRoute) { inclusive = true }
+                }
             }
         )
     }
