@@ -66,6 +66,8 @@ fun QuizAppTextField(
         },
         textStyle = QuizAppTheme.typography.paragraph1,
         colors = OutlinedTextFieldDefaults.colors(
+            unfocusedContainerColor = QuizAppTheme.colors.white,
+            focusedContainerColor = QuizAppTheme.colors.white,
             focusedLabelColor = QuizAppTheme.colors.blue,
             focusedBorderColor = QuizAppTheme.colors.blue,
             unfocusedLabelColor = QuizAppTheme.colors.darkGray,

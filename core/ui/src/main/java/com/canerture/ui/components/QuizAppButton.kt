@@ -6,11 +6,15 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.canerture.ui.theme.QuizAppTheme
@@ -25,6 +29,7 @@ fun QuizAppButton(
     text: String,
     type: QuizAppButtonType = QuizAppButtonType.PRIMARY,
     size: QuizAppButtonSize = QuizAppButtonSize.MEDIUM,
+    icon: ImageVector? = null,
     onClick: () -> Unit,
 ) {
     val textStyle = when (size) {
@@ -32,6 +37,7 @@ fun QuizAppButton(
         QuizAppButtonSize.MEDIUM -> QuizAppTheme.typography.heading5
         QuizAppButtonSize.LARGE -> QuizAppTheme.typography.heading4
     }
+
     when (type) {
         QuizAppButtonType.PRIMARY -> {
             Button(
@@ -44,6 +50,14 @@ fun QuizAppButton(
                 border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.black),
                 contentPadding = PaddingValues(vertical = 16.dp, horizontal = 24.dp),
             ) {
+                icon?.let {
+                    Icon(
+                        imageVector = icon,
+                        tint = Color.Unspecified,
+                        contentDescription = null,
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
                 QuizAppText(
                     text = text,
                     color = QuizAppTheme.colors.white,
@@ -63,6 +77,14 @@ fun QuizAppButton(
                 border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.black),
                 contentPadding = PaddingValues(vertical = 16.dp, horizontal = 24.dp),
             ) {
+                icon?.let {
+                    Icon(
+                        imageVector = icon,
+                        tint = Color.Unspecified,
+                        contentDescription = null,
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
                 QuizAppText(
                     text = text,
                     color = QuizAppTheme.colors.black,
@@ -110,6 +132,7 @@ private fun QuizAppButtonPreview() {
                 text = "Outlined Button",
                 type = QuizAppButtonType.SECONDARY,
                 size = QuizAppButtonSize.MEDIUM,
+                icon = QuizAppTheme.icons.google,
                 onClick = { }
             )
             Spacer(modifier = Modifier.height(16.dp))
@@ -117,6 +140,7 @@ private fun QuizAppButtonPreview() {
                 text = "Primary Button",
                 type = QuizAppButtonType.SECONDARY,
                 size = QuizAppButtonSize.LARGE,
+                icon = QuizAppTheme.icons.google,
                 onClick = { }
             )
         }

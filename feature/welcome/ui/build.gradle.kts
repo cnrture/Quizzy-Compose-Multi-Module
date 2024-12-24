@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.canerture.feature.splash.ui"
+    namespace = "com.canerture.feature.welcome.ui"
 }
 
 dependencies {

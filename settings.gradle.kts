@@ -24,6 +24,7 @@ rootProject.name = "QuizAppCompose"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 include(":core:network")
-include(":feature:main")
 include(":core:ui")
 include(":feature:splash:ui")
+include(":feature:welcome:ui")
+include(":core:common")

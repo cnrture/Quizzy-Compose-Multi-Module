@@ -16,16 +16,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.canerture.core.common.collectWithLifecycle
+import com.canerture.feature.splash.ui.R
 import com.canerture.ui.component.AnimatedLinearProgress
-import com.canerture.ui.component.LinearProgress
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.theme.QuizAppTheme
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(
+    uiEffect: Flow<SplashContract.UiEffect>,
+    onNavigateWelcome: () -> Unit,
+) {
+    uiEffect.collectWithLifecycle { effect ->
+        when (effect) {
+            is SplashContract.UiEffect.NavigateToWelcome -> onNavigateWelcome()
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -38,8 +51,7 @@ fun SplashScreen() {
             contentDescription = null,
         )
         Column(
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -50,7 +62,7 @@ fun SplashScreen() {
             )
             Spacer(modifier = Modifier.height(40.dp))
             QuizAppText(
-                text = "Quiz App",
+                text = stringResource(R.string.app_name),
                 style = QuizAppTheme.typography.heading1,
             )
             Spacer(modifier = Modifier.height(76.dp))
@@ -60,7 +72,7 @@ fun SplashScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),
-                text = "Discover the Joy of Trivia!",
+                text = stringResource(R.string.splash_screen_title),
                 style = QuizAppTheme.typography.heading2,
                 textAlign = TextAlign.Center,
             )
@@ -69,7 +81,7 @@ fun SplashScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),
-                text = "join us on a journey of discovery as you unlock the secrets of the world through trivia!",
+                text = stringResource(R.string.splash_screen_subtitle),
                 style = QuizAppTheme.typography.paragraph1,
                 textAlign = TextAlign.Center,
             )
@@ -80,5 +92,8 @@ fun SplashScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun SplashScreenPreview() {
-    SplashScreen()
+    SplashScreen(
+        uiEffect = emptyFlow(),
+        onNavigateWelcome = {},
+    )
 }

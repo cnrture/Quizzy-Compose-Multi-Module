@@ -33,6 +33,7 @@ dependencies {
     implementation(projects.core.network)
     implementation(projects.core.ui)
     implementation(projects.feature.splash.ui)
+    implementation(projects.feature.welcome.ui)
 
     implementation(libs.activity.compose)
     implementation(libs.core.ktx)

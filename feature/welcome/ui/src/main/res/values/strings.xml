@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quiz App</string>
+    <string name="welcome_title">Where Knowledge Reigns Supreme!</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="sign_in_with_email_or_username">Sign In with Email or Username</string>
+    <string name="or">Or</string>
+    <string name="dont_have_an_account">Don’t have an account? Sign Up</string>
+    <string name="dont_have_an_account_span">Sign Up</string>
+    <string name="policy">By continuing, I agree to Terms of Conditions and Privacy of Policy</string>
+    <string name="terms_of_conditions_span">Terms of Conditions</string>
+    <string name="privacy_policy_span">Privacy of Policy</string>
+</resources>

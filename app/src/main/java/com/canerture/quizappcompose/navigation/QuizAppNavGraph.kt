@@ -6,6 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.canerture.ui.navigation.SplashRoute
 import com.canerture.ui.navigation.splashScreen
+import com.canerture.welcome.ui.navigation.WelcomeRoute
+import com.canerture.welcome.ui.navigation.welcomeScreen
 
 @Composable
 fun QuizAppNavGraph(
@@ -17,6 +19,14 @@ fun QuizAppNavGraph(
         startDestination = SplashRoute,
         modifier = modifier,
     ) {
-        splashScreen()
+        splashScreen(onNavigateWelcome = { navController.navigate(WelcomeRoute) })
+        welcomeScreen(
+            onNavigateLogin = {
+                //navController.navigate(WelcomeRoute)
+            },
+            onNavigateRegister = {
+                //navController.navigate(WelcomeRoute)
+            }
+        )
     }
 }

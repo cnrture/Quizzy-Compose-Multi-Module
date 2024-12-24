@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quiz App</string>
+    <string name="splash_screen_title">Discover the Joy of Trivia!</string>
+    <string name="splash_screen_subtitle">join us on a journey of discovery as you unlock the secrets of the world through trivia!</string>
+</resources>
