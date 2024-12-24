@@ -11,7 +11,7 @@ internal val LocalColors = staticCompositionLocalOf { colors() }
 fun colors(
     black: Color = Color(0xFF343434),
     white: Color = Color(0xFFFCFCFC),
-    background: Color = Color(0xFFFAFAFA),
+    background: Color = Color(0xFFfffbf3),
     blue: Color = Color(0xFF609DED),
     lightBlue: Color = Color(0xFFBCD9FF),
     yellow: Color = Color(0xFFFFCB46),
