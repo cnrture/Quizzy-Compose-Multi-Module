@@ -30,8 +30,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:network"))
-    implementation(project(":feature:main"))
+    implementation(projects.core.network)
+    implementation(projects.core.ui)
+    implementation(projects.feature.splash.ui)
 
     implementation(libs.activity.compose)
     implementation(libs.core.ktx)

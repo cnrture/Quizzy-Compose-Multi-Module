@@ -4,9 +4,8 @@ plugins {
 }
 
 android {
-    namespace = "com.canerture.feature.main"
+    namespace = "com.canerture.feature.splash.ui"
 }
 
 dependencies {
-    //implementation(projects.core.data)
 }

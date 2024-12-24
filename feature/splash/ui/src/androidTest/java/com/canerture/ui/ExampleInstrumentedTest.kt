@@ -1,4 +1,4 @@
-package com.canerture.main
+package com.canerture.ui
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.canerture.main.test", appContext.packageName)
+        assertEquals("com.canerture.ui.test", appContext.packageName)
     }
 }

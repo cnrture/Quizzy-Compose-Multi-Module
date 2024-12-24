@@ -1,4 +1,4 @@
-package com.canerture.main
+package com.canerture.ui
 
 import org.junit.Test
 

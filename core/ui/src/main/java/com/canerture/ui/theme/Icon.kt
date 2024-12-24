@@ -120,4 +120,8 @@ class QuizAppIcons {
     val wrong: ImageVector
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_wrong)
+
+    val starPattern: ImageVector
+        @Composable
+        get() = ImageVector.vectorResource(id = R.drawable.ic_star_pattern)
 }
