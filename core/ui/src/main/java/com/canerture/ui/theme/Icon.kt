@@ -109,6 +109,10 @@ class QuizAppIcons {
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_trophy)
 
+    val visibilityOn: ImageVector
+        @Composable
+        get() = ImageVector.vectorResource(id = R.drawable.ic_visibility_on)
+
     val visibilityOff: ImageVector
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_visibility_off)
