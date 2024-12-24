@@ -75,7 +75,7 @@ fun QuizAppButton(
 
 @Preview(showBackground = true)
 @Composable
-fun ESButtonPreview() {
+private fun QuizAppButtonPreview() {
     QuizAppTheme {
         Column {
             QuizAppButton(
