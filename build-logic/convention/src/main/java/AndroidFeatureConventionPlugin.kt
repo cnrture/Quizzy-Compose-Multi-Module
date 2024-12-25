@@ -10,6 +10,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             pluginManager.apply {
                 apply("quiz.android.library")
                 apply("quiz.hilt")
+                apply("quiz.detekt")
                 apply("org.jetbrains.kotlin.plugin.serialization")
             }
 

@@ -34,7 +34,7 @@ fun QuizAppNavGraph(
             onNavigateBack = { navController.popBackStack() },
             onNavigateRegister = { navController.navigate(RegisterRoute) },
             onNavigateHome = {
-                //navController.navigate(WelcomeRoute)
+                // navController.navigate(WelcomeRoute)
             }
         )
         registerScreen(

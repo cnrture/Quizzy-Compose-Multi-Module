@@ -46,7 +46,4 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.coil.compose)
     implementation(libs.kotlinx.serialization)
-
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
 }

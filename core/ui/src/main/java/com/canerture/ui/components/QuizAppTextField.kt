@@ -64,7 +64,9 @@ fun QuizAppTextField(
                 contentDescription = null,
             )
         }
-    } else null
+    } else {
+        null
+    }
 
     OutlinedTextField(
         modifier = Modifier

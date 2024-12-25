@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `kotlin-dsl`
-    alias(libs.plugins.detekt)
 }
 
 java {
@@ -21,6 +20,7 @@ dependencies {
     compileOnly(libs.compose.plugin)
     compileOnly(libs.kotlin.plugin)
     compileOnly(libs.ksp.plugin)
+    compileOnly(libs.detekt.plugin)
 }
 
 gradlePlugin {
@@ -56,6 +56,10 @@ gradlePlugin {
         register("jvmLibrary") {
             id = libs.plugins.quiz.jvm.library.get().pluginId
             implementationClass = "com.canerture.convention.JvmLibraryConventionPlugin"
+        }
+        register("detekt") {
+            id = libs.plugins.quiz.detekt.get().pluginId
+            implementationClass = "com.canerture.convention.DetektConventionPlugin"
         }
     }
 }

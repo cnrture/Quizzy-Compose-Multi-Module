@@ -8,7 +8,9 @@ class AndroidApplicationFirebaseConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("com.google.gms.google-services")
+                if (pluginManager.hasPlugin("com.android.application")) {
+                    apply("com.google.gms.google-services")
+                }
             }
 
             dependencies {
