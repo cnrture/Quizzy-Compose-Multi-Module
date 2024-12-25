@@ -38,17 +38,23 @@ fun QuizAppButton(
         QuizAppButtonSize.LARGE -> QuizAppTheme.typography.heading4
     }
 
+    val height = when (size) {
+        QuizAppButtonSize.SMALL -> 53.dp
+        QuizAppButtonSize.MEDIUM -> 56.dp
+        QuizAppButtonSize.LARGE -> 59.dp
+    }
+
     when (type) {
         QuizAppButtonType.PRIMARY -> {
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(height)
                     .then(modifier),
                 onClick = onClick,
                 colors = ButtonDefaults.buttonColors(QuizAppTheme.colors.blue),
                 shape = CircleShape,
                 border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.black),
-                contentPadding = PaddingValues(vertical = 16.dp, horizontal = 24.dp),
             ) {
                 icon?.let {
                     Icon(
@@ -70,12 +76,12 @@ fun QuizAppButton(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(height)
                     .then(modifier),
                 onClick = onClick,
                 colors = ButtonDefaults.buttonColors(QuizAppTheme.colors.white),
                 shape = CircleShape,
                 border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.black),
-                contentPadding = PaddingValues(vertical = 16.dp, horizontal = 24.dp),
             ) {
                 icon?.let {
                     Icon(

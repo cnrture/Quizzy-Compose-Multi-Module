@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -17,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,10 +30,11 @@ fun QuizAppTextField(
     modifier: Modifier = Modifier,
     value: String,
     label: String,
-    onValueChange: (String) -> Unit,
+    keyboardType: KeyboardType = KeyboardType.Text,
     isSingleLine: Boolean = true,
     isPassword: Boolean = false,
     icon: ImageVector? = null,
+    onValueChange: (String) -> Unit,
 ) {
     val leadingIcon: @Composable (() -> Unit)? = icon?.let {
         {
@@ -78,6 +81,7 @@ fun QuizAppTextField(
         textStyle = QuizAppTheme.typography.paragraph1,
         singleLine = isSingleLine,
         maxLines = if (isSingleLine) 1 else Int.MAX_VALUE,
+        keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedContainerColor = QuizAppTheme.colors.white,
             focusedContainerColor = QuizAppTheme.colors.white,
@@ -88,7 +92,7 @@ fun QuizAppTextField(
         ),
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
-        visualTransformation = visualTransformation,
+        visualTransformation = if (isPassword) visualTransformation else VisualTransformation.None,
     )
 }
 
