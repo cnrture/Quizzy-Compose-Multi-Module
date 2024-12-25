@@ -1,11 +1,12 @@
 plugins {
-    alias(libs.plugins.quiz.android.library)
-    alias(libs.plugins.quiz.android.library.compose)
+    alias(libs.plugins.quiz.jvm.library)
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
-android {
-    namespace = "com.canerture.core.common"
-}
+group = "com.canerture.core.common"
 
 dependencies {
+    implementation(platform(libs.compose.bom))
+    implementation(libs.material3)
+    implementation(libs.lifecycle.runtime.compose)
 }

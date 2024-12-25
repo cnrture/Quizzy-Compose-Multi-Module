@@ -1,19 +1,19 @@
 plugins {
     alias(libs.plugins.quiz.android.library)
     alias(libs.plugins.quiz.hilt)
+    alias(libs.plugins.quiz.android.firebase)
     alias(libs.plugins.kotlinx.serialization.plugin)
 }
 
 android {
-    namespace = "com.canerture.network"
+    namespace = "com.canerture.core.network"
     buildFeatures {
         buildConfig = true
     }
 }
 
 dependencies {
-    implementation(libs.coil.compose)
     implementation(libs.kotlinx.serialization)
     implementation(libs.retrofit)
-    implementation(libs.kotlinx.serialization)
+    implementation(libs.converter.gson)
 }

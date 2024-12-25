@@ -8,4 +8,5 @@ plugins {
     alias(libs.plugins.hilt.plugin) apply false
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.kotlinx.serialization.plugin) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
 }

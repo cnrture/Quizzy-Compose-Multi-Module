@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.quiz.android.application)
     alias(libs.plugins.quiz.android.application.compose)
-    alias(libs.plugins.quiz.android.application.firebase)
+    alias(libs.plugins.quiz.android.firebase)
     alias(libs.plugins.quiz.hilt)
     alias(libs.plugins.kotlinx.serialization.plugin)
 }
@@ -30,10 +30,13 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.network)
     implementation(projects.core.ui)
+    implementation(projects.core.network)
+    implementation(projects.feature.register.data)
     implementation(projects.feature.splash.ui)
     implementation(projects.feature.welcome.ui)
+    implementation(projects.feature.login.ui)
+    implementation(projects.feature.register.ui)
 
     implementation(libs.activity.compose)
     implementation(libs.core.ktx)

@@ -50,7 +50,7 @@ gradlePlugin {
             implementationClass = "com.canerture.convention.HiltConventionPlugin"
         }
         register("androidFirebase") {
-            id = libs.plugins.quiz.android.application.firebase.get().pluginId
+            id = libs.plugins.quiz.android.firebase.get().pluginId
             implementationClass = "com.canerture.convention.AndroidApplicationFirebaseConventionPlugin"
         }
         register("jvmLibrary") {

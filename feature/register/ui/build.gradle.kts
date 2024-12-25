@@ -1,6 +1,7 @@
 plugins {
-    alias(libs.plugins.quiz.android.feature)
+    alias(libs.plugins.quiz.android.library)
     alias(libs.plugins.quiz.android.library.compose)
+    alias(libs.plugins.quiz.android.feature)
 }
 
 android {
@@ -9,4 +10,5 @@ android {
 
 dependencies {
     implementation(projects.core.common)
+    implementation(projects.feature.register.domain)
 }
