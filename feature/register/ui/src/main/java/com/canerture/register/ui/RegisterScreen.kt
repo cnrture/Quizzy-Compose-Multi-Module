@@ -6,41 +6,99 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import com.canerture.core.common.collectWithLifecycle
 import com.canerture.core.common.noRippleClickable
 import com.canerture.feature.register.ui.R
+import com.canerture.register.ui.RegisterContract.UiAction
+import com.canerture.register.ui.RegisterContract.UiEffect
+import com.canerture.register.ui.RegisterContract.UiState
 import com.canerture.register.ui.component.buildDontHaveAnAccountSpannableText
 import com.canerture.register.ui.component.buildPolicySpannableText
 import com.canerture.ui.components.QuizAppButton
+import com.canerture.ui.components.QuizAppDialog
+import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppTextField
+import com.canerture.ui.components.QuizAppToolbar
 import com.canerture.ui.theme.QuizAppTheme
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun RegisterScreen(
+    uiState: UiState,
+    uiEffect: Flow<UiEffect>,
+    onAction: (UiAction) -> Unit,
     onNavigateBack: () -> Unit,
-    onNavigateLogin: () -> Unit,
+) {
+    uiEffect.collectWithLifecycle { effect ->
+        when (effect) {
+            is UiEffect.NavigateBack -> onNavigateBack()
+        }
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(QuizAppTheme.colors.background),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        QuizAppToolbar(
+            onBackClick = { onAction(UiAction.OnBackClick) },
+        )
+        RegisterContent(
+            uiState = uiState,
+            onEmailChange = { onAction(UiAction.OnEmailChange(it)) },
+            onUsernameChange = { onAction(UiAction.OnUsernameChange(it)) },
+            onPasswordChange = { onAction(UiAction.OnPasswordChange(it)) },
+            onPasswordAgainChange = { onAction(UiAction.OnPasswordAgainChange(it)) },
+            onRegisterClick = { onAction(UiAction.OnRegisterClick) },
+            onLoginClick = { onAction(UiAction.OnBackClick) },
+        )
+    }
+
+    if (uiState.isLoading) QuizAppLoading()
+
+    if (uiState.dialogState != null) {
+        QuizAppDialog(
+            message = uiState.dialogState.message,
+            isSuccess = uiState.dialogState.isSuccess,
+            onDismiss = {
+                if (uiState.dialogState.isSuccess == true) {
+                    onAction(UiAction.OnBackClick)
+                } else {
+                    onAction(UiAction.OnDialogDismiss)
+                }
+            },
+        )
+    }
+}
+
+@Composable
+private fun RegisterContent(
+    uiState: UiState,
+    onEmailChange: (String) -> Unit,
+    onUsernameChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onPasswordAgainChange: (String) -> Unit,
+    onRegisterClick: () -> Unit,
+    onLoginClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(QuizAppTheme.colors.background)
-            .padding(horizontal = 32.dp, vertical = 40.dp),
+            .padding(horizontal = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Icon(
-            modifier = Modifier.align(Alignment.Start),
-            imageVector = QuizAppTheme.icons.arrowLeft,
-            contentDescription = null,
-        )
-        Spacer(modifier = Modifier.height(40.dp))
         QuizAppText(
             text = stringResource(R.string.welcome),
             style = QuizAppTheme.typography.heading1,
@@ -52,42 +110,43 @@ fun RegisterScreen(
         )
         Spacer(modifier = Modifier.height(40.dp))
         QuizAppTextField(
-            value = "",
+            value = uiState.email,
             label = stringResource(R.string.register_email),
             icon = QuizAppTheme.icons.email,
-            onValueChange = {},
+            keyboardType = KeyboardType.Email,
+            onValueChange = { onEmailChange(it) },
         )
         Spacer(modifier = Modifier.height(12.dp))
         QuizAppTextField(
-            value = "",
+            value = uiState.username,
             label = stringResource(R.string.register_username),
             icon = QuizAppTheme.icons.profileUnselected,
-            onValueChange = {},
+            onValueChange = { onUsernameChange(it) },
         )
         Spacer(modifier = Modifier.height(12.dp))
         QuizAppTextField(
-            value = "",
+            value = uiState.password,
             label = stringResource(R.string.password),
             icon = QuizAppTheme.icons.lock,
             isPassword = true,
-            onValueChange = {},
+            onValueChange = { onPasswordChange(it) },
         )
         Spacer(modifier = Modifier.height(12.dp))
         QuizAppTextField(
-            value = "",
+            value = uiState.passwordAgain,
             label = stringResource(R.string.register_confirm_password),
             icon = QuizAppTheme.icons.lock,
             isPassword = true,
-            onValueChange = {},
+            onValueChange = { onPasswordAgainChange(it) },
         )
         Spacer(modifier = Modifier.height(40.dp))
         QuizAppButton(
             text = stringResource(R.string.register),
-            onClick = {},
+            onClick = { onRegisterClick() },
         )
         Spacer(modifier = Modifier.height(24.dp))
         QuizAppText(
-            modifier = Modifier.noRippleClickable { onNavigateLogin() },
+            modifier = Modifier.noRippleClickable { onLoginClick() },
             text = buildDontHaveAnAccountSpannableText(),
             style = QuizAppTheme.typography.paragraph2,
             textAlign = TextAlign.Center,
@@ -103,9 +162,13 @@ fun RegisterScreen(
 
 @Preview(showBackground = true)
 @Composable
-private fun RegisterScreenPreview() {
+private fun RegisterScreenPreview(
+    @PreviewParameter(RegisterPreviewProvider::class) uiState: UiState,
+) {
     RegisterScreen(
+        uiState = uiState,
+        uiEffect = emptyFlow(),
+        onAction = {},
         onNavigateBack = {},
-        onNavigateLogin = {}
     )
 }
