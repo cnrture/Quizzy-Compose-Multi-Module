@@ -103,14 +103,14 @@ fun QuizAppTextField(
 private fun QuizAppTextFieldPreview() {
     Column {
         QuizAppTextField(
-            value = "cnrture",
+            value = "",
             label = "Email or Username",
             onValueChange = {},
             icon = QuizAppTheme.icons.email,
         )
         Spacer(modifier = Modifier.height(16.dp))
         QuizAppTextField(
-            value = "123456",
+            value = "",
             label = "Password",
             onValueChange = {},
             isPassword = true,

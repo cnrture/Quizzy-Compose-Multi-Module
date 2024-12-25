@@ -38,6 +38,7 @@ dependencies {
     implementation(projects.feature.welcome.ui)
     implementation(projects.feature.login.ui)
     implementation(projects.feature.register.ui)
+    implementation(projects.feature.home.ui)
 
     implementation(libs.activity.compose)
     implementation(libs.core.ktx)

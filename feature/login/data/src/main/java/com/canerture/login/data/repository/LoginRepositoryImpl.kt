@@ -22,4 +22,13 @@ class LoginRepositoryImpl @Inject constructor(
             Resource.Error(e.localizedMessage ?: "An error occurred!")
         }
     }
+
+    override suspend fun sendPasswordResetEmail(email: String): Resource<Unit> {
+        return try {
+            firebaseAuth.sendPasswordResetEmail(email).await()
+            Resource.Success(Unit)
+        } catch (e: Exception) {
+            Resource.Error(e.localizedMessage ?: "An error occurred!")
+        }
+    }
 }

@@ -5,8 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -20,6 +25,7 @@ import com.canerture.feature.login.ui.R
 import com.canerture.login.ui.LoginContract.UiAction
 import com.canerture.login.ui.LoginContract.UiEffect
 import com.canerture.login.ui.LoginContract.UiState
+import com.canerture.login.ui.component.ForgotPasswordContent
 import com.canerture.login.ui.component.buildDontHaveAnAccountSpannableText
 import com.canerture.login.ui.component.buildPolicySpannableText
 import com.canerture.ui.components.QuizAppButton
@@ -31,7 +37,9 @@ import com.canerture.ui.components.QuizAppToolbar
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     uiState: UiState,
@@ -49,6 +57,9 @@ fun LoginScreen(
         }
     }
 
+    val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    val coroutineScope = rememberCoroutineScope()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -64,6 +75,7 @@ fun LoginScreen(
             onPasswordChange = { onAction(UiAction.OnPasswordChange(it)) },
             onRegisterClick = { onAction(UiAction.OnRegisterClick) },
             onLoginClick = { onAction(UiAction.OnLoginClick) },
+            onForgotPasswordClick = { onAction(UiAction.OnForgotPasswordClick) },
         )
     }
 
@@ -82,6 +94,28 @@ fun LoginScreen(
             },
         )
     }
+
+    if (uiState.isForgotPasswordSheetOpen) {
+        ModalBottomSheet(
+            modifier = Modifier.navigationBarsPadding(),
+            onDismissRequest = {
+                coroutineScope.launch { bottomSheetState.hide() }
+                    .invokeOnCompletion {
+                        if (!bottomSheetState.isVisible) {
+                            onAction(UiAction.OnForgotPasswordSheetDismiss)
+                        }
+                    }
+            },
+            sheetState = bottomSheetState,
+            containerColor = QuizAppTheme.colors.background,
+        ) {
+            ForgotPasswordContent(
+                email = uiState.email,
+                onEmailChange = { onAction(UiAction.OnEmailChange(it)) },
+                onSendResetLinkClick = { onAction(UiAction.OnSendPasswordResetEmailClick) },
+            )
+        }
+    }
 }
 
 @Composable
@@ -91,6 +125,7 @@ private fun LoginContent(
     onPasswordChange: (String) -> Unit,
     onRegisterClick: () -> Unit,
     onLoginClick: () -> Unit,
+    onForgotPasswordClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -124,7 +159,9 @@ private fun LoginContent(
         )
         Spacer(modifier = Modifier.height(24.dp))
         QuizAppText(
-            modifier = Modifier.align(Alignment.End),
+            modifier = Modifier
+                .align(Alignment.End)
+                .noRippleClickable { onForgotPasswordClick() },
             text = stringResource(R.string.forgot_password),
             style = QuizAppTheme.typography.heading6,
             color = QuizAppTheme.colors.blue,

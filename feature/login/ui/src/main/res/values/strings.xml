@@ -26,4 +26,9 @@
     <string name="register">Sign Up</string>
     <string name="already_have_an_account">Already have an account? Log In</string>
     <string name="already_have_an_account_span">Log In</string>
+
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="forgot_password_message">Enter your email address and we’ll send you a link to reset your password.</string>
+    <string name="forgot_password_email">Please enter your email address</string>
+    <string name="send_reset_link">Send Reset Link</string>
 </resources>
