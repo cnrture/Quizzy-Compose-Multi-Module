@@ -32,10 +32,12 @@ import kotlinx.coroutines.flow.emptyFlow
 fun SplashScreen(
     uiEffect: Flow<SplashContract.UiEffect>,
     onNavigateWelcome: () -> Unit,
+    onNavigateHome: () -> Unit,
 ) {
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
-            is SplashContract.UiEffect.NavigateToWelcome -> onNavigateWelcome()
+            SplashContract.UiEffect.NavigateWelcome -> onNavigateWelcome()
+            SplashContract.UiEffect.NavigateHome -> onNavigateHome()
         }
     }
 
@@ -95,5 +97,6 @@ private fun SplashScreenPreview() {
     SplashScreen(
         uiEffect = emptyFlow(),
         onNavigateWelcome = {},
+        onNavigateHome = {},
     )
 }

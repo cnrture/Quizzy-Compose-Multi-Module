@@ -29,7 +29,7 @@ fun AnimatedLinearProgress() {
             progressValue = 0f
             repeat(100) {
                 progressValue += 1f
-                delay(20)
+                delay(15)
             }
         }
     }

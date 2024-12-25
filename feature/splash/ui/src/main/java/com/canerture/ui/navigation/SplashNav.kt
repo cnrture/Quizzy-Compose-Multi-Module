@@ -11,7 +11,8 @@ import kotlinx.serialization.Serializable
 data object SplashRoute
 
 fun NavGraphBuilder.splashScreen(
-    onNavigateWelcome: () -> Unit
+    onNavigateWelcome: () -> Unit,
+    onNavigateHome: () -> Unit,
 ) {
     composable<SplashRoute> {
         val viewModel = hiltViewModel<SplashViewModel>()
@@ -19,6 +20,7 @@ fun NavGraphBuilder.splashScreen(
         SplashScreen(
             uiEffect = uiEffect,
             onNavigateWelcome = onNavigateWelcome,
+            onNavigateHome = onNavigateHome,
         )
     }
 }

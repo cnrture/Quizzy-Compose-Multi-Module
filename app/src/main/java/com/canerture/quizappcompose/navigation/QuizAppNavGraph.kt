@@ -26,7 +26,8 @@ fun QuizAppNavGraph(
         modifier = modifier,
     ) {
         splashScreen(
-            onNavigateWelcome = { navController.navigateWithPopUpTo(WelcomeRoute, SplashRoute) }
+            onNavigateWelcome = { navController.navigateWithPopUpTo(WelcomeRoute, SplashRoute) },
+            onNavigateHome = { navController.navigateWithPopUpTo(HomeRoute, SplashRoute) }
         )
         welcomeScreen(
             onNavigateLogin = { navController.navigateWithPopUpTo(LoginRoute, WelcomeRoute) },

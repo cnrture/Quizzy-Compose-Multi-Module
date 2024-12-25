@@ -2,24 +2,33 @@ package com.canerture.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.canerture.core.common.Resource
+import com.canerture.core.common.delegate.mvi.MVI
+import com.canerture.core.common.delegate.mvi.mvi
+import com.canerture.splash.domain.usecase.IsUserLoggedInUseCase
+import com.canerture.ui.SplashContract.UiEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SplashViewModel @Inject constructor() : ViewModel() {
-
-    private val _uiEffect by lazy { Channel<SplashContract.UiEffect>() }
-    val uiEffect: Flow<SplashContract.UiEffect> by lazy { _uiEffect.receiveAsFlow() }
+class SplashViewModel @Inject constructor(
+    private val isUserLoggedInUseCase: IsUserLoggedInUseCase,
+) : ViewModel(),
+    MVI<Unit, Unit, UiEffect> by mvi(Unit) {
 
     init {
         viewModelScope.launch {
-            delay(2500)
-            _uiEffect.send(SplashContract.UiEffect.NavigateToWelcome)
+            delay(2000)
+            isUserLoggedIn()
+        }
+    }
+
+    private fun isUserLoggedIn() = viewModelScope.launch {
+        when (isUserLoggedInUseCase()) {
+            is Resource.Success -> emitUiEffect(UiEffect.NavigateHome)
+            is Resource.Error -> emitUiEffect(UiEffect.NavigateWelcome)
         }
     }
 }
