@@ -10,4 +10,13 @@ plugins {
     alias(libs.plugins.kotlinx.serialization.plugin) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.detekt.plugin) apply false
+    alias(libs.plugins.module.graph) apply true
+}
+
+tasks.register("printModulePaths") {
+    subprojects {
+        if (subprojects.size == 0) {
+            println(this.path)
+        }
+    }
 }

@@ -21,6 +21,7 @@ detekt = "1.23.6"
 googleServices = "4.4.2"
 firebase = "33.7.0"
 kotlinxSerialization = "1.7.3"
+moduleGraph = "2.7.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -71,6 +72,7 @@ detekt-plugin = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 kotlinx-serialization-plugin = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+module-graph = { id = "com.jraska.module.graph.assertion", version.ref = "moduleGraph" }
 
 quiz-android-application = { id = "quiz.android.application" }
 quiz-android-application-compose = { id = "quiz.android.application.compose" }
