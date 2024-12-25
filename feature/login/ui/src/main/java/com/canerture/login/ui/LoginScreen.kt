@@ -2,49 +2,102 @@ package com.canerture.login.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import com.canerture.core.common.collectWithLifecycle
 import com.canerture.core.common.noRippleClickable
 import com.canerture.feature.login.ui.R
+import com.canerture.login.ui.LoginContract.UiAction
+import com.canerture.login.ui.LoginContract.UiEffect
+import com.canerture.login.ui.LoginContract.UiState
 import com.canerture.login.ui.component.buildDontHaveAnAccountSpannableText
 import com.canerture.login.ui.component.buildPolicySpannableText
 import com.canerture.ui.components.QuizAppButton
-import com.canerture.ui.components.QuizAppCheckBox
+import com.canerture.ui.components.QuizAppDialog
+import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppTextField
+import com.canerture.ui.components.QuizAppToolbar
 import com.canerture.ui.theme.QuizAppTheme
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun LoginScreen(
+    uiState: UiState,
+    uiEffect: Flow<UiEffect>,
+    onAction: (UiAction) -> Unit,
     onNavigateBack: () -> Unit,
     onNavigateRegister: () -> Unit,
     onNavigateHome: () -> Unit,
 ) {
+    uiEffect.collectWithLifecycle { effect ->
+        when (effect) {
+            UiEffect.NavigateBack -> onNavigateBack()
+            UiEffect.NavigateRegister -> onNavigateRegister()
+            UiEffect.NavigateHome -> onNavigateHome()
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(QuizAppTheme.colors.background)
-            .padding(horizontal = 32.dp, vertical = 40.dp),
+            .background(QuizAppTheme.colors.background),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Icon(
-            modifier = Modifier.align(Alignment.Start),
-            imageVector = QuizAppTheme.icons.arrowLeft,
-            contentDescription = null,
+        QuizAppToolbar(
+            onBackClick = { onAction(UiAction.OnBackClick) },
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        LoginContent(
+            uiState = uiState,
+            onEmailChange = { onAction(UiAction.OnEmailChange(it)) },
+            onPasswordChange = { onAction(UiAction.OnPasswordChange(it)) },
+            onRegisterClick = { onAction(UiAction.OnRegisterClick) },
+            onLoginClick = { onAction(UiAction.OnLoginClick) },
+        )
+    }
+
+    if (uiState.isLoading) QuizAppLoading()
+
+    if (uiState.dialogState != null) {
+        QuizAppDialog(
+            message = uiState.dialogState.message,
+            isSuccess = uiState.dialogState.isSuccess,
+            onDismiss = {
+                if (uiState.dialogState.isSuccess == true) {
+                    onAction(UiAction.OnDialogDismiss)
+                } else {
+                    onAction(UiAction.OnDialogDismiss)
+                }
+            },
+        )
+    }
+}
+
+@Composable
+private fun LoginContent(
+    uiState: UiState,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onRegisterClick: () -> Unit,
+    onLoginClick: () -> Unit,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
         QuizAppText(
             text = stringResource(R.string.welcome),
             style = QuizAppTheme.typography.heading1,
@@ -56,44 +109,34 @@ fun LoginScreen(
         )
         Spacer(modifier = Modifier.height(40.dp))
         QuizAppTextField(
-            value = "",
-            label = stringResource(R.string.login_email_username),
+            value = uiState.email,
+            label = stringResource(R.string.login_email),
             icon = QuizAppTheme.icons.email,
-            onValueChange = {},
+            onValueChange = { onEmailChange(it) },
         )
         Spacer(modifier = Modifier.height(24.dp))
         QuizAppTextField(
-            value = "",
-            label = stringResource(R.string.login_email_username),
+            value = uiState.password,
+            label = stringResource(R.string.password),
             icon = QuizAppTheme.icons.lock,
             isPassword = true,
-            onValueChange = {},
-        )
-        Spacer(modifier = Modifier.height(24.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            QuizAppCheckBox(
-                text = stringResource(R.string.remember_me),
-                isChecked = false,
-                onCheckedChange = {},
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            QuizAppText(
-                text = stringResource(R.string.forgot_password),
-                style = QuizAppTheme.typography.heading6,
-                color = QuizAppTheme.colors.blue,
-            )
-        }
-        Spacer(modifier = Modifier.height(40.dp))
-        QuizAppButton(
-            text = stringResource(R.string.login),
-            onClick = {},
+            onValueChange = { onPasswordChange(it) },
         )
         Spacer(modifier = Modifier.height(24.dp))
         QuizAppText(
-            modifier = Modifier.noRippleClickable { onNavigateRegister() },
+            modifier = Modifier.align(Alignment.End),
+            text = stringResource(R.string.forgot_password),
+            style = QuizAppTheme.typography.heading6,
+            color = QuizAppTheme.colors.blue,
+        )
+        Spacer(modifier = Modifier.height(40.dp))
+        QuizAppButton(
+            text = stringResource(R.string.login),
+            onClick = { onLoginClick() },
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+        QuizAppText(
+            modifier = Modifier.noRippleClickable { onRegisterClick() },
             text = buildDontHaveAnAccountSpannableText(),
             style = QuizAppTheme.typography.paragraph2,
             textAlign = TextAlign.Center,
@@ -109,8 +152,13 @@ fun LoginScreen(
 
 @Preview(showBackground = true)
 @Composable
-private fun LoginScreenPreview() {
+private fun LoginScreenPreview(
+    @PreviewParameter(LoginPreviewProvider::class) uiState: UiState,
+) {
     LoginScreen(
+        uiState = uiState,
+        uiEffect = emptyFlow(),
+        onAction = {},
         onNavigateBack = {},
         onNavigateRegister = {},
         onNavigateHome = {},

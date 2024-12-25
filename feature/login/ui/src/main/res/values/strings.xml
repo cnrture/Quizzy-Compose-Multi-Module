@@ -13,7 +13,7 @@
     <string name="welcome">Welcome!</string>
 
     <string name="login_message">It’s great to see you again! Log in now!</string>
-    <string name="login_email_username">Email or Username</string>
+    <string name="login_email">Email</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember Me</string>
     <string name="forgot_password">Forgot Password?</string>

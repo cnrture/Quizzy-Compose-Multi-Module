@@ -3,7 +3,7 @@
     <string name="app_name">Quiz App</string>
     <string name="welcome_title">Where Knowledge Reigns Supreme!</string>
     <string name="continue_with_google">Continue with Google</string>
-    <string name="sign_in_with_email_or_username">Sign In with Email or Username</string>
+    <string name="sign_in_with_email">Sign In with Email</string>
     <string name="or">Or</string>
     <string name="dont_have_an_account">Don’t have an account? Sign Up</string>
     <string name="dont_have_an_account_span">Sign Up</string>

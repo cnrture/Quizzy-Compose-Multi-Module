@@ -106,7 +106,7 @@ fun WelcomeScreen(
             Spacer(modifier = Modifier.height(40.dp))
             QuizAppButton(
                 modifier = Modifier.padding(horizontal = 32.dp),
-                text = stringResource(R.string.sign_in_with_email_or_username),
+                text = stringResource(R.string.sign_in_with_email),
                 type = QuizAppButtonType.PRIMARY,
                 onClick = onNavigateLogin,
             )

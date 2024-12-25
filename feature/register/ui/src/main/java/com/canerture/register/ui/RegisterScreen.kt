@@ -39,10 +39,12 @@ fun RegisterScreen(
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
     onNavigateBack: () -> Unit,
+    onNavigateLogin: () -> Unit,
 ) {
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
-            is UiEffect.NavigateBack -> onNavigateBack()
+            UiEffect.NavigateBack -> onNavigateBack()
+            UiEffect.NavigateLogin -> onNavigateLogin()
         }
     }
 
@@ -62,7 +64,7 @@ fun RegisterScreen(
             onPasswordChange = { onAction(UiAction.OnPasswordChange(it)) },
             onPasswordAgainChange = { onAction(UiAction.OnPasswordAgainChange(it)) },
             onRegisterClick = { onAction(UiAction.OnRegisterClick) },
-            onLoginClick = { onAction(UiAction.OnBackClick) },
+            onLoginClick = { onAction(UiAction.OnLoginClick) },
         )
     }
 
@@ -170,5 +172,6 @@ private fun RegisterScreenPreview(
         uiEffect = emptyFlow(),
         onAction = {},
         onNavigateBack = {},
+        onNavigateLogin = {},
     )
 }

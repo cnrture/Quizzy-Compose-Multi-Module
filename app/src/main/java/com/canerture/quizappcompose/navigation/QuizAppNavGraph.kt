@@ -38,7 +38,8 @@ fun QuizAppNavGraph(
             }
         )
         registerScreen(
-            onNavigateBack = { navController.popBackStack() }
+            onNavigateBack = { navController.popBackStack() },
+            onNavigateLogin = { navController.navigate(LoginRoute) }
         )
     }
 }

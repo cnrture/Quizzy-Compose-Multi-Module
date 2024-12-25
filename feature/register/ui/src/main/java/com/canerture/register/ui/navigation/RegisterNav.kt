@@ -12,7 +12,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object RegisterRoute
 
-fun NavGraphBuilder.registerScreen(onNavigateBack: () -> Unit) {
+fun NavGraphBuilder.registerScreen(
+    onNavigateBack: () -> Unit,
+    onNavigateLogin: () -> Unit,
+) {
     composable<RegisterRoute> {
         val viewModel: RegisterViewModel = hiltViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -22,6 +25,7 @@ fun NavGraphBuilder.registerScreen(onNavigateBack: () -> Unit) {
             uiEffect = uiEffect,
             onAction = viewModel::onAction,
             onNavigateBack = onNavigateBack,
+            onNavigateLogin = onNavigateLogin,
         )
     }
 }

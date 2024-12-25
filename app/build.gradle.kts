@@ -32,6 +32,7 @@ android {
 dependencies {
     implementation(projects.core.ui)
     implementation(projects.core.network)
+    implementation(projects.feature.login.data)
     implementation(projects.feature.register.data)
     implementation(projects.feature.splash.ui)
     implementation(projects.feature.welcome.ui)
