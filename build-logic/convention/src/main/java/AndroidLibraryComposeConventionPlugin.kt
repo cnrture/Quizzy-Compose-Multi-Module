@@ -4,8 +4,10 @@ import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
 
 class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -14,6 +16,12 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
             apply(plugin = "org.jetbrains.kotlin.plugin.compose")
 
             val extension = extensions.getByType<LibraryExtension>()
+
+            extensions.configure<ComposeCompilerGradlePluginExtension> {
+                stabilityConfigurationFiles.add(
+                    rootProject.layout.projectDirectory.file("stability_config.conf")
+                )
+            }
 
             with(extension) {
                 buildFeatures {
