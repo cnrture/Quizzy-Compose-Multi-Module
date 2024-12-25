@@ -37,11 +37,7 @@ dependencies {
     implementation(projects.feature.login.data)
     implementation(projects.feature.register.data)
 
-    implementation(projects.feature.splash.ui)
-    implementation(projects.feature.welcome.ui)
-    implementation(projects.feature.login.ui)
-    implementation(projects.feature.register.ui)
-    implementation(projects.feature.home.ui)
+    implementation(projects.navigation)
 
     implementation(libs.activity.compose)
     implementation(libs.core.ktx)

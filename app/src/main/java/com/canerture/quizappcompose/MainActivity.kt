@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.canerture.quizappcompose.navigation.QuizAppNavGraph
+import com.canerture.navigation.QuizAppNavGraph
 import com.canerture.ui.theme.QuizAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 

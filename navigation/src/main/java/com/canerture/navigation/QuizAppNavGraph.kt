@@ -1,4 +1,4 @@
-package com.canerture.quizappcompose.navigation
+package com.canerture.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
