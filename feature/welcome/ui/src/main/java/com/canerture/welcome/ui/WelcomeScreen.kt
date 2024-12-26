@@ -22,20 +22,40 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.canerture.core.common.collectWithLifecycle
 import com.canerture.core.common.noRippleClickable
 import com.canerture.feature.welcome.ui.R
 import com.canerture.ui.components.QuizAppButton
 import com.canerture.ui.components.QuizAppButtonType
+import com.canerture.ui.components.QuizAppDialog
+import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.theme.QuizAppTheme
+import com.canerture.welcome.ui.WelcomeContract.UiAction
+import com.canerture.welcome.ui.WelcomeContract.UiEffect
+import com.canerture.welcome.ui.WelcomeContract.UiState
 import com.canerture.welcome.ui.components.buildDontHaveAnAccountSpannableText
 import com.canerture.welcome.ui.components.buildPolicySpannableText
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun WelcomeScreen(
+    uiState: UiState,
+    uiEffect: Flow<UiEffect>,
+    onAction: (UiAction) -> Unit,
     onNavigateLogin: () -> Unit,
     onNavigateRegister: () -> Unit,
+    onNavigateHome: () -> Unit,
 ) {
+    uiEffect.collectWithLifecycle { effect ->
+        when (effect) {
+            UiEffect.NavigateLogin -> onNavigateLogin()
+            UiEffect.NavigateRegister -> onNavigateRegister()
+            UiEffect.NavigateHome -> onNavigateHome()
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -77,7 +97,7 @@ fun WelcomeScreen(
                 text = stringResource(R.string.continue_with_google),
                 type = QuizAppButtonType.SECONDARY,
                 icon = QuizAppTheme.icons.google,
-                onClick = {},
+                onClick = { onAction(UiAction.OnLoginWithGoogleClick) },
             )
             Spacer(modifier = Modifier.height(40.dp))
             Row(
@@ -108,13 +128,13 @@ fun WelcomeScreen(
                 modifier = Modifier.padding(horizontal = 32.dp),
                 text = stringResource(R.string.sign_in_with_email),
                 type = QuizAppButtonType.PRIMARY,
-                onClick = onNavigateLogin,
+                onClick = { onAction(UiAction.OnLoginClick) },
             )
             Spacer(modifier = Modifier.height(24.dp))
             QuizAppText(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .noRippleClickable { onNavigateRegister() },
+                    .noRippleClickable { onAction(UiAction.OnRegisterClick) },
                 text = buildDontHaveAnAccountSpannableText(),
                 style = QuizAppTheme.typography.paragraph2,
                 textAlign = TextAlign.Center,
@@ -130,13 +150,27 @@ fun WelcomeScreen(
             )
         }
     }
+
+    if (uiState.isLoading) QuizAppLoading()
+
+    if (uiState.dialogState != null) {
+        QuizAppDialog(
+            message = uiState.dialogState.message,
+            isSuccess = uiState.dialogState.isSuccess,
+            onDismiss = { onAction(UiAction.OnDismissDialog) },
+        )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun WelcomeScreenPreview() {
     WelcomeScreen(
+        uiState = UiState(),
+        uiEffect = emptyFlow(),
+        onAction = {},
         onNavigateLogin = {},
         onNavigateRegister = {},
+        onNavigateHome = {},
     )
 }

@@ -17,6 +17,9 @@ class AndroidApplicationFirebaseConventionPlugin : Plugin<Project> {
                 val bom = libs.findLibrary("firebase").get()
                 "implementation"(platform(bom))
                 "implementation"(libs.findLibrary("firebase-auth").get())
+                "implementation"(libs.findLibrary("androidx-credentials").get())
+                "implementation"(libs.findLibrary("androidx-credentials-play-services-auth").get())
+                "implementation"(libs.findLibrary("googleid").get())
             }
         }
     }

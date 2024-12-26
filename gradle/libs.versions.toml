@@ -20,6 +20,8 @@ ktlint = "11.3.2"
 detekt = "1.23.6"
 googleServices = "4.4.2"
 firebase = "33.7.0"
+credentialsPlayServicesAuth = "1.5.0-alpha05"
+googleid = "1.1.1"
 kotlinxSerialization = "1.7.3"
 moduleGraph = "2.7.1"
 
@@ -51,6 +53,9 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 detekt = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 firebase = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
+androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentialsPlayServicesAuth" }
+androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentialsPlayServicesAuth" }
+googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 javax-inject = { module = "javax.inject:javax.inject", version = "1" }
 

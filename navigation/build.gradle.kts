@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.quiz.android.library)
     alias(libs.plugins.quiz.android.library.compose)
+    alias(libs.plugins.kotlinx.serialization.plugin)
 }
 
 android {
@@ -10,6 +11,7 @@ android {
 
 dependencies {
     implementation(libs.navigation.compose)
+    implementation(libs.kotlinx.serialization)
 
     implementation(projects.feature.splash.ui)
     implementation(projects.feature.welcome.ui)
