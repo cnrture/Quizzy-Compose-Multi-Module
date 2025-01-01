@@ -3,8 +3,8 @@ package com.canerture.welcome.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.canerture.core.common.Resource
-import com.canerture.core.common.delegate.mvi.MVI
-import com.canerture.core.common.delegate.mvi.mvi
+import com.canerture.ui.delegate.mvi.MVI
+import com.canerture.ui.delegate.mvi.mvi
 import com.canerture.ui.components.DialogState
 import com.canerture.welcome.domain.usecase.LoginWithGoogleUseCase
 import com.canerture.welcome.ui.WelcomeContract.UiAction
@@ -38,7 +38,7 @@ class WelcomeViewModel @Inject constructor(
             is Resource.Error -> updateUiState {
                 copy(
                     isLoading = false,
-                    dialogState = DialogState(isSuccess = false, message = result.message),
+                    dialogState = DialogState(isSuccess = false, message = result.exception.message),
                 )
             }
         }

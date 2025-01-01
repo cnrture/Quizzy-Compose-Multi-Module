@@ -8,6 +8,5 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.common)
     implementation(projects.feature.login.domain)
 }

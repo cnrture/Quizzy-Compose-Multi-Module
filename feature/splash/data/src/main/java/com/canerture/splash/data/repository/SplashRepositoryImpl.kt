@@ -10,14 +10,6 @@ class SplashRepositoryImpl @Inject constructor(
 ) : SplashRepository {
 
     override suspend fun isUserLoggedIn(): Resource<Unit> {
-        return try {
-            if (firebaseAuth.currentUser != null) {
-                Resource.Success(Unit)
-            } else {
-                Resource.Error("")
-            }
-        } catch (e: Exception) {
-            Resource.Error(e.localizedMessage ?: "An error occurred!")
-        }
+        return Resource.Success(Unit)
     }
 }

@@ -15,8 +15,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import com.canerture.core.common.collectWithLifecycle
-import com.canerture.core.common.noRippleClickable
 import com.canerture.feature.register.ui.R
 import com.canerture.register.ui.RegisterContract.UiAction
 import com.canerture.register.ui.RegisterContract.UiEffect
@@ -29,6 +27,8 @@ import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppTextField
 import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.extensions.collectWithLifecycle
+import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -74,13 +74,7 @@ fun RegisterScreen(
         QuizAppDialog(
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
-            onDismiss = {
-                if (uiState.dialogState.isSuccess == true) {
-                    onAction(UiAction.OnBackClick)
-                } else {
-                    onAction(UiAction.OnDialogDismiss)
-                }
-            },
+            onDismiss = { onAction(UiAction.OnDialogDismiss) },
         )
     }
 }
@@ -144,6 +138,7 @@ private fun RegisterContent(
         Spacer(modifier = Modifier.height(40.dp))
         QuizAppButton(
             text = stringResource(R.string.register),
+            isEnable = uiState.isButtonEnable,
             onClick = { onRegisterClick() },
         )
         Spacer(modifier = Modifier.height(24.dp))

@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.quiz.android.library)
     alias(libs.plugins.quiz.hilt)
@@ -7,13 +9,30 @@ plugins {
 
 android {
     namespace = "com.canerture.core.network"
-    buildFeatures {
-        buildConfig = true
+
+    val localProperties = Properties().apply {
+        val propsFile = rootProject.file("local.properties")
+        if (propsFile.exists()) {
+            load(propsFile.inputStream())
+        }
+    }
+
+    defaultConfig {
+        buildFeatures {
+            buildConfig = true
+        }
+
+        buildConfigField(
+            "String",
+            "BASE_URL",
+            "\"${localProperties.getProperty("BASE_URL") ?: "BASE_URL"}\"",
+        )
     }
 }
 
 dependencies {
     implementation(libs.kotlinx.serialization)
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
+    api(libs.retrofit)
+    implementation(libs.converter.kotlinx.serialization)
+    implementation(projects.core.common)
 }

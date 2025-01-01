@@ -5,7 +5,9 @@ import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
+import com.canerture.core.common.AuthorizationException
 import com.canerture.core.common.Resource
+import com.canerture.core.common.UnknownException
 import com.canerture.welcome.domain.repository.WelcomeRepository
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -29,7 +31,7 @@ class WelcomeRepositoryImpl @Inject constructor(
             val result = buildCredentialRequest()
             return handleSingIn(result)
         } catch (e: Exception) {
-            return Resource.Error(e.localizedMessage ?: "An error occurred!")
+            return Resource.Error(UnknownException(e.localizedMessage ?: "An error occurred!"))
         }
     }
 
@@ -48,13 +50,13 @@ class WelcomeRepositoryImpl @Inject constructor(
                 return if (authResult.user != null) {
                     Resource.Success(Unit)
                 } else {
-                    Resource.Error("Something went wrong!")
+                    Resource.Error(AuthorizationException("An error occurred!"))
                 }
             } catch (e: GoogleIdTokenParsingException) {
-                return Resource.Error(e.localizedMessage ?: "An error occurred!")
+                return Resource.Error(UnknownException(e.localizedMessage ?: "An error occurred!"))
             }
         } else {
-            return Resource.Error("An error occurred!")
+            return Resource.Error(UnknownException("An error occurred!"))
         }
     }
 

@@ -26,6 +26,7 @@ enum class QuizAppButtonSize { SMALL, MEDIUM, LARGE }
 fun QuizAppButton(
     modifier: Modifier = Modifier,
     text: String,
+    isEnable: Boolean = true,
     type: QuizAppButtonType = QuizAppButtonType.PRIMARY,
     size: QuizAppButtonSize = QuizAppButtonSize.MEDIUM,
     icon: ImageVector? = null,
@@ -51,7 +52,11 @@ fun QuizAppButton(
                     .height(height)
                     .then(modifier),
                 onClick = onClick,
-                colors = ButtonDefaults.buttonColors(QuizAppTheme.colors.blue),
+                enabled = isEnable,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = QuizAppTheme.colors.blue,
+                    disabledContainerColor = QuizAppTheme.colors.gray,
+                ),
                 shape = CircleShape,
                 border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.black),
             ) {
@@ -78,6 +83,7 @@ fun QuizAppButton(
                     .height(height)
                     .then(modifier),
                 onClick = onClick,
+                enabled = isEnable,
                 colors = ButtonDefaults.buttonColors(QuizAppTheme.colors.white),
                 shape = CircleShape,
                 border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.black),

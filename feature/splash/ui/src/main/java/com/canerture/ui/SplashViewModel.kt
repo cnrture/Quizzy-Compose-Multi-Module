@@ -3,8 +3,8 @@ package com.canerture.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.canerture.core.common.Resource
-import com.canerture.core.common.delegate.mvi.MVI
-import com.canerture.core.common.delegate.mvi.mvi
+import com.canerture.ui.delegate.mvi.MVI
+import com.canerture.ui.delegate.mvi.mvi
 import com.canerture.splash.domain.usecase.IsUserLoggedInUseCase
 import com.canerture.ui.SplashContract.UiEffect
 import dagger.hilt.android.lifecycle.HiltViewModel

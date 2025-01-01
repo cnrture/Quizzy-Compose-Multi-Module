@@ -9,5 +9,4 @@ android {
 
 dependencies {
     implementation(projects.feature.welcome.domain)
-    implementation(projects.core.common)
 }

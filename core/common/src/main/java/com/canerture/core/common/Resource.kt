@@ -2,7 +2,7 @@ package com.canerture.core.common
 
 sealed class Resource<out T> {
     data class Success<out T : Any>(val data: T) : Resource<T>()
-    data class Error(val message: String) : Resource<Nothing>()
+    data class Error(val exception: BaseException) : Resource<Nothing>()
 }
 
 inline fun <T> Resource<T>.onSuccess(action: (T) -> Unit): Resource<T> {
@@ -10,14 +10,14 @@ inline fun <T> Resource<T>.onSuccess(action: (T) -> Unit): Resource<T> {
     return this
 }
 
-inline fun <T> Resource<T>.onFailure(action: (String) -> Unit): Resource<T> {
-    if (this is Resource.Error) action(message)
+inline fun <T> Resource<T>.onFailure(action: (BaseException) -> Unit): Resource<T> {
+    if (this is Resource.Error) action(exception)
     return this
 }
 
 inline fun <T, R : Any> Resource<T>.map(transform: (T) -> R): Resource<R> {
     return when (this) {
         is Resource.Success -> Resource.Success(transform(data))
-        is Resource.Error -> Resource.Error(message)
+        is Resource.Error -> Resource.Error(exception)
     }
 }

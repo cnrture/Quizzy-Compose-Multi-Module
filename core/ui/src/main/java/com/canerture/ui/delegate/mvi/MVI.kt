@@ -1,4 +1,4 @@
-package com.canerture.core.common.delegate.mvi
+package com.canerture.ui.delegate.mvi
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow

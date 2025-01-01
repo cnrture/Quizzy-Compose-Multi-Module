@@ -3,8 +3,8 @@ package com.canerture.login.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.canerture.core.common.Resource
-import com.canerture.core.common.delegate.mvi.MVI
-import com.canerture.core.common.delegate.mvi.mvi
+import com.canerture.ui.delegate.mvi.MVI
+import com.canerture.ui.delegate.mvi.mvi
 import com.canerture.login.domain.usecase.LoginUseCase
 import com.canerture.login.domain.usecase.SendPasswordResetMailUseCase
 import com.canerture.login.ui.LoginContract.UiAction
@@ -53,7 +53,7 @@ class LoginViewModel @Inject constructor(
             is Resource.Error -> updateUiState {
                 copy(
                     isLoading = false,
-                    dialogState = DialogState(isSuccess = false, message = result.message)
+                    dialogState = DialogState(isSuccess = false, message = result.exception.message)
                 )
             }
         }
@@ -72,7 +72,7 @@ class LoginViewModel @Inject constructor(
             is Resource.Error -> updateUiState {
                 copy(
                     isLoading = false,
-                    dialogState = DialogState(isSuccess = false, message = result.message)
+                    dialogState = DialogState(isSuccess = false, message = result.exception.message)
                 )
             }
         }

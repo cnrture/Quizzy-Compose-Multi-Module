@@ -19,8 +19,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import com.canerture.core.common.collectWithLifecycle
-import com.canerture.core.common.noRippleClickable
+import com.canerture.ui.extensions.collectWithLifecycle
+import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.feature.login.ui.R
 import com.canerture.login.ui.LoginContract.UiAction
 import com.canerture.login.ui.LoginContract.UiEffect

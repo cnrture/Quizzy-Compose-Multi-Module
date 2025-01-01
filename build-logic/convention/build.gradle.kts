@@ -61,5 +61,9 @@ gradlePlugin {
             id = libs.plugins.quiz.detekt.get().pluginId
             implementationClass = "com.canerture.convention.DetektConventionPlugin"
         }
+        register("retrofit") {
+            id = libs.plugins.quiz.retrofit.get().pluginId
+            implementationClass = "com.canerture.convention.RetrofitConventionPlugin"
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.canerture.core.common
+package com.canerture.ui.extensions
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource

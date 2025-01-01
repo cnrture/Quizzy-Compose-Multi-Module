@@ -3,13 +3,12 @@ package com.canerture.register.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.canerture.core.common.Resource
-import com.canerture.core.common.delegate.mvi.MVI
-import com.canerture.core.common.delegate.mvi.mvi
 import com.canerture.register.domain.usecase.RegisterUseCase
 import com.canerture.register.ui.RegisterContract.UiAction
 import com.canerture.register.ui.RegisterContract.UiEffect
 import com.canerture.register.ui.RegisterContract.UiState
-import com.canerture.ui.components.DialogState
+import com.canerture.ui.delegate.mvi.MVI
+import com.canerture.ui.delegate.mvi.mvi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,13 +27,32 @@ class RegisterViewModel @Inject constructor(
                     emitUiEffect(UiEffect.NavigateBack)
                 }
 
-                is UiAction.OnEmailChange -> updateUiState { copy(email = uiAction.email) }
-                is UiAction.OnUsernameChange -> updateUiState { copy(username = uiAction.username) }
-                is UiAction.OnPasswordChange -> updateUiState { copy(password = uiAction.password) }
-                is UiAction.OnPasswordAgainChange -> updateUiState { copy(passwordAgain = uiAction.passwordAgain) }
+                is UiAction.OnEmailChange -> {
+                    updateUiState { copy(email = uiAction.email) }
+                    checkButtonEnabled()
+                }
+
+                is UiAction.OnUsernameChange -> {
+                    updateUiState { copy(username = uiAction.username) }
+                    checkButtonEnabled()
+                }
+
+                is UiAction.OnPasswordChange -> {
+                    updateUiState { copy(password = uiAction.password) }
+                    checkButtonEnabled()
+                }
+
+                is UiAction.OnPasswordAgainChange -> {
+                    updateUiState { copy(passwordAgain = uiAction.passwordAgain) }
+                    checkButtonEnabled()
+                }
+
                 UiAction.OnRegisterClick -> register()
                 UiAction.OnLoginClick -> emitUiEffect(UiEffect.NavigateLogin)
-                UiAction.OnDialogDismiss -> updateUiState { copy(dialogState = null) }
+                UiAction.OnDialogDismiss -> {
+                    if (currentUiState.dialogState?.isSuccess == true) emitUiEffect(UiEffect.NavigateBack)
+                    else updateUiState { copy(dialogState = null) }
+                }
             }
         }
     }
@@ -42,19 +60,14 @@ class RegisterViewModel @Inject constructor(
     private fun register() = viewModelScope.launch {
         updateUiState { copy(isLoading = true) }
         when (val result = registerUseCase(currentUiState.email, currentUiState.username, currentUiState.password)) {
-            is Resource.Success -> updateUiState {
-                copy(
-                    isLoading = false,
-                    dialogState = DialogState(isSuccess = true)
-                )
-            }
+            is Resource.Success -> updateUiState { setSuccessDialog() }
+            is Resource.Error -> updateUiState { setErrorDialog(result.exception.message) }
+        }
+    }
 
-            is Resource.Error -> updateUiState {
-                copy(
-                    isLoading = false,
-                    dialogState = DialogState(isSuccess = false, message = result.message)
-                )
-            }
+    private fun checkButtonEnabled() {
+        updateUiState {
+            copy(isButtonEnable = email.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty() && passwordAgain.isNotEmpty())
         }
     }
 }
