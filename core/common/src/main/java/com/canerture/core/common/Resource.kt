@@ -31,3 +31,10 @@ inline fun <T> Resource<T>.fold(
         is Resource.Error -> onError(exception)
     }
 }
+
+fun <T> Resource<T>.toUnit(): Resource<Unit> {
+    return when (this) {
+        is Resource.Success -> Resource.Success(Unit)
+        is Resource.Error -> Resource.Error(exception)
+    }
+}

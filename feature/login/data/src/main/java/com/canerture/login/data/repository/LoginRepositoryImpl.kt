@@ -2,12 +2,12 @@ package com.canerture.login.data.repository
 
 import com.canerture.core.common.Resource
 import com.canerture.core.common.onSuccess
+import com.canerture.core.common.toUnit
 import com.canerture.datastore.DataStoreHelper
 import com.canerture.login.data.model.LoginRequest
 import com.canerture.login.data.source.LoginApi
 import com.canerture.login.domain.repository.LoginRepository
 import com.canerture.network.safeApiCall
-import com.canerture.network.toUnit
 import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor(
