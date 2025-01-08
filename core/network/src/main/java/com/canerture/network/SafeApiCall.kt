@@ -20,7 +20,7 @@ suspend fun <T> safeApiCall(apiToBeCalled: suspend () -> BaseResponse<T>): Resou
         try {
             val response: BaseResponse<T> = apiToBeCalled()
             if (response.data == null) {
-                Resource.Error(UnknownException("An unknown error occurred, please try again later."))
+                Resource.Error(UnknownException())
             } else {
                 Resource.Success(response.data)
             }
@@ -37,9 +37,9 @@ suspend fun <T> safeApiCall(apiToBeCalled: suspend () -> BaseResponse<T>): Resou
                 else -> Resource.Error(UnknownException(message))
             }
         } catch (e: IOException) {
-            Resource.Error(NetworkException("Please check your internet connection."))
+            Resource.Error(NetworkException())
         } catch (e: Exception) {
-            Resource.Error(UnknownException("An unknown error occurred, please try again later."))
+            Resource.Error(UnknownException())
         }
     }
 }
