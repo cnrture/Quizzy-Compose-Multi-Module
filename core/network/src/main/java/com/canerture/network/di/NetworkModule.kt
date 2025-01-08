@@ -2,7 +2,9 @@ package com.canerture.network.di
 
 import android.content.Context
 import com.canerture.core.network.BuildConfig
+import com.canerture.datastore.DataStoreHelper
 import com.canerture.network.NetworkManager
+import com.canerture.network.TokenAuthenticator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +30,16 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder().apply {
+    fun provideTokenAuthenticator(
+        userRepository: dagger.Lazy<DataStoreHelper>
+    ): TokenAuthenticator = TokenAuthenticator(userRepository)
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        authenticator: TokenAuthenticator,
+    ): OkHttpClient = OkHttpClient.Builder().apply {
+        authenticator(authenticator)
         readTimeout(TIMEOUT, TimeUnit.SECONDS)
         connectTimeout(TIMEOUT, TimeUnit.SECONDS)
         writeTimeout(TIMEOUT, TimeUnit.SECONDS)

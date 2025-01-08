@@ -35,4 +35,5 @@ dependencies {
     api(libs.retrofit)
     implementation(libs.converter.kotlinx.serialization)
     implementation(projects.core.common)
+    implementation(projects.core.datastore)
 }
