@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.quiz.android.library)
-    alias(libs.plugins.quiz.android.firebase)
     alias(libs.plugins.quiz.hilt)
 }
 
@@ -12,4 +11,5 @@ dependencies {
     implementation(projects.feature.splash.domain)
     implementation(projects.core.network)
     implementation(projects.core.common)
+    implementation(projects.core.datastore)
 }

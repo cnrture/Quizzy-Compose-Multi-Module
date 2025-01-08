@@ -2,7 +2,7 @@ package com.canerture.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.canerture.core.common.Resource
+import com.canerture.core.common.fold
 import com.canerture.splash.domain.usecase.IsUserLoggedInUseCase
 import com.canerture.ui.SplashContract.UiEffect
 import com.canerture.ui.delegate.mvi.MVI
@@ -19,16 +19,14 @@ class SplashViewModel @Inject constructor(
     MVI<Unit, Unit, UiEffect> by mvi(Unit) {
 
     init {
-        viewModelScope.launch {
-            delay(2000)
-            isUserLoggedIn()
-        }
+        isUserLoggedIn()
     }
 
     private fun isUserLoggedIn() = viewModelScope.launch {
-        when (isUserLoggedInUseCase()) {
-            is Resource.Success -> emitUiEffect(UiEffect.NavigateHome)
-            is Resource.Error -> emitUiEffect(UiEffect.NavigateWelcome)
-        }
+        delay(2000)
+        isUserLoggedInUseCase().fold(
+            onSuccess = { emitUiEffect(UiEffect.NavigateHome) },
+            onError = { emitUiEffect(UiEffect.NavigateWelcome) },
+        )
     }
 }

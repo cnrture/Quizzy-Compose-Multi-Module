@@ -34,7 +34,7 @@ fun QuizAppNavGraph(
 }
 
 fun NavGraphBuilder.loginFlowNavigation(navController: NavHostController) {
-    navigation<LoginFlowRoute>(WelcomeRoute) {
+    navigation<LoginFlowRoute>(SplashRoute) {
         splashScreen(
             onNavigateWelcome = { navController.navigateWithPopUpTo(WelcomeRoute, SplashRoute) },
             onNavigateHome = { navController.navigateWithPopUpTo(HomeRoute, LoginFlowRoute) }
