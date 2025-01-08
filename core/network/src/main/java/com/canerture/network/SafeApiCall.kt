@@ -15,11 +15,15 @@ import kotlinx.serialization.json.jsonPrimitive
 import retrofit2.HttpException
 import java.io.IOException
 
-suspend fun <T : Any> safeApiCall(apiToBeCalled: suspend () -> BaseResponse<T>): Resource<T> {
+suspend fun <T> safeApiCall(apiToBeCalled: suspend () -> BaseResponse<T>): Resource<T> {
     return withContext(Dispatchers.IO) {
         try {
             val response: BaseResponse<T> = apiToBeCalled()
-            Resource.Success(response.data)
+            if (response.data == null) {
+                Resource.Error(UnknownException("An unknown error occurred, please try again later."))
+            } else {
+                Resource.Success(response.data)
+            }
         } catch (e: HttpException) {
             val message = Json.parseToJsonElement(
                 e.response()?.errorBody()?.string().orEmpty()
@@ -37,5 +41,12 @@ suspend fun <T : Any> safeApiCall(apiToBeCalled: suspend () -> BaseResponse<T>):
         } catch (e: Exception) {
             Resource.Error(UnknownException("An unknown error occurred, please try again later."))
         }
+    }
+}
+
+fun <T> Resource<T>.toUnit(): Resource<Unit> {
+    return when (this) {
+        is Resource.Success -> Resource.Success(Unit)
+        is Resource.Error -> Resource.Error(exception)
     }
 }

@@ -21,3 +21,13 @@ inline fun <T, R : Any> Resource<T>.map(transform: (T) -> R): Resource<R> {
         is Resource.Error -> Resource.Error(exception)
     }
 }
+
+inline fun <T> Resource<T>.fold(
+    onSuccess: (T) -> Unit,
+    onError: (BaseException) -> Unit,
+) {
+    when (this) {
+        is Resource.Success -> onSuccess(data)
+        is Resource.Error -> onError(exception)
+    }
+}

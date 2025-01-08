@@ -19,8 +19,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import com.canerture.ui.extensions.collectWithLifecycle
-import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.feature.login.ui.R
 import com.canerture.login.ui.LoginContract.UiAction
 import com.canerture.login.ui.LoginContract.UiEffect
@@ -34,6 +32,8 @@ import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppTextField
 import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.extensions.collectWithLifecycle
+import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow

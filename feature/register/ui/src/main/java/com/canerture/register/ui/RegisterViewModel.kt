@@ -50,8 +50,11 @@ class RegisterViewModel @Inject constructor(
                 UiAction.OnRegisterClick -> register()
                 UiAction.OnLoginClick -> emitUiEffect(UiEffect.NavigateLogin)
                 UiAction.OnDialogDismiss -> {
-                    if (currentUiState.dialogState?.isSuccess == true) emitUiEffect(UiEffect.NavigateBack)
-                    else updateUiState { copy(dialogState = null) }
+                    if (currentUiState.dialogState?.isSuccess == true) {
+                        emitUiEffect(UiEffect.NavigateBack)
+                    } else {
+                        updateUiState { copy(dialogState = null) }
+                    }
                 }
             }
         }
@@ -65,9 +68,5 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    private fun checkButtonEnabled() {
-        updateUiState {
-            copy(isButtonEnable = email.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty() && passwordAgain.isNotEmpty())
-        }
-    }
+    private fun checkButtonEnabled() = updateUiState { checkButtonEnabled() }
 }
