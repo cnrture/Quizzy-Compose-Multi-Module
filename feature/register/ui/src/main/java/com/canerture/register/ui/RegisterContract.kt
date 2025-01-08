@@ -17,10 +17,8 @@ object RegisterContract {
             return copy(dialogState = DialogState(isSuccess = false, message = message), isLoading = false)
         }
 
-        fun checkButtonEnabled() = copy(
-            isButtonEnable = email.isNotEmpty() && username.isNotEmpty() &&
-                password.isNotEmpty() && passwordAgain.isNotEmpty()
-        )
+        fun checkButtonEnabled() = email.isNotEmpty() && username.isNotEmpty() &&
+            password.isNotEmpty() && passwordAgain.isNotEmpty()
     }
 
     sealed interface UiAction {

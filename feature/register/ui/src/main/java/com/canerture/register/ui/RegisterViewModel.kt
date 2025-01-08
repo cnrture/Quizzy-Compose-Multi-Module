@@ -2,7 +2,7 @@ package com.canerture.register.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.canerture.core.common.Resource
+import com.canerture.core.common.fold
 import com.canerture.register.domain.usecase.RegisterUseCase
 import com.canerture.register.ui.RegisterContract.UiAction
 import com.canerture.register.ui.RegisterContract.UiEffect
@@ -28,23 +28,24 @@ class RegisterViewModel @Inject constructor(
                 }
 
                 is UiAction.OnEmailChange -> {
-                    updateUiState { copy(email = uiAction.email) }
-                    checkButtonEnabled()
+                    updateUiState { copy(email = uiAction.email, isButtonEnable = checkButtonEnabled()) }
                 }
 
                 is UiAction.OnUsernameChange -> {
-                    updateUiState { copy(username = uiAction.username) }
-                    checkButtonEnabled()
+                    updateUiState { copy(username = uiAction.username, isButtonEnable = checkButtonEnabled()) }
                 }
 
                 is UiAction.OnPasswordChange -> {
-                    updateUiState { copy(password = uiAction.password) }
-                    checkButtonEnabled()
+                    updateUiState { copy(password = uiAction.password, isButtonEnable = checkButtonEnabled()) }
                 }
 
                 is UiAction.OnPasswordAgainChange -> {
-                    updateUiState { copy(passwordAgain = uiAction.passwordAgain) }
-                    checkButtonEnabled()
+                    updateUiState {
+                        copy(
+                            passwordAgain = uiAction.passwordAgain,
+                            isButtonEnable = checkButtonEnabled()
+                        )
+                    }
                 }
 
                 UiAction.OnRegisterClick -> register()
@@ -62,11 +63,9 @@ class RegisterViewModel @Inject constructor(
 
     private fun register() = viewModelScope.launch {
         updateUiState { copy(isLoading = true) }
-        when (val result = registerUseCase(currentUiState.email, currentUiState.username, currentUiState.password)) {
-            is Resource.Success -> updateUiState { setSuccessDialog() }
-            is Resource.Error -> updateUiState { setErrorDialog(result.exception.message) }
-        }
+        registerUseCase(currentUiState.email, currentUiState.username, currentUiState.password).fold(
+            onSuccess = { updateUiState { setSuccessDialog() } },
+            onError = { updateUiState { setErrorDialog(it.message) } }
+        )
     }
-
-    private fun checkButtonEnabled() = updateUiState { checkButtonEnabled() }
 }

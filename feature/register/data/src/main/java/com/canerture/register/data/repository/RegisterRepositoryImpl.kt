@@ -11,7 +11,7 @@ class RegisterRepositoryImpl @Inject constructor(
     private val registerApi: RegisterApi,
 ) : RegisterRepository {
 
-    override suspend fun register(email: String, username: String, password: String): Resource<Boolean> {
+    override suspend fun register(email: String, username: String, password: String): Resource<Unit> {
         val request = RegisterRequest(email, username, password)
         return safeApiCall { registerApi.register(request) }
     }
