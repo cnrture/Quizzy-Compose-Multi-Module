@@ -1,1 +1,0 @@
-package com.canerture.register.data.model
