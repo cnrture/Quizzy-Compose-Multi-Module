@@ -12,10 +12,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -77,7 +78,9 @@ private fun HomeContent(
     onAction: (UiAction) -> Unit,
 ) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         QuizAppSearchBar(
@@ -225,74 +228,69 @@ private fun ColumnScope.PopularQuiz() {
         style = QuizAppTheme.typography.heading4,
     )
     Spacer(modifier = Modifier.height(16.dp))
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 32.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-    ) {
-        items(10) { index ->
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(
-                        color = QuizAppTheme.colors.white,
-                        shape = RoundedCornerShape(16.dp),
-                    )
-                    .boldBorder()
-                    .padding(16.dp),
+    repeat(6) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp)
+                .background(
+                    color = QuizAppTheme.colors.white,
+                    shape = RoundedCornerShape(16.dp),
+                )
+                .boldBorder()
+                .padding(16.dp),
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                QuizAppAsyncImage(
+                    modifier = Modifier
+                        .size(56.dp)
+                        .clip(CircleShape)
+                        .boldBorder(100),
+                    imageUrl = "https://www.canerture.com/assets/images/logo.png",
+                    contentDescription = "Canerture",
+                )
+                Column(
+                    modifier = Modifier.weight(1f)
                 ) {
-                    QuizAppAsyncImage(
-                        modifier = Modifier
-                            .size(56.dp)
-                            .clip(CircleShape)
-                            .boldBorder(100),
-                        imageUrl = "https://www.canerture.com/assets/images/logo.png",
-                        contentDescription = "Canerture",
-                    )
-                    Column(
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        QuizAppText(
-                            text = "Popular Quiz",
-                            style = QuizAppTheme.typography.subheading2,
-                            color = QuizAppTheme.colors.darkGray,
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        QuizAppText(
-                            text = "Movie Mania",
-                            style = QuizAppTheme.typography.heading5,
-                        )
-                    }
-                    QuizAppButton(
-                        text = "Start",
-                        size = QuizAppButtonSize.EXTRA_SMALL,
-                        onClick = {},
-                    )
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    QuizAppLinearProgress(
-                        modifier = Modifier.weight(1f),
-                        value = 50f,
-                        maxValue = 100f,
-                        thickness = 12.dp,
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
                     QuizAppText(
-                        text = "50%",
-                        style = QuizAppTheme.typography.subheading3,
+                        text = "Popular Quiz",
+                        style = QuizAppTheme.typography.subheading2,
+                        color = QuizAppTheme.colors.darkGray,
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    QuizAppText(
+                        text = "Movie Mania",
+                        style = QuizAppTheme.typography.heading5,
                     )
                 }
+                QuizAppButton(
+                    text = "Start",
+                    size = QuizAppButtonSize.EXTRA_SMALL,
+                    onClick = {},
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                QuizAppLinearProgress(
+                    modifier = Modifier.weight(1f),
+                    value = 50f,
+                    maxValue = 100f,
+                    thickness = 12.dp,
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                QuizAppText(
+                    text = "50%",
+                    style = QuizAppTheme.typography.subheading3,
+                )
             }
         }
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 

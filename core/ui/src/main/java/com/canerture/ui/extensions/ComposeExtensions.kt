@@ -49,3 +49,14 @@ fun Modifier.boldBorder(radius: Int = 16): Modifier = composed {
         shape = RoundedCornerShape(radius.dp)
     )
 }
+
+inline fun Modifier.conditional(
+    condition: Boolean,
+    modifier: Modifier.() -> Modifier,
+): Modifier {
+    return if (condition) {
+        this then modifier(Modifier)
+    } else {
+        this
+    }
+}

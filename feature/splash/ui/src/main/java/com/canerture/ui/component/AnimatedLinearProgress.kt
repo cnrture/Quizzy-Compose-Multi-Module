@@ -34,7 +34,13 @@ fun AnimatedLinearProgress() {
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center,
     ) {
-        QuizAppLinearProgress(value = progressValue)
+        QuizAppLinearProgress(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp),
+            thickness = 28.dp,
+            value = progressValue
+        )
         QuizAppText(
             text = "${progressValue.toInt()}%",
             style = QuizAppTheme.typography.subheading2,
