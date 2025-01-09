@@ -5,19 +5,20 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.canerture.ui.navigation.Screen
 import com.canerture.welcome.ui.WelcomeScreen
 import com.canerture.welcome.ui.WelcomeViewModel
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object WelcomeRoute
+data object Welcome : Screen
 
 fun NavGraphBuilder.welcomeScreen(
     onNavigateLogin: () -> Unit,
     onNavigateRegister: () -> Unit,
     onNavigateHome: () -> Unit,
 ) {
-    composable<WelcomeRoute> {
+    composable<Welcome> {
         val viewModel = hiltViewModel<WelcomeViewModel>()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         val uiEffect = viewModel.uiEffect

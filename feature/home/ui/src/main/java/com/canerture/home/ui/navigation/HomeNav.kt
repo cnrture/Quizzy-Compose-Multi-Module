@@ -5,15 +5,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.canerture.ui.navigation.Screen
 import com.canerture.home.ui.HomeScreen
 import com.canerture.home.ui.HomeViewModel
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object HomeRoute
+data object Home : Screen
 
 fun NavGraphBuilder.homeScreen() {
-    composable<HomeRoute> {
+    composable<Home> {
         val viewModel = hiltViewModel<HomeViewModel>()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         val uiEffect = viewModel.uiEffect

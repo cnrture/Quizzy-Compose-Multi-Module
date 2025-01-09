@@ -7,17 +7,18 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.canerture.login.ui.LoginScreen
 import com.canerture.login.ui.LoginViewModel
+import com.canerture.ui.navigation.Screen
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object LoginRoute
+data object Login : Screen
 
 fun NavGraphBuilder.loginScreen(
     onNavigateBack: () -> Unit,
     onNavigateRegister: () -> Unit,
     onNavigateHome: () -> Unit,
 ) {
-    composable<LoginRoute> {
+    composable<Login> {
         val viewModel = hiltViewModel<LoginViewModel>()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         val uiEffect = viewModel.uiEffect

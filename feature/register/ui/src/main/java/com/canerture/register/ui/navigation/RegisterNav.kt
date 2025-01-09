@@ -7,16 +7,17 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.canerture.register.ui.RegisterScreen
 import com.canerture.register.ui.RegisterViewModel
+import com.canerture.ui.navigation.Screen
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object RegisterRoute
+data object Register : Screen
 
 fun NavGraphBuilder.registerScreen(
     onNavigateBack: () -> Unit,
     onNavigateLogin: () -> Unit,
 ) {
-    composable<RegisterRoute> {
+    composable<Register> {
         val viewModel: RegisterViewModel = hiltViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         val uiEffect = viewModel.uiEffect
