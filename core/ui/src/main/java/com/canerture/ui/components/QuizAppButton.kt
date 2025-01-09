@@ -2,6 +2,7 @@ package com.canerture.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,7 +21,7 @@ import com.canerture.ui.theme.QuizAppTheme
 
 enum class QuizAppButtonType { PRIMARY, SECONDARY }
 
-enum class QuizAppButtonSize { SMALL, MEDIUM, LARGE }
+enum class QuizAppButtonSize { EXTRA_SMALL, SMALL, MEDIUM, LARGE }
 
 @Composable
 fun QuizAppButton(
@@ -33,22 +34,28 @@ fun QuizAppButton(
     onClick: () -> Unit,
 ) {
     val textStyle = when (size) {
+        QuizAppButtonSize.EXTRA_SMALL -> QuizAppTheme.typography.subheading3
         QuizAppButtonSize.SMALL -> QuizAppTheme.typography.heading6
         QuizAppButtonSize.MEDIUM -> QuizAppTheme.typography.heading5
         QuizAppButtonSize.LARGE -> QuizAppTheme.typography.heading4
     }
 
     val height = when (size) {
+        QuizAppButtonSize.EXTRA_SMALL -> 34.dp
         QuizAppButtonSize.SMALL -> 53.dp
         QuizAppButtonSize.MEDIUM -> 56.dp
         QuizAppButtonSize.LARGE -> 59.dp
+    }
+
+    val paddingValues = when (size) {
+        QuizAppButtonSize.EXTRA_SMALL -> PaddingValues(vertical = 8.dp, horizontal = 16.dp)
+        else -> PaddingValues(vertical = 16.dp, horizontal = 24.dp)
     }
 
     when (type) {
         QuizAppButtonType.PRIMARY -> {
             Button(
                 modifier = Modifier
-                    .fillMaxWidth()
                     .height(height)
                     .then(modifier),
                 onClick = onClick,
@@ -59,6 +66,7 @@ fun QuizAppButton(
                 ),
                 shape = CircleShape,
                 border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.black),
+                contentPadding = paddingValues,
             ) {
                 icon?.let {
                     Icon(
@@ -79,7 +87,6 @@ fun QuizAppButton(
         QuizAppButtonType.SECONDARY -> {
             Button(
                 modifier = Modifier
-                    .fillMaxWidth()
                     .height(height)
                     .then(modifier),
                 onClick = onClick,
@@ -87,6 +94,7 @@ fun QuizAppButton(
                 colors = ButtonDefaults.buttonColors(QuizAppTheme.colors.white),
                 shape = CircleShape,
                 border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.black),
+                contentPadding = paddingValues,
             ) {
                 icon?.let {
                     Icon(

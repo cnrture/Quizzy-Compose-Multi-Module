@@ -67,88 +67,7 @@ fun WelcomeScreen(
             contentScale = ContentScale.FillWidth,
             contentDescription = null,
         )
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Icon(
-                modifier = Modifier.size(112.dp),
-                imageVector = QuizAppTheme.icons.star,
-                contentDescription = null,
-            )
-            Spacer(modifier = Modifier.height(40.dp))
-            QuizAppText(
-                text = stringResource(R.string.app_name),
-                style = QuizAppTheme.typography.heading1,
-            )
-            Spacer(modifier = Modifier.height(24.dp))
-            QuizAppText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 32.dp),
-                text = stringResource(R.string.welcome_title),
-                style = QuizAppTheme.typography.paragraph1,
-                textAlign = TextAlign.Center,
-            )
-            Spacer(modifier = Modifier.height(64.dp))
-            QuizAppButton(
-                modifier = Modifier.padding(horizontal = 32.dp),
-                text = stringResource(R.string.continue_with_google),
-                type = QuizAppButtonType.SECONDARY,
-                icon = QuizAppTheme.icons.google,
-                onClick = { onAction(UiAction.OnLoginWithGoogleClick) },
-            )
-            Spacer(modifier = Modifier.height(40.dp))
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 32.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                HorizontalDivider(
-                    modifier = Modifier.weight(1f),
-                    color = QuizAppTheme.colors.black,
-                    thickness = 2.dp,
-                )
-                QuizAppText(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    text = stringResource(R.string.or),
-                    style = QuizAppTheme.typography.paragraph1,
-                    textAlign = TextAlign.Center,
-                )
-                HorizontalDivider(
-                    modifier = Modifier.weight(1f),
-                    color = QuizAppTheme.colors.black,
-                    thickness = 2.dp,
-                )
-            }
-            Spacer(modifier = Modifier.height(40.dp))
-            QuizAppButton(
-                modifier = Modifier.padding(horizontal = 32.dp),
-                text = stringResource(R.string.sign_in_with_email),
-                type = QuizAppButtonType.PRIMARY,
-                onClick = { onAction(UiAction.OnLoginClick) },
-            )
-            Spacer(modifier = Modifier.height(24.dp))
-            QuizAppText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .noRippleClickable { onAction(UiAction.OnRegisterClick) },
-                text = buildDontHaveAnAccountSpannableText(),
-                style = QuizAppTheme.typography.paragraph2,
-                textAlign = TextAlign.Center,
-            )
-            Spacer(modifier = Modifier.height(40.dp))
-            QuizAppText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 32.dp),
-                text = buildPolicySpannableText(),
-                style = QuizAppTheme.typography.paragraph2,
-                textAlign = TextAlign.Center,
-            )
-        }
+        WelcomeContent(onAction)
     }
 
     if (uiState.isLoading) QuizAppLoading()
@@ -158,6 +77,89 @@ fun WelcomeScreen(
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnDismissDialog) },
+        )
+    }
+}
+
+@Composable
+private fun WelcomeContent(
+    onAction: (UiAction) -> Unit,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(32.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Icon(
+            modifier = Modifier.size(112.dp),
+            imageVector = QuizAppTheme.icons.star,
+            contentDescription = null,
+        )
+        Spacer(modifier = Modifier.height(40.dp))
+        QuizAppText(
+            text = stringResource(R.string.app_name),
+            style = QuizAppTheme.typography.heading1,
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+        QuizAppText(
+            text = stringResource(R.string.welcome_title),
+            style = QuizAppTheme.typography.paragraph1,
+            textAlign = TextAlign.Center,
+        )
+        Spacer(modifier = Modifier.height(64.dp))
+        QuizAppButton(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(R.string.continue_with_google),
+            type = QuizAppButtonType.SECONDARY,
+            icon = QuizAppTheme.icons.google,
+            onClick = { onAction(UiAction.OnLoginWithGoogleClick) },
+        )
+        Spacer(modifier = Modifier.height(40.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            HorizontalDivider(
+                modifier = Modifier.weight(1f),
+                color = QuizAppTheme.colors.black,
+                thickness = 2.dp,
+            )
+            QuizAppText(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = stringResource(R.string.or),
+                style = QuizAppTheme.typography.paragraph1,
+                textAlign = TextAlign.Center,
+            )
+            HorizontalDivider(
+                modifier = Modifier.weight(1f),
+                color = QuizAppTheme.colors.black,
+                thickness = 2.dp,
+            )
+        }
+        Spacer(modifier = Modifier.height(40.dp))
+        QuizAppButton(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(R.string.sign_in_with_email),
+            type = QuizAppButtonType.PRIMARY,
+            onClick = { onAction(UiAction.OnLoginClick) },
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+        QuizAppText(
+            modifier = Modifier
+                .fillMaxWidth()
+                .noRippleClickable { onAction(UiAction.OnRegisterClick) },
+            text = buildDontHaveAnAccountSpannableText(),
+            style = QuizAppTheme.typography.paragraph2,
+            textAlign = TextAlign.Center,
+        )
+        Spacer(modifier = Modifier.height(40.dp))
+        QuizAppText(
+            modifier = Modifier.fillMaxWidth(),
+            text = buildPolicySpannableText(),
+            style = QuizAppTheme.typography.paragraph2,
+            textAlign = TextAlign.Center,
         )
     }
 }

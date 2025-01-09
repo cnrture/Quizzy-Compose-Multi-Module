@@ -90,7 +90,7 @@ fun QuizAppDialog(
             }
             QuizAppButton(
                 type = QuizAppButtonType.PRIMARY,
-                size = QuizAppButtonSize.SMALL,
+                size = QuizAppButtonSize.MEDIUM,
                 text = buttonText,
                 onClick = {
                     if (onButtonClick != null) {

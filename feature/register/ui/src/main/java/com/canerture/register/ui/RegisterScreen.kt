@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -137,6 +138,7 @@ private fun RegisterContent(
         )
         Spacer(modifier = Modifier.height(40.dp))
         QuizAppButton(
+            modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.register),
             isEnable = uiState.isButtonEnable,
             onClick = { onRegisterClick() },
