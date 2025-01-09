@@ -35,6 +35,7 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
                     "androidTestImplementation"(platform(bom))
                     "implementation"(libs.findLibrary("compose-ui-tooling-preview").get())
                     "debugImplementation"(libs.findLibrary("compose-ui-tooling").get())
+                    "implementation"(libs.findLibrary("coil-compose").get())
                 }
             }
         }
