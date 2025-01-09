@@ -5,7 +5,6 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
@@ -46,11 +46,7 @@ fun QuizAppCheckBox(
     ) {
         Box(
             modifier = Modifier
-                .border(
-                    width = 2.dp,
-                    color = QuizAppTheme.colors.black,
-                    shape = RoundedCornerShape(4.dp),
-                )
+                .boldBorder(4)
                 .size(24.dp)
                 .clip(
                     RoundedCornerShape(4.dp)

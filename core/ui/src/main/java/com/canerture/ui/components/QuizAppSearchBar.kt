@@ -1,7 +1,6 @@
 package com.canerture.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -17,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
@@ -29,11 +29,7 @@ fun QuizAppSearchBar(
             .fillMaxWidth()
             .height(56.dp)
             .clip(RoundedCornerShape(16.dp))
-            .border(
-                width = 2.dp,
-                color = QuizAppTheme.colors.black,
-                shape = RoundedCornerShape(16.dp),
-            )
+            .boldBorder()
             .background(QuizAppTheme.colors.white),
         value = value,
         onValueChange = onValueChange,

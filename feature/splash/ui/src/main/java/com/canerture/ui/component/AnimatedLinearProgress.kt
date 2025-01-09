@@ -1,12 +1,10 @@
 package com.canerture.ui.component
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -18,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.unit.dp
 import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.delay
 
@@ -57,11 +56,7 @@ fun LinearProgress(value: Float) {
             .fillMaxWidth()
             .padding(horizontal = 32.dp)
             .height(24.dp)
-            .border(
-                width = 2.dp,
-                color = QuizAppTheme.colors.black,
-                shape = CircleShape
-            )
+            .boldBorder(100)
     ) {
         drawRoundRect(
             color = softGray,
