@@ -75,7 +75,6 @@ fun QuizAppCheckBox(
             Spacer(modifier = Modifier.width(8.dp))
             QuizAppText(
                 text = it,
-                color = QuizAppTheme.colors.black,
                 style = style,
             )
         }

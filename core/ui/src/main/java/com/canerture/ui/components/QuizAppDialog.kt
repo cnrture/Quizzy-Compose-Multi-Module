@@ -84,7 +84,6 @@ fun QuizAppDialog(
                 QuizAppText(
                     text = it,
                     style = QuizAppTheme.typography.subheading2,
-                    color = QuizAppTheme.colors.black,
                     textAlign = TextAlign.Center,
                 )
             }
