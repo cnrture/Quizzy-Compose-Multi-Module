@@ -94,7 +94,7 @@ private fun WelcomeContent(
     ) {
         Icon(
             modifier = Modifier.size(112.dp),
-            imageVector = QuizAppTheme.icons.star,
+            imageVector = QuizAppTheme.icons.starUnselected,
             contentDescription = null,
         )
         Spacer(modifier = Modifier.height(40.dp))
