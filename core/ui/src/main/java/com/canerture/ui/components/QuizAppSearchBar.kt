@@ -21,11 +21,12 @@ import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
 fun QuizAppSearchBar(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
 ) {
     BasicTextField(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(56.dp)
             .clip(RoundedCornerShape(16.dp))
