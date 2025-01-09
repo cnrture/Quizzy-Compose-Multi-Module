@@ -97,7 +97,11 @@ class QuizAppIcons {
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_sort)
 
-    val star: ImageVector
+    val starSelected: ImageVector
+        @Composable
+        get() = ImageVector.vectorResource(id = R.drawable.ic_star_selected)
+
+    val starUnselected: ImageVector
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_star)
 
