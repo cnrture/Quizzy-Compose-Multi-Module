@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.quiz.android.library)
     alias(libs.plugins.quiz.hilt)
     alias(libs.plugins.quiz.android.firebase)
-    alias(libs.plugins.kotlinx.serialization.plugin)
+    alias(libs.plugins.quiz.retrofit)
 }
 
 android {
@@ -31,9 +31,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.kotlinx.serialization)
-    api(libs.retrofit)
-    implementation(libs.converter.kotlinx.serialization)
     implementation(projects.core.common)
     implementation(projects.core.datastore)
 }

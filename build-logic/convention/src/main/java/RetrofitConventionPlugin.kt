@@ -9,7 +9,8 @@ class RetrofitConventionPlugin : Plugin<Project> {
         with(target) {
             pluginManager.apply("org.jetbrains.kotlin.plugin.serialization")
             dependencies {
-                "implementation"(libs.findLibrary("retrofit").get())
+                "api"(libs.findLibrary("retrofit").get())
+                "implementation"(libs.findLibrary("kotlinx.serialization").get())
                 "implementation"(libs.findLibrary("converter.kotlinx.serialization").get())
             }
         }
