@@ -5,9 +5,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.canerture.ui.navigation.Screen
 import com.canerture.home.ui.HomeScreen
 import com.canerture.home.ui.HomeViewModel
+import com.canerture.ui.navigation.Screen
 import kotlinx.serialization.Serializable
 
 @Serializable
