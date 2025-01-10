@@ -1,6 +1,7 @@
 package com.canerture.home.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -12,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,9 +21,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import com.canerture.home.domain.model.CategoryModel
 import com.canerture.home.ui.HomeContract.UiAction
 import com.canerture.home.ui.HomeContract.UiEffect
 import com.canerture.home.ui.HomeContract.UiState
@@ -37,6 +39,7 @@ import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppToolbar
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
+import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -47,7 +50,7 @@ fun HomeScreen(
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
 ) {
-    uiEffect.collectWithLifecycle { effect ->
+    uiEffect.collectWithLifecycle { _ ->
     }
 
     Column(
@@ -91,7 +94,10 @@ private fun HomeContent(
         Spacer(modifier = Modifier.height(24.dp))
         RecentQuiz()
         Spacer(modifier = Modifier.height(24.dp))
-        Categories()
+        Categories(
+            categories = uiState.categories,
+            onCategoryClick = {},
+        )
         Spacer(modifier = Modifier.height(24.dp))
         PopularQuiz()
     }
@@ -163,7 +169,12 @@ private fun RecentQuiz() {
 }
 
 @Composable
-private fun ColumnScope.Categories() {
+private fun ColumnScope.Categories(
+    categories: List<CategoryModel> = emptyList(),
+    onCategoryClick: (CategoryModel) -> Unit,
+) {
+    if (categories.isEmpty()) return
+
     QuizAppText(
         modifier = Modifier
             .align(Alignment.Start)
@@ -172,48 +183,54 @@ private fun ColumnScope.Categories() {
         style = QuizAppTheme.typography.heading4,
     )
     Spacer(modifier = Modifier.height(16.dp))
-    LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState()),
     ) {
-        items(6) { index ->
+        categories.forEachIndexed { index, category ->
             if (index == 0) Spacer(modifier = Modifier.width(32.dp))
             Column(
                 modifier = Modifier
-                    .width(140.dp)
+                    .width(160.dp)
                     .background(
                         color = if (index % 2 == 0) QuizAppTheme.colors.lightBlue else QuizAppTheme.colors.lightYellow,
                         shape = RoundedCornerShape(16.dp),
                     )
                     .boldBorder()
+                    .clip(RoundedCornerShape(16.dp))
+                    .noRippleClickable { onCategoryClick(category) }
                     .padding(16.dp),
             ) {
                 QuizAppAsyncImage(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(74.dp)
+                        .height(124.dp)
                         .boldBorder(16)
                         .clip(RoundedCornerShape(16.dp))
                         .background(if (index % 2 == 0) QuizAppTheme.colors.blue else QuizAppTheme.colors.yellow),
-                    imageUrl = "https://www.canerture.com/assets/images/logo.png",
-                    contentDescription = "Canerture",
+                    imageUrl = category.imageUrl,
+                    contentDescription = category.name,
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 QuizAppText(
-                    text = "Category",
+                    text = category.name,
+                    style = QuizAppTheme.typography.heading5,
+                    maxLine = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                QuizAppText(
+                    text = "${category.quizCount} Quizzes",
                     style = QuizAppTheme.typography.heading6,
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                QuizAppText(
-                    text = "Movie Mania",
-                    style = QuizAppTheme.typography.subheading3,
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                QuizAppText(
-                    text = "Start Now",
-                    style = QuizAppTheme.typography.heading7,
+                    color = QuizAppTheme.colors.black,
                 )
             }
-            if (index == 5) Spacer(modifier = Modifier.width(32.dp))
+            if (index == categories.lastIndex) {
+                Spacer(modifier = Modifier.width(32.dp))
+            } else {
+                Spacer(modifier = Modifier.width(16.dp))
+            }
         }
     }
 }
