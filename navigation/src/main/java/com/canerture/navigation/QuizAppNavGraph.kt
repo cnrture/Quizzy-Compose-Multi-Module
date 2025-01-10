@@ -20,6 +20,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.canerture.detail.ui.navigation.Detail
+import com.canerture.detail.ui.navigation.detailScreen
 import com.canerture.favorites.ui.navigation.Favorites
 import com.canerture.favorites.ui.navigation.favoritesScreen
 import com.canerture.home.ui.navigation.Home
@@ -108,10 +110,16 @@ private fun NavGraph(
         modifier = modifier,
     ) {
         loginFlowNavigation(navController)
-        homeScreen()
+        homeScreen(
+            onNavigateDetail = { navController.navigate(Detail(it)) }
+        )
         favoritesScreen()
         leaderboardScreen()
         profileScreen()
+        detailScreen(
+            onNavigateBack = { navController.popBackStack() },
+            onNavigateQuiz = {}
+        )
     }
 }
 

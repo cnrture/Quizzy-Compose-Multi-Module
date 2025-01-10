@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "QuizAppCompose"
+rootProject.name = "Quizzy"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 include(":core:network")
@@ -48,4 +48,7 @@ include(":feature:profile:ui")
 include(":feature:detail:data")
 include(":feature:detail:domain")
 include(":feature:detail:ui")
+include(":feature:template:ui")
+include(":feature:template:data")
+include(":feature:template:domain")
 include(":navigation")

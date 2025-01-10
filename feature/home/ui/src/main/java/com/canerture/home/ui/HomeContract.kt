@@ -13,9 +13,11 @@ object HomeContract {
 
     sealed interface UiAction {
         data class OnSearchQueryChange(val searchQuery: String) : UiAction
+        data class OnQuizClick(val id: Int) : UiAction
     }
 
     sealed interface UiEffect {
         data class ShowError(val message: String) : UiEffect
+        data class NavigateDetail(val id: Int) : UiEffect
     }
 }

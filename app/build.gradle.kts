@@ -38,6 +38,7 @@ dependencies {
     implementation(projects.feature.login.data)
     implementation(projects.feature.register.data)
     implementation(projects.feature.home.data)
+    implementation(projects.feature.detail.data)
 
     implementation(projects.navigation)
 

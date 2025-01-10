@@ -55,8 +55,8 @@ fun QuizAppButton(
         QuizAppButtonType.PRIMARY -> {
             Button(
                 modifier = Modifier
-                    .height(height)
-                    .then(modifier),
+                    .then(modifier)
+                    .height(height),
                 onClick = onClick,
                 enabled = isEnable,
                 colors = ButtonDefaults.buttonColors(

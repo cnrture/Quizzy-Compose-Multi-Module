@@ -20,5 +20,6 @@ dependencies {
     implementation(projects.feature.favorites.ui)
     implementation(projects.feature.leaderboard.ui)
     implementation(projects.feature.profile.ui)
+    implementation(projects.feature.detail.ui)
     implementation(projects.core.ui)
 }

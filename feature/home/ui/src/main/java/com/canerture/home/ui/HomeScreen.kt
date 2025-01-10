@@ -50,8 +50,15 @@ fun HomeScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
+    onNavigateDetail: (Int) -> Unit,
 ) {
-    uiEffect.collectWithLifecycle { _ ->
+    uiEffect.collectWithLifecycle { effect ->
+        when (effect) {
+            is UiEffect.NavigateDetail -> onNavigateDetail(effect.id)
+            is UiEffect.ShowError -> {
+                // Show error
+            }
+        }
     }
 
     Column(
@@ -102,7 +109,7 @@ private fun HomeContent(
         Spacer(modifier = Modifier.height(24.dp))
         PopularQuizzes(
             quizzes = uiState.popularQuizzes,
-            onQuizClick = {},
+            onQuizClick = { onAction(UiAction.OnQuizClick(it)) },
         )
     }
 }
@@ -235,5 +242,6 @@ private fun HomeScreenPreview(
         uiState = uiState,
         uiEffect = emptyFlow(),
         onAction = {},
+        onNavigateDetail = {},
     )
 }

@@ -8,7 +8,7 @@ fun List<PopularQuizzesResponse>?.toModel(): List<PopularQuizModel> {
     return this?.map {
         PopularQuizModel(
             id = it.id.orZero(),
-            category = it.category?.name.orEmpty(),
+            category = it.category.orEmpty(),
             name = it.name.orEmpty(),
             questionCount = it.questionCount.orZero(),
             imageUrl = it.imageUrl.orEmpty()
