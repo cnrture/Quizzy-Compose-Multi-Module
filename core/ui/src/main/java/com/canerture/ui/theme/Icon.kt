@@ -132,4 +132,8 @@ class QuizAppIcons {
     val google: ImageVector
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_google)
+
+    val logo: ImageVector
+        @Composable
+        get() = ImageVector.vectorResource(id = R.drawable.ic_logo)
 }
