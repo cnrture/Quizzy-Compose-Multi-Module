@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.canerture.ui.theme.QuizAppTheme
 
@@ -16,6 +17,8 @@ fun QuizAppText(
     text: String,
     color: Color = QuizAppTheme.colors.black,
     style: TextStyle = QuizAppTheme.typography.paragraph2,
+    overflow: TextOverflow = TextOverflow.Clip,
+    maxLine: Int = Int.MAX_VALUE,
     textAlign: TextAlign? = null,
 ) {
     Text(
@@ -23,7 +26,9 @@ fun QuizAppText(
         modifier = modifier,
         color = color,
         textAlign = textAlign,
-        style = style
+        style = style,
+        overflow = overflow,
+        maxLines = maxLine
     )
 }
 
