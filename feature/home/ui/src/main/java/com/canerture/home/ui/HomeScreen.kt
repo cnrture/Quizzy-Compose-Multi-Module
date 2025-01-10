@@ -226,7 +226,7 @@ private fun ColumnScope.Categories(
                     color = QuizAppTheme.colors.black,
                 )
             }
-            Modifier.width(if (index == categories.lastIndex) 32.dp else 16.dp)
+            Spacer(modifier = Modifier.width(if (index == categories.lastIndex) 32.dp else 16.dp))
         }
     }
 }
