@@ -1,0 +1,110 @@
+package com.canerture.home.ui.components
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.canerture.ui.components.QuizAppAsyncImage
+import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.extensions.boldBorder
+import com.canerture.ui.theme.QuizAppTheme
+
+@Composable
+fun PopularQuizItem() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 32.dp)
+            .background(
+                color = QuizAppTheme.colors.white,
+                shape = RoundedCornerShape(16.dp),
+            )
+            .boldBorder(),
+    ) {
+        Box(
+            modifier = Modifier
+                .aspectRatio(1f)
+                .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
+        ) {
+            QuizAppAsyncImage(
+                modifier = Modifier.fillMaxWidth(),
+                imageUrl = "https://www.canerture.com/assets/images/logo.png",
+                contentDescription = "Canerture",
+            )
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(16.dp)
+                    .size(40.dp)
+                    .background(
+                        color = QuizAppTheme.colors.white,
+                        shape = RoundedCornerShape(4.dp),
+                    )
+                    .boldBorder(4),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    imageVector = QuizAppTheme.icons.starUnselected,
+                    contentDescription = "Play",
+                    tint = QuizAppTheme.colors.blue,
+                    modifier = Modifier.size(24.dp),
+                )
+            }
+        }
+        HorizontalDivider(
+            modifier = Modifier.fillMaxWidth(),
+            color = QuizAppTheme.colors.black,
+            thickness = 2.dp,
+        )
+        Column(
+            modifier = Modifier.padding(16.dp),
+        ) {
+            QuizAppText(
+                text = "Popular Quiz",
+                style = QuizAppTheme.typography.heading3,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                QuizAppText(
+                    text = "15 Questions",
+                    style = QuizAppTheme.typography.subheading3,
+                )
+                QuizAppText(
+                    text = "•",
+                    style = QuizAppTheme.typography.subheading1,
+                )
+                QuizAppText(
+                    text = "Music & Entertainment",
+                    style = QuizAppTheme.typography.subheading3,
+                )
+            }
+        }
+    }
+    Spacer(modifier = Modifier.height(16.dp))
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PopularQuizItemPreview() {
+    PopularQuizItem()
+}
