@@ -37,6 +37,7 @@ dependencies {
     implementation(projects.feature.splash.data)
     implementation(projects.feature.login.data)
     implementation(projects.feature.register.data)
+    implementation(projects.feature.home.data)
 
     implementation(projects.navigation)
 
