@@ -1,6 +1,5 @@
 package com.canerture.home.ui
 
-import com.canerture.core.common.BaseException
 import com.canerture.home.domain.model.CategoryModel
 
 object HomeContract {
