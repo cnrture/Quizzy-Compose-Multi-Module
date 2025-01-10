@@ -170,7 +170,7 @@ private fun RecentQuiz() {
 
 @Composable
 private fun ColumnScope.Categories(
-    categories: List<CategoryModel> = emptyList(),
+    categories: List<CategoryModel>,
     onCategoryClick: (CategoryModel) -> Unit,
 ) {
     if (categories.isEmpty()) return
@@ -190,11 +190,12 @@ private fun ColumnScope.Categories(
     ) {
         categories.forEachIndexed { index, category ->
             if (index == 0) Spacer(modifier = Modifier.width(32.dp))
+            val bgColor = if (index % 2 == 0) QuizAppTheme.colors.lightBlue else QuizAppTheme.colors.lightYellow
             Column(
                 modifier = Modifier
                     .width(160.dp)
                     .background(
-                        color = if (index % 2 == 0) QuizAppTheme.colors.lightBlue else QuizAppTheme.colors.lightYellow,
+                        color = bgColor,
                         shape = RoundedCornerShape(16.dp),
                     )
                     .boldBorder()
@@ -207,8 +208,7 @@ private fun ColumnScope.Categories(
                         .fillMaxWidth()
                         .height(124.dp)
                         .boldBorder(16)
-                        .clip(RoundedCornerShape(16.dp))
-                        .background(if (index % 2 == 0) QuizAppTheme.colors.blue else QuizAppTheme.colors.yellow),
+                        .clip(RoundedCornerShape(16.dp)),
                     imageUrl = category.imageUrl,
                     contentDescription = category.name,
                 )
@@ -226,11 +226,7 @@ private fun ColumnScope.Categories(
                     color = QuizAppTheme.colors.black,
                 )
             }
-            if (index == categories.lastIndex) {
-                Spacer(modifier = Modifier.width(32.dp))
-            } else {
-                Spacer(modifier = Modifier.width(16.dp))
-            }
+            Modifier.width(if (index == categories.lastIndex) 32.dp else 16.dp)
         }
     }
 }
