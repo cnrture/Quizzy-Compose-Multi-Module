@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.canerture.home.domain.model.CategoryModel
+import com.canerture.home.domain.model.PopularQuizModel
 import com.canerture.home.ui.HomeContract.UiAction
 import com.canerture.home.ui.HomeContract.UiEffect
 import com.canerture.home.ui.HomeContract.UiState
@@ -99,7 +100,10 @@ private fun HomeContent(
             onCategoryClick = {},
         )
         Spacer(modifier = Modifier.height(24.dp))
-        PopularQuiz()
+        PopularQuizzes(
+            quizzes = uiState.popularQuizzes,
+            onQuizClick = {},
+        )
     }
 }
 
@@ -200,7 +204,12 @@ private fun ColumnScope.Categories(
 }
 
 @Composable
-private fun ColumnScope.PopularQuiz() {
+private fun ColumnScope.PopularQuizzes(
+    quizzes: List<PopularQuizModel>,
+    onQuizClick: (Int) -> Unit,
+) {
+    if (quizzes.isEmpty()) return
+
     QuizAppText(
         modifier = Modifier
             .align(Alignment.Start)
@@ -209,8 +218,11 @@ private fun ColumnScope.PopularQuiz() {
         style = QuizAppTheme.typography.heading4,
     )
     Spacer(modifier = Modifier.height(16.dp))
-    repeat(3) {
-        PopularQuizItem()
+    quizzes.forEachIndexed { index, quiz ->
+        PopularQuizItem(
+            quiz = quiz,
+            onQuizClick = onQuizClick,
+        )
     }
 }
 

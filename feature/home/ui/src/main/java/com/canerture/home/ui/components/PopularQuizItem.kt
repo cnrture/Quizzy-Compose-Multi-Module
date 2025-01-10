@@ -20,13 +20,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.canerture.home.domain.model.PopularQuizModel
 import com.canerture.ui.components.QuizAppAsyncImage
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.extensions.boldBorder
+import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun PopularQuizItem() {
+fun PopularQuizItem(
+    quiz: PopularQuizModel,
+    onQuizClick: (Int) -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -35,7 +40,8 @@ fun PopularQuizItem() {
                 color = QuizAppTheme.colors.white,
                 shape = RoundedCornerShape(16.dp),
             )
-            .boldBorder(),
+            .boldBorder()
+            .noRippleClickable { onQuizClick(quiz.id) },
     ) {
         Box(
             modifier = Modifier
@@ -44,8 +50,8 @@ fun PopularQuizItem() {
         ) {
             QuizAppAsyncImage(
                 modifier = Modifier.fillMaxWidth(),
-                imageUrl = "https://www.canerture.com/assets/images/logo.png",
-                contentDescription = "Canerture",
+                imageUrl = quiz.imageUrl,
+                contentDescription = quiz.name,
             )
             Box(
                 modifier = Modifier
@@ -61,7 +67,7 @@ fun PopularQuizItem() {
             ) {
                 Icon(
                     imageVector = QuizAppTheme.icons.starUnselected,
-                    contentDescription = "Play",
+                    contentDescription = "Favorite",
                     tint = QuizAppTheme.colors.blue,
                     modifier = Modifier.size(24.dp),
                 )
@@ -76,7 +82,7 @@ fun PopularQuizItem() {
             modifier = Modifier.padding(16.dp),
         ) {
             QuizAppText(
-                text = "Popular Quiz",
+                text = quiz.name,
                 style = QuizAppTheme.typography.heading3,
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -86,7 +92,7 @@ fun PopularQuizItem() {
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 QuizAppText(
-                    text = "15 Questions",
+                    text = "${quiz.questionCount} Questions",
                     style = QuizAppTheme.typography.subheading3,
                 )
                 QuizAppText(
@@ -94,7 +100,7 @@ fun PopularQuizItem() {
                     style = QuizAppTheme.typography.subheading1,
                 )
                 QuizAppText(
-                    text = "Music & Entertainment",
+                    text = quiz.category,
                     style = QuizAppTheme.typography.subheading3,
                 )
             }
@@ -106,5 +112,14 @@ fun PopularQuizItem() {
 @Preview(showBackground = true)
 @Composable
 fun PopularQuizItemPreview() {
-    PopularQuizItem()
+    PopularQuizItem(
+        quiz = PopularQuizModel(
+            id = 1,
+            imageUrl = "https://www.canerture.com/assets/images/logo.png",
+            name = "Movie Mania",
+            questionCount = 10,
+            category = "Movies",
+        ),
+        onQuizClick = {},
+    )
 }
