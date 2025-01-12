@@ -4,9 +4,8 @@ plugins {
 }
 
 android {
-    namespace = "com.canerture.core.datastore"
+    namespace = "com.canerture.datasource.logout"
 }
 
 dependencies {
-    implementation(libs.datastore)
 }

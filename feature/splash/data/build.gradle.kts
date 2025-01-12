@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.quiz.android.library)
     alias(libs.plugins.quiz.hilt)
+    alias(libs.plugins.quiz.retrofit)
 }
 
 android {

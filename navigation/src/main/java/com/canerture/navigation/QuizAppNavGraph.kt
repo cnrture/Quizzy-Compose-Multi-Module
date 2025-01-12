@@ -19,7 +19,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
-import androidx.navigation.compose.rememberNavController
 import com.canerture.detail.ui.navigation.Detail
 import com.canerture.detail.ui.navigation.detailScreen
 import com.canerture.favorites.ui.navigation.Favorites
@@ -34,6 +33,7 @@ import com.canerture.profile.ui.navigation.Profile
 import com.canerture.profile.ui.navigation.profileScreen
 import com.canerture.register.ui.navigation.Register
 import com.canerture.register.ui.navigation.registerScreen
+import com.canerture.ui.navigation.Screen
 import com.canerture.ui.navigation.Splash
 import com.canerture.ui.navigation.splashScreen
 import com.canerture.ui.theme.QuizAppTheme
@@ -42,17 +42,13 @@ import com.canerture.welcome.ui.navigation.welcomeScreen
 import kotlinx.serialization.Serializable
 
 @Composable
-fun QuizAppNavGraph() {
-    val navController = rememberNavController()
-
+fun QuizAppNavGraph(
+    navController: NavHostController,
+) {
     var selectedItem by rememberSaveable { mutableIntStateOf(0) }
 
-    val visibleBottomSheetScreen = listOf(
-        Home::class.java.canonicalName,
-        Favorites::class.java.canonicalName,
-        Leaderboard::class.java.canonicalName,
-        Profile::class.java.canonicalName,
-    )
+    val visibleBottomSheetScreen =
+        listOf(Home.getRoute(), Favorites.getRoute(), Leaderboard.getRoute(), Profile.getRoute())
 
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
     val bottomBarVisibility = currentRoute in visibleBottomSheetScreen
@@ -60,10 +56,10 @@ fun QuizAppNavGraph() {
     LaunchedEffect(Unit) {
         navController.currentBackStackEntryFlow.collect {
             selectedItem = when (it.destination.route) {
-                Home::class.java.canonicalName -> 0
-                Favorites::class.java.canonicalName -> 1
-                Leaderboard::class.java.canonicalName -> 2
-                Profile::class.java.canonicalName -> 3
+                Home.getRoute() -> 0
+                Favorites.getRoute() -> 1
+                Leaderboard.getRoute() -> 2
+                Profile.getRoute() -> 3
                 else -> selectedItem
             }
         }
@@ -106,10 +102,39 @@ private fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = LoginFlow,
+        startDestination = Splash,
         modifier = modifier,
     ) {
+        splashScreen(
+            onNavigateWelcome = { navController.navigateWithPopUpTo(LoginFlow, Splash) },
+            onNavigateHome = { navController.navigateWithPopUpTo(MainFlow, Splash) }
+        )
         loginFlowNavigation(navController)
+        mainFlowNavigation(navController)
+    }
+}
+
+fun NavGraphBuilder.loginFlowNavigation(navController: NavHostController) {
+    navigation<LoginFlow>(Welcome) {
+        welcomeScreen(
+            onNavigateLogin = { navController.navigate(Login) },
+            onNavigateRegister = { navController.navigate(Register) },
+            onNavigateHome = { navController.navigateWithPopUpTo(MainFlow, LoginFlow) }
+        )
+        loginScreen(
+            onNavigateBack = { navController.popBackStack() },
+            onNavigateRegister = { navController.navigate(Register) },
+            onNavigateHome = { navController.navigateWithPopUpTo(MainFlow, LoginFlow) }
+        )
+        registerScreen(
+            onNavigateBack = { navController.popBackStack() },
+            onNavigateLogin = { navController.navigateWithPopUpTo(Login, Register) }
+        )
+    }
+}
+
+fun NavGraphBuilder.mainFlowNavigation(navController: NavHostController) {
+    navigation<MainFlow>(Home) {
         homeScreen(
             onNavigateDetail = { navController.navigate(Detail(it)) }
         )
@@ -123,29 +148,6 @@ private fun NavGraph(
     }
 }
 
-fun NavGraphBuilder.loginFlowNavigation(navController: NavHostController) {
-    navigation<LoginFlow>(Splash) {
-        splashScreen(
-            onNavigateWelcome = { navController.navigateWithPopUpTo(Welcome, Splash) },
-            onNavigateHome = { navController.navigateWithPopUpTo(Home, LoginFlow) }
-        )
-        welcomeScreen(
-            onNavigateLogin = { navController.navigate(Login) },
-            onNavigateRegister = { navController.navigate(Register) },
-            onNavigateHome = { navController.navigateWithPopUpTo(Home, LoginFlow) }
-        )
-        loginScreen(
-            onNavigateBack = { navController.popBackStack() },
-            onNavigateRegister = { navController.navigate(Register) },
-            onNavigateHome = { navController.navigateWithPopUpTo(Home, LoginFlow) }
-        )
-        registerScreen(
-            onNavigateBack = { navController.popBackStack() },
-            onNavigateLogin = { navController.navigateWithPopUpTo(Login, Register) }
-        )
-    }
-}
-
 fun NavHostController.navigateWithPopUpTo(screen: Any, popUp: Any) {
     navigate(screen) {
         popUpTo(popUp) { inclusive = true }
@@ -154,3 +156,10 @@ fun NavHostController.navigateWithPopUpTo(screen: Any, popUp: Any) {
 
 @Serializable
 object LoginFlow
+
+@Serializable
+object MainFlow
+
+fun Screen.getRoute(): String {
+    return this::class.java.canonicalName.orEmpty()
+}

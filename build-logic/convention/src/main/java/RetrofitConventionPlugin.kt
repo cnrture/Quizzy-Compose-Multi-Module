@@ -12,6 +12,8 @@ class RetrofitConventionPlugin : Plugin<Project> {
                 "api"(libs.findLibrary("retrofit").get())
                 "implementation"(libs.findLibrary("kotlinx.serialization").get())
                 "implementation"(libs.findLibrary("converter.kotlinx.serialization").get())
+                "debugImplementation"(libs.findLibrary("chucker").get())
+                "releaseImplementation"(libs.findLibrary("chucker.noop").get())
             }
         }
     }

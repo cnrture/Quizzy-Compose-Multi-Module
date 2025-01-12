@@ -4,9 +4,8 @@ plugins {
 }
 
 android {
-    namespace = "com.canerture.core.datastore"
+    namespace = "com.canerture.core.connectivity"
 }
 
 dependencies {
-    implementation(libs.datastore)
 }
