@@ -31,6 +31,8 @@ import com.canerture.login.ui.navigation.Login
 import com.canerture.login.ui.navigation.loginScreen
 import com.canerture.profile.ui.navigation.Profile
 import com.canerture.profile.ui.navigation.profileScreen
+import com.canerture.quiz.ui.navigation.Quiz
+import com.canerture.quiz.ui.navigation.quizScreen
 import com.canerture.register.ui.navigation.Register
 import com.canerture.register.ui.navigation.registerScreen
 import com.canerture.ui.navigation.Screen
@@ -143,7 +145,11 @@ fun NavGraphBuilder.mainFlowNavigation(navController: NavHostController) {
         profileScreen()
         detailScreen(
             onNavigateBack = { navController.popBackStack() },
-            onNavigateQuiz = {}
+            onNavigateQuiz = { navController.navigate(Quiz(it)) }
+        )
+        quizScreen(
+            onNavigateBack = { navController.popBackStack() },
+            onNavigateResult = {}
         )
     }
 }

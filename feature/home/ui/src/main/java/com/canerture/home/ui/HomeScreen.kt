@@ -166,8 +166,8 @@ private fun RecentQuiz() {
         ) {
             QuizAppLinearProgress(
                 modifier = Modifier.weight(1f),
-                value = 50f,
-                maxValue = 100f,
+                value = 50,
+                maxValue = 100,
                 thickness = 12.dp,
             )
             Spacer(modifier = Modifier.width(8.dp))

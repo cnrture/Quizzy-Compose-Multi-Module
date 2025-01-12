@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -19,12 +19,12 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun AnimatedLinearProgress() {
-    var progressValue by remember { mutableFloatStateOf(0f) }
+    var progressValue by remember { mutableIntStateOf(0) }
     LaunchedEffect(Unit) {
         while (progressValue < 100f) {
-            progressValue = 0f
+            progressValue = 0
             repeat(100) {
-                progressValue += 1f
+                progressValue += 1
                 delay(15)
             }
         }
@@ -42,7 +42,7 @@ fun AnimatedLinearProgress() {
             value = progressValue
         )
         QuizAppText(
-            text = "${progressValue.toInt()}%",
+            text = "$progressValue%",
             style = QuizAppTheme.typography.subheading2,
             modifier = Modifier.padding(8.dp)
         )

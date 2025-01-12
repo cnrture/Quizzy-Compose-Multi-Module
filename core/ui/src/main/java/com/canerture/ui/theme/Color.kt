@@ -19,8 +19,10 @@ fun colors(
     darkGray: Color = Color(0xFFB9B9B9),
     gray: Color = Color(0xFF9C9C9C).copy(alpha = 0.5f),
     softGray: Color = Color(0xFFF2F2F2),
-    green: Color = Color(0xFF4CAF50),
-    red: Color = Color(0xFFE53935),
+    green: Color = Color(0xFF2ED22A),
+    softGreen: Color = Color(0xFFC2F8B9),
+    red: Color = Color(0xFFF45C5C),
+    softRed: Color = Color(0xFFFFD0BC),
 ): QuizAppColor = QuizAppColor(
     black = black,
     white = white,
@@ -33,7 +35,9 @@ fun colors(
     gray = gray,
     softGray = softGray,
     green = green,
+    softGreen = softGreen,
     red = red,
+    softRed = softRed,
 )
 
 class QuizAppColor(
@@ -48,7 +52,9 @@ class QuizAppColor(
     gray: Color,
     softGray: Color,
     green: Color,
+    softGreen: Color,
     red: Color,
+    softRed: Color,
 ) {
     private var _black: Color by mutableStateOf(black)
     val black: Color = _black
@@ -83,6 +89,12 @@ class QuizAppColor(
     private var _green: Color by mutableStateOf(green)
     val green: Color = _green
 
+    private var _softGreen: Color by mutableStateOf(softGreen)
+    val softGreen: Color = _softGreen
+
     private var _red: Color by mutableStateOf(red)
     val red: Color = _red
+
+    private var _softRed: Color by mutableStateOf(softRed)
+    val softRed: Color = _softRed
 }

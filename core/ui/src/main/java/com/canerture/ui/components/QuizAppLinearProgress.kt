@@ -9,14 +9,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.canerture.ui.extensions.boldBorder
+import com.canerture.ui.extensions.conditional
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
 fun QuizAppLinearProgress(
     modifier: Modifier = Modifier,
-    value: Float,
-    maxValue: Float = 100f,
+    value: Int,
+    maxValue: Int = 100,
     thickness: Dp = 24.dp,
+    isBordered: Boolean = true,
     progressColor: Color = QuizAppTheme.colors.yellow,
     backgroundColor: Color = QuizAppTheme.colors.softGray,
 ) {
@@ -24,7 +26,9 @@ fun QuizAppLinearProgress(
     Canvas(
         modifier = modifier
             .height(thickness)
-            .boldBorder(100)
+            .conditional(isBordered) {
+                boldBorder(100)
+            }
     ) {
         drawRoundRect(
             color = backgroundColor,

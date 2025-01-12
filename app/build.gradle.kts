@@ -41,6 +41,7 @@ dependencies {
     implementation(projects.feature.register.data)
     implementation(projects.feature.home.data)
     implementation(projects.feature.detail.data)
+    implementation(projects.feature.quiz.data)
 
     implementation(projects.navigation)
 
