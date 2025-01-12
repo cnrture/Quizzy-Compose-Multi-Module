@@ -19,7 +19,7 @@ class SplashRepositoryImpl @Inject constructor(
     override suspend fun checkUserLoggedIn(): Resource<Unit> {
         val token = dataStore.getToken().firstOrNull().orEmpty()
         return safeApiCall { api.checkToken(CheckTokenRequest(token)) }.onSuccess {
-            dataStore.saveToken(it.token.orEmpty())
+            dataStore.saveToken(it.token)
         }.toUnit()
     }
 }
