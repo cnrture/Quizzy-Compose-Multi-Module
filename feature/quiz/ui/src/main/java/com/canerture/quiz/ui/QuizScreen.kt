@@ -27,12 +27,12 @@ import com.canerture.quiz.ui.QuizContract.UiEffect
 import com.canerture.quiz.ui.QuizContract.UiState
 import com.canerture.quiz.ui.component.AnswerButton
 import com.canerture.quiz.ui.component.QuestionCountProgress
+import com.canerture.quiz.ui.component.QuizAppTimer
+import com.canerture.quiz.ui.component.TimerState
 import com.canerture.ui.components.QuizAppButton
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
-import com.canerture.quiz.ui.component.QuizAppTimer
 import com.canerture.ui.components.QuizAppToolbar
-import com.canerture.quiz.ui.component.TimerState
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
