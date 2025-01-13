@@ -4,7 +4,6 @@ import android.content.Context
 import com.canerture.core.network.BuildConfig
 import com.canerture.datasource.logout.LogoutDataSource
 import com.canerture.datastore.DataStoreHelper
-import com.canerture.network.NetworkInterceptor
 import com.canerture.network.TokenAuthenticator
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
@@ -34,12 +33,6 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideNetworkInterceptor(
-        @ApplicationContext context: Context,
-    ): NetworkInterceptor = NetworkInterceptor(context)
-
-    @Provides
-    @Singleton
     fun provideTokenAuthenticator(
         userRepository: dagger.Lazy<DataStoreHelper>,
         logoutDatasource: dagger.Lazy<LogoutDataSource>,
@@ -48,11 +41,9 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        networkInterceptor: NetworkInterceptor,
         authenticator: TokenAuthenticator,
         chuckerInterceptor: ChuckerInterceptor,
     ): OkHttpClient = OkHttpClient.Builder().apply {
-        addInterceptor(networkInterceptor)
         authenticator(authenticator)
         if (BuildConfig.DEBUG) {
             addInterceptor(chuckerInterceptor)

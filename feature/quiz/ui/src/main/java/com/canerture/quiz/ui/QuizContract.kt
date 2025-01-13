@@ -8,6 +8,7 @@ object QuizContract {
         val isLoading: Boolean = false,
         val id: Int = 0,
         val categoryId: Int = 0,
+        val score: Int = 0,
         val quizNumber: Int = 0,
         val questions: List<QuestionModel> = emptyList(),
         val question: QuestionModel? = null,

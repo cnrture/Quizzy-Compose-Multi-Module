@@ -1,22 +1,23 @@
 package com.canerture.quiz.data.mapper
 
 import com.canerture.core.common.orZero
+import com.canerture.quiz.data.model.QuestionResponse
 import com.canerture.quiz.data.model.QuizResponse
 import com.canerture.quiz.domain.model.OptionModel
 import com.canerture.quiz.domain.model.OptionState
 import com.canerture.quiz.domain.model.QuestionModel
 import com.canerture.quiz.domain.model.QuizModel
 
-fun List<QuizResponse>?.toModel(): QuizModel {
-    val questions = this.toQuestionModel()
+fun QuizResponse?.toModel(): QuizModel {
     return QuizModel(
-        id = this?.firstOrNull()?.id.orZero(),
-        categoryId = this?.firstOrNull()?.categoryId.orZero(),
-        questions = questions,
+        id = this?.id.orZero(),
+        categoryId = this?.categoryId.orZero(),
+        score = this?.score.orZero(),
+        questions = this?.questions.toQuestionModel(),
     )
 }
 
-fun List<QuizResponse>?.toQuestionModel(): List<QuestionModel> {
+fun List<QuestionResponse>?.toQuestionModel(): List<QuestionModel> {
     return this?.map {
         QuestionModel(
             question = it.question.orEmpty(),

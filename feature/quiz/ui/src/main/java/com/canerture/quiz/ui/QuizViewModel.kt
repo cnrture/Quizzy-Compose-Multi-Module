@@ -7,6 +7,7 @@ import androidx.navigation.toRoute
 import com.canerture.core.common.fold
 import com.canerture.quiz.domain.model.OptionModel
 import com.canerture.quiz.domain.usecase.GetQuizUseCase
+import com.canerture.quiz.domain.usecase.SubmitQuizUseCase
 import com.canerture.quiz.domain.usecase.UpdateOptionsUseCase
 import com.canerture.quiz.ui.QuizContract.UiAction
 import com.canerture.quiz.ui.QuizContract.UiEffect
@@ -22,6 +23,7 @@ import javax.inject.Inject
 class QuizViewModel @Inject constructor(
     private val getQuizUseCase: GetQuizUseCase,
     private val updateOptionsUseCase: UpdateOptionsUseCase,
+    private val submitQuizUseCase: SubmitQuizUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel(),
     MVI<UiState, UiAction, UiEffect> by mvi(UiState()) {
@@ -51,12 +53,29 @@ class QuizViewModel @Inject constructor(
                         isLoading = false,
                         id = it.id,
                         categoryId = it.categoryId,
+                        score = it.score,
                         questions = it.questions,
                         question = it.questions.firstOrNull(),
                         options = it.questions.firstOrNull()?.options.orEmpty(),
                         quizNumber = 1,
                     )
                 }
+            },
+            onError = {
+                updateUiState { copy(isLoading = false) }
+                emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
+            }
+        )
+    }
+
+    private fun submitQuiz() = viewModelScope.launch {
+        updateUiState { copy(isLoading = true) }
+        val currentUiState = currentUiState
+        val score = currentUiState.score / currentUiState.questions.size * currentUiState.correctAnswers
+        submitQuizUseCase(currentUiState.id, score).fold(
+            onSuccess = {
+                updateUiState { copy(isLoading = false) }
+                emitUiEffect(UiEffect.NavigateResult(currentUiState.correctAnswers))
             },
             onError = {
                 updateUiState { copy(isLoading = false) }
@@ -82,7 +101,7 @@ class QuizViewModel @Inject constructor(
             }
             emitUiEffect(UiEffect.ResetTimer)
         } else {
-            emitUiEffect(UiEffect.NavigateResult(currentUiState.correctAnswers))
+            submitQuiz()
         }
     }
 
