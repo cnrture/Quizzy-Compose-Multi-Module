@@ -22,7 +22,11 @@ android {
             buildConfig = true
         }
 
-        buildConfigField("String", "SERVER_CLIENT_ID", "\"${localProperties.getProperty("SERVER_CLIENT_ID") ?: "SERVER_CLIENT_ID"}\"")
+        buildConfigField(
+            "String",
+            "SERVER_CLIENT_ID",
+            "\"${localProperties.getProperty("SERVER_CLIENT_ID") ?: "SERVER_CLIENT_ID"}\""
+        )
     }
 }
 
