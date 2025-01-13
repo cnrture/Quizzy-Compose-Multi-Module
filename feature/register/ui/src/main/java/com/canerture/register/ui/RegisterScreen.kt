@@ -20,8 +20,6 @@ import com.canerture.feature.register.ui.R
 import com.canerture.register.ui.RegisterContract.UiAction
 import com.canerture.register.ui.RegisterContract.UiEffect
 import com.canerture.register.ui.RegisterContract.UiState
-import com.canerture.register.ui.component.buildDontHaveAnAccountSpannableText
-import com.canerture.register.ui.component.buildPolicySpannableText
 import com.canerture.ui.components.QuizAppButton
 import com.canerture.ui.components.QuizAppDialog
 import com.canerture.ui.components.QuizAppLoading
@@ -146,13 +144,18 @@ private fun RegisterContent(
         Spacer(modifier = Modifier.height(24.dp))
         QuizAppText(
             modifier = Modifier.noRippleClickable { onLoginClick() },
-            text = buildDontHaveAnAccountSpannableText(),
+            fullText = stringResource(R.string.already_have_an_account),
+            spanTexts = listOf(stringResource(R.string.already_have_an_account_span)),
             style = QuizAppTheme.typography.paragraph2,
             textAlign = TextAlign.Center,
         )
         Spacer(modifier = Modifier.height(40.dp))
         QuizAppText(
-            text = buildPolicySpannableText(),
+            fullText = stringResource(R.string.policy),
+            spanTexts = listOf(
+                stringResource(R.string.privacy_policy_span),
+                stringResource(R.string.terms_of_conditions_span)
+            ),
             style = QuizAppTheme.typography.paragraph2,
             textAlign = TextAlign.Center,
         )

@@ -9,6 +9,7 @@ object HomeContract {
         val searchQuery: String = "",
         val categories: List<CategoryModel> = emptyList(),
         val popularQuizzes: List<PopularQuizModel> = emptyList(),
+        val username: String = ""
     )
 
     sealed interface UiAction {

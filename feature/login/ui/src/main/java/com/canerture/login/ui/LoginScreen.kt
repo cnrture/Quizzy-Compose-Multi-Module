@@ -25,8 +25,6 @@ import com.canerture.login.ui.LoginContract.UiAction
 import com.canerture.login.ui.LoginContract.UiEffect
 import com.canerture.login.ui.LoginContract.UiState
 import com.canerture.login.ui.component.ForgotPasswordContent
-import com.canerture.login.ui.component.buildDontHaveAnAccountSpannableText
-import com.canerture.login.ui.component.buildPolicySpannableText
 import com.canerture.ui.components.QuizAppButton
 import com.canerture.ui.components.QuizAppDialog
 import com.canerture.ui.components.QuizAppLoading
@@ -176,13 +174,18 @@ private fun LoginContent(
         Spacer(modifier = Modifier.height(24.dp))
         QuizAppText(
             modifier = Modifier.noRippleClickable { onRegisterClick() },
-            text = buildDontHaveAnAccountSpannableText(),
+            fullText = stringResource(R.string.dont_have_an_account),
+            spanTexts = listOf(stringResource(R.string.dont_have_an_account_span)),
             style = QuizAppTheme.typography.paragraph2,
             textAlign = TextAlign.Center,
         )
         Spacer(modifier = Modifier.height(40.dp))
         QuizAppText(
-            text = buildPolicySpannableText(),
+            fullText = stringResource(R.string.policy),
+            spanTexts = listOf(
+                stringResource(R.string.privacy_policy_span),
+                stringResource(R.string.terms_of_conditions_span)
+            ),
             style = QuizAppTheme.typography.paragraph2,
             textAlign = TextAlign.Center,
         )

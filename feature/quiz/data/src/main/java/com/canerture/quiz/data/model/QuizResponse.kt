@@ -1,4 +1,4 @@
-package com.canerture.quiz.data.mapper
+package com.canerture.quiz.data.model
 
 import kotlinx.serialization.Serializable
 

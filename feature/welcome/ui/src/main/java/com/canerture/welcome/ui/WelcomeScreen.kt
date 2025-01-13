@@ -34,8 +34,6 @@ import com.canerture.ui.theme.QuizAppTheme
 import com.canerture.welcome.ui.WelcomeContract.UiAction
 import com.canerture.welcome.ui.WelcomeContract.UiEffect
 import com.canerture.welcome.ui.WelcomeContract.UiState
-import com.canerture.welcome.ui.components.buildDontHaveAnAccountSpannableText
-import com.canerture.welcome.ui.components.buildPolicySpannableText
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
@@ -150,14 +148,19 @@ private fun WelcomeContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .noRippleClickable { onAction(UiAction.OnRegisterClick) },
-            text = buildDontHaveAnAccountSpannableText(),
+            fullText = stringResource(R.string.dont_have_an_account),
+            spanTexts = listOf(stringResource(R.string.dont_have_an_account_span)),
             style = QuizAppTheme.typography.paragraph2,
             textAlign = TextAlign.Center,
         )
         Spacer(modifier = Modifier.height(40.dp))
         QuizAppText(
             modifier = Modifier.fillMaxWidth(),
-            text = buildPolicySpannableText(),
+            fullText = stringResource(R.string.policy),
+            spanTexts = listOf(
+                stringResource(R.string.privacy_policy_span),
+                stringResource(R.string.terms_of_conditions_span),
+            ),
             style = QuizAppTheme.typography.paragraph2,
             textAlign = TextAlign.Center,
         )

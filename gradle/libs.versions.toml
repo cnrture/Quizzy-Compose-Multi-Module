@@ -26,6 +26,7 @@ kotlinxSerialization = "1.7.3"
 moduleGraph = "2.7.1"
 dataStore = "1.1.1"
 chucker = "4.0.0"
+coroutines = "1.9.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -63,6 +64,7 @@ javax-inject = { module = "javax.inject:javax.inject", version = "1" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStore" }
 chucker = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
 chucker-noop = { group = "com.github.chuckerteam.chucker", name = "library-no-op", version.ref = "chucker" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 
 android-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 compose-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }

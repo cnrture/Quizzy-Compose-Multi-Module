@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.canerture.core.common.fold
 import com.canerture.home.domain.usecase.GetCategoriesUseCase
 import com.canerture.home.domain.usecase.GetPopularQuizzesUseCase
+import com.canerture.home.domain.usecase.GetUsernameUseCase
 import com.canerture.home.ui.HomeContract.UiAction
 import com.canerture.home.ui.HomeContract.UiEffect
 import com.canerture.home.ui.HomeContract.UiState
@@ -18,12 +19,14 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getPopularQuizzesUseCase: GetPopularQuizzesUseCase,
+    private val getUsernameUseCase: GetUsernameUseCase,
 ) : ViewModel(),
     MVI<UiState, UiAction, UiEffect> by mvi(UiState()) {
 
     init {
         getCategories()
         getPopularQuizzes()
+        getUsername()
     }
 
     override fun onAction(uiAction: UiAction) {
@@ -58,5 +61,11 @@ class HomeViewModel @Inject constructor(
                 emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
             }
         )
+    }
+
+    private fun getUsername() = viewModelScope.launch {
+        getUsernameUseCase().collect {
+            updateUiState { copy(username = it) }
+        }
     }
 }

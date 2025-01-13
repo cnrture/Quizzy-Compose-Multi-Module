@@ -10,9 +10,12 @@ import com.canerture.core.common.Resource
 import com.canerture.core.common.UnknownException
 import com.canerture.core.common.onSuccess
 import com.canerture.core.common.toUnit
+import com.canerture.datasource.profile.ProfileDataSource
 import com.canerture.datastore.DataStoreHelper
 import com.canerture.network.safeApiCall
+import com.canerture.welcome.data.mapper.toModel
 import com.canerture.welcome.data.model.GoogleLoginRequest
+import com.canerture.welcome.data.model.UserResponse
 import com.canerture.welcome.data.source.WelcomeApi
 import com.canerture.welcome.domain.repository.WelcomeRepository
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
@@ -28,8 +31,9 @@ import javax.inject.Inject
 class WelcomeRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val firebaseAuth: FirebaseAuth,
-    private val welcomeApi: WelcomeApi,
+    private val api: WelcomeApi,
     private val dataStore: DataStoreHelper,
+    private val profileDataSource: ProfileDataSource,
 ) : WelcomeRepository {
 
     private val credentialManager = CredentialManager.create(context)
@@ -40,9 +44,12 @@ class WelcomeRepositoryImpl @Inject constructor(
 
         return safeApiCall {
             val token = (tokenResource as Resource.Success).data
-            welcomeApi.loginWithGoogle(GoogleLoginRequest(token))
+            api.loginWithGoogle(GoogleLoginRequest(token))
         }.onSuccess {
             dataStore.saveToken(it.token.orEmpty())
+            getUser().onSuccess { user ->
+                profileDataSource.save(user.toModel())
+            }
         }.toUnit()
     }
 
@@ -91,5 +98,9 @@ class WelcomeRepositoryImpl @Inject constructor(
             ).build()
 
         return credentialManager.getCredential(context, request)
+    }
+
+    private suspend fun getUser(): Resource<UserResponse> {
+        return safeApiCall { api.getUser() }
     }
 }

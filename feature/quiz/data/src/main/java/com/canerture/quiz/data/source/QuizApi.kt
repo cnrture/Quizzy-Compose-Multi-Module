@@ -2,7 +2,7 @@ package com.canerture.quiz.data.source
 
 import com.canerture.network.model.BaseResponse
 import com.canerture.quiz.data.common.Constants.QUIZ
-import com.canerture.quiz.data.mapper.QuizResponse
+import com.canerture.quiz.data.model.QuizResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

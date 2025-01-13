@@ -24,6 +24,7 @@ import com.canerture.ui.theme.QuizAppTheme
 @Composable
 fun QuizAppToolbar(
     title: String? = null,
+    titleSpan: String? = null,
     titleStyle: TextStyle = QuizAppTheme.typography.heading2,
     endIcon: ImageVector? = null,
     onBackClick: (() -> Unit)? = null,
@@ -52,11 +53,20 @@ fun QuizAppToolbar(
             }
         }
         title?.let {
-            QuizAppText(
-                modifier = Modifier.align(Alignment.CenterStart),
-                text = title,
-                style = titleStyle,
-            )
+            if (titleSpan != null) {
+                QuizAppText(
+                    modifier = Modifier.align(Alignment.CenterStart),
+                    fullText = title,
+                    spanTexts = listOf(titleSpan),
+                    style = titleStyle,
+                )
+            } else {
+                QuizAppText(
+                    modifier = Modifier.align(Alignment.CenterStart),
+                    text = title,
+                    style = titleStyle,
+                )
+            }
         }
         content?.let {
             Box(

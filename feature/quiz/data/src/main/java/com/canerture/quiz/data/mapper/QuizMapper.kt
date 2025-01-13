@@ -1,7 +1,7 @@
-package com.canerture.quiz.data.model
+package com.canerture.quiz.data.mapper
 
 import com.canerture.core.common.orZero
-import com.canerture.quiz.data.mapper.QuizResponse
+import com.canerture.quiz.data.model.QuizResponse
 import com.canerture.quiz.domain.model.OptionModel
 import com.canerture.quiz.domain.model.OptionState
 import com.canerture.quiz.domain.model.QuestionModel

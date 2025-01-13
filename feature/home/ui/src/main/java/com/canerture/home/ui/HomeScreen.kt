@@ -68,7 +68,8 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         QuizAppToolbar(
-            title = "Hoş geldin cano123",
+            title = "Hoş geldin ${uiState.username}",
+            titleSpan = uiState.username,
             titleStyle = QuizAppTheme.typography.heading4,
             endIcon = QuizAppTheme.icons.notifications,
             onEndIconClick = {},
@@ -225,7 +226,7 @@ private fun ColumnScope.PopularQuizzes(
         style = QuizAppTheme.typography.heading4,
     )
     Spacer(modifier = Modifier.height(16.dp))
-    quizzes.forEachIndexed { index, quiz ->
+    quizzes.forEach { quiz ->
         PopularQuizItem(
             quiz = quiz,
             onQuizClick = onQuizClick,

@@ -7,4 +7,5 @@ group = "com.quiz.feature.home.domain"
 dependencies {
     implementation(projects.core.common)
     implementation(libs.javax.inject)
+    implementation(libs.kotlinx.coroutines.core)
 }

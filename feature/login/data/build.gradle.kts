@@ -14,4 +14,5 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.datastore)
     implementation(projects.core.datasource.logout)
+    implementation(projects.core.datasource.profile)
 }
