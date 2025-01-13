@@ -44,14 +44,20 @@ fun QuizScreen(
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
     onNavigateBack: () -> Unit,
-    onNavigateResult: (Int) -> Unit,
+    onNavigateSummary: (Int, Int, Int, Int) -> Unit,
 ) {
     var timerState by remember { mutableStateOf(TimerState.START) }
 
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
             is UiEffect.NavigateBack -> onNavigateBack()
-            is UiEffect.NavigateResult -> onNavigateResult(effect.correctAnswers)
+            is UiEffect.NavigateSummary -> onNavigateSummary(
+                effect.quizId,
+                effect.correctAnswers,
+                effect.wrongAnswers,
+                effect.score
+            )
+
             is UiEffect.ShowError -> {
             }
 
@@ -150,6 +156,6 @@ private fun QuizScreenPreview(
         uiEffect = emptyFlow(),
         onAction = {},
         onNavigateBack = {},
-        onNavigateResult = {},
+        onNavigateSummary = { _, _, _, _ -> },
     )
 }

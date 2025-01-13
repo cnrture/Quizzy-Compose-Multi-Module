@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary_title">Quiz Summary</string>
+    <string name="summary_score">You’ve got +%1$d points</string>
+    <string name="summary_score_span">+%1$d points</string>
+    <string name="summary_correct">Congratulations! A great performance!</string>
+    <string name="summary_wrong">You may have struggled this time. Mistakes are part of learning, keep going!</string>
+    <string name="summary_equal">A balanced result! A great opportunity to improve.</string>
+    <string name="correct">Correct</string>
+    <string name="wrong">Wrong</string>
+    <string name="play_again">Play Again</string>
+</resources>

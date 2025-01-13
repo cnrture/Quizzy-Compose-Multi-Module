@@ -75,7 +75,14 @@ class QuizViewModel @Inject constructor(
         submitQuizUseCase(currentUiState.id, score).fold(
             onSuccess = {
                 updateUiState { copy(isLoading = false) }
-                emitUiEffect(UiEffect.NavigateResult(currentUiState.correctAnswers))
+                emitUiEffect(
+                    UiEffect.NavigateSummary(
+                        quizId = currentUiState.id,
+                        correctAnswers = currentUiState.correctAnswers,
+                        wrongAnswers = currentUiState.questions.size - currentUiState.correctAnswers,
+                        score = score,
+                    )
+                )
             },
             onError = {
                 updateUiState { copy(isLoading = false) }

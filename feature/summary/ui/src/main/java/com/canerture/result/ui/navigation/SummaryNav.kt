@@ -1,32 +1,37 @@
-package com.canerture.quiz.ui.navigation
+package com.canerture.result.ui.navigation
 
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.canerture.quiz.ui.QuizScreen
-import com.canerture.quiz.ui.QuizViewModel
+import com.canerture.result.ui.SummaryScreen
+import com.canerture.result.ui.SummaryViewModel
 import com.canerture.ui.navigation.Screen
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Quiz(val id: Int) : Screen
+data class Summary(
+    val quizId: Int,
+    val correctAnswers: Int,
+    val wrongAnswers: Int,
+    val score: Int,
+) : Screen
 
-fun NavGraphBuilder.quizScreen(
+fun NavGraphBuilder.summaryScreen(
     onNavigateBack: () -> Unit,
-    onNavigateSummary: (Int, Int, Int, Int) -> Unit,
+    onNavigateQuiz: (Int) -> Unit,
 ) {
-    composable<Quiz> {
-        val viewModel = hiltViewModel<QuizViewModel>()
+    composable<Summary> {
+        val viewModel = hiltViewModel<SummaryViewModel>()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         val uiEffect = viewModel.uiEffect
-        QuizScreen(
+        SummaryScreen(
             uiState = uiState,
             uiEffect = uiEffect,
             onAction = viewModel::onAction,
             onNavigateBack = onNavigateBack,
-            onNavigateSummary = onNavigateSummary,
+            onNavigateQuiz = onNavigateQuiz,
         )
     }
 }

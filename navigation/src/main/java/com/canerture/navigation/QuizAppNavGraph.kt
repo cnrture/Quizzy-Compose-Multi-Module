@@ -35,6 +35,8 @@ import com.canerture.quiz.ui.navigation.Quiz
 import com.canerture.quiz.ui.navigation.quizScreen
 import com.canerture.register.ui.navigation.Register
 import com.canerture.register.ui.navigation.registerScreen
+import com.canerture.result.ui.navigation.Summary
+import com.canerture.result.ui.navigation.summaryScreen
 import com.canerture.ui.navigation.Screen
 import com.canerture.ui.navigation.Splash
 import com.canerture.ui.navigation.splashScreen
@@ -149,7 +151,13 @@ fun NavGraphBuilder.mainFlowNavigation(navController: NavHostController) {
         )
         quizScreen(
             onNavigateBack = { navController.popBackStack() },
-            onNavigateResult = {}
+            onNavigateSummary = { quizId, correctAnswers, wrongAnswers, score ->
+                navController.navigateWithPopUpTo(Summary(quizId, correctAnswers, wrongAnswers, score), Quiz(quizId))
+            }
+        )
+        summaryScreen(
+            onNavigateBack = { navController.popBackStack() },
+            onNavigateQuiz = {}
         )
     }
 }

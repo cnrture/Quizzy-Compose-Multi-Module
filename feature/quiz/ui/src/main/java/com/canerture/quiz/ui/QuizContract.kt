@@ -28,7 +28,13 @@ object QuizContract {
     sealed interface UiEffect {
         data object NavigateBack : UiEffect
         data object ResetTimer : UiEffect
-        data class NavigateResult(val correctAnswers: Int) : UiEffect
+        data class NavigateSummary(
+            val quizId: Int,
+            val correctAnswers: Int,
+            val wrongAnswers: Int,
+            val score: Int,
+        ) : UiEffect
+
         data class ShowError(val message: String) : UiEffect
     }
 }

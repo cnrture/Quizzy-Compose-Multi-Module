@@ -22,5 +22,6 @@ dependencies {
     implementation(projects.feature.profile.ui)
     implementation(projects.feature.detail.ui)
     implementation(projects.feature.quiz.ui)
+    implementation(projects.feature.summary.ui)
     implementation(projects.core.ui)
 }
