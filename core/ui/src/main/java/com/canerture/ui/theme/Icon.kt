@@ -148,4 +148,8 @@ class QuizAppIcons {
     val smile: ImageVector
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_smile)
+
+    val king: ImageVector
+        @Composable
+        get() = ImageVector.vectorResource(id = R.drawable.ic_king)
 }

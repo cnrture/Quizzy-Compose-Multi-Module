@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="leaderboard_title">Leaderboard</string>
+    <string name="nickname">\@%1$s</string>
+    <string name="score">%1$s Point</string>
+</resources>

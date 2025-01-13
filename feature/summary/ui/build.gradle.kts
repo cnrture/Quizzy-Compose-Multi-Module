@@ -8,5 +8,4 @@ android {
 }
 
 dependencies {
-    implementation(projects.feature.summary.domain)
 }
