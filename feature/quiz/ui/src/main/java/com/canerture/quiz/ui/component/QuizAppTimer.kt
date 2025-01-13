@@ -1,4 +1,4 @@
-package com.canerture.ui.components
+package com.canerture.quiz.ui.component
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
@@ -18,8 +18,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.canerture.feature.quiz.ui.R
+import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.theme.QuizAppTheme
 
 enum class TimerState {
@@ -103,7 +106,7 @@ fun QuizAppTimer(
         }
         if (currentTime == 0 && !isRunning) {
             QuizAppText(
-                text = "Time's Up!",
+                text = stringResource(R.string.times_up),
                 style = QuizAppTheme.typography.heading5,
             )
         } else {

@@ -15,10 +15,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import com.canerture.feature.quiz.ui.R
 import com.canerture.quiz.domain.model.OptionModel
 import com.canerture.quiz.ui.QuizContract.UiAction
 import com.canerture.quiz.ui.QuizContract.UiEffect
@@ -28,9 +30,9 @@ import com.canerture.quiz.ui.component.QuestionCountProgress
 import com.canerture.ui.components.QuizAppButton
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
-import com.canerture.ui.components.QuizAppTimer
+import com.canerture.quiz.ui.component.QuizAppTimer
 import com.canerture.ui.components.QuizAppToolbar
-import com.canerture.ui.components.TimerState
+import com.canerture.quiz.ui.component.TimerState
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
@@ -130,7 +132,7 @@ private fun QuizContent(
         Spacer(modifier = Modifier.weight(1f))
         QuizAppButton(
             modifier = Modifier.fillMaxWidth(),
-            text = "Next",
+            text = stringResource(R.string.next),
             isEnable = uiState.isNextButtonEnable,
             onClick = onNextClick,
         )

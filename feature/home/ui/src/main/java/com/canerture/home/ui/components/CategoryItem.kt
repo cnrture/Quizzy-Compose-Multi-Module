@@ -11,9 +11,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.canerture.feature.home.ui.R
 import com.canerture.home.domain.model.CategoryModel
 import com.canerture.ui.components.QuizAppAsyncImage
 import com.canerture.ui.components.QuizAppText
@@ -60,7 +62,7 @@ fun CategoryItem(
         )
         Spacer(modifier = Modifier.height(12.dp))
         QuizAppText(
-            text = "${category.quizCount} Quizzes",
+            text = stringResource(R.string.quiz_count, category.quizCount),
             style = QuizAppTheme.typography.heading6,
             color = QuizAppTheme.colors.black,
         )

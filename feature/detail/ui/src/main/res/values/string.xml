@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="score">+%s Points</string>
+    <string name="question">Question</string>
+    <string name="played">Played</string>
+    <string name="favorites">Favorites</string>
+    <string name="description">Description</string>
+    <string name="start_quiz">Start Quiz</string>
+</resources>

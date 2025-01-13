@@ -21,9 +21,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import com.canerture.feature.home.ui.R
 import com.canerture.home.domain.model.CategoryModel
 import com.canerture.home.domain.model.PopularQuizModel
 import com.canerture.home.ui.HomeContract.UiAction
@@ -68,7 +70,7 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         QuizAppToolbar(
-            title = "Hoş geldin ${uiState.username}",
+            title = stringResource(R.string.welcome_message, uiState.username),
             titleSpan = uiState.username,
             titleStyle = QuizAppTheme.typography.heading4,
             endIcon = QuizAppTheme.icons.notifications,
@@ -145,7 +147,7 @@ private fun RecentQuiz() {
                 modifier = Modifier.weight(1f)
             ) {
                 QuizAppText(
-                    text = "Recent Quiz",
+                    text = stringResource(R.string.recent_quiz),
                     style = QuizAppTheme.typography.subheading2,
                     color = QuizAppTheme.colors.darkGray,
                 )
@@ -156,7 +158,7 @@ private fun RecentQuiz() {
                 )
             }
             QuizAppButton(
-                text = "Continue",
+                text = stringResource(R.string.continue_text),
                 size = QuizAppButtonSize.EXTRA_SMALL,
                 onClick = {},
             )
@@ -191,7 +193,7 @@ private fun ColumnScope.Categories(
         modifier = Modifier
             .align(Alignment.Start)
             .padding(start = 32.dp),
-        text = "Categories",
+        text = stringResource(R.string.categories),
         style = QuizAppTheme.typography.heading4,
     )
     Spacer(modifier = Modifier.height(16.dp))
@@ -222,7 +224,7 @@ private fun ColumnScope.PopularQuizzes(
         modifier = Modifier
             .align(Alignment.Start)
             .padding(start = 32.dp),
-        text = "Popular Quiz",
+        text = stringResource(R.string.popular_quizzes),
         style = QuizAppTheme.typography.heading4,
     )
     Spacer(modifier = Modifier.height(16.dp))

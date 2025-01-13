@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -29,6 +30,7 @@ import com.canerture.detail.ui.DetailContract.UiAction
 import com.canerture.detail.ui.DetailContract.UiEffect
 import com.canerture.detail.ui.DetailContract.UiState
 import com.canerture.detail.ui.component.StartQuizButton
+import com.canerture.feature.detail.ui.R
 import com.canerture.ui.components.QuizAppAsyncImage
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
@@ -125,7 +127,7 @@ private fun DetailContent(
             )
             Spacer(modifier = Modifier.width(8.dp))
             QuizAppText(
-                text = "+${quiz.score} Points",
+                text = stringResource(R.string.score, quiz.score),
                 style = QuizAppTheme.typography.subheading2,
             )
         }
@@ -144,7 +146,7 @@ private fun DetailContent(
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 QuizAppText(
-                    text = "Question",
+                    text = stringResource(R.string.question),
                     style = QuizAppTheme.typography.paragraph2,
                 )
             }
@@ -163,7 +165,7 @@ private fun DetailContent(
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 QuizAppText(
-                    text = "Played",
+                    text = stringResource(R.string.played),
                     style = QuizAppTheme.typography.paragraph2,
                 )
             }
@@ -182,14 +184,14 @@ private fun DetailContent(
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 QuizAppText(
-                    text = "Favorites",
+                    text = stringResource(R.string.favorites),
                     style = QuizAppTheme.typography.paragraph2,
                 )
             }
         }
         Spacer(modifier = Modifier.height(24.dp))
         QuizAppText(
-            text = "Description",
+            text = stringResource(R.string.description),
             style = QuizAppTheme.typography.heading4,
         )
         Spacer(modifier = Modifier.height(8.dp))

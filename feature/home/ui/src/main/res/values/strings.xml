@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome_message">Welcome %s</string>
+    <string name="recent_quiz">Recent Quiz</string>
+    <string name="continue_text">Continue</string>
+    <string name="categories">Categories</string>
+    <string name="popular_quizzes">Popular Quizzes</string>
+    <string name="quiz_count">%d Quizzes</string>
+</resources>

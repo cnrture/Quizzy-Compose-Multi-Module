@@ -9,8 +9,10 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.canerture.feature.detail.ui.R
 import com.canerture.ui.components.QuizAppButton
 import com.canerture.ui.theme.QuizAppTheme
 
@@ -34,7 +36,7 @@ fun BoxScope.StartQuizButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp, vertical = 16.dp),
-            text = "Start Quiz",
+            text = stringResource(R.string.start_quiz),
             onClick = onClick,
         )
     }

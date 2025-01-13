@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Quiz App</string>
+    <string name="app_name">Quizzy</string>
     <string name="welcome_title">Where Knowledge Reigns Supreme!</string>
     <string name="continue_with_google">Continue with Google</string>
     <string name="sign_in_with_email">Sign In with Email</string>
