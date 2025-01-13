@@ -13,4 +13,5 @@ dependencies {
     implementation(projects.core.network)
     implementation(projects.core.common)
     implementation(projects.core.datastore)
+    implementation(projects.core.datasource.profile)
 }
