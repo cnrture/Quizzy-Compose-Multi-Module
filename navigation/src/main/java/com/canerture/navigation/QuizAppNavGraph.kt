@@ -1,6 +1,5 @@
 package com.canerture.navigation
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -10,60 +9,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.navigation
-import com.canerture.detail.ui.navigation.Detail
-import com.canerture.detail.ui.navigation.detailScreen
-import com.canerture.favorites.ui.navigation.Favorites
-import com.canerture.favorites.ui.navigation.favoritesScreen
-import com.canerture.home.ui.navigation.Home
-import com.canerture.home.ui.navigation.homeScreen
-import com.canerture.leaderboard.ui.navigation.Leaderboard
-import com.canerture.leaderboard.ui.navigation.leaderboardScreen
-import com.canerture.login.ui.navigation.Login
-import com.canerture.login.ui.navigation.loginScreen
-import com.canerture.profile.ui.navigation.Profile
-import com.canerture.profile.ui.navigation.profileScreen
-import com.canerture.quiz.ui.navigation.Quiz
-import com.canerture.quiz.ui.navigation.quizScreen
-import com.canerture.register.ui.navigation.Register
-import com.canerture.register.ui.navigation.registerScreen
-import com.canerture.result.ui.navigation.Summary
-import com.canerture.result.ui.navigation.summaryScreen
-import com.canerture.ui.navigation.Screen
 import com.canerture.ui.navigation.Splash
 import com.canerture.ui.navigation.splashScreen
 import com.canerture.ui.theme.QuizAppTheme
-import com.canerture.welcome.ui.navigation.Welcome
-import com.canerture.welcome.ui.navigation.welcomeScreen
-import kotlinx.serialization.Serializable
 
 @Composable
 fun QuizAppNavGraph(
     navController: NavHostController,
 ) {
-    var selectedItem by rememberSaveable { mutableIntStateOf(0) }
+    var selectedItem by remember { mutableIntStateOf(0) }
 
-    val visibleBottomSheetScreen =
-        listOf(Home.getRoute(), Favorites.getRoute(), Leaderboard.getRoute(), Profile.getRoute())
+    val visibleBottomSheetScreen = NavigationItem.getNavigationRoutes()
 
-    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
-    val bottomBarVisibility = currentRoute in visibleBottomSheetScreen
+    val bottomBarVisibility =
+        navController.currentBackStackEntryAsState().value?.destination?.route in visibleBottomSheetScreen
 
     LaunchedEffect(Unit) {
         navController.currentBackStackEntryFlow.collect {
-            selectedItem = when (it.destination.route) {
-                Home.getRoute() -> 0
-                Favorites.getRoute() -> 1
-                Leaderboard.getRoute() -> 2
-                Profile.getRoute() -> 3
+            selectedItem = when (navController.currentDestination?.route) {
+                NavigationItem.HomeScreen.route.getRoute() -> 0
+                NavigationItem.FavoritesScreen.route.getRoute() -> 1
+                NavigationItem.LeaderboardScreen.route.getRoute() -> 2
+                NavigationItem.ProfileScreen.route.getRoute() -> 3
                 else -> selectedItem
             }
         }
@@ -82,7 +56,7 @@ fun QuizAppNavGraph(
                 )
             },
             bottomBar = {
-                AnimatedVisibility(bottomBarVisibility) {
+                if (bottomBarVisibility) {
                     Column {
                         HorizontalDivider(
                             thickness = 2.dp,
@@ -116,64 +90,4 @@ private fun NavGraph(
         loginFlowNavigation(navController)
         mainFlowNavigation(navController)
     }
-}
-
-fun NavGraphBuilder.loginFlowNavigation(navController: NavHostController) {
-    navigation<LoginFlow>(Welcome) {
-        welcomeScreen(
-            onNavigateLogin = { navController.navigate(Login) },
-            onNavigateRegister = { navController.navigate(Register) },
-            onNavigateHome = { navController.navigateWithPopUpTo(MainFlow, LoginFlow) }
-        )
-        loginScreen(
-            onNavigateBack = { navController.popBackStack() },
-            onNavigateRegister = { navController.navigate(Register) },
-            onNavigateHome = { navController.navigateWithPopUpTo(MainFlow, LoginFlow) }
-        )
-        registerScreen(
-            onNavigateBack = { navController.popBackStack() },
-            onNavigateLogin = { navController.navigateWithPopUpTo(Login, Register) }
-        )
-    }
-}
-
-fun NavGraphBuilder.mainFlowNavigation(navController: NavHostController) {
-    navigation<MainFlow>(Home) {
-        homeScreen(
-            onNavigateDetail = { navController.navigate(Detail(it)) }
-        )
-        favoritesScreen()
-        leaderboardScreen()
-        profileScreen()
-        detailScreen(
-            onNavigateBack = { navController.popBackStack() },
-            onNavigateQuiz = { navController.navigate(Quiz(it)) }
-        )
-        quizScreen(
-            onNavigateBack = { navController.popBackStack() },
-            onNavigateSummary = { quizId, correctAnswers, wrongAnswers, score ->
-                navController.navigateWithPopUpTo(Summary(quizId, correctAnswers, wrongAnswers, score), Quiz(quizId))
-            }
-        )
-        summaryScreen(
-            onNavigateBack = { navController.popBackStack() },
-            onNavigateQuiz = {}
-        )
-    }
-}
-
-fun NavHostController.navigateWithPopUpTo(screen: Any, popUp: Any) {
-    navigate(screen) {
-        popUpTo(popUp) { inclusive = true }
-    }
-}
-
-@Serializable
-object LoginFlow
-
-@Serializable
-object MainFlow
-
-fun Screen.getRoute(): String {
-    return this::class.java.canonicalName.orEmpty()
 }

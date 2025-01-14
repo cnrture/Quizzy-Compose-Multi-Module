@@ -12,8 +12,6 @@ object LeaderboardContract {
         val thirdUser: BoardModel? = null,
     )
 
-    sealed interface UiAction
-
     sealed interface UiEffect {
         data class ShowError(val message: String) : UiEffect
     }

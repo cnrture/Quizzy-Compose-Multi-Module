@@ -21,42 +21,6 @@ class QuizAppIcons {
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_close)
 
-    val database: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_database)
-
-    val discoverSelected: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_discover_selected)
-
-    val discoverUnselected: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_discover_unselected)
-
-    val filter: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_filter)
-
-    val hint: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_hint)
-
-    val homeSelected: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_home_selected)
-
-    val homeUnselected: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_home_unselected)
-
-    val leaderboardSelected: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_leaderboard_selected)
-
-    val leaderboardUnselected: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_leaderboard_unselected)
-
     val lock: ImageVector
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_lock)
@@ -73,13 +37,9 @@ class QuizAppIcons {
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_notifications)
 
-    val profileSelected: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_profile_selected)
-
     val profileUnselected: ImageVector
         @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_profile_unselected)
+        get() = ImageVector.vectorResource(id = R.drawable.ic_profile)
 
     val search: ImageVector
         @Composable
@@ -88,10 +48,6 @@ class QuizAppIcons {
     val settings: ImageVector
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_settings)
-
-    val share: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_share)
 
     val sort: ImageVector
         @Composable
@@ -103,11 +59,7 @@ class QuizAppIcons {
 
     val starUnselected: ImageVector
         @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_star)
-
-    val timer: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_timer)
+        get() = ImageVector.vectorResource(id = R.drawable.ic_star_unselected)
 
     val trophy: ImageVector
         @Composable

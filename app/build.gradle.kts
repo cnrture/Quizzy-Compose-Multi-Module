@@ -43,6 +43,7 @@ dependencies {
     implementation(projects.feature.detail.data)
     implementation(projects.feature.quiz.data)
     implementation(projects.feature.leaderboard.data)
+    implementation(projects.feature.profile.data)
 
     implementation(projects.navigation)
 

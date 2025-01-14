@@ -21,7 +21,6 @@ fun NavGraphBuilder.leaderboardScreen() {
         LeaderboardScreen(
             uiState = uiState,
             uiEffect = uiEffect,
-            onAction = viewModel::onAction
         )
     }
 }

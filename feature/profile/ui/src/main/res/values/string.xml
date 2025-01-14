@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_title">Profile</string>
+    <string name="nickname">\@%1$s</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="your_rank">Your Rank</string>
+    <string name="score">%1$s Point</string>
+</resources>
