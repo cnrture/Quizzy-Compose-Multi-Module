@@ -47,10 +47,12 @@ fun CurrentUserItem(
             modifier = Modifier
                 .size(32.dp)
                 .background(
-                    color = QuizAppTheme.colors.gray,
+                    color = QuizAppTheme.colors.softGray,
                     shape = CircleShape,
-                ),
-            model = "https://randomuser.me/api/portraits",
+                )
+                .boldBorder(width = 1.dp)
+                .padding(4.dp),
+            model = item.avatarUrl,
             contentDescription = null,
         )
         Spacer(modifier = Modifier.width(8.dp))
@@ -79,6 +81,7 @@ fun CurrentUserItemPreview() {
     CurrentUserItem(
         item = BoardModel(
             username = "cnrdm",
+            avatarUrl = "https://avatars.githubusercontent.com/u/38183230?v=4",
             score = "100",
             rank = "1",
         )

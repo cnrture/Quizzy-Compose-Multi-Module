@@ -82,6 +82,7 @@ private fun LeaderboardContent(
             TopRankItem(
                 width = 80.dp,
                 username = uiState.secondUser?.username.orEmpty(),
+                avatarUrl = uiState.secondUser?.avatarUrl.orEmpty(),
                 score = uiState.secondUser?.score.orEmpty(),
                 rank = 2,
             )
@@ -89,12 +90,14 @@ private fun LeaderboardContent(
                 modifier = Modifier.weight(1f),
                 width = 100.dp,
                 username = uiState.firstUser?.username.orEmpty(),
+                avatarUrl = uiState.firstUser?.avatarUrl.orEmpty(),
                 score = uiState.firstUser?.score.orEmpty(),
                 rank = 1,
             )
             TopRankItem(
                 width = 80.dp,
                 username = uiState.thirdUser?.username.orEmpty(),
+                avatarUrl = uiState.thirdUser?.avatarUrl.orEmpty(),
                 score = uiState.thirdUser?.score.orEmpty(),
                 rank = 3,
             )

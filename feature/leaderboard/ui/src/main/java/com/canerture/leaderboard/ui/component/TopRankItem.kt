@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
@@ -20,7 +21,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.canerture.feature.leaderboard.ui.R
+import com.canerture.ui.components.QuizAppAsyncImage
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
@@ -30,6 +33,7 @@ fun TopRankItem(
     modifier: Modifier = Modifier,
     width: Dp,
     username: String,
+    avatarUrl: String,
     score: String,
     rank: Int,
 ) {
@@ -40,15 +44,18 @@ fun TopRankItem(
         Box(
             contentAlignment = Alignment.Center,
         ) {
-            Box(
+            QuizAppAsyncImage(
                 modifier = Modifier
                     .widthIn(max = width)
                     .aspectRatio(1f)
                     .background(
-                        color = QuizAppTheme.colors.gray,
+                        color = QuizAppTheme.colors.white,
                         shape = CircleShape,
                     )
-                    .boldBorder(100),
+                    .boldBorder(100)
+                    .padding(12.dp),
+                imageUrl = avatarUrl,
+                contentDescription = "",
             )
             if (rank == 1) {
                 Icon(
@@ -110,6 +117,7 @@ fun TopRankItemPreview() {
     TopRankItem(
         width = 80.dp,
         username = "canerture",
+        avatarUrl = "https://avatars.githubusercontent.com/u/77449521?v=4",
         score = "100",
         rank = 1,
     )

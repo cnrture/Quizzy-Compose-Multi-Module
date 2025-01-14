@@ -44,6 +44,7 @@ dependencies {
     implementation(projects.feature.quiz.data)
     implementation(projects.feature.leaderboard.data)
     implementation(projects.feature.profile.data)
+    implementation(projects.feature.editprofile.data)
 
     implementation(projects.navigation)
 

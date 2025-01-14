@@ -12,10 +12,12 @@ object ProfileContract {
 
     sealed interface UiAction {
         data object OnEditProfileClick : UiAction
+        data object OnLogoutClick : UiAction
     }
 
     sealed interface UiEffect {
         data object NavigateEditProfile : UiEffect
+        data object Logout : UiEffect
         data class ShowError(val message: String) : UiEffect
     }
 }

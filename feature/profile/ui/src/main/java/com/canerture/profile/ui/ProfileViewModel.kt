@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.canerture.core.common.fold
 import com.canerture.profile.domain.usecase.GetProfileUseCase
 import com.canerture.profile.domain.usecase.GetRankUseCase
+import com.canerture.profile.domain.usecase.LogoutUseCase
 import com.canerture.profile.ui.ProfileContract.UiAction
 import com.canerture.profile.ui.ProfileContract.UiEffect
 import com.canerture.profile.ui.ProfileContract.UiState
@@ -18,6 +19,7 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
     private val getRankUseCase: GetRankUseCase,
+    private val logoutUseCase: LogoutUseCase,
 ) : ViewModel(),
     MVI<UiState, UiAction, UiEffect> by mvi(UiState()) {
 
@@ -30,6 +32,7 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch {
             when (uiAction) {
                 UiAction.OnEditProfileClick -> emitUiEffect(UiEffect.NavigateEditProfile)
+                UiAction.OnLogoutClick -> logout()
             }
         }
     }
@@ -59,6 +62,13 @@ class ProfileViewModel @Inject constructor(
                     emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
                 }
             )
+        }
+    }
+
+    private fun logout() {
+        viewModelScope.launch {
+            logoutUseCase()
+            emitUiEffect(UiEffect.Logout)
         }
     }
 }

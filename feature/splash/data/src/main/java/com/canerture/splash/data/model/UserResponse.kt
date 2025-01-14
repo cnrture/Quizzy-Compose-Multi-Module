@@ -6,4 +6,5 @@ import kotlinx.serialization.Serializable
 data class UserResponse(
     val email: String? = null,
     val username: String? = null,
+    val avatarUrl: String? = null,
 )

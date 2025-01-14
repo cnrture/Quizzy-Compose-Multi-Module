@@ -28,6 +28,7 @@ import com.canerture.ui.theme.QuizAppTheme
 fun RankItem(
     rank: RankModel,
     username: String,
+    avatarUrl: String,
 ) {
     Row(
         modifier = Modifier
@@ -50,13 +51,13 @@ fun RankItem(
                 .size(32.dp)
                 .clip(CircleShape)
                 .boldBorder(100),
-            imageUrl = "https://randomuser.me/api/portraits",
+            imageUrl = avatarUrl,
             contentDescription = "",
         )
         Spacer(modifier = Modifier.width(8.dp))
         QuizAppText(
             text = stringResource(R.string.nickname, username),
-            style = QuizAppTheme.typography.paragraph3,
+            style = QuizAppTheme.typography.paragraph2,
             color = QuizAppTheme.colors.darkGray,
         )
         Spacer(modifier = Modifier.weight(1f))
@@ -65,10 +66,10 @@ fun RankItem(
             imageVector = QuizAppTheme.icons.trophy,
             contentDescription = null,
         )
-        Spacer(modifier = Modifier.width(4.dp))
+        Spacer(modifier = Modifier.width(8.dp))
         QuizAppText(
             text = stringResource(R.string.score, rank.score),
-            style = QuizAppTheme.typography.heading7,
+            style = QuizAppTheme.typography.heading6,
         )
     }
 }
@@ -79,5 +80,6 @@ fun RankItemPreview() {
     RankItem(
         rank = RankModel("1", "100"),
         username = "canerture",
+        avatarUrl = "https://avatars.githubusercontent.com/u/77449569?v=4",
     )
 }

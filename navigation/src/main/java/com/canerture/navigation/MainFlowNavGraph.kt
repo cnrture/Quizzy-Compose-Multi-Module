@@ -5,6 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigation
 import com.canerture.detail.ui.navigation.Detail
 import com.canerture.detail.ui.navigation.detailScreen
+import com.canerture.editprofile.ui.navigation.EditProfile
+import com.canerture.editprofile.ui.navigation.editProfileScreen
 import com.canerture.favorites.ui.navigation.favoritesScreen
 import com.canerture.home.ui.navigation.Home
 import com.canerture.home.ui.navigation.homeScreen
@@ -28,7 +30,8 @@ fun NavGraphBuilder.mainFlowNavigation(navController: NavHostController) {
         favoritesScreen()
         leaderboardScreen()
         profileScreen(
-            onNavigateEditProfile = {}
+            onNavigateEditProfile = { navController.navigate(EditProfile) },
+            onLogout = { navController.navigateWithPopUpTo(LoginFlow, MainFlow) }
         )
         detailScreen(
             onNavigateBack = { navController.popBackStack() },
@@ -43,6 +46,9 @@ fun NavGraphBuilder.mainFlowNavigation(navController: NavHostController) {
         summaryScreen(
             onNavigateBack = { navController.popBackStack() },
             onNavigateQuiz = {}
+        )
+        editProfileScreen(
+            onNavigateBack = { navController.popBackStack() }
         )
     }
 }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Quiz App</string>
     <string name="okay">Okay</string>
+    <string name="success">Success</string>
 </resources>

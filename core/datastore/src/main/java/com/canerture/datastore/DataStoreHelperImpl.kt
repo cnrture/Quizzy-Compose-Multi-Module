@@ -29,7 +29,7 @@ class DataStoreHelperImpl @Inject constructor(private val context: Context) : Da
 
     override suspend fun clear() {
         context.dataStore.edit { preferences ->
-            preferences.remove(TOKEN)
+            preferences.clear()
         }
     }
 }

@@ -6,4 +6,5 @@ import com.canerture.welcome.data.model.UserResponse
 fun UserResponse?.toModel() = ProfileModel(
     email = this?.email.orEmpty(),
     username = this?.username.orEmpty(),
+    avatarUrl = this?.avatarUrl.orEmpty(),
 )

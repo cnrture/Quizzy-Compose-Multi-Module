@@ -19,6 +19,7 @@ import coil.compose.AsyncImage
 import com.canerture.feature.leaderboard.ui.R
 import com.canerture.leaderboard.domain.model.BoardModel
 import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
@@ -40,10 +41,12 @@ fun UserItem(
             modifier = Modifier
                 .size(32.dp)
                 .background(
-                    color = QuizAppTheme.colors.gray,
+                    color = QuizAppTheme.colors.white,
                     shape = CircleShape,
-                ),
-            model = "https://randomuser.me/api/portraits",
+                )
+                .boldBorder(width = 1.dp)
+                .padding(4.dp),
+            model = item.avatarUrl,
             contentDescription = null,
         )
         Spacer(modifier = Modifier.width(8.dp))
@@ -72,6 +75,7 @@ fun UserItemPreview() {
     UserItem(
         item = BoardModel(
             username = "cnrdm",
+            avatarUrl = "https://avatars.githubusercontent.com/u/38183230?v=4",
             score = "100",
             rank = "1",
         )

@@ -11,5 +11,6 @@ data class LeaderboardModel(
 data class BoardModel(
     val rank: String,
     val username: String,
+    val avatarUrl: String,
     val score: String,
 )

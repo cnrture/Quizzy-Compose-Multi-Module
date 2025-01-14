@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -46,10 +47,11 @@ inline fun Modifier.noRippleClickable(
 @Composable
 fun Modifier.boldBorder(
     radius: Int = 16,
-    color: Color = QuizAppTheme.colors.black
+    color: Color = QuizAppTheme.colors.black,
+    width: Dp = 2.dp
 ): Modifier = composed {
     this.border(
-        width = 2.dp,
+        width = width,
         color = color,
         shape = RoundedCornerShape(radius.dp)
     )

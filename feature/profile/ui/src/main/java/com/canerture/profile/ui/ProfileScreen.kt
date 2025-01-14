@@ -11,7 +11,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -40,10 +39,12 @@ fun ProfileScreen(
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
     onNavigateEditProfile: () -> Unit,
+    onLogout: () -> Unit,
 ) {
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
             is UiEffect.NavigateEditProfile -> onNavigateEditProfile()
+            is UiEffect.Logout -> onLogout()
             is UiEffect.ShowError -> {
             }
         }
@@ -57,7 +58,8 @@ fun ProfileScreen(
     ) {
         QuizAppToolbar(
             title = stringResource(R.string.profile_title),
-            endIcon = QuizAppTheme.icons.settings,
+            endIcon = QuizAppTheme.icons.exit,
+            onEndIconClick = { onAction(UiAction.OnLogoutClick) },
         )
         Spacer(modifier = Modifier.height(16.dp))
         ProfileContent(
@@ -82,10 +84,14 @@ private fun ProfileContent(
     ) {
         QuizAppAsyncImage(
             modifier = Modifier
-                .size(144.dp)
-                .clip(CircleShape)
-                .boldBorder(100),
-            imageUrl = "https://avatars.githubusercontent.com/u/38183230",
+                .size(180.dp)
+                .background(
+                    color = QuizAppTheme.colors.white,
+                    shape = CircleShape,
+                )
+                .boldBorder(100)
+                .padding(24.dp),
+            imageUrl = uiState.profile?.avatarUrl.orEmpty(),
             contentDescription = "",
         )
         Spacer(modifier = Modifier.height(32.dp))
@@ -113,6 +119,7 @@ private fun ProfileContent(
             RankItem(
                 rank = uiState.rank,
                 username = uiState.profile?.username.orEmpty(),
+                avatarUrl = uiState.profile?.avatarUrl.orEmpty(),
             )
         }
     }
@@ -128,5 +135,6 @@ fun ProfileScreenPreview(
         uiEffect = emptyFlow(),
         onAction = {},
         onNavigateEditProfile = {},
+        onLogout = {},
     )
 }

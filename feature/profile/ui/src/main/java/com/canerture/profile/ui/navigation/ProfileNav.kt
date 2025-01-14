@@ -15,6 +15,7 @@ data object Profile : Screen
 
 fun NavGraphBuilder.profileScreen(
     onNavigateEditProfile: () -> Unit,
+    onLogout: () -> Unit,
 ) {
     composable<Profile> {
         val viewModel = hiltViewModel<ProfileViewModel>()
@@ -25,6 +26,7 @@ fun NavGraphBuilder.profileScreen(
             uiEffect = uiEffect,
             onAction = viewModel::onAction,
             onNavigateEditProfile = onNavigateEditProfile,
+            onLogout = onLogout,
         )
     }
 }

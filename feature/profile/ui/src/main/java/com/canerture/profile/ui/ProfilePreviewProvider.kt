@@ -12,6 +12,7 @@ class ProfilePreviewProvider : PreviewParameterProvider<ProfileContract.UiState>
                 profile = ProfileModel(
                     email = "",
                     username = "canerture",
+                    avatarUrl = "",
                 ),
                 rank = RankModel(
                     rank = "1",

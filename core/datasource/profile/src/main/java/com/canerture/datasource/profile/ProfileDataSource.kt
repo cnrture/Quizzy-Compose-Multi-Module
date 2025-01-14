@@ -11,10 +11,12 @@ class ProfileDataSource {
     private val profileData = MutableSharedFlow<ProfileModel>(1)
 
     init {
-        profileData.tryEmit(ProfileModel("", ""))
+        profileData.tryEmit(ProfileModel("", "", ""))
     }
 
     fun save(value: ProfileModel) = profileData.tryEmit(value)
 
     fun get(): Flow<ProfileModel> = profileData.asSharedFlow()
+
+    fun clear() = profileData.tryEmit(ProfileModel("", "", ""))
 }

@@ -30,6 +30,7 @@ fun List<LeaderboardResponse>?.toModelList(): List<BoardModel> {
 fun LeaderboardResponse?.toModel(): BoardModel {
     return BoardModel(
         username = this?.username.orEmpty(),
+        avatarUrl = this?.avatarUrl.orEmpty(),
         score = this?.score.orZero().toString(),
         rank = this?.rank.orZero().toString(),
     )

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Quizzy</string>
+    <string name="no_network_connection">No network connection</string>
+    <string name="okay">Okay</string>
 </resources>

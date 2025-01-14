@@ -7,5 +7,6 @@ fun UserResponse?.toModel(): ProfileModel {
     return ProfileModel(
         email = this?.email.orEmpty(),
         username = this?.username.orEmpty(),
+        avatarUrl = this?.avatarUrl.orEmpty()
     )
 }

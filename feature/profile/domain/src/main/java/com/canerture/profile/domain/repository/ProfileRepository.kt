@@ -8,4 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface ProfileRepository {
     fun getProfile(): Flow<Resource<ProfileModel>>
     suspend fun getRank(): Resource<RankModel>
+    suspend fun logout()
 }
