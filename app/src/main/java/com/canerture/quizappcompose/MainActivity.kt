@@ -22,13 +22,8 @@ import androidx.navigation.compose.rememberNavController
 import com.canerture.navigation.LoginFlow
 import com.canerture.navigation.MainFlow
 import com.canerture.navigation.NavigationItem
-import com.canerture.navigation.NavigationItem.FavoritesScreen
-import com.canerture.navigation.NavigationItem.HomeScreen
-import com.canerture.navigation.NavigationItem.LeaderboardScreen
-import com.canerture.navigation.NavigationItem.ProfileScreen
 import com.canerture.navigation.QuizAppBottomBar
 import com.canerture.navigation.QuizAppNavGraph
-import com.canerture.navigation.getRoute
 import com.canerture.navigation.navigateWithPopUpTo
 import com.canerture.ui.components.QuizAppDialog
 import com.canerture.ui.extensions.collectWithLifecycle

@@ -72,7 +72,9 @@ fun QuizAppBottomBar(
                 ) {
                     Icon(
                         modifier = Modifier.size(if (isSelected) 16.dp else 24.dp),
-                        imageVector = ImageVector.vectorResource(if (isSelected) navItem.selectedIcon else navItem.unselectedIcon),
+                        imageVector = ImageVector.vectorResource(
+                            if (isSelected) navItem.selectedIcon else navItem.unselectedIcon
+                        ),
                         tint = if (isSelected) QuizAppTheme.colors.white else QuizAppTheme.colors.black,
                         contentDescription = null,
                     )
