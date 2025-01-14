@@ -80,13 +80,11 @@ fun QuizAppDialog(
                     )
                 }
             }
-            message?.let {
-                QuizAppText(
-                    text = it,
-                    style = QuizAppTheme.typography.subheading2,
-                    textAlign = TextAlign.Center,
-                )
-            }
+            QuizAppText(
+                text = if (message.isNullOrEmpty()) stringResource(R.string.success) else message,
+                style = QuizAppTheme.typography.subheading2,
+                textAlign = TextAlign.Center,
+            )
             QuizAppButton(
                 type = QuizAppButtonType.PRIMARY,
                 size = QuizAppButtonSize.MEDIUM,

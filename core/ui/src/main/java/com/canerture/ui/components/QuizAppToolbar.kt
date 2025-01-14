@@ -47,6 +47,7 @@ fun QuizAppToolbar(
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
+                    modifier = Modifier.size(28.dp),
                     imageVector = QuizAppTheme.icons.arrowLeft,
                     contentDescription = null
                 )
@@ -88,6 +89,7 @@ fun QuizAppToolbar(
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
+                    modifier = Modifier.size(28.dp),
                     imageVector = endIcon,
                     contentDescription = null
                 )
