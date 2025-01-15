@@ -12,7 +12,9 @@ object RegisterContract {
         val dialogState: DialogState? = null,
         val isButtonEnable: Boolean = false,
     ) {
-        fun setSuccessDialog() = UiState().copy(dialogState = DialogState(isSuccess = true), isLoading = false)
+        fun setSuccessDialog(message: String?): UiState {
+            return copy(dialogState = DialogState(isSuccess = true, message = message), isLoading = false)
+        }
         fun setErrorDialog(message: String?): UiState {
             return copy(dialogState = DialogState(isSuccess = false, message = message), isLoading = false)
         }

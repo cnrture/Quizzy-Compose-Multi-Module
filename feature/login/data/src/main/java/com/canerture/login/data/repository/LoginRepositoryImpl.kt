@@ -1,6 +1,7 @@
 package com.canerture.login.data.repository
 
 import com.canerture.core.common.Resource
+import com.canerture.core.common.map
 import com.canerture.core.common.onSuccess
 import com.canerture.core.common.toUnit
 import com.canerture.datasource.logout.LogoutDataSource
@@ -8,7 +9,6 @@ import com.canerture.datasource.profile.ProfileDataSource
 import com.canerture.datastore.DataStoreHelper
 import com.canerture.login.data.mapper.toModel
 import com.canerture.login.data.model.LoginRequest
-import com.canerture.login.data.model.UserResponse
 import com.canerture.login.data.source.LoginApi
 import com.canerture.login.domain.repository.LoginRepository
 import com.canerture.network.safeApiCall
@@ -23,15 +23,17 @@ class LoginRepositoryImpl @Inject constructor(
 
     override suspend fun login(email: String, password: String): Resource<Unit> {
         return safeApiCall { api.login(LoginRequest(email, password)) }.onSuccess {
-            dataStore.saveToken(it.token.orEmpty())
+            dataStore.saveToken(it.data?.token.orEmpty())
             logoutDatasource.save(null)
-            getUser().onSuccess { user ->
-                profileDataSource.save(user.toModel())
-            }
-        }.toUnit()
+            getUser()
+        }.map {
+            it.message.orEmpty()
+        }
     }
 
-    private suspend fun getUser(): Resource<UserResponse> {
-        return safeApiCall { api.getUser() }
+    private suspend fun getUser(): Resource<Unit> {
+        return safeApiCall { api.getUser() }.onSuccess {
+            profileDataSource.save(it.data.toModel())
+        }.toUnit()
     }
 }

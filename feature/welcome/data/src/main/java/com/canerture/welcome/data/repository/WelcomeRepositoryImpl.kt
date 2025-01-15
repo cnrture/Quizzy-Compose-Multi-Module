@@ -15,7 +15,6 @@ import com.canerture.datastore.DataStoreHelper
 import com.canerture.network.safeApiCall
 import com.canerture.welcome.data.mapper.toModel
 import com.canerture.welcome.data.model.GoogleLoginRequest
-import com.canerture.welcome.data.model.UserResponse
 import com.canerture.welcome.data.source.WelcomeApi
 import com.canerture.welcome.domain.repository.WelcomeRepository
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
@@ -46,10 +45,8 @@ class WelcomeRepositoryImpl @Inject constructor(
             val token = (tokenResource as Resource.Success).data
             api.loginWithGoogle(GoogleLoginRequest(token))
         }.onSuccess {
-            dataStore.saveToken(it.token.orEmpty())
-            getUser().onSuccess { user ->
-                profileDataSource.save(user.toModel())
-            }
+            dataStore.saveToken(it.data?.token.orEmpty())
+            getUser()
         }.toUnit()
     }
 
@@ -100,7 +97,9 @@ class WelcomeRepositoryImpl @Inject constructor(
         return credentialManager.getCredential(context, request)
     }
 
-    private suspend fun getUser(): Resource<UserResponse> {
-        return safeApiCall { api.getUser() }
+    private suspend fun getUser(): Resource<Unit> {
+        return safeApiCall { api.getUser() }.onSuccess {
+            profileDataSource.save(it.data.toModel())
+        }.toUnit()
     }
 }

@@ -14,8 +14,6 @@ class LeaderboardRepositoryImpl @Inject constructor(
 ) : LeaderboardRepository {
 
     override suspend fun getLeaderboard(): Resource<LeaderboardModel> {
-        return safeApiCall { api.getLeaderboard() }.map {
-            it.toModel()
-        }
+        return safeApiCall { api.getLeaderboard() }.map { it.data.toModel() }
     }
 }

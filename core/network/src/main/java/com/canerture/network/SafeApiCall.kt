@@ -6,7 +6,6 @@ import com.canerture.core.common.NetworkException
 import com.canerture.core.common.NotFoundException
 import com.canerture.core.common.Resource
 import com.canerture.core.common.UnknownException
-import com.canerture.network.model.BaseResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -15,15 +14,10 @@ import kotlinx.serialization.json.jsonPrimitive
 import retrofit2.HttpException
 import java.io.IOException
 
-suspend fun <T> safeApiCall(apiToBeCalled: suspend () -> BaseResponse<T>): Resource<T> {
+suspend fun <T : Any> safeApiCall(apiToBeCalled: suspend () -> T): Resource<T> {
     return withContext(Dispatchers.IO) {
         try {
-            val response: BaseResponse<T> = apiToBeCalled()
-            if (response.data == null) {
-                Resource.Error(UnknownException())
-            } else {
-                Resource.Success(response.data)
-            }
+            Resource.Success(apiToBeCalled())
         } catch (e: HttpException) {
             val message = Json.parseToJsonElement(
                 e.response()?.errorBody()?.string().orEmpty()

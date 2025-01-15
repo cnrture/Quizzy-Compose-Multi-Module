@@ -12,5 +12,5 @@ class SaveProfileUseCase @Inject constructor(
         username: String,
         password: String,
         avatarId: Int,
-    ): Resource<Unit> = repository.saveProfile(email, username, password, avatarId)
+    ): Resource<String> = repository.saveProfile(email, username, password, avatarId)
 }

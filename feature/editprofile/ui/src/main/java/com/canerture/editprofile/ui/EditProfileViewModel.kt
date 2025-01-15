@@ -86,7 +86,7 @@ class EditProfileViewModel @Inject constructor(
                 avatarId = selectedAvatarId ?: foundAvatarId,
             ).fold(
                 onSuccess = {
-                    updateUiState { copy(dialogState = DialogState("", true), isLoading = false) }
+                    updateUiState { copy(dialogState = DialogState(it, true), isLoading = false) }
                 },
                 onError = { error ->
                     updateUiState {

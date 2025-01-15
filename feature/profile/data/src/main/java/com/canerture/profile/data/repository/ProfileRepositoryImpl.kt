@@ -31,9 +31,7 @@ class ProfileRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getRank(): Resource<RankModel> {
-        return safeApiCall { api.getRank() }.map {
-            it.toModel()
-        }
+        return safeApiCall { api.getRank() }.map { it.data.toModel() }
     }
 
     override suspend fun logout() {
@@ -43,7 +41,7 @@ class ProfileRepositoryImpl @Inject constructor(
 
     private suspend fun getProfileFromApi(): Resource<ProfileModel> {
         return safeApiCall { api.getProfile() }.map {
-            it.toModel()
+            it.data.toModel()
         }.onSuccess {
             profileDataSource.save(it.toModel())
         }

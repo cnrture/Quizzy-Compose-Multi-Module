@@ -13,8 +13,6 @@ class DetailRepositoryImpl @Inject constructor(
     private val api: DetailApi,
 ) : DetailRepository {
     override suspend fun getQuizDetail(id: Int): Resource<QuizDetailModel> {
-        return safeApiCall { api.getQuizDetail(id) }.map {
-            it.toModel()
-        }
+        return safeApiCall { api.getQuizDetail(id) }.map { it.data.toModel() }
     }
 }

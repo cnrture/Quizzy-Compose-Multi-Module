@@ -11,10 +11,10 @@ fun com.canerture.datasource.profile.ProfileModel.toModel(): ProfileModel {
     )
 }
 
-fun ProfileResponse.toModel(): com.canerture.datasource.profile.ProfileModel {
+fun ProfileResponse?.toModel(): com.canerture.datasource.profile.ProfileModel {
     return com.canerture.datasource.profile.ProfileModel(
-        email = email.orEmpty(),
-        username = username.orEmpty(),
-        avatarUrl = avatarUrl.orEmpty(),
+        email = this?.email.orEmpty(),
+        username = this?.username.orEmpty(),
+        avatarUrl = this?.avatarUrl.orEmpty(),
     )
 }

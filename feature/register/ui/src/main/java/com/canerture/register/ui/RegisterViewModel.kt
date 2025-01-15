@@ -64,7 +64,7 @@ class RegisterViewModel @Inject constructor(
     private fun register() = viewModelScope.launch {
         updateUiState { copy(isLoading = true) }
         registerUseCase(currentUiState.email, currentUiState.username, currentUiState.password).fold(
-            onSuccess = { updateUiState { setSuccessDialog() } },
+            onSuccess = { updateUiState { setSuccessDialog(it) } },
             onError = { updateUiState { setErrorDialog(it.message) } }
         )
     }

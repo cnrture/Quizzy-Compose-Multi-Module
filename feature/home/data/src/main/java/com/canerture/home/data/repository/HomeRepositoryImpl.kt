@@ -18,15 +18,11 @@ class HomeRepositoryImpl @Inject constructor(
     private val profileDataSource: ProfileDataSource,
 ) : HomeRepository {
     override suspend fun getCategories(): Resource<List<CategoryModel>> {
-        return safeApiCall { api.getCategories() }.map {
-            it.toModel()
-        }
+        return safeApiCall { api.getCategories() }.map { it.data.toModel() }
     }
 
     override suspend fun getPopularQuizzes(): Resource<List<PopularQuizModel>> {
-        return safeApiCall { api.getQuizzes() }.map {
-            it.toModel()
-        }
+        return safeApiCall { api.getQuizzes() }.map { it.data.toModel() }
     }
 
     override fun getUsername(): Flow<String> {

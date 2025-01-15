@@ -16,9 +16,7 @@ class QuizRepositoryImpl @Inject constructor(
 ) : QuizRepository {
 
     override suspend fun getQuiz(id: Int): Resource<QuizModel> {
-        return safeApiCall { api.getQuiz(id) }.map {
-            it.toModel()
-        }
+        return safeApiCall { api.getQuiz(id) }.map { it.data.toModel() }
     }
 
     override suspend fun submitQuiz(quizId: Int, score: Int): Resource<Unit> {
