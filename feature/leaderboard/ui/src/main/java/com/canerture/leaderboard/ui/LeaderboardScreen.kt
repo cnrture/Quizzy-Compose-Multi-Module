@@ -51,7 +51,6 @@ fun LeaderboardScreen(
     ) {
         QuizAppToolbar(
             title = stringResource(R.string.leaderboard_title),
-            endIcon = QuizAppTheme.icons.sort,
         )
         Spacer(modifier = Modifier.height(16.dp))
         LeaderboardContent(

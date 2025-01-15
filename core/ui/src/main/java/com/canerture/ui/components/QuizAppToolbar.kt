@@ -39,7 +39,7 @@ fun QuizAppToolbar(
         onBackClick?.let {
             Box(
                 modifier = Modifier
-                    .size(32.dp)
+                    .size(24.dp)
                     .clickable(
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }
@@ -80,7 +80,7 @@ fun QuizAppToolbar(
         endIcon?.let {
             Box(
                 modifier = Modifier
-                    .size(32.dp)
+                    .size(24.dp)
                     .align(Alignment.CenterEnd)
                     .clickable(
                         indication = null,

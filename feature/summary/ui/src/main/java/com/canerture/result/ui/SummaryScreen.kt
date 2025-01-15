@@ -146,8 +146,8 @@ private fun SummaryContent(
             )
             Spacer(modifier = Modifier.height(16.dp))
             QuizAppText(
-                fullText = stringResource(R.string.summary_score, 70),
-                spanTexts = listOf(stringResource(R.string.summary_score_span, 70)),
+                fullText = stringResource(R.string.summary_score, uiState.score),
+                spanTexts = listOf(stringResource(R.string.summary_score_span, uiState.score)),
                 style = QuizAppTheme.typography.paragraph1,
             )
             Spacer(modifier = Modifier.height(16.dp))

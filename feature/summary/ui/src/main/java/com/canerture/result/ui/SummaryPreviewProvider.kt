@@ -10,6 +10,7 @@ class SummaryPreviewProvider : PreviewParameterProvider<SummaryContract.UiState>
                 quizId = 1,
                 correctAnswers = "6",
                 wrongAnswers = "4",
+                score = 60,
                 state = SummaryState.CORRECT,
             ),
             SummaryContract.UiState(
