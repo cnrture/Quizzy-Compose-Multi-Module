@@ -2,7 +2,6 @@ package com.canerture.home.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
@@ -11,16 +10,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -33,15 +27,10 @@ import com.canerture.home.ui.HomeContract.UiEffect
 import com.canerture.home.ui.HomeContract.UiState
 import com.canerture.home.ui.components.CategoryItem
 import com.canerture.home.ui.components.PopularQuizItem
-import com.canerture.ui.components.QuizAppAsyncImage
-import com.canerture.ui.components.QuizAppButton
-import com.canerture.ui.components.QuizAppButtonSize
-import com.canerture.ui.components.QuizAppLinearProgress
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppSearchBar
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppToolbar
-import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
@@ -103,8 +92,6 @@ private fun HomeContent(
             onValueChange = { onAction(UiAction.OnSearchQueryChange(it)) },
         )
         Spacer(modifier = Modifier.height(24.dp))
-        RecentQuiz()
-        Spacer(modifier = Modifier.height(24.dp))
         Categories(
             categories = uiState.categories,
             onCategoryClick = {},
@@ -114,71 +101,6 @@ private fun HomeContent(
             quizzes = uiState.popularQuizzes,
             onQuizClick = { onAction(UiAction.OnQuizClick(it)) },
         )
-    }
-}
-
-@Composable
-private fun RecentQuiz() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 32.dp)
-            .background(
-                color = QuizAppTheme.colors.white,
-                shape = RoundedCornerShape(16.dp),
-            )
-            .boldBorder()
-            .padding(16.dp),
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            QuizAppAsyncImage(
-                modifier = Modifier
-                    .size(56.dp)
-                    .clip(CircleShape)
-                    .boldBorder(100),
-                imageUrl = "https://www.canerture.com/assets/images/logo.png",
-                contentDescription = "Canerture",
-            )
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                QuizAppText(
-                    text = stringResource(R.string.recent_quiz),
-                    style = QuizAppTheme.typography.subheading2,
-                    color = QuizAppTheme.colors.darkGray,
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                QuizAppText(
-                    text = "Movie Mania",
-                    style = QuizAppTheme.typography.heading5,
-                )
-            }
-            QuizAppButton(
-                text = stringResource(R.string.continue_text),
-                size = QuizAppButtonSize.EXTRA_SMALL,
-                onClick = {},
-            )
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            QuizAppLinearProgress(
-                modifier = Modifier.weight(1f),
-                value = 50,
-                maxValue = 100,
-                thickness = 12.dp,
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            QuizAppText(
-                text = "50%",
-                style = QuizAppTheme.typography.subheading3,
-            )
-        }
     }
 }
 
