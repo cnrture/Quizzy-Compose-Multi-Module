@@ -45,14 +45,8 @@ dependencies {
     implementation(projects.feature.leaderboard.data)
     implementation(projects.feature.profile.data)
     implementation(projects.feature.editprofile.data)
+    implementation(projects.feature.favorites.data)
 
     implementation(projects.navigation)
-
-    implementation(libs.activity.compose)
-    implementation(libs.core.ktx)
-    implementation(libs.hilt.navigation.compose)
-    implementation(libs.lifecycle.runtime.compose)
     implementation(libs.navigation.compose)
-    implementation(libs.coil.compose)
-    implementation(libs.kotlinx.serialization)
 }

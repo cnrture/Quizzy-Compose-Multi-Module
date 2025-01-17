@@ -27,7 +27,9 @@ fun NavGraphBuilder.mainFlowNavigation(navController: NavHostController) {
         homeScreen(
             onNavigateDetail = { navController.navigate(Detail(it)) }
         )
-        favoritesScreen()
+        favoritesScreen(
+            onNavigateDetail = { navController.navigate(Detail(it)) }
+        )
         leaderboardScreen()
         profileScreen(
             onNavigateEditProfile = { navController.navigate(EditProfile) },
