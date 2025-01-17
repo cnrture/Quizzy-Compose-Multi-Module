@@ -10,10 +10,8 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,25 +51,6 @@ fun PopularQuizItem(
                 imageUrl = quiz.imageUrl,
                 contentDescription = quiz.name,
             )
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(16.dp)
-                    .size(40.dp)
-                    .background(
-                        color = QuizAppTheme.colors.white,
-                        shape = RoundedCornerShape(4.dp),
-                    )
-                    .boldBorder(4),
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(
-                    imageVector = QuizAppTheme.icons.starUnselected,
-                    contentDescription = "Favorite",
-                    tint = QuizAppTheme.colors.blue,
-                    modifier = Modifier.size(24.dp),
-                )
-            }
         }
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
