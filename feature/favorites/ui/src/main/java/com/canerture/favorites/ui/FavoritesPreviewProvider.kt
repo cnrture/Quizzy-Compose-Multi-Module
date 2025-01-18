@@ -36,6 +36,10 @@ class FavoritesPreviewProvider : PreviewParameterProvider<FavoritesContract.UiSt
                 ),
             ),
             FavoritesContract.UiState(
+                isLoading = false,
+                favorites = emptyList(),
+            ),
+            FavoritesContract.UiState(
                 isLoading = true,
                 favorites = listOf(
                     FavoriteModel(

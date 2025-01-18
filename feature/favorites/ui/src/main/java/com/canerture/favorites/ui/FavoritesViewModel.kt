@@ -39,10 +39,7 @@ class FavoritesViewModel @Inject constructor(
         updateUiState { copy(isLoading = true) }
         getFavoritesUseCase().fold(
             onSuccess = { updateUiState { copy(favorites = it, isLoading = false) } },
-            onError = {
-                updateUiState { copy(isLoading = false) }
-                emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
-            }
+            onError = { updateUiState { copy(isLoading = false) } }
         )
     }
 

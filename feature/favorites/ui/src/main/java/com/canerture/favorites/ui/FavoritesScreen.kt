@@ -31,6 +31,7 @@ import com.canerture.favorites.domain.model.FavoriteModel
 import com.canerture.favorites.ui.FavoritesContract.UiAction
 import com.canerture.favorites.ui.FavoritesContract.UiEffect
 import com.canerture.favorites.ui.FavoritesContract.UiState
+import com.canerture.favorites.ui.component.EmptyScreenContent
 import com.canerture.favorites.ui.component.FavoriteQuizItem
 import com.canerture.feature.favorites.ui.R
 import com.canerture.ui.components.QuizAppLoading
@@ -80,33 +81,37 @@ private fun FavoritesContent(
     onItemClick: (Int) -> Unit,
     onSwipeDelete: (FavoriteModel) -> Unit,
 ) {
-    LazyColumn(
-        contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
-    ) {
-        items(uiState.favorites) { favorite ->
-            val dismissState = rememberSwipeToDismissBoxState(
-                confirmValueChange = {
-                    if (it == SwipeToDismissBoxValue.EndToStart) {
-                        onSwipeDelete(favorite)
-                        return@rememberSwipeToDismissBoxState true
-                    } else {
-                        return@rememberSwipeToDismissBoxState false
+    if (uiState.favorites.isEmpty()) {
+        EmptyScreenContent()
+    } else {
+        LazyColumn(
+            contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
+        ) {
+            items(uiState.favorites) { favorite ->
+                val dismissState = rememberSwipeToDismissBoxState(
+                    confirmValueChange = {
+                        if (it == SwipeToDismissBoxValue.EndToStart) {
+                            onSwipeDelete(favorite)
+                            return@rememberSwipeToDismissBoxState true
+                        } else {
+                            return@rememberSwipeToDismissBoxState false
+                        }
+                    },
+                    positionalThreshold = { it * .25f },
+                )
+                SwipeToDismissBox(
+                    state = dismissState,
+                    modifier = Modifier.fillParentMaxWidth(),
+                    backgroundContent = { DismissBackground(dismissState) },
+                    enableDismissFromStartToEnd = false,
+                    content = {
+                        FavoriteQuizItem(
+                            item = favorite,
+                            onQuizClick = onItemClick,
+                        )
                     }
-                },
-                positionalThreshold = { it * .25f },
-            )
-            SwipeToDismissBox(
-                state = dismissState,
-                modifier = Modifier.fillParentMaxWidth(),
-                backgroundContent = { DismissBackground(dismissState) },
-                enableDismissFromStartToEnd = false,
-                content = {
-                    FavoriteQuizItem(
-                        item = favorite,
-                        onQuizClick = onItemClick,
-                    )
-                }
-            )
+                )
+            }
         }
     }
 }
