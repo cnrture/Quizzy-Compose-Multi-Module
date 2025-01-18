@@ -17,7 +17,7 @@ class FavoritesRepositoryImpl @Inject constructor(
         return safeApiCall { api.getFavorites() }.map { it.data.toModel() }
     }
 
-    override suspend fun deleteFavorite(id: Int): Resource<List<FavoriteModel>> {
-        return safeApiCall { api.deleteFavorite(id) }.map { it.data.toModel() }
+    override suspend fun deleteFavorite(id: Int): Resource<Unit> {
+        return safeApiCall { api.deleteFavorite(id) }
     }
 }

@@ -10,4 +10,5 @@ data class QuizDetailModel(
     val description: String,
     val imageUrl: String,
     val category: String,
+    val isFavorite: Boolean,
 )

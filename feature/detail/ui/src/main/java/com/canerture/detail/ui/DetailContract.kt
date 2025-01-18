@@ -6,11 +6,13 @@ object DetailContract {
     data class UiState(
         val isLoading: Boolean = false,
         val quiz: QuizDetailModel? = null,
+        val isFavorite: Boolean = false,
     )
 
     sealed interface UiAction {
         data object OnBackClick : UiAction
         data object OnStartQuizClick : UiAction
+        data object OnFavoriteClick : UiAction
     }
 
     sealed interface UiEffect {

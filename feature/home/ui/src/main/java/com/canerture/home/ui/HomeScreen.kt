@@ -62,9 +62,6 @@ fun HomeScreen(
             title = stringResource(R.string.welcome_message, uiState.username),
             titleSpan = uiState.username,
             titleStyle = QuizAppTheme.typography.heading4,
-            endIcon = QuizAppTheme.icons.notifications,
-            onEndIconClick = {},
-            content = {},
         )
         HomeContent(
             uiState = uiState,

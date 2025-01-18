@@ -13,4 +13,5 @@ data class QuizDetailResponse(
     val description: String? = null,
     val imageUrl: String? = null,
     val category: String? = null,
+    val isFavorite: Boolean? = null,
 )

@@ -1,5 +1,6 @@
 package com.canerture.detail.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -49,13 +51,12 @@ fun DetailScreen(
     onNavigateBack: () -> Unit,
     onNavigateQuiz: (Int) -> Unit,
 ) {
+    val context = LocalContext.current
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
             UiEffect.NavigateBack -> onNavigateBack()
             is UiEffect.NavigateQuiz -> onNavigateQuiz(effect.id)
-            is UiEffect.ShowError -> {
-                // Show error dialog
-            }
+            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -69,8 +70,8 @@ fun DetailScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             QuizAppToolbar(
-                endIcon = QuizAppTheme.icons.starUnselected,
-                onEndIconClick = {},
+                endIcon = if (uiState.isFavorite) QuizAppTheme.icons.starSelected else QuizAppTheme.icons.starUnselected,
+                onEndIconClick = { onAction(UiAction.OnFavoriteClick) },
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
             if (uiState.quiz != null) {

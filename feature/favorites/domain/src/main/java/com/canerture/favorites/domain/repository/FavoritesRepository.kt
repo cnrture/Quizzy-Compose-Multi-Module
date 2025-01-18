@@ -5,5 +5,5 @@ import com.canerture.favorites.domain.model.FavoriteModel
 
 interface FavoritesRepository {
     suspend fun getFavorites(): Resource<List<FavoriteModel>>
-    suspend fun deleteFavorite(id: Int): Resource<List<FavoriteModel>>
+    suspend fun deleteFavorite(id: Int): Resource<Unit>
 }

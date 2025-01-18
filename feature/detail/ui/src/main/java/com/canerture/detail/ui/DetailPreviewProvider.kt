@@ -18,6 +18,7 @@ class DetailPreviewProvider : PreviewParameterProvider<DetailContract.UiState> {
                     description = "Quiz Description",
                     imageUrl = "https://www.canerture.com/quiz.jpg",
                     category = "Category",
+                    isFavorite = false,
                 )
             ),
             DetailContract.UiState(

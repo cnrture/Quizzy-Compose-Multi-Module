@@ -1,4 +1,4 @@
-package com.canerture.favorites.data.model
+package com.canerture.detail.data.model
 
 import kotlinx.serialization.Serializable
 

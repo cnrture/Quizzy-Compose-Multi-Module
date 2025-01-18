@@ -12,7 +12,6 @@ import com.canerture.favorites.ui.FavoritesContract.UiState
 import com.canerture.ui.delegate.mvi.MVI
 import com.canerture.ui.delegate.mvi.mvi
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -48,15 +47,11 @@ class FavoritesViewModel @Inject constructor(
     }
 
     private fun deleteFavorite(item: FavoriteModel) = viewModelScope.launch {
-        val currentList = currentUiState.favorites.toMutableList()
-        currentList.remove(item)
-        updateUiState { copy(isLoading = true, favorites = currentList) }
+        updateUiState { copy(isLoading = true) }
         deleteFavoriteUseCase(item.id).fold(
-            onSuccess = { updateUiState { copy(favorites = it, isLoading = false) } },
+            onSuccess = { getFavorites() },
             onError = {
-                delay(1000)
-                updateUiState { copy(isLoading = false, favorites = currentList) }
-                emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
+                updateUiState { copy(isLoading = false, favorites = emptyList()) }
             }
         )
     }

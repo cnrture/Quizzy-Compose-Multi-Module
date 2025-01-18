@@ -1,5 +1,6 @@
 package com.canerture.detail.data.mapper
 
+import com.canerture.core.common.orFalse
 import com.canerture.core.common.orZero
 import com.canerture.detail.data.model.QuizDetailResponse
 import com.canerture.detail.domain.model.QuizDetailModel
@@ -15,5 +16,6 @@ fun QuizDetailResponse?.toModel(): QuizDetailModel {
         description = this?.description.orEmpty(),
         imageUrl = this?.imageUrl.orEmpty(),
         category = this?.category.orEmpty(),
+        isFavorite = this?.isFavorite.orFalse(),
     )
 }

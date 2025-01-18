@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.canerture.core.common.fold
 import com.canerture.core.common.orZero
+import com.canerture.detail.domain.usecase.AddFavoriteUseCase
+import com.canerture.detail.domain.usecase.DeleteFavoriteUseCase
 import com.canerture.detail.domain.usecase.GetQuizDetailUseCase
 import com.canerture.detail.ui.DetailContract.UiAction
 import com.canerture.detail.ui.DetailContract.UiEffect
@@ -20,6 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val getQuizDetailUseCase: GetQuizDetailUseCase,
+    private val addFavoriteUseCase: AddFavoriteUseCase,
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel(),
     MVI<UiState, UiAction, UiEffect> by mvi(UiState()) {
@@ -34,6 +38,7 @@ class DetailViewModel @Inject constructor(
             when (uiAction) {
                 is UiAction.OnBackClick -> emitUiEffect(UiEffect.NavigateBack)
                 is UiAction.OnStartQuizClick -> emitUiEffect(UiEffect.NavigateQuiz(currentUiState.quiz?.id.orZero()))
+                UiAction.OnFavoriteClick -> handleFavoriteClick()
             }
         }
     }
@@ -41,11 +46,39 @@ class DetailViewModel @Inject constructor(
     private fun getQuizDetail(id: Int) = viewModelScope.launch {
         updateUiState { copy(isLoading = true) }
         getQuizDetailUseCase(id).fold(
-            onSuccess = { updateUiState { copy(quiz = it, isLoading = false) } },
+            onSuccess = { updateUiState { copy(quiz = it, isFavorite = it.isFavorite, isLoading = false) } },
             onError = {
                 updateUiState { copy(isLoading = false) }
                 emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
             }
         )
+    }
+
+    private fun handleFavoriteClick() = viewModelScope.launch {
+        updateUiState { copy(isLoading = true) }
+        val isFavorite = currentUiState.isFavorite
+        if (isFavorite) {
+            deleteFavoriteUseCase(currentUiState.quiz?.id.orZero()).fold(
+                onSuccess = {
+                    updateUiState { copy(isFavorite = false, isLoading = false) }
+                    emitUiEffect(UiEffect.ShowError(it))
+                },
+                onError = {
+                    updateUiState { copy(isLoading = false) }
+                    emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
+                }
+            )
+        } else {
+            addFavoriteUseCase(currentUiState.quiz?.id.orZero()).fold(
+                onSuccess = {
+                    updateUiState { copy(isFavorite = true, isLoading = false) }
+                    emitUiEffect(UiEffect.ShowError(it))
+                },
+                onError = {
+                    updateUiState { copy(isLoading = false) }
+                    emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
+                }
+            )
+        }
     }
 }

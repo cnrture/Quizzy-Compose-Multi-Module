@@ -12,5 +12,5 @@ interface FavoritesApi {
     suspend fun getFavorites(): BaseResponse<List<FavoriteResponse>>
 
     @DELETE(FAVORITES)
-    suspend fun deleteFavorite(@Query("id") id: Int): BaseResponse<List<FavoriteResponse>>
+    suspend fun deleteFavorite(@Query("id") id: Int): BaseResponse<Unit>
 }
