@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.canerture.core.common.fold
 import com.canerture.login.domain.usecase.LoginUseCase
+import com.canerture.login.domain.usecase.SendResetPasswordMailUseCase
 import com.canerture.login.ui.LoginContract.UiAction
 import com.canerture.login.ui.LoginContract.UiEffect
 import com.canerture.login.ui.LoginContract.UiState
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
+    private val sendResetPasswordMailUseCase: SendResetPasswordMailUseCase,
 ) : ViewModel(),
     MVI<UiState, UiAction, UiEffect> by mvi(UiState()) {
 
@@ -35,6 +37,7 @@ class LoginViewModel @Inject constructor(
                 UiAction.OnForgotPasswordClick -> updateUiState { copy(isForgotPasswordSheetOpen = true) }
                 UiAction.OnSendPasswordResetEmailClick -> {
                     updateUiState { copy(isForgotPasswordSheetOpen = false) }
+                    sendResetPasswordMail()
                 }
 
                 UiAction.OnDialogDismiss -> updateUiState { copy(dialogState = null) }
@@ -53,6 +56,20 @@ class LoginViewModel @Inject constructor(
                         isLoading = false,
                         dialogState = DialogState(isSuccess = false, message = it.message)
                     )
+                }
+            }
+        )
+    }
+
+    private fun sendResetPasswordMail() = viewModelScope.launch {
+        updateUiState { copy(isLoading = true) }
+        sendResetPasswordMailUseCase(currentUiState.email).fold(
+            onSuccess = {
+                updateUiState { copy(isLoading = false, dialogState = DialogState(isSuccess = true, message = it)) }
+            },
+            onError = {
+                updateUiState {
+                    copy(isLoading = false, dialogState = DialogState(isSuccess = false, message = it.message))
                 }
             }
         )
