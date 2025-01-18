@@ -1,7 +1,6 @@
 package com.canerture.favorites.domain.usecase
 
 import com.canerture.core.common.Resource
-import com.canerture.favorites.domain.model.FavoriteModel
 import com.canerture.favorites.domain.repository.FavoritesRepository
 import javax.inject.Inject
 
