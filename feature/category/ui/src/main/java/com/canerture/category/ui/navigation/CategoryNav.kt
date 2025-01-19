@@ -1,34 +1,36 @@
-package com.canerture.home.ui.navigation
+package com.canerture.category.ui.navigation
 
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.canerture.home.ui.HomeScreen
-import com.canerture.home.ui.HomeViewModel
+import com.canerture.category.ui.CategoryScreen
+import com.canerture.category.ui.CategoryViewModel
 import com.canerture.ui.navigation.Screen
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object Home : Screen
+data class Category(
+    val id: Int,
+    val name: String,
+    val imageUrl: String,
+) : Screen
 
-fun NavGraphBuilder.homeScreen(
-    onNavigateSearch: () -> Unit,
+fun NavGraphBuilder.categoryScreen(
+    onNavigateBack: () -> Unit,
     onNavigateDetail: (Int) -> Unit,
-    onNavigateCategory: (Int, String, String) -> Unit,
 ) {
-    composable<Home> {
-        val viewModel = hiltViewModel<HomeViewModel>()
+    composable<Category> {
+        val viewModel = hiltViewModel<CategoryViewModel>()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         val uiEffect = viewModel.uiEffect
-        HomeScreen(
+        CategoryScreen(
             uiState = uiState,
             uiEffect = uiEffect,
             onAction = viewModel::onAction,
-            onNavigateSearch = onNavigateSearch,
-            onNavigateDetail = onNavigateDetail,
-            onNavigateCategory = onNavigateCategory
+            onNavigateBack = onNavigateBack,
+            onNavigateDetail = onNavigateDetail
         )
     }
 }

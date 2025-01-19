@@ -14,11 +14,13 @@ object HomeContract {
     sealed interface UiAction {
         data object OnSearchClick : UiAction
         data class OnQuizClick(val id: Int) : UiAction
+        data class OnCategoryClick(val category: CategoryModel) : UiAction
     }
 
     sealed interface UiEffect {
         data class ShowError(val message: String) : UiEffect
         data object NavigateSearch : UiEffect
         data class NavigateDetail(val id: Int) : UiEffect
+        data class NavigateCategory(val id: Int, val name: String, val imageUrl: String) : UiEffect
     }
 }

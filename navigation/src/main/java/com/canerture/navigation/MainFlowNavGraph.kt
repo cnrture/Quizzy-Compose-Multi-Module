@@ -3,6 +3,8 @@ package com.canerture.navigation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigation
+import com.canerture.category.ui.navigation.Category
+import com.canerture.category.ui.navigation.categoryScreen
 import com.canerture.detail.ui.navigation.Detail
 import com.canerture.detail.ui.navigation.detailScreen
 import com.canerture.editprofile.ui.navigation.EditProfile
@@ -28,6 +30,13 @@ fun NavGraphBuilder.mainFlowNavigation(navController: NavHostController) {
     navigation<MainFlow>(Home) {
         homeScreen(
             onNavigateSearch = { navController.navigate(Search) },
+            onNavigateDetail = { navController.navigate(Detail(it)) },
+            onNavigateCategory = { id, name, imageUrl ->
+                navController.navigate(Category(id, name, imageUrl))
+            },
+        )
+        categoryScreen(
+            onNavigateBack = { navController.popBackStack() },
             onNavigateDetail = { navController.navigate(Detail(it)) }
         )
         searchScreen(

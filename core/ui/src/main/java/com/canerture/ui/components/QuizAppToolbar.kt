@@ -37,10 +37,12 @@ fun QuizAppToolbar(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 32.dp, vertical = 24.dp),
+        contentAlignment = Alignment.Center,
     ) {
         onBackClick?.let {
             Box(
                 modifier = Modifier
+                    .align(Alignment.CenterStart)
                     .size(24.dp)
                     .clickable(
                         indication = null,
@@ -82,8 +84,8 @@ fun QuizAppToolbar(
         endIcon?.let {
             Box(
                 modifier = Modifier
-                    .size(24.dp)
                     .align(Alignment.CenterEnd)
+                    .size(24.dp)
                     .clickable(
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }

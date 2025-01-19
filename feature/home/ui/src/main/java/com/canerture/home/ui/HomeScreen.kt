@@ -43,11 +43,13 @@ fun HomeScreen(
     onAction: (UiAction) -> Unit,
     onNavigateSearch: () -> Unit,
     onNavigateDetail: (Int) -> Unit,
+    onNavigateCategory: (Int, String, String) -> Unit,
 ) {
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
             UiEffect.NavigateSearch -> onNavigateSearch()
             is UiEffect.NavigateDetail -> onNavigateDetail(effect.id)
+            is UiEffect.NavigateCategory -> onNavigateCategory(effect.id, effect.name, effect.imageUrl)
             is UiEffect.ShowError -> {
                 // Show error
             }
@@ -69,6 +71,7 @@ fun HomeScreen(
             uiState = uiState,
             onSearchClick = { onAction(UiAction.OnSearchClick) },
             onQuizClick = { onAction(UiAction.OnQuizClick(it)) },
+            onCategoryClick = { onAction(UiAction.OnCategoryClick(it)) },
         )
     }
 
@@ -80,6 +83,7 @@ private fun HomeContent(
     uiState: UiState,
     onSearchClick: () -> Unit,
     onQuizClick: (Int) -> Unit,
+    onCategoryClick: (CategoryModel) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -94,7 +98,7 @@ private fun HomeContent(
         Spacer(modifier = Modifier.height(24.dp))
         Categories(
             categories = uiState.categories,
-            onCategoryClick = {},
+            onCategoryClick = onCategoryClick,
         )
         Spacer(modifier = Modifier.height(24.dp))
         PopularQuizzes(
@@ -169,5 +173,6 @@ private fun HomeScreenPreview(
         onAction = {},
         onNavigateSearch = {},
         onNavigateDetail = {},
+        onNavigateCategory = { _, _, _ -> },
     )
 }

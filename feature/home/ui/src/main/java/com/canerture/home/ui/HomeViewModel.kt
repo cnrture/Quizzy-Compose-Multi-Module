@@ -34,6 +34,10 @@ class HomeViewModel @Inject constructor(
             when (uiAction) {
                 is UiAction.OnSearchClick -> emitUiEffect(UiEffect.NavigateSearch)
                 is UiAction.OnQuizClick -> emitUiEffect(UiEffect.NavigateDetail(uiAction.id))
+                is UiAction.OnCategoryClick -> {
+                    val category = uiAction.category
+                    emitUiEffect(UiEffect.NavigateCategory(category.id, category.name, category.imageUrl))
+                }
             }
         }
     }
