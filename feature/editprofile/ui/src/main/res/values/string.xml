@@ -7,4 +7,7 @@
     <string name="save">Save</string>
     <string name="change_avatar">Change Avatar</string>
     <string name="select_avatar">Select Avatar</string>
+    <string name="close">Close</string>
+
+    <string name="profile_image">Profile Image</string>
 </resources>

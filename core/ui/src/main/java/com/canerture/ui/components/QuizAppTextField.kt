@@ -44,7 +44,7 @@ fun QuizAppTextField(
                     .size(24.dp),
                 imageVector = icon,
                 tint = QuizAppTheme.colors.black,
-                contentDescription = null,
+                contentDescription = label,
             )
         }
     }
@@ -61,7 +61,7 @@ fun QuizAppTextField(
                     .clickable { visibility = !visibility },
                 imageVector = if (visibility) QuizAppTheme.icons.visibilityOn else QuizAppTheme.icons.visibilityOff,
                 tint = QuizAppTheme.colors.black,
-                contentDescription = null,
+                contentDescription = label,
             )
         }
     } else {

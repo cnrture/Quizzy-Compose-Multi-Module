@@ -9,4 +9,6 @@
     <string name="correct">Correct</string>
     <string name="wrong">Wrong</string>
     <string name="play_again">Play Again</string>
+
+    <string name="summary_icon">Summary Icon</string>
 </resources>

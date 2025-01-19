@@ -59,7 +59,7 @@ fun UserItem(
         Icon(
             modifier = Modifier.size(16.dp),
             imageVector = QuizAppTheme.icons.trophy,
-            contentDescription = null,
+            contentDescription = stringResource(R.string.trophy),
         )
         Spacer(modifier = Modifier.width(4.dp))
         QuizAppText(

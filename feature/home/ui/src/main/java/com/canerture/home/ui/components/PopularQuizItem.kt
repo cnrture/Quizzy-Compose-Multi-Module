@@ -16,8 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.canerture.feature.home.ui.R
 import com.canerture.home.domain.model.PopularQuizModel
 import com.canerture.ui.components.QuizAppAsyncImage
 import com.canerture.ui.components.QuizAppText
@@ -71,11 +73,11 @@ fun PopularQuizItem(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 QuizAppText(
-                    text = "${quiz.questionCount} Questions",
+                    text = stringResource(R.string.question_count, quiz.questionCount),
                     style = QuizAppTheme.typography.subheading3,
                 )
                 QuizAppText(
-                    text = "•",
+                    text = stringResource(R.string.dot),
                     style = QuizAppTheme.typography.subheading1,
                 )
                 QuizAppText(

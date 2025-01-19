@@ -133,7 +133,7 @@ private fun EditProfileContent(
                 .boldBorder(100)
                 .padding(24.dp),
             imageUrl = uiState.avatarUrl,
-            contentDescription = "",
+            contentDescription = stringResource(R.string.profile_image),
         )
         Spacer(modifier = Modifier.height(12.dp))
         QuizAppButton(

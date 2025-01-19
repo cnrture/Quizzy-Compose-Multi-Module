@@ -95,7 +95,7 @@ private fun WelcomeContent(
             modifier = Modifier.size(112.dp),
             imageVector = QuizAppTheme.icons.logo,
             tint = Color.Unspecified,
-            contentDescription = null,
+            contentDescription = stringResource(R.string.logo),
         )
         Spacer(modifier = Modifier.height(40.dp))
         QuizAppText(

@@ -138,7 +138,7 @@ fun DismissBackground(dismissState: SwipeToDismissBoxState) {
                 modifier = Modifier.size(32.dp),
                 imageVector = Icons.Default.Delete,
                 tint = QuizAppTheme.colors.white,
-                contentDescription = ""
+                contentDescription = stringResource(R.string.delete),
             )
         }
     }

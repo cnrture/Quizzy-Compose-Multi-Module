@@ -11,4 +11,6 @@
     <string name="terms_of_conditions_span">Terms of Conditions</string>
     <string name="privacy_policy_span">Privacy of Policy</string>
     <string name="welcome">Welcome!</string>
+
+    <string name="logo">Quizzy Logo</string>
 </resources>

@@ -5,4 +5,7 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="your_rank">Your Rank</string>
     <string name="score">%1$s Point</string>
+
+    <string name="trophy">Trophy Icon</string>
+    <string name="profile_image">Profile Image</string>
 </resources>

@@ -32,7 +32,7 @@ fun EmptyScreenContent() {
             modifier = Modifier.size(144.dp),
             imageVector = QuizAppTheme.icons.sad,
             tint = QuizAppTheme.colors.red,
-            contentDescription = "Empty Screen",
+            contentDescription = stringResource(R.string.empty_content_icon),
         )
         Spacer(modifier = Modifier.height(48.dp))
         QuizAppText(

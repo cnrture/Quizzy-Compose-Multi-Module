@@ -104,7 +104,7 @@ private fun DetailContent(
                 .clip(RoundedCornerShape(16.dp))
                 .boldBorder(),
             imageUrl = quiz.imageUrl,
-            contentDescription = "Quiz Image",
+            contentDescription = stringResource(R.string.quiz_image),
         )
         Spacer(modifier = Modifier.height(24.dp))
         QuizAppText(
@@ -124,7 +124,7 @@ private fun DetailContent(
             Icon(
                 modifier = Modifier.size(16.dp),
                 imageVector = QuizAppTheme.icons.trophy,
-                contentDescription = "Trophy Icon",
+                contentDescription = stringResource(R.string.trophy_icon),
             )
             Spacer(modifier = Modifier.width(8.dp))
             QuizAppText(

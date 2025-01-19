@@ -77,7 +77,7 @@ fun AvatarsDialog(
                             .clickable { onSelectAvatar(avatars[index]) }
                             .padding(16.dp),
                         imageUrl = avatars[index].url,
-                        contentDescription = "",
+                        contentDescription = stringResource(R.string.profile_image),
                     )
                 }
             }
@@ -85,7 +85,7 @@ fun AvatarsDialog(
             QuizAppButton(
                 modifier = Modifier.fillMaxWidth(),
                 size = QuizAppButtonSize.SMALL,
-                text = "Kapat",
+                text = stringResource(R.string.close),
                 onClick = onDismiss,
             )
         }

@@ -14,8 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.canerture.feature.quiz.ui.R
 import com.canerture.quiz.domain.model.OptionModel
 import com.canerture.quiz.domain.model.OptionState
 import com.canerture.quiz.ui.common.rememberShake
@@ -76,7 +78,7 @@ fun AnswerButton(
         if (icon != null) {
             Icon(
                 imageVector = icon,
-                contentDescription = "Icon",
+                contentDescription = stringResource(R.string.option),
                 tint = iconColor,
             )
         }

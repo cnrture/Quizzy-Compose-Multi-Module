@@ -6,4 +6,6 @@
     <string name="categories">Categories</string>
     <string name="popular_quizzes">Popular Quizzes</string>
     <string name="quiz_count">%d Quizzes</string>
+    <string name="question_count">%d Questions</string>
+    <string name="dot">.</string>
 </resources>

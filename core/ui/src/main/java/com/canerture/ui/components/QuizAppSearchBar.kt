@@ -57,7 +57,7 @@ fun QuizAppSearchBar(
                     Icon(
                         imageVector = QuizAppTheme.icons.search,
                         tint = QuizAppTheme.colors.black,
-                        contentDescription = null,
+                        contentDescription = stringResource(R.string.search_icon),
                     )
                     if (value.isBlank()) {
                         QuizAppText(

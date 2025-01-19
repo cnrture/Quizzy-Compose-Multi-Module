@@ -5,4 +5,7 @@
     <string name="played_count">%d Plays</string>
     <string name="dot">•</string>
     <string name="empty_content">No favorites yet</string>
+
+    <string name="empty_content_icon">Empty content icon</string>
+    <string name="delete">Delete</string>
 </resources>

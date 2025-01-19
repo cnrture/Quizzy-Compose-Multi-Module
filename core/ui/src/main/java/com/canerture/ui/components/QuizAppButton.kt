@@ -71,7 +71,7 @@ fun QuizAppButton(
                     Icon(
                         imageVector = icon,
                         tint = Color.Unspecified,
-                        contentDescription = null,
+                        contentDescription = text,
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                 }
@@ -99,7 +99,7 @@ fun QuizAppButton(
                     Icon(
                         imageVector = icon,
                         tint = Color.Unspecified,
-                        contentDescription = null,
+                        contentDescription = text,
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                 }

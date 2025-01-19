@@ -66,7 +66,7 @@ fun SplashScreen(
                     .boldBorder(100),
                 imageVector = QuizAppTheme.icons.logo,
                 tint = Color.Unspecified,
-                contentDescription = null,
+                contentDescription = stringResource(R.string.logo),
             )
             QuizAppText(
                 text = stringResource(R.string.app_name),

@@ -6,4 +6,5 @@
     <string name="played_count">%d Plays</string>
     <string name="dot">•</string>
     <string name="empty_content">No content available</string>
+    <string name="empty_content_icon">Empty content icon</string>
 </resources>

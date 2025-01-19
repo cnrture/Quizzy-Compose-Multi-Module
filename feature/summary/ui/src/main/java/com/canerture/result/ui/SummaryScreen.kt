@@ -124,7 +124,7 @@ private fun SummaryContent(
                     .padding(28.dp),
                 imageVector = resultIcon,
                 tint = QuizAppTheme.colors.white,
-                contentDescription = null,
+                contentDescription = stringResource(R.string.summary_icon),
             )
         }
         Spacer(modifier = Modifier.height(48.dp))

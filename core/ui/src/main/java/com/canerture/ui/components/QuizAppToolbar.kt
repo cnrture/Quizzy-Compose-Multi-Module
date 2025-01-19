@@ -16,9 +16,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.canerture.core.ui.R
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
@@ -49,7 +51,7 @@ fun QuizAppToolbar(
                 Icon(
                     modifier = Modifier.size(28.dp),
                     imageVector = QuizAppTheme.icons.arrowLeft,
-                    contentDescription = null
+                    contentDescription = stringResource(R.string.back_icon)
                 )
             }
         }

@@ -52,7 +52,7 @@ fun RankItem(
                 .clip(CircleShape)
                 .boldBorder(100),
             imageUrl = avatarUrl,
-            contentDescription = "",
+            contentDescription = stringResource(R.string.profile_image),
         )
         Spacer(modifier = Modifier.width(8.dp))
         QuizAppText(
@@ -64,7 +64,7 @@ fun RankItem(
         Icon(
             modifier = Modifier.size(16.dp),
             imageVector = QuizAppTheme.icons.trophy,
-            contentDescription = null,
+            contentDescription = stringResource(R.string.trophy),
         )
         Spacer(modifier = Modifier.width(8.dp))
         QuizAppText(

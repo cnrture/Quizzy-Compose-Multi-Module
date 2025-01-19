@@ -54,7 +54,7 @@ fun TopRankItem(
                     .boldBorder(100)
                     .padding(12.dp),
                 imageUrl = avatarUrl,
-                contentDescription = "",
+                contentDescription = username,
             )
             if (rank == 1) {
                 Icon(

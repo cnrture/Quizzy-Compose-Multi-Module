@@ -40,7 +40,6 @@ fun SearchScreen(
         when (effect) {
             is UiEffect.NavigateBack -> onNavigateBack()
             is UiEffect.NavigateDetail -> onNavigateDetail(effect.id)
-            else -> Unit
         }
     }
 

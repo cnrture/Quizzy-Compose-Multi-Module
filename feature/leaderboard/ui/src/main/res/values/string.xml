@@ -3,4 +3,6 @@
     <string name="leaderboard_title">Leaderboard</string>
     <string name="nickname">\@%1$s</string>
     <string name="score">%1$s Point</string>
+
+    <string name="trophy">Trophy Icon</string>
 </resources>

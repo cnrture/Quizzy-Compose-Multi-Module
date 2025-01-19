@@ -6,4 +6,7 @@
     <string name="favorites">Favorites</string>
     <string name="description">Description</string>
     <string name="start_quiz">Start Quiz</string>
+
+    <string name="quiz_image">Quiz Image</string>
+    <string name="trophy_icon">Trophy Icon</string>
 </resources>
