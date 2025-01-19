@@ -17,6 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -92,7 +93,8 @@ private fun WelcomeContent(
     ) {
         Icon(
             modifier = Modifier.size(112.dp),
-            imageVector = QuizAppTheme.icons.starUnselected,
+            imageVector = QuizAppTheme.icons.logo,
+            tint = Color.Unspecified,
             contentDescription = null,
         )
         Spacer(modifier = Modifier.height(40.dp))
