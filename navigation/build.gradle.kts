@@ -17,6 +17,7 @@ dependencies {
     implementation(projects.feature.login.ui)
     implementation(projects.feature.register.ui)
     implementation(projects.feature.home.ui)
+    implementation(projects.feature.search.ui)
     implementation(projects.feature.favorites.ui)
     implementation(projects.feature.leaderboard.ui)
     implementation(projects.feature.profile.ui)

@@ -16,6 +16,8 @@ import com.canerture.quiz.ui.navigation.Quiz
 import com.canerture.quiz.ui.navigation.quizScreen
 import com.canerture.result.ui.navigation.Summary
 import com.canerture.result.ui.navigation.summaryScreen
+import com.canerture.search.ui.navigation.Search
+import com.canerture.search.ui.navigation.searchScreen
 import com.canerture.ui.navigation.Screen
 import kotlinx.serialization.Serializable
 
@@ -25,6 +27,11 @@ object MainFlow : Screen
 fun NavGraphBuilder.mainFlowNavigation(navController: NavHostController) {
     navigation<MainFlow>(Home) {
         homeScreen(
+            onNavigateSearch = { navController.navigate(Search) },
+            onNavigateDetail = { navController.navigate(Detail(it)) }
+        )
+        searchScreen(
+            onNavigateBack = { navController.popBackStack() },
             onNavigateDetail = { navController.navigate(Detail(it)) }
         )
         favoritesScreen(

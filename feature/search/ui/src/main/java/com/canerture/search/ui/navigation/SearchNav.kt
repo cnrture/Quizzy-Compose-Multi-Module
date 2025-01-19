@@ -1,32 +1,32 @@
-package com.canerture.home.ui.navigation
+package com.canerture.search.ui.navigation
 
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.canerture.home.ui.HomeScreen
-import com.canerture.home.ui.HomeViewModel
+import com.canerture.search.ui.SearchScreen
+import com.canerture.search.ui.SearchViewModel
 import com.canerture.ui.navigation.Screen
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object Home : Screen
+data object Search : Screen
 
-fun NavGraphBuilder.homeScreen(
-    onNavigateSearch: () -> Unit,
+fun NavGraphBuilder.searchScreen(
+    onNavigateBack: () -> Unit,
     onNavigateDetail: (Int) -> Unit,
 ) {
-    composable<Home> {
-        val viewModel = hiltViewModel<HomeViewModel>()
+    composable<Search> {
+        val viewModel = hiltViewModel<SearchViewModel>()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         val uiEffect = viewModel.uiEffect
-        HomeScreen(
+        SearchScreen(
             uiState = uiState,
             uiEffect = uiEffect,
             onAction = viewModel::onAction,
-            onNavigateSearch = onNavigateSearch,
-            onNavigateDetail = onNavigateDetail
+            onNavigateBack = onNavigateBack,
+            onNavigateDetail = onNavigateDetail,
         )
     }
 }

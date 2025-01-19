@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_title">Search</string>
+    <string name="favorites_title">Favorites</string>
+    <string name="question_count">%d Questions</string>
+    <string name="played_count">%d Plays</string>
+    <string name="dot">•</string>
+    <string name="empty_content">No content available</string>
+</resources>

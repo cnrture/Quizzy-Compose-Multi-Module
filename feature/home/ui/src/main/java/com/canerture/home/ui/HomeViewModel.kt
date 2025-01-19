@@ -32,10 +32,7 @@ class HomeViewModel @Inject constructor(
     override fun onAction(uiAction: UiAction) {
         viewModelScope.launch {
             when (uiAction) {
-                is UiAction.OnSearchQueryChange -> {
-                    updateUiState { copy(searchQuery = uiAction.searchQuery) }
-                }
-
+                is UiAction.OnSearchClick -> emitUiEffect(UiEffect.NavigateSearch)
                 is UiAction.OnQuizClick -> emitUiEffect(UiEffect.NavigateDetail(uiAction.id))
             }
         }

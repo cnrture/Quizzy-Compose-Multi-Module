@@ -41,10 +41,12 @@ fun HomeScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
+    onNavigateSearch: () -> Unit,
     onNavigateDetail: (Int) -> Unit,
 ) {
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
+            UiEffect.NavigateSearch -> onNavigateSearch()
             is UiEffect.NavigateDetail -> onNavigateDetail(effect.id)
             is UiEffect.ShowError -> {
                 // Show error
@@ -65,7 +67,8 @@ fun HomeScreen(
         )
         HomeContent(
             uiState = uiState,
-            onAction = onAction,
+            onSearchClick = { onAction(UiAction.OnSearchClick) },
+            onQuizClick = { onAction(UiAction.OnQuizClick(it)) },
         )
     }
 
@@ -75,7 +78,8 @@ fun HomeScreen(
 @Composable
 private fun HomeContent(
     uiState: UiState,
-    onAction: (UiAction) -> Unit,
+    onSearchClick: () -> Unit,
+    onQuizClick: (Int) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -85,8 +89,7 @@ private fun HomeContent(
     ) {
         QuizAppSearchBar(
             modifier = Modifier.padding(horizontal = 32.dp),
-            value = uiState.searchQuery,
-            onValueChange = { onAction(UiAction.OnSearchQueryChange(it)) },
+            onClick = onSearchClick,
         )
         Spacer(modifier = Modifier.height(24.dp))
         Categories(
@@ -96,7 +99,7 @@ private fun HomeContent(
         Spacer(modifier = Modifier.height(24.dp))
         PopularQuizzes(
             quizzes = uiState.popularQuizzes,
-            onQuizClick = { onAction(UiAction.OnQuizClick(it)) },
+            onQuizClick = onQuizClick,
         )
     }
 }
@@ -164,6 +167,7 @@ private fun HomeScreenPreview(
         uiState = uiState,
         uiEffect = emptyFlow(),
         onAction = {},
+        onNavigateSearch = {},
         onNavigateDetail = {},
     )
 }

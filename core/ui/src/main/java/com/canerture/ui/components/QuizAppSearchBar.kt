@@ -14,16 +14,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.canerture.core.ui.R
 import com.canerture.ui.extensions.boldBorder
+import com.canerture.ui.extensions.conditional
+import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
 fun QuizAppSearchBar(
     modifier: Modifier = Modifier,
-    value: String,
-    onValueChange: (String) -> Unit,
+    value: String = "",
+    onClick: (() -> Unit)? = null,
+    onValueChange: (String) -> Unit = {},
 ) {
     BasicTextField(
         modifier = modifier
@@ -38,7 +43,11 @@ fun QuizAppSearchBar(
         singleLine = true,
         decorationBox = {
             Box(
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier
+                    .conditional(onClick != null) {
+                        noRippleClickable { onClick?.invoke() }
+                    }
+                    .padding(16.dp),
                 contentAlignment = Alignment.CenterStart,
             ) {
                 Row(
@@ -52,7 +61,7 @@ fun QuizAppSearchBar(
                     )
                     if (value.isBlank()) {
                         QuizAppText(
-                            text = "Search...",
+                            text = stringResource(R.string.search),
                             style = QuizAppTheme.typography.paragraph1,
                             color = QuizAppTheme.colors.darkGray
                         )
