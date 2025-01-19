@@ -29,14 +29,6 @@ class QuizAppIcons {
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_mail)
 
-    val more: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_more)
-
-    val notifications: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_notifications)
-
     val profileUnselected: ImageVector
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_profile)
@@ -48,10 +40,6 @@ class QuizAppIcons {
     val settings: ImageVector
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_settings)
-
-    val sort: ImageVector
-        @Composable
-        get() = ImageVector.vectorResource(id = R.drawable.ic_sort)
 
     val starSelected: ImageVector
         @Composable
