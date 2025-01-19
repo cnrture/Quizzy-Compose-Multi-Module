@@ -20,7 +20,7 @@ class SearchViewModel @Inject constructor(
     MVI<UiState, UiAction, UiEffect> by mvi(UiState()) {
 
     init {
-        searchQuiz()
+        getInitialQuizList()
     }
 
     override fun onAction(uiAction: UiAction) {
@@ -30,21 +30,28 @@ class SearchViewModel @Inject constructor(
                 is UiAction.OnQuizClick -> emitUiEffect(UiEffect.NavigateDetail(uiAction.id))
                 is UiAction.OnQueryChange -> {
                     updateUiState { copy(query = uiAction.query) }
-                    if (uiAction.query.length > 2) searchQuiz()
+                    if (uiAction.query.length > 2) {
+                        searchQuiz()
+                    } else {
+                        updateUiState { copy(quizList = initialQuizList) }
+                    }
                 }
             }
         }
     }
 
+    private fun getInitialQuizList() = viewModelScope.launch {
+        searchQuizUseCase("").fold(
+            onSuccess = { updateUiState { copy(initialQuizList = it, quizList = it) } },
+            onError = { updateUiState { copy(initialQuizList = emptyList()) } }
+        )
+    }
+
     private fun searchQuiz() = viewModelScope.launch {
         updateUiState { copy(isLoading = true) }
         searchQuizUseCase(currentUiState.query).fold(
-            onSuccess = { quizList ->
-                updateUiState { copy(quizList = quizList, isLoading = false) }
-            },
-            onError = {
-                updateUiState { copy(isLoading = false) }
-            }
+            onSuccess = { updateUiState { copy(quizList = quizList, isLoading = false) } },
+            onError = { updateUiState { copy(quizList = emptyList(), isLoading = false) } }
         )
     }
 }

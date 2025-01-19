@@ -6,6 +6,7 @@ object SearchContract {
     data class UiState(
         val isLoading: Boolean = false,
         val query: String = "",
+        val initialQuizList: List<QuizModel> = emptyList(),
         val quizList: List<QuizModel> = emptyList(),
     )
 
