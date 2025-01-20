@@ -1,4 +1,5 @@
 ![quiz-app-github](https://github.com/user-attachments/assets/14d963cf-1f91-4d54-a0a0-2bf314b3b034)
+
 A modern **Quiz App** built with **Jetpack Compose** and organized using a **multi-module architecture**. This project demonstrates practices in Android development, emphasizing scalability, maintainability, and clean architecture.
 
 ## Tech
@@ -76,6 +77,21 @@ This project is organized into the following modules:
 | Profile | Edit Profile | Select Avatar |
 | - | - | - |
 |<img src="https://github.com/user-attachments/assets/bc1f28cc-661f-4b80-89ba-4794b69c1fe2" width = "250"/>|<img src="https://github.com/user-attachments/assets/6db9f4de-1286-49f8-b1b2-c7d74abdf411" width = "250"/>|<img src="https://github.com/user-attachments/assets/3647aea0-d9ef-4b9a-8cfc-ffa75585fbb2" width = "250"/>|
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/cnrture/Quiz-App-Compose-Multi-Module.git
+   ```
+2. Open the project in Android Studio.
+3. Sync Gradle to download all dependencies.
+4. You need to provide Firebase connection, add google.services.json into the app and add client id in local.properties as follows
+   ```bash
+   SERVER_CLIENT_ID=YOUR_CLIENT_ID
+   ```
+   <img src="https://github.com/user-attachments/assets/c3ba48ea-2694-461d-9722-d0af681f0388" width = "800"/>
+5. Run the app on an emulator or physical device.
 
 ## Roadmap
 
