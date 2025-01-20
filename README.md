@@ -82,7 +82,7 @@ This project is organized into the following modules:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/cnrture/Quiz-App-Compose-Multi-Module.git
+   git clone https://github.com/cnrture/Quizzy-Compose-Multi-Module.git
    ```
 2. Open the project in Android Studio.
 3. Sync Gradle to download all dependencies.
