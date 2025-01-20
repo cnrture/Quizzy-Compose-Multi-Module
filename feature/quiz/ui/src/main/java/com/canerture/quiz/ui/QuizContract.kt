@@ -2,6 +2,7 @@ package com.canerture.quiz.ui
 
 import com.canerture.quiz.domain.model.OptionModel
 import com.canerture.quiz.domain.model.QuestionModel
+import com.canerture.ui.components.DialogState
 
 internal object QuizContract {
     data class UiState(
@@ -16,6 +17,7 @@ internal object QuizContract {
         val correctAnswers: Int = 0,
         val isSelectable: Boolean = true,
         val isNextButtonEnable: Boolean = false,
+        val dialogState: DialogState? = null,
     )
 
     sealed interface UiAction {

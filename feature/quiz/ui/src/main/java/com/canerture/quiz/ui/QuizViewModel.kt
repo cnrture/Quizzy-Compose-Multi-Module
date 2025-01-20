@@ -13,6 +13,7 @@ import com.canerture.quiz.ui.QuizContract.UiAction
 import com.canerture.quiz.ui.QuizContract.UiEffect
 import com.canerture.quiz.ui.QuizContract.UiState
 import com.canerture.quiz.ui.navigation.Quiz
+import com.canerture.ui.components.DialogState
 import com.canerture.ui.delegate.mvi.MVI
 import com.canerture.ui.delegate.mvi.mvi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -62,8 +63,7 @@ internal class QuizViewModel @Inject constructor(
                 }
             },
             onError = {
-                updateUiState { copy(isLoading = false) }
-                emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
+                updateUiState { copy(dialogState = DialogState(it.message, false), isLoading = false) }
             }
         )
     }

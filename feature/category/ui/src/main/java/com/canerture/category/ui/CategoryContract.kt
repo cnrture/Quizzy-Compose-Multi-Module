@@ -1,6 +1,7 @@
 package com.canerture.category.ui
 
 import com.canerture.category.domain.model.QuizModel
+import com.canerture.ui.components.DialogState
 
 internal object CategoryContract {
     data class UiState(
@@ -8,7 +9,8 @@ internal object CategoryContract {
         val title: String = "",
         val imageUrl: String = "",
         val quizzes: List<QuizModel> = emptyList(),
-        val username: String = ""
+        val username: String = "",
+        val dialogState: DialogState? = null,
     )
 
     sealed interface UiAction {
@@ -17,7 +19,6 @@ internal object CategoryContract {
     }
 
     sealed interface UiEffect {
-        data class ShowError(val message: String) : UiEffect
         data object NavigateBack : UiEffect
         data class NavigateDetail(val id: Int) : UiEffect
     }

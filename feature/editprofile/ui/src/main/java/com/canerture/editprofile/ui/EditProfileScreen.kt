@@ -46,7 +46,6 @@ internal fun EditProfileScreen(
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
             UiEffect.NavigateBack -> onNavigateBack()
-            else -> {}
         }
     }
 
@@ -76,20 +75,6 @@ internal fun EditProfileScreen(
     }
 
     if (uiState.isLoading) QuizAppLoading()
-
-    if (uiState.dialogState != null) {
-        QuizAppDialog(
-            message = uiState.dialogState.message,
-            isSuccess = uiState.dialogState.isSuccess,
-            onDismiss = {
-                if (uiState.dialogState.isSuccess == true) {
-                    onAction(UiAction.OnDialogDismiss)
-                } else {
-                    onAction(UiAction.OnDialogDismiss)
-                }
-            },
-        )
-    }
 
     if (uiState.isAvatarsDialogVisible) {
         AvatarsDialog(

@@ -10,6 +10,7 @@ import com.canerture.category.ui.CategoryContract.UiEffect
 import com.canerture.category.ui.CategoryContract.UiState
 import com.canerture.category.ui.navigation.Category
 import com.canerture.core.common.fold
+import com.canerture.ui.components.DialogState
 import com.canerture.ui.delegate.mvi.MVI
 import com.canerture.ui.delegate.mvi.mvi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -42,12 +43,9 @@ internal class CategoryViewModel @Inject constructor(
         viewModelScope.launch {
             updateUiState { copy(isLoading = true) }
             getQuizzesByCategoryUseCase(categoryId).fold(
-                onSuccess = { quizzes ->
-                    updateUiState { copy(quizzes = quizzes, isLoading = false) }
-                },
+                onSuccess = { updateUiState { copy(quizzes = it, isLoading = false) } },
                 onError = {
-                    updateUiState { copy(isLoading = false) }
-                    emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
+                    updateUiState { copy(dialogState = DialogState(it.message, false), isLoading = false) }
                 }
             )
         }

@@ -13,6 +13,7 @@ import com.canerture.detail.ui.DetailContract.UiAction
 import com.canerture.detail.ui.DetailContract.UiEffect
 import com.canerture.detail.ui.DetailContract.UiState
 import com.canerture.detail.ui.navigation.Detail
+import com.canerture.ui.components.DialogState
 import com.canerture.ui.delegate.mvi.MVI
 import com.canerture.ui.delegate.mvi.mvi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -48,8 +49,7 @@ internal class DetailViewModel @Inject constructor(
         getQuizDetailUseCase(id).fold(
             onSuccess = { updateUiState { copy(quiz = it, isFavorite = it.isFavorite, isLoading = false) } },
             onError = {
-                updateUiState { copy(isLoading = false) }
-                emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
+                updateUiState { copy(dialogState = DialogState(it.message, false), isLoading = false) }
             }
         )
     }
@@ -61,22 +61,22 @@ internal class DetailViewModel @Inject constructor(
             deleteFavoriteUseCase(currentUiState.quiz?.id.orZero()).fold(
                 onSuccess = {
                     updateUiState { copy(isFavorite = false, isLoading = false) }
-                    emitUiEffect(UiEffect.ShowError(it))
+                    emitUiEffect(UiEffect.ShowToast(it))
                 },
                 onError = {
                     updateUiState { copy(isLoading = false) }
-                    emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
+                    emitUiEffect(UiEffect.ShowToast(it.message.orEmpty()))
                 }
             )
         } else {
             addFavoriteUseCase(currentUiState.quiz?.id.orZero()).fold(
                 onSuccess = {
                     updateUiState { copy(isFavorite = true, isLoading = false) }
-                    emitUiEffect(UiEffect.ShowError(it))
+                    emitUiEffect(UiEffect.ShowToast(it))
                 },
                 onError = {
                     updateUiState { copy(isLoading = false) }
-                    emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
+                    emitUiEffect(UiEffect.ShowToast(it.message.orEmpty()))
                 }
             )
         }

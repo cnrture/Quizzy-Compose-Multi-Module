@@ -34,6 +34,7 @@ import com.canerture.detail.ui.DetailContract.UiState
 import com.canerture.detail.ui.component.StartQuizButton
 import com.canerture.feature.detail.ui.R
 import com.canerture.ui.components.QuizAppAsyncImage
+import com.canerture.ui.components.QuizAppDialog
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppToolbar
@@ -56,7 +57,7 @@ internal fun DetailScreen(
         when (effect) {
             UiEffect.NavigateBack -> onNavigateBack()
             is UiEffect.NavigateQuiz -> onNavigateQuiz(effect.id)
-            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
+            is UiEffect.ShowToast -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -86,6 +87,14 @@ internal fun DetailScreen(
     }
 
     if (uiState.isLoading) QuizAppLoading()
+
+    if (uiState.dialogState != null) {
+        QuizAppDialog(
+            message = uiState.dialogState.message,
+            isSuccess = uiState.dialogState.isSuccess,
+            onDismiss = { onAction(UiAction.OnBackClick) },
+        )
+    }
 }
 
 @Composable

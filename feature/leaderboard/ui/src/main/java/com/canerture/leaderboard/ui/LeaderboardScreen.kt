@@ -1,5 +1,6 @@
 package com.canerture.leaderboard.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -36,10 +38,10 @@ internal fun LeaderboardScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
 ) {
+    val context = LocalContext.current
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
-            is UiEffect.ShowError -> {
-            }
+            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
         }
     }
 

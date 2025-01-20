@@ -48,7 +48,8 @@ internal class FavoritesViewModel @Inject constructor(
         deleteFavoriteUseCase(item.id).fold(
             onSuccess = { getFavorites() },
             onError = {
-                updateUiState { copy(isLoading = false, favorites = emptyList()) }
+                updateUiState { copy(isLoading = false) }
+                emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
             }
         )
     }

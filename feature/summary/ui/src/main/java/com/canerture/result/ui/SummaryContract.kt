@@ -18,6 +18,5 @@ internal object SummaryContract {
     sealed interface UiEffect {
         data object NavigateBack : UiEffect
         data class NavigateQuiz(val quizId: Int) : UiEffect
-        data class ShowError(val message: String) : UiEffect
     }
 }

@@ -29,6 +29,5 @@ internal object EditProfileContract {
 
     sealed interface UiEffect {
         data object NavigateBack : UiEffect
-        data class ShowError(val message: String) : UiEffect
     }
 }

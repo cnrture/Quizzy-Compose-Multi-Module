@@ -89,7 +89,6 @@ class MainActivity : ComponentActivity() {
                         isSuccess = false,
                         isCancelable = false,
                         message = stringResource(R.string.no_network_connection),
-                        buttonText = stringResource(R.string.okay),
                         onButtonClick = {
                             viewModel.updateUiState { copy(isShowNoNetworkDialog = false) }
                         }

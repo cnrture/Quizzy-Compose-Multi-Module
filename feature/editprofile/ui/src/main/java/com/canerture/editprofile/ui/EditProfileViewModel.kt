@@ -3,6 +3,7 @@ package com.canerture.editprofile.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.canerture.core.common.fold
+import com.canerture.core.common.onSuccess
 import com.canerture.core.common.orZero
 import com.canerture.editprofile.domain.usecase.GetAvatarsUseCase
 import com.canerture.editprofile.domain.usecase.GetProfileUseCase
@@ -49,14 +50,9 @@ internal class EditProfileViewModel @Inject constructor(
 
     private fun getAvatars() {
         viewModelScope.launch {
-            getAvatarsUseCase().fold(
-                onSuccess = { avatars ->
-                    updateUiState { copy(avatars = avatars) }
-                },
-                onError = { error ->
-                    emitUiEffect(UiEffect.ShowError(error.message.orEmpty()))
-                }
-            )
+            getAvatarsUseCase().onSuccess {
+                updateUiState { copy(avatars = avatars) }
+            }
         }
     }
 
@@ -85,12 +81,10 @@ internal class EditProfileViewModel @Inject constructor(
                 password = currentUiState.password,
                 avatarId = selectedAvatarId ?: foundAvatarId,
             ).fold(
-                onSuccess = {
-                    updateUiState { copy(dialogState = DialogState(it, true), isLoading = false) }
-                },
-                onError = { error ->
+                onSuccess = { updateUiState { copy(dialogState = DialogState(it, true), isLoading = false) } },
+                onError = {
                     updateUiState {
-                        copy(dialogState = DialogState(error.message.orEmpty(), false), isLoading = false)
+                        copy(dialogState = DialogState(it.message.orEmpty(), false), isLoading = false)
                     }
                 }
             )

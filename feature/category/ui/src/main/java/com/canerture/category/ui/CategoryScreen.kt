@@ -32,6 +32,7 @@ import com.canerture.category.ui.CategoryContract.UiState
 import com.canerture.category.ui.components.QuizItem
 import com.canerture.feature.category.ui.R
 import com.canerture.ui.components.QuizAppAsyncImage
+import com.canerture.ui.components.QuizAppDialog
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppToolbar
@@ -53,9 +54,6 @@ internal fun CategoryScreen(
         when (effect) {
             UiEffect.NavigateBack -> onNavigateBack()
             is UiEffect.NavigateDetail -> onNavigateDetail(effect.id)
-            is UiEffect.ShowError -> {
-                // Show error
-            }
         }
     }
 
@@ -75,6 +73,14 @@ internal fun CategoryScreen(
     }
 
     if (uiState.isLoading) QuizAppLoading()
+
+    if (uiState.dialogState != null) {
+        QuizAppDialog(
+            message = uiState.dialogState.message,
+            isSuccess = uiState.dialogState.isSuccess,
+            onDismiss = { onAction(UiAction.OnBackClick) },
+        )
+    }
 }
 
 @Composable

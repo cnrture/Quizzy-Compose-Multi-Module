@@ -38,7 +38,7 @@ internal class WelcomeViewModel @Inject constructor(
             is Resource.Error -> updateUiState {
                 copy(
                     isLoading = false,
-                    dialogState = DialogState(isSuccess = false, message = result.exception.message),
+                    dialogState = DialogState(result.exception.message, false),
                 )
             }
         }

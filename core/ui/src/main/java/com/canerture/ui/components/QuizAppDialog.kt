@@ -33,7 +33,6 @@ data class DialogState(
 @Composable
 fun QuizAppDialog(
     message: String? = null,
-    buttonText: String = stringResource(R.string.okay),
     isSuccess: Boolean? = null,
     isCancelable: Boolean = true,
     onDismiss: () -> Unit = {},
@@ -88,7 +87,7 @@ fun QuizAppDialog(
             QuizAppButton(
                 type = QuizAppButtonType.PRIMARY,
                 size = QuizAppButtonSize.MEDIUM,
-                text = buttonText,
+                text = stringResource(R.string.okay),
                 onClick = {
                     if (onButtonClick != null) {
                         onButtonClick()
@@ -106,6 +105,5 @@ fun QuizAppDialog(
 fun QuizAppDialogPreview() {
     QuizAppDialog(
         message = "This is a sample error message",
-        buttonText = "Okay",
     )
 }

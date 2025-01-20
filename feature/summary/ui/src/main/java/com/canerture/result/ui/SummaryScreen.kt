@@ -51,8 +51,6 @@ internal fun SummaryScreen(
         when (effect) {
             is UiEffect.NavigateBack -> onNavigateBack()
             is UiEffect.NavigateQuiz -> onNavigateQuiz(effect.quizId)
-            is UiEffect.ShowError -> {
-            }
         }
     }
 

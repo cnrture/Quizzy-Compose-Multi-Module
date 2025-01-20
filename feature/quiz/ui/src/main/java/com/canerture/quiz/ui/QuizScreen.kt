@@ -1,5 +1,6 @@
 package com.canerture.quiz.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,6 +32,7 @@ import com.canerture.quiz.ui.component.QuestionCountProgress
 import com.canerture.quiz.ui.component.QuizAppTimer
 import com.canerture.quiz.ui.component.TimerState
 import com.canerture.ui.components.QuizAppButton
+import com.canerture.ui.components.QuizAppDialog
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppToolbar
@@ -47,7 +50,7 @@ internal fun QuizScreen(
     onNavigateSummary: (Int, Int, Int, Int) -> Unit,
 ) {
     var timerState by remember { mutableStateOf(TimerState.START) }
-
+    val context = LocalContext.current
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
             is UiEffect.NavigateBack -> onNavigateBack()
@@ -58,9 +61,7 @@ internal fun QuizScreen(
                 effect.score
             )
 
-            is UiEffect.ShowError -> {
-            }
-
+            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
             UiEffect.ResetTimer -> timerState = TimerState.RESET
         }
     }
@@ -92,6 +93,14 @@ internal fun QuizScreen(
     }
 
     if (uiState.isLoading) QuizAppLoading()
+
+    if (uiState.dialogState != null) {
+        QuizAppDialog(
+            message = uiState.dialogState.message,
+            isSuccess = uiState.dialogState.isSuccess,
+            onDismiss = { onAction(UiAction.OnBackClick) },
+        )
+    }
 }
 
 @Composable
