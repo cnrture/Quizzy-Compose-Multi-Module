@@ -10,7 +10,6 @@ fun List<QuizResponse>?.toModel(): List<QuizModel> {
             id = it.id.orZero(),
             name = it.name.orEmpty(),
             questionCount = it.questionCount.orZero(),
-            playedCount = it.favoriteCount.orZero(),
             imageUrl = it.imageUrl.orEmpty(),
             category = it.category.orEmpty()
         )

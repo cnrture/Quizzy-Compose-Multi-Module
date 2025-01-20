@@ -41,16 +41,17 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun getInitialQuizList() = viewModelScope.launch {
+        updateUiState { copy(isLoading = true) }
         searchQuizUseCase("").fold(
-            onSuccess = { updateUiState { copy(initialQuizList = it, quizList = it) } },
-            onError = { updateUiState { copy(initialQuizList = emptyList()) } }
+            onSuccess = { updateUiState { copy(initialQuizList = it, quizList = it, isLoading = false) } },
+            onError = { updateUiState { copy(initialQuizList = emptyList(), isLoading = false) } }
         )
     }
 
     private fun searchQuiz() = viewModelScope.launch {
         updateUiState { copy(isLoading = true) }
         searchQuizUseCase(currentUiState.query).fold(
-            onSuccess = { updateUiState { copy(quizList = quizList, isLoading = false) } },
+            onSuccess = { updateUiState { copy(quizList = it, isLoading = false) } },
             onError = { updateUiState { copy(quizList = emptyList(), isLoading = false) } }
         )
     }

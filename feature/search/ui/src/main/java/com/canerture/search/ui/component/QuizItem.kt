@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.search.ui.R
@@ -72,14 +73,8 @@ fun QuizItem(
                     QuizAppText(
                         text = item.category,
                         style = QuizAppTheme.typography.subheading3,
-                    )
-                    QuizAppText(
-                        text = stringResource(R.string.hyphen),
-                        style = QuizAppTheme.typography.subheading1,
-                    )
-                    QuizAppText(
-                        text = stringResource(R.string.played_count, item.playedCount),
-                        style = QuizAppTheme.typography.subheading3,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                     )
                 }
             }
@@ -98,7 +93,6 @@ fun QuizItemPreview() {
             category = "Movies",
             imageUrl = "https://www.canerture.com/assets/images/logo.png",
             questionCount = 10,
-            playedCount = 100,
         ),
         onQuizClick = {},
     )

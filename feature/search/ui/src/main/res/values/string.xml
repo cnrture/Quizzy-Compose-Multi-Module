@@ -3,7 +3,6 @@
     <string name="search_title">Search</string>
     <string name="favorites_title">Favorites</string>
     <string name="question_count">%d Questions</string>
-    <string name="played_count">%d Plays</string>
     <string name="hyphen">-</string>
     <string name="empty_content">No content available</string>
     <string name="empty_content_icon">Empty content icon</string>

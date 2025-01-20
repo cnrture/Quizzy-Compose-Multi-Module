@@ -15,7 +15,6 @@ class SearchPreviewProvider : PreviewParameterProvider<SearchContract.UiState> {
                         name = "name",
                         category = "category",
                         questionCount = 1,
-                        playedCount = 1,
                         imageUrl = "imageUrl",
                     ),
                     QuizModel(
@@ -23,7 +22,6 @@ class SearchPreviewProvider : PreviewParameterProvider<SearchContract.UiState> {
                         name = "name",
                         category = "category",
                         questionCount = 1,
-                        playedCount = 1,
                         imageUrl = "imageUrl",
                     ),
                     QuizModel(
@@ -31,7 +29,6 @@ class SearchPreviewProvider : PreviewParameterProvider<SearchContract.UiState> {
                         name = "name",
                         category = "category",
                         questionCount = 1,
-                        playedCount = 1,
                         imageUrl = "imageUrl",
                     )
                 ),
