@@ -2,7 +2,7 @@ package com.canerture.leaderboard.ui
 
 import com.canerture.leaderboard.domain.model.BoardModel
 
-object LeaderboardContract {
+internal object LeaderboardContract {
     data class UiState(
         val isLoading: Boolean = false,
         val userList: List<BoardModel> = emptyList(),

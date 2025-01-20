@@ -5,7 +5,7 @@ import com.canerture.core.common.orZero
 import com.canerture.detail.data.model.QuizDetailResponse
 import com.canerture.detail.domain.model.QuizDetailModel
 
-fun QuizDetailResponse?.toModel(): QuizDetailModel {
+internal fun QuizDetailResponse?.toModel(): QuizDetailModel {
     return QuizDetailModel(
         id = this?.id.orZero(),
         name = this?.name.orEmpty(),

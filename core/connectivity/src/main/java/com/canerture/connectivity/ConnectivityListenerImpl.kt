@@ -9,7 +9,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
-class ConnectivityListenerImpl(context: Context) : ConnectivityListener {
+internal class ConnectivityListenerImpl(context: Context) : ConnectivityListener {
 
     private val connectivityManager = context.getSystemService<ConnectivityManager>()
 

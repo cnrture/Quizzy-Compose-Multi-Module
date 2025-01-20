@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-interface QuizApi {
+internal interface QuizApi {
     @GET(QUIZ)
     suspend fun getQuiz(@Query("id") id: Int): BaseResponse<QuizResponse>
 

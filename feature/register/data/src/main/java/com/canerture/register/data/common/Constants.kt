@@ -1,5 +1,5 @@
 package com.canerture.register.data.common
 
-object Constants {
+internal object Constants {
     const val USER = "user"
 }

@@ -1,6 +1,6 @@
 package com.canerture.result.ui
 
-object SummaryContract {
+internal object SummaryContract {
     data class UiState(
         val isLoading: Boolean = false,
         val quizId: Int = 0,

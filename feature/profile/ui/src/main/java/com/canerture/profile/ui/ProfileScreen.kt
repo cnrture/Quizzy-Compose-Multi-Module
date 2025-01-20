@@ -34,7 +34,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun ProfileScreen(
+internal fun ProfileScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
@@ -72,7 +72,7 @@ fun ProfileScreen(
 }
 
 @Composable
-private fun ProfileContent(
+internal fun ProfileContent(
     uiState: UiState,
     onEditProfileClick: () -> Unit,
 ) {
@@ -127,7 +127,7 @@ private fun ProfileContent(
 
 @Preview(showBackground = true)
 @Composable
-fun ProfileScreenPreview(
+internal fun ProfileScreenPreview(
     @PreviewParameter(ProfilePreviewProvider::class) uiState: UiState,
 ) {
     ProfileScreen(

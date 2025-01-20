@@ -25,7 +25,7 @@ import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun RankItem(
+internal fun RankItem(
     rank: RankModel,
     username: String,
     avatarUrl: String,
@@ -76,7 +76,7 @@ fun RankItem(
 
 @Preview(showBackground = true)
 @Composable
-fun RankItemPreview() {
+internal fun RankItemPreview() {
     RankItem(
         rank = RankModel("1", "100"),
         username = "canerture",

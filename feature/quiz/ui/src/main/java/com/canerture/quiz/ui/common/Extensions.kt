@@ -7,7 +7,7 @@ import com.canerture.quiz.domain.model.OptionState
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun OptionState.toBgColor(): Color {
+internal fun OptionState.toBgColor(): Color {
     return when (this) {
         OptionState.UNSELECTED -> QuizAppTheme.colors.white
         OptionState.CORRECT -> QuizAppTheme.colors.softGreen
@@ -16,7 +16,7 @@ fun OptionState.toBgColor(): Color {
 }
 
 @Composable
-fun OptionState.toIcon(): ImageVector? {
+internal fun OptionState.toIcon(): ImageVector? {
     return when (this) {
         OptionState.UNSELECTED -> null
         OptionState.CORRECT -> QuizAppTheme.icons.check
@@ -25,7 +25,7 @@ fun OptionState.toIcon(): ImageVector? {
 }
 
 @Composable
-fun OptionState.toIconColor(): Color {
+internal fun OptionState.toIconColor(): Color {
     return when (this) {
         OptionState.UNSELECTED -> QuizAppTheme.colors.black
         OptionState.CORRECT -> QuizAppTheme.colors.green

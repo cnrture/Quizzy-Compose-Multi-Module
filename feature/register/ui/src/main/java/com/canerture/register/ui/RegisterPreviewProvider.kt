@@ -3,7 +3,7 @@ package com.canerture.register.ui
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.canerture.ui.components.DialogState
 
-class RegisterPreviewProvider : PreviewParameterProvider<RegisterContract.UiState> {
+internal class RegisterPreviewProvider : PreviewParameterProvider<RegisterContract.UiState> {
     override val values: Sequence<RegisterContract.UiState>
         get() = sequenceOf(
             RegisterContract.UiState(

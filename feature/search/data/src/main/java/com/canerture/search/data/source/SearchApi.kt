@@ -6,7 +6,7 @@ import com.canerture.search.data.model.QuizResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface SearchApi {
+internal interface SearchApi {
     @GET(SEARCH)
     suspend fun searchQuiz(@Query("query") query: String): BaseResponse<List<QuizResponse>>
 }

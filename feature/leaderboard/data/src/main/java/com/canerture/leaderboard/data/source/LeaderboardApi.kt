@@ -5,7 +5,7 @@ import com.canerture.leaderboard.data.model.LeaderboardResponse
 import com.canerture.network.model.BaseResponse
 import retrofit2.http.GET
 
-interface LeaderboardApi {
+internal interface LeaderboardApi {
     @GET(LEADERBOARD)
     suspend fun getLeaderboard(): BaseResponse<List<LeaderboardResponse>>
 }

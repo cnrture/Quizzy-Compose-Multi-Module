@@ -7,7 +7,7 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface FavoritesApi {
+internal interface FavoritesApi {
     @GET(FAVORITES)
     suspend fun getFavorites(): BaseResponse<List<FavoriteResponse>>
 

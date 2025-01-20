@@ -9,7 +9,7 @@ import com.canerture.core.common.map
 import com.canerture.network.safeApiCall
 import javax.inject.Inject
 
-class CategoryRepositoryImpl @Inject constructor(
+internal class CategoryRepositoryImpl @Inject constructor(
     private val api: CategoryApi,
 ) : CategoryRepository {
 

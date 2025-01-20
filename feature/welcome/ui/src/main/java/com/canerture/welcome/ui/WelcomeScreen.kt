@@ -39,7 +39,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun WelcomeScreen(
+internal fun WelcomeScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
@@ -81,7 +81,7 @@ fun WelcomeScreen(
 }
 
 @Composable
-private fun WelcomeContent(
+internal fun WelcomeContent(
     onAction: (UiAction) -> Unit,
 ) {
     Column(
@@ -171,7 +171,7 @@ private fun WelcomeContent(
 
 @Preview(showBackground = true)
 @Composable
-private fun WelcomeScreenPreview() {
+internal fun WelcomeScreenPreview() {
     WelcomeScreen(
         uiState = UiState(),
         uiEffect = emptyFlow(),

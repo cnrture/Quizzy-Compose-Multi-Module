@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class ProfileRepositoryImpl @Inject constructor(
+internal class ProfileRepositoryImpl @Inject constructor(
     private val api: ProfileApi,
     private val profileDataSource: ProfileDataSource,
     private val dataStoreHelper: DataStoreHelper,

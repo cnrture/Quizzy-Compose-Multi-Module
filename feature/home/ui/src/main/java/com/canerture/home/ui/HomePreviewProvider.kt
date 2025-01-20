@@ -4,7 +4,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.canerture.home.domain.model.CategoryModel
 import com.canerture.home.domain.model.PopularQuizModel
 
-class HomePreviewProvider : PreviewParameterProvider<HomeContract.UiState> {
+internal class HomePreviewProvider : PreviewParameterProvider<HomeContract.UiState> {
     override val values: Sequence<HomeContract.UiState>
         get() = sequenceOf(
             HomeContract.UiState(

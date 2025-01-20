@@ -4,7 +4,7 @@ import com.canerture.core.common.orZero
 import com.canerture.home.data.model.PopularQuizzesResponse
 import com.canerture.home.domain.model.PopularQuizModel
 
-fun List<PopularQuizzesResponse>?.toModel(): List<PopularQuizModel> {
+internal fun List<PopularQuizzesResponse>?.toModel(): List<PopularQuizModel> {
     return this?.map {
         PopularQuizModel(
             id = it.id.orZero(),

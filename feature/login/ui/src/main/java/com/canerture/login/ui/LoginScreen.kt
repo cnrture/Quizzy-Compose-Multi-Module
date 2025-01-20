@@ -40,7 +40,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(
+internal fun LoginScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
@@ -118,7 +118,7 @@ fun LoginScreen(
 }
 
 @Composable
-private fun LoginContent(
+internal fun LoginContent(
     uiState: UiState,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
@@ -194,7 +194,7 @@ private fun LoginContent(
 
 @Preview(showBackground = true)
 @Composable
-private fun LoginScreenPreview(
+internal fun LoginScreenPreview(
     @PreviewParameter(LoginPreviewProvider::class) uiState: UiState,
 ) {
     LoginScreen(

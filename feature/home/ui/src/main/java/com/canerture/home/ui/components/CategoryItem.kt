@@ -24,7 +24,7 @@ import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun CategoryItem(
+internal fun CategoryItem(
     category: CategoryModel,
     index: Int,
     isLastItem: Boolean,
@@ -72,7 +72,7 @@ fun CategoryItem(
 
 @Preview(showBackground = true)
 @Composable
-fun CategoryItemPreview() {
+internal fun CategoryItemPreview() {
     CategoryItem(
         category = CategoryModel(
             id = 1,

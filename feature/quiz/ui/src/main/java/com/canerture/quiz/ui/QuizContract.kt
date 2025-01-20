@@ -3,7 +3,7 @@ package com.canerture.quiz.ui
 import com.canerture.quiz.domain.model.OptionModel
 import com.canerture.quiz.domain.model.QuestionModel
 
-object QuizContract {
+internal object QuizContract {
     data class UiState(
         val isLoading: Boolean = false,
         val id: Int = 0,

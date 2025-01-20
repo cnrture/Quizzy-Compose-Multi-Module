@@ -9,7 +9,7 @@ import com.canerture.leaderboard.domain.repository.LeaderboardRepository
 import com.canerture.network.safeApiCall
 import javax.inject.Inject
 
-class LeaderboardRepositoryImpl @Inject constructor(
+internal class LeaderboardRepositoryImpl @Inject constructor(
     private val api: LeaderboardApi,
 ) : LeaderboardRepository {
 

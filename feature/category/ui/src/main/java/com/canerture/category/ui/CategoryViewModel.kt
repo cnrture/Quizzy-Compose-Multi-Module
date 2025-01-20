@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CategoryViewModel @Inject constructor(
+internal class CategoryViewModel @Inject constructor(
     private val getQuizzesByCategoryUseCase: GetQuizzesByCategoryUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel(),

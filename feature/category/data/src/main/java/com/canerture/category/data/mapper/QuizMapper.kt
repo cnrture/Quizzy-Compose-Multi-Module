@@ -1,10 +1,10 @@
 package com.canerture.category.data.mapper
 
+import com.canerture.category.data.model.QuizResponse
 import com.canerture.category.domain.model.QuizModel
 import com.canerture.core.common.orZero
-import com.canerture.home.data.model.QuizResponse
 
-fun List<QuizResponse>?.toModel(): List<QuizModel> {
+internal fun List<QuizResponse>?.toModel(): List<QuizModel> {
     return this?.map {
         QuizModel(
             id = it.id.orZero(),

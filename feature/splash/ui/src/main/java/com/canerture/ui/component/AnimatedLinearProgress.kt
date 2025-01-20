@@ -18,7 +18,7 @@ import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.delay
 
 @Composable
-fun AnimatedLinearProgress() {
+internal fun AnimatedLinearProgress() {
     var progressValue by remember { mutableIntStateOf(0) }
     LaunchedEffect(Unit) {
         while (progressValue < 100f) {

@@ -3,7 +3,7 @@ package com.canerture.favorites.data.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class FavoriteResponse(
+internal data class FavoriteResponse(
     val id: Int? = null,
     val name: String? = null,
     val category: String? = null,

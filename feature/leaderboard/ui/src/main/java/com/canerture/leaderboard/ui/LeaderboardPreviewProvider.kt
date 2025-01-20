@@ -3,7 +3,7 @@ package com.canerture.leaderboard.ui
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.canerture.leaderboard.domain.model.BoardModel
 
-class LeaderboardPreviewProvider : PreviewParameterProvider<LeaderboardContract.UiState> {
+internal class LeaderboardPreviewProvider : PreviewParameterProvider<LeaderboardContract.UiState> {
     override val values: Sequence<LeaderboardContract.UiState>
         get() = sequenceOf(
             LeaderboardContract.UiState(

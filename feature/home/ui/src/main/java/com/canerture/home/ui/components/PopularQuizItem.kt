@@ -28,7 +28,7 @@ import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun PopularQuizItem(
+internal fun PopularQuizItem(
     quiz: PopularQuizModel,
     onQuizClick: (Int) -> Unit,
 ) {
@@ -92,7 +92,7 @@ fun PopularQuizItem(
 
 @Preview(showBackground = true)
 @Composable
-fun PopularQuizItemPreview() {
+internal fun PopularQuizItemPreview() {
     PopularQuizItem(
         quiz = PopularQuizModel(
             id = 1,

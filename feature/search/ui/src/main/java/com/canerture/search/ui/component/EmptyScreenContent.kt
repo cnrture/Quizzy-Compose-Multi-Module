@@ -20,7 +20,7 @@ import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun EmptyScreenContent() {
+internal fun EmptyScreenContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -46,6 +46,6 @@ fun EmptyScreenContent() {
 
 @Preview(showBackground = true)
 @Composable
-fun EmptyScreenContentPreview() {
+internal fun EmptyScreenContentPreview() {
     EmptyScreenContent()
 }

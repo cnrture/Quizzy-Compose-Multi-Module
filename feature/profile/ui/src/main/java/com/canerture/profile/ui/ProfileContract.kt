@@ -3,7 +3,7 @@ package com.canerture.profile.ui
 import com.canerture.profile.domain.model.ProfileModel
 import com.canerture.profile.domain.model.RankModel
 
-object ProfileContract {
+internal object ProfileContract {
     data class UiState(
         val isLoading: Boolean = false,
         val profile: ProfileModel? = null,

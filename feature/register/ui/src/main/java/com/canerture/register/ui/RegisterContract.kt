@@ -2,7 +2,7 @@ package com.canerture.register.ui
 
 import com.canerture.ui.components.DialogState
 
-object RegisterContract {
+internal object RegisterContract {
     data class UiState(
         val isLoading: Boolean = false,
         val email: String = "",

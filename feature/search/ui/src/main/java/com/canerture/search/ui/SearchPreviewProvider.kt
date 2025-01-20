@@ -3,7 +3,7 @@ package com.canerture.search.ui
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.canerture.search.domain.model.QuizModel
 
-class SearchPreviewProvider : PreviewParameterProvider<SearchContract.UiState> {
+internal class SearchPreviewProvider : PreviewParameterProvider<SearchContract.UiState> {
     override val values: Sequence<SearchContract.UiState>
         get() = sequenceOf(
             SearchContract.UiState(

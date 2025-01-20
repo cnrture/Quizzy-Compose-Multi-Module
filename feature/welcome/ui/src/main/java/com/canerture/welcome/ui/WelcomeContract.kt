@@ -2,7 +2,7 @@ package com.canerture.welcome.ui
 
 import com.canerture.ui.components.DialogState
 
-object WelcomeContract {
+internal object WelcomeContract {
     data class UiState(
         val isLoading: Boolean = false,
         val dialogState: DialogState? = null,

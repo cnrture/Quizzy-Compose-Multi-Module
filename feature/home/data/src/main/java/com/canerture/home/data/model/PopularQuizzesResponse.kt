@@ -3,7 +3,7 @@ package com.canerture.home.data.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PopularQuizzesResponse(
+internal data class PopularQuizzesResponse(
     val id: Int? = null,
     val name: String? = null,
     val score: Int? = null,

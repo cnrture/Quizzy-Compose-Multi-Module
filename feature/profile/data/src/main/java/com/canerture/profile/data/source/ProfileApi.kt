@@ -7,7 +7,7 @@ import com.canerture.profile.data.model.ProfileResponse
 import com.canerture.profile.data.model.RankResponse
 import retrofit2.http.GET
 
-interface ProfileApi {
+internal interface ProfileApi {
     @GET(USER)
     suspend fun getProfile(): BaseResponse<ProfileResponse>
 

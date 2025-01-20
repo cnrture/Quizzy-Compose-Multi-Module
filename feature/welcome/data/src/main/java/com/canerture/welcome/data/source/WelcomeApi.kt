@@ -9,7 +9,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface WelcomeApi {
+internal interface WelcomeApi {
     @POST(USER)
     suspend fun loginWithGoogle(@Body request: GoogleLoginRequest): BaseResponse<GoogleLoginResponse>
 

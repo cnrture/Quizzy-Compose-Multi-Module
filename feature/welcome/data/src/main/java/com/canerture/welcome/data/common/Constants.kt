@@ -1,5 +1,5 @@
 package com.canerture.welcome.data.common
 
-object Constants {
+internal object Constants {
     const val USER = "user"
 }

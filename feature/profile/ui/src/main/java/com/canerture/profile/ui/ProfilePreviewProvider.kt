@@ -4,7 +4,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.canerture.profile.domain.model.ProfileModel
 import com.canerture.profile.domain.model.RankModel
 
-class ProfilePreviewProvider : PreviewParameterProvider<ProfileContract.UiState> {
+internal class ProfilePreviewProvider : PreviewParameterProvider<ProfileContract.UiState> {
     override val values: Sequence<ProfileContract.UiState>
         get() = sequenceOf(
             ProfileContract.UiState(

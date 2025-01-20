@@ -15,7 +15,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 object LoginFlow : Screen
 
-fun NavGraphBuilder.loginFlowNavigation(navController: NavHostController) {
+internal fun NavGraphBuilder.loginFlowNavigation(navController: NavHostController) {
     navigation<LoginFlow>(Welcome) {
         welcomeScreen(
             onNavigateLogin = { navController.navigate(Login) },

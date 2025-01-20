@@ -31,7 +31,7 @@ import com.canerture.ui.extensions.conditional
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun AnswerButton(
+internal fun AnswerButton(
     optionModel: OptionModel,
     isSelectable: Boolean,
     onOptionSelect: (OptionModel) -> Unit,
@@ -87,7 +87,7 @@ fun AnswerButton(
 
 @Preview(showBackground = true)
 @Composable
-private fun AnswerButtonPreview() {
+internal fun AnswerButtonPreview() {
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {

@@ -3,7 +3,7 @@ package com.canerture.editprofile.ui
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.canerture.ui.components.DialogState
 
-class EditProfilePreviewProvider : PreviewParameterProvider<EditProfileContract.UiState> {
+internal class EditProfilePreviewProvider : PreviewParameterProvider<EditProfileContract.UiState> {
     override val values: Sequence<EditProfileContract.UiState>
         get() = sequenceOf(
             EditProfileContract.UiState(

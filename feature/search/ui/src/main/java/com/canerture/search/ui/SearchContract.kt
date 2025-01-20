@@ -2,7 +2,7 @@ package com.canerture.search.ui
 
 import com.canerture.search.domain.model.QuizModel
 
-object SearchContract {
+internal object SearchContract {
     data class UiState(
         val isLoading: Boolean = false,
         val query: String = "",

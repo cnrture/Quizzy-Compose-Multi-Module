@@ -11,7 +11,7 @@ import com.canerture.quiz.domain.model.QuizModel
 import com.canerture.quiz.domain.repository.QuizRepository
 import javax.inject.Inject
 
-class QuizRepositoryImpl @Inject constructor(
+internal class QuizRepositoryImpl @Inject constructor(
     private val api: QuizApi,
 ) : QuizRepository {
 

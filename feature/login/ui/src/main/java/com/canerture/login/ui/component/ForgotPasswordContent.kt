@@ -17,7 +17,7 @@ import com.canerture.ui.components.QuizAppTextField
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun ForgotPasswordContent(
+internal fun ForgotPasswordContent(
     email: String,
     onEmailChange: (String) -> Unit,
     onSendResetLinkClick: () -> Unit,
@@ -52,7 +52,7 @@ fun ForgotPasswordContent(
 
 @Preview(showBackground = true)
 @Composable
-fun ForgotPasswordContentPreview() {
+internal fun ForgotPasswordContentPreview() {
     ForgotPasswordContent(
         email = "",
         onEmailChange = {},

@@ -26,7 +26,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 object MainFlow : Screen
 
-fun NavGraphBuilder.mainFlowNavigation(navController: NavHostController) {
+internal fun NavGraphBuilder.mainFlowNavigation(navController: NavHostController) {
     navigation<MainFlow>(Home) {
         homeScreen(
             onNavigateSearch = { navController.navigate(Search) },

@@ -3,7 +3,7 @@ package com.canerture.favorites.ui
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.canerture.favorites.domain.model.FavoriteModel
 
-class FavoritesPreviewProvider : PreviewParameterProvider<FavoritesContract.UiState> {
+internal class FavoritesPreviewProvider : PreviewParameterProvider<FavoritesContract.UiState> {
     override val values: Sequence<FavoritesContract.UiState>
         get() = sequenceOf(
             FavoritesContract.UiState(

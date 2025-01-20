@@ -25,14 +25,14 @@ import com.canerture.feature.quiz.ui.R
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.theme.QuizAppTheme
 
-enum class TimerState {
+internal enum class TimerState {
     START,
     STOP,
     RESET,
 }
 
 @Composable
-fun QuizAppTimer(
+internal fun QuizAppTimer(
     modifier: Modifier = Modifier,
     state: TimerState,
     onTimeOut: () -> Unit,
@@ -125,7 +125,7 @@ fun QuizAppTimer(
 
 @Preview(showBackground = true)
 @Composable
-fun QuizAppTimerPreview() {
+internal fun QuizAppTimerPreview() {
     QuizAppTimer(
         modifier = Modifier.size(200.dp),
         state = TimerState.START,

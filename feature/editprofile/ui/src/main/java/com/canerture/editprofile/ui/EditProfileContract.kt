@@ -3,7 +3,7 @@ package com.canerture.editprofile.ui
 import com.canerture.editprofile.domain.model.AvatarModel
 import com.canerture.ui.components.DialogState
 
-object EditProfileContract {
+internal object EditProfileContract {
     data class UiState(
         val isLoading: Boolean = false,
         val email: String = "",

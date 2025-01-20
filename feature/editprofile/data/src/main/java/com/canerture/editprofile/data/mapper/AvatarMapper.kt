@@ -4,7 +4,7 @@ import com.canerture.core.common.orZero
 import com.canerture.editprofile.data.model.AvatarResponse
 import com.canerture.editprofile.domain.model.AvatarModel
 
-fun List<AvatarResponse>?.toModel(): List<AvatarModel> {
+internal fun List<AvatarResponse>?.toModel(): List<AvatarModel> {
     return this?.map {
         AvatarModel(
             id = it.id.orZero(),

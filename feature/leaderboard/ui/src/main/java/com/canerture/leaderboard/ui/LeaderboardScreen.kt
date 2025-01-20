@@ -32,7 +32,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun LeaderboardScreen(
+internal fun LeaderboardScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
 ) {
@@ -62,7 +62,7 @@ fun LeaderboardScreen(
 }
 
 @Composable
-private fun LeaderboardContent(
+internal fun LeaderboardContent(
     uiState: UiState,
 ) {
     Column(
@@ -119,7 +119,7 @@ private fun LeaderboardContent(
 
 @Preview(showBackground = true)
 @Composable
-private fun LeaderboardScreenPreview(
+internal fun LeaderboardScreenPreview(
     @PreviewParameter(LeaderboardPreviewProvider::class) uiState: UiState,
 ) {
     LeaderboardScreen(

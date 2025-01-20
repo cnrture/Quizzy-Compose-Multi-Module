@@ -11,7 +11,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-interface DetailApi {
+internal interface DetailApi {
     @GET(QUIZZES)
     suspend fun getQuizDetail(@Query("id") id: Int): BaseResponse<QuizDetailResponse>
 

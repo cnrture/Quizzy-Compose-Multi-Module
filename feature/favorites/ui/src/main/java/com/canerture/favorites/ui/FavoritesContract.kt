@@ -2,7 +2,7 @@ package com.canerture.favorites.ui
 
 import com.canerture.favorites.domain.model.FavoriteModel
 
-object FavoritesContract {
+internal object FavoritesContract {
     data class UiState(
         val isLoading: Boolean = false,
         val favorites: List<FavoriteModel> = emptyList(),

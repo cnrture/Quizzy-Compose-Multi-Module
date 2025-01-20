@@ -17,7 +17,7 @@ import com.canerture.ui.components.QuizAppButton
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun BoxScope.StartQuizButton(
+internal fun BoxScope.StartQuizButton(
     onClick: () -> Unit,
 ) {
     Box(

@@ -2,7 +2,7 @@ package com.canerture.result.ui
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 
-class SummaryPreviewProvider : PreviewParameterProvider<SummaryContract.UiState> {
+internal class SummaryPreviewProvider : PreviewParameterProvider<SummaryContract.UiState> {
     override val values: Sequence<SummaryContract.UiState>
         get() = sequenceOf(
             SummaryContract.UiState(

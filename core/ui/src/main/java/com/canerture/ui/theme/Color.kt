@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.Color
 
 internal val LocalColors = staticCompositionLocalOf { colors() }
 
-fun colors(
+internal fun colors(
     black: Color = Color(0xFF343434),
     white: Color = Color(0xFFFCFCFC),
     background: Color = Color(0xFFfffbf3),

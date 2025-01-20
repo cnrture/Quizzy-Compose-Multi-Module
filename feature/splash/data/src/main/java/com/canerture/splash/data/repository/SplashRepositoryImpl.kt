@@ -13,7 +13,7 @@ import com.canerture.splash.domain.repository.SplashRepository
 import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
 
-class SplashRepositoryImpl @Inject constructor(
+internal class SplashRepositoryImpl @Inject constructor(
     private val api: SplashApi,
     private val dataStore: DataStoreHelper,
     private val profileDataSource: ProfileDataSource,

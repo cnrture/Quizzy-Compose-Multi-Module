@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
+internal class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val sendResetPasswordMailUseCase: SendResetPasswordMailUseCase,
 ) : ViewModel(),

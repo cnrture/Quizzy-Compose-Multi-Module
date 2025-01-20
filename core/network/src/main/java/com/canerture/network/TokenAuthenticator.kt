@@ -10,7 +10,7 @@ import okhttp3.Response
 import okhttp3.Route
 import javax.inject.Inject
 
-class TokenAuthenticator @Inject constructor(
+internal class TokenAuthenticator @Inject constructor(
     private val dataStoreHelper: dagger.Lazy<DataStoreHelper>,
     private val logoutDatasource: dagger.Lazy<LogoutDataSource>
 ) : Authenticator {

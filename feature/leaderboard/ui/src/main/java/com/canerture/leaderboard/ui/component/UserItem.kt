@@ -23,7 +23,7 @@ import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun UserItem(
+internal fun UserItem(
     item: BoardModel,
 ) {
     Row(
@@ -71,7 +71,7 @@ fun UserItem(
 
 @Preview(showBackground = true)
 @Composable
-fun UserItemPreview() {
+internal fun UserItemPreview() {
     UserItem(
         item = BoardModel(
             username = "cnrdm",

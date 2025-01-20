@@ -3,7 +3,7 @@ package com.canerture.home.ui
 import com.canerture.home.domain.model.CategoryModel
 import com.canerture.home.domain.model.PopularQuizModel
 
-object HomeContract {
+internal object HomeContract {
     data class UiState(
         val isLoading: Boolean = false,
         val categories: List<CategoryModel> = emptyList(),

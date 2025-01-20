@@ -42,7 +42,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun CategoryScreen(
+internal fun CategoryScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
@@ -78,7 +78,7 @@ fun CategoryScreen(
 }
 
 @Composable
-private fun CategoryContent(
+internal fun CategoryContent(
     uiState: UiState,
     onQuizClick: (Int) -> Unit,
 ) {
@@ -132,7 +132,7 @@ private fun CategoryContent(
 
 @Preview(showBackground = true)
 @Composable
-private fun CategoryScreenPreview(
+internal fun CategoryScreenPreview(
     @PreviewParameter(CategoryPreviewProvider::class) uiState: UiState,
 ) {
     CategoryScreen(

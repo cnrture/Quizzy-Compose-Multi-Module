@@ -31,7 +31,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun SplashScreen(
+internal fun SplashScreen(
     uiEffect: Flow<SplashContract.UiEffect>,
     onNavigateWelcome: () -> Unit,
     onNavigateHome: () -> Unit,
@@ -87,7 +87,7 @@ fun SplashScreen(
 
 @Preview(showBackground = true)
 @Composable
-private fun SplashScreenPreview() {
+internal fun SplashScreenPreview() {
     SplashScreen(
         uiEffect = emptyFlow(),
         onNavigateWelcome = {},

@@ -6,7 +6,7 @@ import com.canerture.leaderboard.data.model.LeaderboardResponse
 import com.canerture.leaderboard.domain.model.BoardModel
 import com.canerture.leaderboard.domain.model.LeaderboardModel
 
-fun List<LeaderboardResponse>?.toModel(): LeaderboardModel {
+internal fun List<LeaderboardResponse>?.toModel(): LeaderboardModel {
     val currentUser = this?.find { it.isYourself.orFalse() }
     val currentList = this?.toMutableList()
     val firstUser = currentList?.getOrNull(0)
@@ -23,11 +23,11 @@ fun List<LeaderboardResponse>?.toModel(): LeaderboardModel {
     )
 }
 
-fun List<LeaderboardResponse>?.toModelList(): List<BoardModel> {
+internal fun List<LeaderboardResponse>?.toModelList(): List<BoardModel> {
     return this?.map { it.toModel() }.orEmpty()
 }
 
-fun LeaderboardResponse?.toModel(): BoardModel {
+internal fun LeaderboardResponse?.toModel(): BoardModel {
     return BoardModel(
         username = this?.username.orEmpty(),
         avatarUrl = this?.avatarUrl.orEmpty(),

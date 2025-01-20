@@ -39,7 +39,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun QuizScreen(
+internal fun QuizScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
@@ -95,7 +95,7 @@ fun QuizScreen(
 }
 
 @Composable
-private fun QuizContent(
+internal fun QuizContent(
     uiState: UiState,
     timerState: TimerState,
     onOptionSelect: (OptionModel) -> Unit,
@@ -148,7 +148,7 @@ private fun QuizContent(
 
 @Preview(showBackground = true)
 @Composable
-private fun QuizScreenPreview(
+internal fun QuizScreenPreview(
     @PreviewParameter(QuizPreviewProvider::class) uiState: UiState,
 ) {
     QuizScreen(

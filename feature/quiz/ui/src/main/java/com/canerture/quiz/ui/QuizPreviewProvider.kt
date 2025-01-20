@@ -5,7 +5,7 @@ import com.canerture.quiz.domain.model.OptionModel
 import com.canerture.quiz.domain.model.OptionState
 import com.canerture.quiz.domain.model.QuestionModel
 
-class QuizPreviewProvider : PreviewParameterProvider<QuizContract.UiState> {
+internal class QuizPreviewProvider : PreviewParameterProvider<QuizContract.UiState> {
     override val values: Sequence<QuizContract.UiState>
         get() = sequenceOf(
             QuizContract.UiState(

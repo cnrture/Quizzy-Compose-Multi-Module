@@ -2,7 +2,7 @@ package com.canerture.detail.ui
 
 import com.canerture.detail.domain.model.QuizDetailModel
 
-object DetailContract {
+internal object DetailContract {
     data class UiState(
         val isLoading: Boolean = false,
         val quiz: QuizDetailModel? = null,

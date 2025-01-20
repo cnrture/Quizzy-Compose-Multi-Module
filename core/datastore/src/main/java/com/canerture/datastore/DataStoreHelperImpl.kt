@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DataStoreHelperImpl @Inject constructor(private val context: Context) : DataStoreHelper {
+internal class DataStoreHelperImpl @Inject constructor(private val context: Context) : DataStoreHelper {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(PreferencesKeys.STORE_NAME)
 

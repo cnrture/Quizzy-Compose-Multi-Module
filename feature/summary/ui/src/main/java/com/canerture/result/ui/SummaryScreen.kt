@@ -40,7 +40,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun SummaryScreen(
+internal fun SummaryScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
@@ -87,7 +87,7 @@ fun SummaryScreen(
 }
 
 @Composable
-private fun SummaryContent(
+internal fun SummaryContent(
     uiState: UiState,
     onPlayAgainClick: () -> Unit,
 ) {
@@ -196,7 +196,7 @@ private fun SummaryContent(
 
 @Preview(showBackground = true)
 @Composable
-private fun SummaryScreenPreview(
+internal fun SummaryScreenPreview(
     @PreviewParameter(SummaryPreviewProvider::class) uiState: UiState,
 ) {
     SummaryScreen(

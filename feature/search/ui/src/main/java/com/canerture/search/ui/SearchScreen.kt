@@ -29,7 +29,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun SearchScreen(
+internal fun SearchScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
@@ -68,7 +68,7 @@ fun SearchScreen(
 }
 
 @Composable
-private fun SearchContent(
+internal fun SearchContent(
     uiState: UiState,
     onAction: (UiAction) -> Unit,
 ) {
@@ -91,7 +91,7 @@ private fun SearchContent(
 
 @Preview(showBackground = true)
 @Composable
-private fun SearchScreenPreview(
+internal fun SearchScreenPreview(
     @PreviewParameter(SearchPreviewProvider::class) uiState: UiState,
 ) {
     SearchScreen(

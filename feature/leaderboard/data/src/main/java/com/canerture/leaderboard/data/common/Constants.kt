@@ -1,5 +1,5 @@
 package com.canerture.leaderboard.data.common
 
-object Constants {
+internal object Constants {
     const val LEADERBOARD = "leaderboard"
 }

@@ -3,7 +3,7 @@ package com.canerture.category.ui
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.canerture.category.domain.model.QuizModel
 
-class CategoryPreviewProvider : PreviewParameterProvider<CategoryContract.UiState> {
+internal class CategoryPreviewProvider : PreviewParameterProvider<CategoryContract.UiState> {
     override val values: Sequence<CategoryContract.UiState>
         get() = sequenceOf(
             CategoryContract.UiState(

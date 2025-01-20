@@ -33,7 +33,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun RegisterScreen(
+internal fun RegisterScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
@@ -79,7 +79,7 @@ fun RegisterScreen(
 }
 
 @Composable
-private fun RegisterContent(
+internal fun RegisterContent(
     uiState: UiState,
     onEmailChange: (String) -> Unit,
     onUsernameChange: (String) -> Unit,
@@ -164,7 +164,7 @@ private fun RegisterContent(
 
 @Preview(showBackground = true)
 @Composable
-private fun RegisterScreenPreview(
+internal fun RegisterScreenPreview(
     @PreviewParameter(RegisterPreviewProvider::class) uiState: UiState,
 ) {
     RegisterScreen(

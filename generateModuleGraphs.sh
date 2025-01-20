@@ -101,7 +101,7 @@ echo "$module_paths" | while read -r module_path; do
           -Pmodules.graph.of.module="${module_path}" </dev/null
 
         # Convert to SVG using dot
-        dot -Tsvg "/tmp/${file_name}.gv" > "docs/images/graphs/${file_name}.svg"
+        dot -Tsvg -Grankdir=TB "/tmp/${file_name}.gv" > "docs/images/graphs/${file_name}.svg"
         # Remove the temporary .gv file
         rm "/tmp/${file_name}.gv"
     fi

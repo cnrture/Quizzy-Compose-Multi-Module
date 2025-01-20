@@ -33,7 +33,7 @@ import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun AvatarsDialog(
+internal fun AvatarsDialog(
     avatars: List<AvatarModel>,
     onSelectAvatar: (AvatarModel) -> Unit,
     onDismiss: () -> Unit,
@@ -95,7 +95,7 @@ fun AvatarsDialog(
 
 @Preview(showBackground = true)
 @Composable
-fun AvatarsDialogPreview() {
+internal fun AvatarsDialogPreview() {
     AvatarsDialog(
         avatars = listOf(
             AvatarModel(1, "https://www.canerture.com/avatar1.jpg"),

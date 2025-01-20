@@ -10,7 +10,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
 
-interface EditProfileApi {
+internal interface EditProfileApi {
     @GET(AVATAR)
     suspend fun getAvatars(): BaseResponse<List<AvatarResponse>>
 

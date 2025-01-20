@@ -1,6 +1,6 @@
 package com.canerture.splash.data.common
 
-object Constants {
+internal object Constants {
     const val TOKEN = "token"
     const val USER = "user"
 }

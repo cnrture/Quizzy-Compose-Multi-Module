@@ -37,7 +37,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun HomeScreen(
+internal fun HomeScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
@@ -79,7 +79,7 @@ fun HomeScreen(
 }
 
 @Composable
-private fun HomeContent(
+internal fun HomeContent(
     uiState: UiState,
     onSearchClick: () -> Unit,
     onQuizClick: (Int) -> Unit,
@@ -109,7 +109,7 @@ private fun HomeContent(
 }
 
 @Composable
-private fun ColumnScope.Categories(
+internal fun ColumnScope.Categories(
     categories: List<CategoryModel>,
     onCategoryClick: (CategoryModel) -> Unit,
 ) {
@@ -140,7 +140,7 @@ private fun ColumnScope.Categories(
 }
 
 @Composable
-private fun ColumnScope.PopularQuizzes(
+internal fun ColumnScope.PopularQuizzes(
     quizzes: List<PopularQuizModel>,
     onQuizClick: (Int) -> Unit,
 ) {
@@ -164,7 +164,7 @@ private fun ColumnScope.PopularQuizzes(
 
 @Preview(showBackground = true)
 @Composable
-private fun HomeScreenPreview(
+internal fun HomeScreenPreview(
     @PreviewParameter(HomePreviewProvider::class) uiState: UiState,
 ) {
     HomeScreen(

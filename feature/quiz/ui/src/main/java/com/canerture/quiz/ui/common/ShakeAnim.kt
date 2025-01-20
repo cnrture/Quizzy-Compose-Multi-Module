@@ -10,9 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 
 @Composable
-fun rememberShake() = remember { ShakeAnim() }
+internal fun rememberShake() = remember { ShakeAnim() }
 
-class ShakeAnim(
+internal class ShakeAnim(
     val animatable: Animatable<Float, AnimationVector1D> = Animatable(0f),
 ) {
     suspend fun shake() {
@@ -29,6 +29,6 @@ class ShakeAnim(
     }
 }
 
-fun Modifier.shake(shake: ShakeAnim) = graphicsLayer {
+internal fun Modifier.shake(shake: ShakeAnim) = graphicsLayer {
     this.translationX = shake.animatable.value
 }

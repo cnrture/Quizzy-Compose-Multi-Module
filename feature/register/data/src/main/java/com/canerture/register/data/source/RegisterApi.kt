@@ -6,7 +6,7 @@ import com.canerture.register.data.model.RegisterRequest
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface RegisterApi {
+internal interface RegisterApi {
     @POST(USER)
     suspend fun register(@Body request: RegisterRequest): BaseResponse<Unit>
 }

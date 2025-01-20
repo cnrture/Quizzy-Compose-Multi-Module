@@ -3,7 +3,7 @@ package com.canerture.profile.data.mapper
 import com.canerture.profile.data.model.ProfileResponse
 import com.canerture.profile.domain.model.ProfileModel
 
-fun com.canerture.datasource.profile.ProfileModel.toModel(): ProfileModel {
+internal fun com.canerture.datasource.profile.ProfileModel.toModel(): ProfileModel {
     return ProfileModel(
         email = email,
         username = username,
@@ -11,7 +11,7 @@ fun com.canerture.datasource.profile.ProfileModel.toModel(): ProfileModel {
     )
 }
 
-fun ProfileResponse?.toModel(): ProfileModel {
+internal fun ProfileResponse?.toModel(): ProfileModel {
     return ProfileModel(
         email = this?.email.orEmpty(),
         username = this?.username.orEmpty(),
@@ -19,7 +19,7 @@ fun ProfileResponse?.toModel(): ProfileModel {
     )
 }
 
-fun ProfileModel.toModel(): com.canerture.datasource.profile.ProfileModel {
+internal fun ProfileModel.toModel(): com.canerture.datasource.profile.ProfileModel {
     return com.canerture.datasource.profile.ProfileModel(
         email = email,
         username = username,

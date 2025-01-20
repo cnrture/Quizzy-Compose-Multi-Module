@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+internal class HomeViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getPopularQuizzesUseCase: GetPopularQuizzesUseCase,
     private val getUsernameUseCase: GetUsernameUseCase,

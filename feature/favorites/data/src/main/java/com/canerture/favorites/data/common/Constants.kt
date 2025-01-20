@@ -1,5 +1,5 @@
 package com.canerture.favorites.data.common
 
-object Constants {
+internal object Constants {
     const val FAVORITES = "favorites"
 }

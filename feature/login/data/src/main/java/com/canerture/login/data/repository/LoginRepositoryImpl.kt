@@ -15,7 +15,7 @@ import com.canerture.login.domain.repository.LoginRepository
 import com.canerture.network.safeApiCall
 import javax.inject.Inject
 
-class LoginRepositoryImpl @Inject constructor(
+internal class LoginRepositoryImpl @Inject constructor(
     private val api: LoginApi,
     private val dataStore: DataStoreHelper,
     private val logoutDatasource: LogoutDataSource,

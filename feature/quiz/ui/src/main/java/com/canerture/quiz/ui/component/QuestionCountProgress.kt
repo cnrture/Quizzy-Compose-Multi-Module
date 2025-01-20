@@ -12,7 +12,7 @@ import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun QuestionCountProgress(
+internal fun QuestionCountProgress(
     currentQuestion: Int,
     totalQuestion: Int,
 ) {
@@ -37,7 +37,7 @@ fun QuestionCountProgress(
 
 @Preview(showBackground = true)
 @Composable
-fun QuestionCountProgressPreview() {
+internal fun QuestionCountProgressPreview() {
     QuestionCountProgress(
         currentQuestion = 1,
         totalQuestion = 10,

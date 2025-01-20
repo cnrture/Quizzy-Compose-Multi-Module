@@ -4,7 +4,7 @@ import com.canerture.core.common.orZero
 import com.canerture.favorites.data.model.FavoriteResponse
 import com.canerture.favorites.domain.model.FavoriteModel
 
-fun List<FavoriteResponse>?.toModel() = this?.map {
+internal fun List<FavoriteResponse>?.toModel() = this?.map {
     FavoriteModel(
         id = it.id.orZero(),
         name = it.name.orEmpty(),

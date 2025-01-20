@@ -9,7 +9,7 @@ import com.canerture.favorites.domain.repository.FavoritesRepository
 import com.canerture.network.safeApiCall
 import javax.inject.Inject
 
-class FavoritesRepositoryImpl @Inject constructor(
+internal class FavoritesRepositoryImpl @Inject constructor(
     private val api: FavoritesApi,
 ) : FavoritesRepository {
 

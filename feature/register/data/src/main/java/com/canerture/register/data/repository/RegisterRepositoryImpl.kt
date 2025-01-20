@@ -8,7 +8,7 @@ import com.canerture.register.data.source.RegisterApi
 import com.canerture.register.domain.repository.RegisterRepository
 import javax.inject.Inject
 
-class RegisterRepositoryImpl @Inject constructor(
+internal class RegisterRepositoryImpl @Inject constructor(
     private val registerApi: RegisterApi,
 ) : RegisterRepository {
 

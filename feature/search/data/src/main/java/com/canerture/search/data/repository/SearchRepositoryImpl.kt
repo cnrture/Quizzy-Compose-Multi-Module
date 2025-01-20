@@ -9,7 +9,7 @@ import com.canerture.search.domain.model.QuizModel
 import com.canerture.search.domain.repository.SearchRepository
 import javax.inject.Inject
 
-class SearchRepositoryImpl @Inject constructor(
+internal class SearchRepositoryImpl @Inject constructor(
     private val api: SearchApi,
 ) : SearchRepository {
 

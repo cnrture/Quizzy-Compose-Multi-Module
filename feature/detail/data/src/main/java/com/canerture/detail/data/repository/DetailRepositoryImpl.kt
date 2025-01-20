@@ -10,7 +10,7 @@ import com.canerture.detail.domain.repository.DetailRepository
 import com.canerture.network.safeApiCall
 import javax.inject.Inject
 
-class DetailRepositoryImpl @Inject constructor(
+internal class DetailRepositoryImpl @Inject constructor(
     private val api: DetailApi,
 ) : DetailRepository {
     override suspend fun getQuizDetail(id: Int): Resource<QuizDetailModel> {

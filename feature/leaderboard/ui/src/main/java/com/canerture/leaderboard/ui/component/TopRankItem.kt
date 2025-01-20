@@ -28,7 +28,7 @@ import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun TopRankItem(
+internal fun TopRankItem(
     modifier: Modifier = Modifier,
     width: Dp,
     username: String,
@@ -112,7 +112,7 @@ fun TopRankItem(
 
 @Preview(showBackground = true)
 @Composable
-fun TopRankItemPreview() {
+internal fun TopRankItemPreview() {
     TopRankItem(
         width = 80.dp,
         username = "canerture",

@@ -1,5 +1,5 @@
 package com.canerture.quiz.data.common
 
-object Constants {
+internal object Constants {
     const val QUIZ = "quiz"
 }

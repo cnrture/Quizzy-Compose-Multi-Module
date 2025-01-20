@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class QuizViewModel @Inject constructor(
+internal class QuizViewModel @Inject constructor(
     private val getQuizUseCase: GetQuizUseCase,
     private val updateOptionsUseCase: UpdateOptionsUseCase,
     private val submitQuizUseCase: SubmitQuizUseCase,

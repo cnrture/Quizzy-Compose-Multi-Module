@@ -8,7 +8,7 @@ import com.canerture.quiz.domain.model.OptionState
 import com.canerture.quiz.domain.model.QuestionModel
 import com.canerture.quiz.domain.model.QuizModel
 
-fun QuizResponse?.toModel(): QuizModel {
+internal fun QuizResponse?.toModel(): QuizModel {
     return QuizModel(
         id = this?.id.orZero(),
         categoryId = this?.categoryId.orZero(),
@@ -17,7 +17,7 @@ fun QuizResponse?.toModel(): QuizModel {
     )
 }
 
-fun List<QuestionResponse>?.toQuestionModel(): List<QuestionModel> {
+internal fun List<QuestionResponse>?.toQuestionModel(): List<QuestionModel> {
     return this?.map {
         QuestionModel(
             question = it.question.orEmpty(),
@@ -27,7 +27,7 @@ fun List<QuestionResponse>?.toQuestionModel(): List<QuestionModel> {
     }.orEmpty()
 }
 
-fun List<String>?.toModel(): List<OptionModel> {
+internal fun List<String>?.toModel(): List<OptionModel> {
     return this?.map {
         OptionModel(
             option = it,

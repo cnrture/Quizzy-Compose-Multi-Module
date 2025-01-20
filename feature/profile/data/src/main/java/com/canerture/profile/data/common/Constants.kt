@@ -1,6 +1,6 @@
 package com.canerture.profile.data.common
 
-object Constants {
+internal object Constants {
     const val RANK = "rank"
     const val USER = "user"
 }

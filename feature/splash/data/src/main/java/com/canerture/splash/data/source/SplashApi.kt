@@ -10,7 +10,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface SplashApi {
+internal interface SplashApi {
     @POST(TOKEN)
     suspend fun checkToken(@Body request: CheckTokenRequest): BaseResponse<CheckTokenResponse>
 

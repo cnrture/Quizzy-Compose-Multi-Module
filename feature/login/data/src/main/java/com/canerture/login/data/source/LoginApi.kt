@@ -11,7 +11,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface LoginApi {
+internal interface LoginApi {
     @POST(USER)
     suspend fun login(@Body request: LoginRequest): BaseResponse<LoginResponse>
 

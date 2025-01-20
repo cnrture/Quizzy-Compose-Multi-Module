@@ -21,7 +21,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.canerture.favorites.domain.model.FavoriteModel
-import com.canerture.favorites.ui.DismissBackground
 import com.canerture.feature.favorites.ui.R
 import com.canerture.ui.components.QuizAppAsyncImage
 import com.canerture.ui.components.QuizAppText
@@ -30,7 +29,7 @@ import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun FavoriteQuizItem(
+internal fun FavoriteQuizItem(
     item: FavoriteModel,
     onQuizClick: (Int) -> Unit,
     onDelete: (FavoriteModel) -> Unit,
@@ -106,7 +105,7 @@ fun FavoriteQuizItem(
 
 @Preview(showBackground = true)
 @Composable
-fun FavoriteQuizItemPreview() {
+internal fun FavoriteQuizItemPreview() {
     FavoriteQuizItem(
         item = FavoriteModel(
             id = 1,

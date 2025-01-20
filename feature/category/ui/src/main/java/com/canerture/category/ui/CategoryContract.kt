@@ -2,7 +2,7 @@ package com.canerture.category.ui
 
 import com.canerture.category.domain.model.QuizModel
 
-object CategoryContract {
+internal object CategoryContract {
     data class UiState(
         val isLoading: Boolean = false,
         val title: String = "",

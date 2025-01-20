@@ -2,7 +2,7 @@ package com.canerture.login.ui
 
 import com.canerture.ui.components.DialogState
 
-object LoginContract {
+internal object LoginContract {
     data class UiState(
         val isLoading: Boolean = false,
         val email: String = "",

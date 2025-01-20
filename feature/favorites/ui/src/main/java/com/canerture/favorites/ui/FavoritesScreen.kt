@@ -3,24 +3,14 @@ package com.canerture.favorites.ui
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.Icon
-import androidx.compose.material3.SwipeToDismissBoxState
-import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,7 +31,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun FavoritesScreen(
+internal fun FavoritesScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
@@ -75,7 +65,7 @@ fun FavoritesScreen(
 }
 
 @Composable
-private fun FavoritesContent(
+internal fun FavoritesContent(
     uiState: UiState,
     onItemClick: (Int) -> Unit,
     onDelete: (FavoriteModel) -> Unit,
@@ -98,37 +88,9 @@ private fun FavoritesContent(
     }
 }
 
-@Composable
-fun DismissBackground(dismissState: SwipeToDismissBoxState) {
-    val color = if (dismissState.targetValue == SwipeToDismissBoxValue.EndToStart) {
-        QuizAppTheme.colors.red
-    } else {
-        Color.Transparent
-    }
-    if (dismissState.targetValue == SwipeToDismissBoxValue.EndToStart) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    color = color,
-                    shape = RoundedCornerShape(16.dp),
-                )
-                .padding(16.dp),
-            contentAlignment = Alignment.CenterEnd,
-        ) {
-            Icon(
-                modifier = Modifier.size(32.dp),
-                imageVector = Icons.Default.Delete,
-                tint = QuizAppTheme.colors.white,
-                contentDescription = stringResource(R.string.delete),
-            )
-        }
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
-private fun FavoritesScreenPreview(
+internal fun FavoritesScreenPreview(
     @PreviewParameter(FavoritesPreviewProvider::class) uiState: UiState,
 ) {
     FavoritesScreen(

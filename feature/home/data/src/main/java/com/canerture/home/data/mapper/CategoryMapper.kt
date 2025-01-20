@@ -4,7 +4,7 @@ import com.canerture.core.common.orZero
 import com.canerture.home.data.model.CategoriesResponse
 import com.canerture.home.domain.model.CategoryModel
 
-fun List<CategoriesResponse>?.toModel(): List<CategoryModel> {
+internal fun List<CategoriesResponse>?.toModel(): List<CategoryModel> {
     return this?.map {
         CategoryModel(
             id = it.id.orZero(),

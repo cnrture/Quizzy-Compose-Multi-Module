@@ -7,7 +7,7 @@ import com.canerture.home.data.model.PopularQuizzesResponse
 import com.canerture.network.model.BaseResponse
 import retrofit2.http.GET
 
-interface HomeApi {
+internal interface HomeApi {
     @GET(CATEGORIES)
     suspend fun getCategories(): BaseResponse<List<CategoriesResponse>?>
 

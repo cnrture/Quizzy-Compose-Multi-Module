@@ -44,7 +44,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
-fun DetailScreen(
+internal fun DetailScreen(
     uiState: UiState,
     uiEffect: Flow<UiEffect>,
     onAction: (UiAction) -> Unit,
@@ -89,7 +89,7 @@ fun DetailScreen(
 }
 
 @Composable
-private fun DetailContent(
+internal fun DetailContent(
     quiz: QuizDetailModel,
 ) {
     Column(
@@ -205,7 +205,7 @@ private fun DetailContent(
 
 @Preview(showBackground = true)
 @Composable
-private fun DetailScreenPreview(
+internal fun DetailScreenPreview(
     @PreviewParameter(DetailPreviewProvider::class) uiState: UiState,
 ) {
     DetailScreen(
