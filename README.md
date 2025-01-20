@@ -1,5 +1,4 @@
-![quiz-app-github](https://github.com/user-attachments/assets/f966a08c-c634-4b5b-9077-1304bb81dff3)
-
+![quiz-app-github](https://github.com/user-attachments/assets/14d963cf-1f91-4d54-a0a0-2bf314b3b034)
 A modern **Quiz App** built with **Jetpack Compose** and organized using a **multi-module architecture**. This project demonstrates practices in Android development, emphasizing scalability, maintainability, and clean architecture.
 
 ## Tech
