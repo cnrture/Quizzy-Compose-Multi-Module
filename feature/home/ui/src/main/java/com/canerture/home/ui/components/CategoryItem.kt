@@ -57,7 +57,7 @@ fun CategoryItem(
         QuizAppText(
             text = category.name,
             style = QuizAppTheme.typography.heading5,
-            maxLine = 1,
+            maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
         Spacer(modifier = Modifier.height(12.dp))

@@ -66,7 +66,7 @@ fun QuizItem(
                         style = QuizAppTheme.typography.subheading3,
                     )
                     QuizAppText(
-                        text = stringResource(R.string.dot),
+                        text = stringResource(R.string.hyphen),
                         style = QuizAppTheme.typography.subheading1,
                     )
                     QuizAppText(
@@ -74,7 +74,7 @@ fun QuizItem(
                         style = QuizAppTheme.typography.subheading3,
                     )
                     QuizAppText(
-                        text = stringResource(R.string.dot),
+                        text = stringResource(R.string.hyphen),
                         style = QuizAppTheme.typography.subheading1,
                     )
                     QuizAppText(

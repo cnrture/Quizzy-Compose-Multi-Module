@@ -62,7 +62,7 @@ fun QuizItem(
         ) {
             QuizAppText(
                 text = quiz.name,
-                maxLine = 2,
+                maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 style = QuizAppTheme.typography.heading4,
             )

@@ -2,6 +2,7 @@ package com.canerture.favorites.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,10 +15,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
-import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxState
 import androidx.compose.material3.SwipeToDismissBoxValue
-import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -68,7 +67,7 @@ fun FavoritesScreen(
         FavoritesContent(
             uiState = uiState,
             onItemClick = { onAction(UiAction.OnQuizClick(it)) },
-            onSwipeDelete = { onAction(UiAction.OnSwipeDelete(it)) },
+            onDelete = { onAction(UiAction.OnSwipeDelete(it)) },
         )
     }
 
@@ -79,37 +78,20 @@ fun FavoritesScreen(
 private fun FavoritesContent(
     uiState: UiState,
     onItemClick: (Int) -> Unit,
-    onSwipeDelete: (FavoriteModel) -> Unit,
+    onDelete: (FavoriteModel) -> Unit,
 ) {
     if (uiState.favorites.isEmpty()) {
         EmptyScreenContent()
     } else {
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(uiState.favorites) { favorite ->
-                val dismissState = rememberSwipeToDismissBoxState(
-                    confirmValueChange = {
-                        if (it == SwipeToDismissBoxValue.EndToStart) {
-                            onSwipeDelete(favorite)
-                            return@rememberSwipeToDismissBoxState true
-                        } else {
-                            return@rememberSwipeToDismissBoxState false
-                        }
-                    },
-                    positionalThreshold = { it * .25f },
-                )
-                SwipeToDismissBox(
-                    state = dismissState,
-                    modifier = Modifier.fillParentMaxWidth(),
-                    backgroundContent = { DismissBackground(dismissState) },
-                    enableDismissFromStartToEnd = false,
-                    content = {
-                        FavoriteQuizItem(
-                            item = favorite,
-                            onQuizClick = onItemClick,
-                        )
-                    }
+                FavoriteQuizItem(
+                    item = favorite,
+                    onQuizClick = onItemClick,
+                    onDelete = onDelete,
                 )
             }
         }

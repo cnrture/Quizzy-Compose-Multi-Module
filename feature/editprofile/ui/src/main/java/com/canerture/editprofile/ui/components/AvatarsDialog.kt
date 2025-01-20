@@ -46,7 +46,7 @@ fun AvatarsDialog(
             modifier = Modifier
                 .fillMaxSize()
                 .noRippleClickable { onDismiss() }
-                .padding(horizontal = 48.dp, vertical = 160.dp)
+                .padding(horizontal = 48.dp, vertical = 200.dp)
                 .background(
                     color = QuizAppTheme.colors.background,
                     shape = RoundedCornerShape(16.dp)
@@ -61,6 +61,7 @@ fun AvatarsDialog(
             )
             Spacer(modifier = Modifier.height(16.dp))
             LazyVerticalGrid(
+                modifier = Modifier.weight(1f),
                 columns = GridCells.Fixed(3),
             ) {
                 items(avatars.size) { index ->

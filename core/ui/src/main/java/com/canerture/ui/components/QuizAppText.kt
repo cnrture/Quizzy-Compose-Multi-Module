@@ -21,7 +21,7 @@ fun QuizAppText(
     color: Color = QuizAppTheme.colors.black,
     style: TextStyle = QuizAppTheme.typography.paragraph2,
     overflow: TextOverflow = TextOverflow.Clip,
-    maxLine: Int = Int.MAX_VALUE,
+    maxLines: Int = Int.MAX_VALUE,
     textAlign: TextAlign? = null,
 ) {
     Text(
@@ -31,7 +31,7 @@ fun QuizAppText(
         textAlign = textAlign,
         style = style,
         overflow = overflow,
-        maxLines = maxLine
+        maxLines = maxLines
     )
 }
 
