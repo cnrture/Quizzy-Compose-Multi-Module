@@ -88,7 +88,7 @@ internal fun ProfileContent(
             modifier = Modifier
                 .size(180.dp)
                 .background(
-                    color = QuizAppTheme.colors.white,
+                    color = QuizAppTheme.colors.background,
                     shape = CircleShape,
                 )
                 .boldBorder(100)
@@ -100,7 +100,7 @@ internal fun ProfileContent(
         QuizAppText(
             text = stringResource(R.string.nickname, uiState.profile?.username.orEmpty()),
             style = QuizAppTheme.typography.heading3,
-            color = QuizAppTheme.colors.black,
+            color = QuizAppTheme.colors.onBackground,
         )
         Spacer(modifier = Modifier.height(24.dp))
         QuizAppButton(
@@ -114,7 +114,7 @@ internal fun ProfileContent(
             modifier = Modifier.align(Alignment.Start),
             text = stringResource(R.string.your_rank),
             style = QuizAppTheme.typography.heading3,
-            color = QuizAppTheme.colors.black,
+            color = QuizAppTheme.colors.onBackground,
         )
         Spacer(modifier = Modifier.height(16.dp))
         if (uiState.rank != null) {

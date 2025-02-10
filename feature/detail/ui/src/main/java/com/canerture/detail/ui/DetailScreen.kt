@@ -134,6 +134,7 @@ internal fun DetailContent(
                 modifier = Modifier.size(16.dp),
                 imageVector = QuizAppTheme.icons.trophy,
                 contentDescription = stringResource(R.string.trophy_icon),
+                tint = QuizAppTheme.colors.lightYellow,
             )
             Spacer(modifier = Modifier.width(8.dp))
             QuizAppText(
@@ -163,7 +164,7 @@ internal fun DetailContent(
             VerticalDivider(
                 modifier = Modifier.height(56.dp),
                 thickness = 2.dp,
-                color = QuizAppTheme.colors.black,
+                color = QuizAppTheme.colors.onBackground,
             )
             Column(
                 modifier = Modifier.weight(1f),
@@ -182,7 +183,7 @@ internal fun DetailContent(
             VerticalDivider(
                 modifier = Modifier.height(56.dp),
                 thickness = 2.dp,
-                color = QuizAppTheme.colors.black,
+                color = QuizAppTheme.colors.onBackground,
             )
             Column(
                 modifier = Modifier.weight(1f),

@@ -54,7 +54,7 @@ internal fun FavoriteQuizItem(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(
-                        color = QuizAppTheme.colors.white,
+                        color = QuizAppTheme.colors.background,
                         shape = RoundedCornerShape(16.dp),
                     )
                     .boldBorder()

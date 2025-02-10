@@ -35,7 +35,7 @@ internal fun QuizItem(
             .fillMaxWidth()
             .padding(12.dp)
             .background(
-                color = QuizAppTheme.colors.white,
+                color = QuizAppTheme.colors.background,
                 shape = RoundedCornerShape(16.dp),
             )
             .boldBorder()
@@ -54,7 +54,7 @@ internal fun QuizItem(
         }
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
-            color = QuizAppTheme.colors.black,
+            color = QuizAppTheme.colors.onBackground,
             thickness = 2.dp,
         )
         Column(

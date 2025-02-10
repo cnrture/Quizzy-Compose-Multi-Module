@@ -121,6 +121,7 @@ internal fun ColumnScope.Categories(
             .padding(start = 32.dp),
         text = stringResource(R.string.categories),
         style = QuizAppTheme.typography.heading4,
+        color = QuizAppTheme.colors.onBackground
     )
     Spacer(modifier = Modifier.height(16.dp))
     Row(

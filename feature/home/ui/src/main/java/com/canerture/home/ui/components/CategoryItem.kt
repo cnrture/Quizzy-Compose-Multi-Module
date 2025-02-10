@@ -64,7 +64,7 @@ internal fun CategoryItem(
         QuizAppText(
             text = stringResource(R.string.quiz_count, category.quizCount),
             style = QuizAppTheme.typography.heading6,
-            color = QuizAppTheme.colors.black,
+            color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
         )
     }
     Spacer(modifier = Modifier.width(if (isLastItem) 32.dp else 16.dp))

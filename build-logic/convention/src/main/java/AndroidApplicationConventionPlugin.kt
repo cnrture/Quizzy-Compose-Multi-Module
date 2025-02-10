@@ -1,10 +1,11 @@
 package com.canerture.convention
 
 import com.android.build.api.dsl.ApplicationExtension
-import org.gradle.api.JavaVersion
+import com.canerture.convention.com.canerture.config.AppConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -16,17 +17,23 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<ApplicationExtension> {
-                compileSdk = 35
+                compileSdk = AppConfig.COMPILE_SDK
 
                 defaultConfig {
-                    minSdk = 24
+                    minSdk = AppConfig.MIN_SDK
                 }
 
                 compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_17
-                    targetCompatibility = JavaVersion.VERSION_17
+                    sourceCompatibility = AppConfig.JAVA_VERSION
+                    targetCompatibility = AppConfig.JAVA_VERSION
+                    isCoreLibraryDesugaringEnabled = true
                 }
-                defaultConfig.targetSdk = 35
+                defaultConfig.targetSdk = AppConfig.TARGET_SDK
+
+            }
+            dependencies {
+                add("coreLibraryDesugaring", libs.findLibrary("desugaring").get())
+                add("implementation", libs.findLibrary("androidx-multidex").get())
             }
         }
     }

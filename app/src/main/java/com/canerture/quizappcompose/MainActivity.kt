@@ -74,7 +74,7 @@ class MainActivity : ComponentActivity() {
                                 Column {
                                     HorizontalDivider(
                                         thickness = 2.dp,
-                                        color = QuizAppTheme.colors.black,
+                                        color = QuizAppTheme.colors.onBackground,
                                     )
                                     QuizAppBottomBar(
                                         navController = navController,
