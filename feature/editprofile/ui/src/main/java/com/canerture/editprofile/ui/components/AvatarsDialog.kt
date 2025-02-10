@@ -70,7 +70,7 @@ internal fun AvatarsDialog(
                             .padding(4.dp)
                             .aspectRatio(1f)
                             .background(
-                                color = QuizAppTheme.colors.white,
+                                color = QuizAppTheme.colors.background,
                                 shape = CircleShape
                             )
                             .clip(CircleShape)

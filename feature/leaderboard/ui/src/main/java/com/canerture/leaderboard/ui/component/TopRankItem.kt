@@ -48,7 +48,7 @@ internal fun TopRankItem(
                     .widthIn(max = width)
                     .aspectRatio(1f)
                     .background(
-                        color = QuizAppTheme.colors.white,
+                        color = QuizAppTheme.colors.background,
                         shape = CircleShape,
                     )
                     .boldBorder(100)
@@ -90,7 +90,7 @@ internal fun TopRankItem(
         QuizAppText(
             text = stringResource(R.string.nickname, username),
             style = QuizAppTheme.typography.heading7,
-            color = QuizAppTheme.colors.darkGray,
+            color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
         )
         Spacer(modifier = Modifier.height(16.dp))
         Row(
@@ -100,6 +100,7 @@ internal fun TopRankItem(
                 modifier = Modifier.size(16.dp),
                 imageVector = QuizAppTheme.icons.trophy,
                 contentDescription = null,
+                tint = QuizAppTheme.colors.yellow,
             )
             Spacer(modifier = Modifier.width(8.dp))
             QuizAppText(

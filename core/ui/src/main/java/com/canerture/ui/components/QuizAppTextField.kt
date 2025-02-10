@@ -43,7 +43,7 @@ fun QuizAppTextField(
                     .padding(16.dp)
                     .size(24.dp),
                 imageVector = icon,
-                tint = QuizAppTheme.colors.black,
+                tint = QuizAppTheme.colors.onBackground,
                 contentDescription = label,
             )
         }
@@ -60,7 +60,7 @@ fun QuizAppTextField(
                     .size(24.dp)
                     .clickable { visibility = !visibility },
                 imageVector = if (visibility) QuizAppTheme.icons.visibilityOn else QuizAppTheme.icons.visibilityOff,
-                tint = QuizAppTheme.colors.black,
+                tint = QuizAppTheme.colors.onBackground,
                 contentDescription = label,
             )
         }
@@ -78,6 +78,7 @@ fun QuizAppTextField(
             QuizAppText(
                 text = label,
                 style = QuizAppTheme.typography.paragraph1,
+                color = QuizAppTheme.colors.onBackground
             )
         },
         textStyle = QuizAppTheme.typography.paragraph1,
@@ -85,12 +86,13 @@ fun QuizAppTextField(
         maxLines = if (isSingleLine) 1 else Int.MAX_VALUE,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         colors = OutlinedTextFieldDefaults.colors(
-            unfocusedContainerColor = QuizAppTheme.colors.white,
-            focusedContainerColor = QuizAppTheme.colors.white,
+            unfocusedContainerColor = QuizAppTheme.colors.background,
+            focusedContainerColor = QuizAppTheme.colors.background,
             focusedLabelColor = QuizAppTheme.colors.blue,
             focusedBorderColor = QuizAppTheme.colors.blue,
-            unfocusedLabelColor = QuizAppTheme.colors.darkGray,
-            unfocusedBorderColor = QuizAppTheme.colors.black,
+            unfocusedLabelColor = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
+            unfocusedBorderColor = QuizAppTheme.colors.onBackground,
+            cursorColor = QuizAppTheme.colors.onBackground
         ),
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,

@@ -30,6 +30,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val heading2: TextStyle
         @Composable
@@ -41,6 +42,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val heading3: TextStyle
         @Composable
@@ -52,6 +54,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val heading4: TextStyle
         @Composable
@@ -63,6 +66,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val heading5: TextStyle
         @Composable
@@ -74,6 +78,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val heading6: TextStyle
         @Composable
@@ -85,6 +90,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val heading7: TextStyle
         @Composable
@@ -96,6 +102,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val subheading1: TextStyle
         @Composable
@@ -107,6 +114,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val subheading2: TextStyle
         @Composable
@@ -118,6 +126,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val subheading3: TextStyle
         @Composable
@@ -129,6 +138,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val paragraph1: TextStyle
         @Composable
@@ -140,6 +150,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val paragraph2: TextStyle
         @Composable
@@ -151,6 +162,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val paragraph3: TextStyle
         @Composable
@@ -162,6 +174,7 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
     val paragraph4: TextStyle
         @Composable
@@ -173,5 +186,6 @@ class ESimTypography {
                 alignment = LineHeightStyle.Alignment.Center,
                 trim = LineHeightStyle.Trim.None,
             ),
+            color = QuizAppTheme.colors.onBackground
         )
 }

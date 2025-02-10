@@ -120,7 +120,7 @@ internal fun CategoryContent(
     Spacer(modifier = Modifier.height(24.dp))
     HorizontalDivider(
         modifier = Modifier.fillMaxWidth(),
-        color = QuizAppTheme.colors.black,
+        color = QuizAppTheme.colors.onBackground,
         thickness = 2.dp,
     )
     LazyVerticalGrid(

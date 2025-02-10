@@ -53,6 +53,7 @@ fun QuizAppToolbar(
                 Icon(
                     modifier = Modifier.size(28.dp),
                     imageVector = QuizAppTheme.icons.arrowLeft,
+                    tint = QuizAppTheme.colors.onBackground,
                     contentDescription = stringResource(R.string.back_icon)
                 )
             }
@@ -95,6 +96,7 @@ fun QuizAppToolbar(
                 Icon(
                     modifier = Modifier.size(28.dp),
                     imageVector = endIcon,
+                    tint = QuizAppTheme.colors.onBackground,
                     contentDescription = null
                 )
             }

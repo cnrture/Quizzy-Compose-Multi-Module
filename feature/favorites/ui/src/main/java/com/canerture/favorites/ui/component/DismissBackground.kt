@@ -41,7 +41,7 @@ internal fun DismissBackground(dismissState: SwipeToDismissBoxState) {
             Icon(
                 modifier = Modifier.size(32.dp),
                 imageVector = Icons.Default.Delete,
-                tint = QuizAppTheme.colors.white,
+                tint = QuizAppTheme.colors.background,
                 contentDescription = stringResource(R.string.delete),
             )
         }

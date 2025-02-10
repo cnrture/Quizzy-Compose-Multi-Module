@@ -121,7 +121,7 @@ internal fun SummaryContent(
                     .fillMaxSize()
                     .padding(28.dp),
                 imageVector = resultIcon,
-                tint = QuizAppTheme.colors.white,
+                tint = QuizAppTheme.colors.background,
                 contentDescription = stringResource(R.string.summary_icon),
             )
         }
@@ -130,7 +130,7 @@ internal fun SummaryContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = QuizAppTheme.colors.white,
+                    color = QuizAppTheme.colors.background.copy(alpha = 0.1f),
                     shape = RoundedCornerShape(16.dp),
                 )
                 .boldBorder()
@@ -167,7 +167,7 @@ internal fun SummaryContent(
                 VerticalDivider(
                     modifier = Modifier.height(56.dp),
                     thickness = 2.dp,
-                    color = QuizAppTheme.colors.black,
+                    color = QuizAppTheme.colors.onBackground,
                 )
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,

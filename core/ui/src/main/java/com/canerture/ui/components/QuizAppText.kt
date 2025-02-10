@@ -18,7 +18,7 @@ import com.canerture.ui.theme.QuizAppTheme
 fun QuizAppText(
     modifier: Modifier = Modifier,
     text: String,
-    color: Color = QuizAppTheme.colors.black,
+    color: Color = QuizAppTheme.colors.onBackground,
     style: TextStyle = QuizAppTheme.typography.paragraph2,
     overflow: TextOverflow = TextOverflow.Clip,
     maxLines: Int = Int.MAX_VALUE,
@@ -40,7 +40,7 @@ fun QuizAppText(
     modifier: Modifier = Modifier,
     fullText: String,
     spanTexts: List<String>,
-    color: Color = QuizAppTheme.colors.black,
+    color: Color = QuizAppTheme.colors.onBackground,
     style: TextStyle = QuizAppTheme.typography.paragraph2,
     textAlign: TextAlign? = null,
 ) {

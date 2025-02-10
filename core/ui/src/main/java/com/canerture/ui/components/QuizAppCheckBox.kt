@@ -36,7 +36,7 @@ fun QuizAppCheckBox(
     onCheckedChange: (Boolean) -> Unit,
 ) {
     val animatedColor by animateColorAsState(
-        targetValue = if (isChecked) QuizAppTheme.colors.blue else QuizAppTheme.colors.white,
+        targetValue = if (isChecked) QuizAppTheme.colors.blue else QuizAppTheme.colors.background,
         label = "color",
     )
 

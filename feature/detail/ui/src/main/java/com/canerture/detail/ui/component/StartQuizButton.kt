@@ -23,14 +23,14 @@ internal fun BoxScope.StartQuizButton(
     Box(
         modifier = Modifier
             .align(Alignment.BottomCenter)
-            .background(QuizAppTheme.colors.white),
+            .background(QuizAppTheme.colors.background),
     ) {
         HorizontalDivider(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.TopCenter),
             thickness = 2.dp,
-            color = QuizAppTheme.colors.black,
+            color = QuizAppTheme.colors.onBackground,
         )
         QuizAppButton(
             modifier = Modifier

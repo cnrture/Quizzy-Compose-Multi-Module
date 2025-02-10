@@ -1,5 +1,5 @@
 [versions]
-agp = "8.6.1"
+agp = "8.8.0"
 kotlin = "2.1.0"
 core-ktx = "1.15.0"
 junit = "4.13.2"
@@ -10,25 +10,27 @@ material = "1.12.0"
 lifecycle-runtime-ktx = "2.8.7"
 ksp = "2.1.0-1.0.29"
 activity-compose = "1.10.0"
-compose-bom = "2025.01.00"
+compose-bom = "2025.01.01"
 coilVersion = "2.7.0"
 retrofit = "2.11.0"
-hilt = "2.53.1"
+hilt = "2.55"
 hiltNavigationCompose = "1.2.0"
-navigation = "2.8.5"
-ktlint = "11.3.2"
+navigation = "2.8.6"
+ktlint = "12.1.2"
 detekt = "1.23.6"
 googleServices = "4.4.2"
-firebase = "33.8.0"
+firebase = "33.9.0"
 credentialsPlayServicesAuth = "1.5.0-rc01"
 googleid = "1.1.1"
-kotlinxSerialization = "1.7.3"
+kotlinxSerialization = "1.8.0"
 moduleGraph = "2.7.1"
 dataStore = "1.1.2"
 chucker = "4.0.0"
-coroutines = "1.9.0"
+coroutines = "1.10.1"
 
 [libraries]
+desugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version = "2.1.4" }
+androidx-multidex = { group = "androidx.multidex", name = "multidex", version = "2.0.1" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 junit-ext = { group = "androidx.test.ext", name = "junit", version.ref = "junit-ext" }

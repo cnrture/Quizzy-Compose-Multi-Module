@@ -47,10 +47,10 @@ inline fun Modifier.noRippleClickable(
 @Composable
 fun Modifier.boldBorder(
     radius: Int = 16,
-    color: Color = QuizAppTheme.colors.black,
+    color: Color = QuizAppTheme.colors.onBackground.copy(alpha = 0.8f),
     width: Dp = 2.dp
-): Modifier = composed {
-    this.border(
+): Modifier {
+    return this.border(
         width = width,
         color = color,
         shape = RoundedCornerShape(radius.dp)

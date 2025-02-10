@@ -41,7 +41,7 @@ internal fun UserItem(
             modifier = Modifier
                 .size(32.dp)
                 .background(
-                    color = QuizAppTheme.colors.white,
+                    color = QuizAppTheme.colors.background,
                     shape = CircleShape,
                 )
                 .boldBorder(width = 1.dp)
@@ -53,12 +53,13 @@ internal fun UserItem(
         QuizAppText(
             text = stringResource(R.string.nickname, item.username),
             style = QuizAppTheme.typography.paragraph3,
-            color = QuizAppTheme.colors.darkGray,
+            color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
         )
         Spacer(modifier = Modifier.weight(1f))
         Icon(
             modifier = Modifier.size(16.dp),
             imageVector = QuizAppTheme.icons.trophy,
+            tint = QuizAppTheme.colors.yellow,
             contentDescription = stringResource(R.string.trophy),
         )
         Spacer(modifier = Modifier.width(4.dp))

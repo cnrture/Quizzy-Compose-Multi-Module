@@ -15,7 +15,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,7 +54,7 @@ fun QuizAppDialog(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = QuizAppTheme.colors.white,
+                    color = QuizAppTheme.colors.background,
                     shape = RoundedCornerShape(16.dp),
                 )
                 .padding(24.dp),
@@ -75,7 +74,7 @@ fun QuizAppDialog(
                         modifier = Modifier.size(64.dp),
                         imageVector = it,
                         contentDescription = null,
-                        tint = Color.White,
+                        tint = QuizAppTheme.colors.onBackground,
                     )
                 }
             }

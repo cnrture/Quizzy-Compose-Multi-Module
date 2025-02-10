@@ -1,5 +1,6 @@
 package com.canerture.convention
 
+import com.canerture.convention.com.canerture.config.AppConfig
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -17,13 +18,13 @@ class JvmLibraryConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<JavaPluginExtension> {
-                sourceCompatibility = JavaVersion.VERSION_17
-                targetCompatibility = JavaVersion.VERSION_17
+                sourceCompatibility = AppConfig.JAVA_VERSION
+                targetCompatibility = AppConfig.JAVA_VERSION
             }
 
             extensions.configure<KotlinJvmProjectExtension> {
                 compilerOptions.apply {
-                    jvmTarget.set(JvmTarget.JVM_17)
+                    jvmTarget.set(JvmTarget.JVM_21)
                 }
             }
         }

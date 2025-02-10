@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,11 +37,12 @@ fun QuizAppSearchBar(
             .height(56.dp)
             .clip(RoundedCornerShape(16.dp))
             .boldBorder()
-            .background(QuizAppTheme.colors.white),
+            .background(QuizAppTheme.colors.onBackground.copy(alpha = 0.1f)),
         value = value,
         onValueChange = onValueChange,
         textStyle = QuizAppTheme.typography.paragraph1,
         singleLine = true,
+        cursorBrush = SolidColor(value = QuizAppTheme.colors.onBackground),
         decorationBox = {
             Box(
                 modifier = Modifier
@@ -56,21 +58,21 @@ fun QuizAppSearchBar(
                 ) {
                     Icon(
                         imageVector = QuizAppTheme.icons.search,
-                        tint = QuizAppTheme.colors.black,
+                        tint = QuizAppTheme.colors.onBackground,
                         contentDescription = stringResource(R.string.search_icon),
                     )
                     if (value.isBlank()) {
                         QuizAppText(
                             text = stringResource(R.string.search),
                             style = QuizAppTheme.typography.paragraph1,
-                            color = QuizAppTheme.colors.darkGray
+                            color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f)
                         )
                     } else {
                         it()
                     }
                 }
             }
-        }
+        },
     )
 }
 

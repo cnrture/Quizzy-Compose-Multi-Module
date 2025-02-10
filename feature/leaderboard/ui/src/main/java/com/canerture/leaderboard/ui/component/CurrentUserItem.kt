@@ -31,7 +31,7 @@ internal fun CurrentUserItem(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = QuizAppTheme.colors.white,
+                color = QuizAppTheme.colors.background,
                 shape = RoundedCornerShape(16.dp),
             )
             .boldBorder()
@@ -47,7 +47,7 @@ internal fun CurrentUserItem(
             modifier = Modifier
                 .size(32.dp)
                 .background(
-                    color = QuizAppTheme.colors.softGray,
+                    color = QuizAppTheme.colors.onBackground.copy(alpha = 0.1f),
                     shape = CircleShape,
                 )
                 .boldBorder(width = 1.dp)
@@ -59,7 +59,7 @@ internal fun CurrentUserItem(
         QuizAppText(
             text = stringResource(R.string.nickname, item.username),
             style = QuizAppTheme.typography.paragraph3,
-            color = QuizAppTheme.colors.darkGray,
+            color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
         )
         Spacer(modifier = Modifier.weight(1f))
         Icon(

@@ -18,7 +18,7 @@ fun QuizAppLoading() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(QuizAppTheme.colors.softGray.copy(alpha = 0.5f))
+            .background(QuizAppTheme.colors.onBackground.copy(alpha = 0.5f))
             .clickable(
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() }
