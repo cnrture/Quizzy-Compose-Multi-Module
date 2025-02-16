@@ -6,34 +6,27 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-internal val LocalColors = staticCompositionLocalOf { colors() }
+internal val LocalLightColors = staticCompositionLocalOf { lightColors() }
+internal val LocalDarkColors = staticCompositionLocalOf { darkColors() }
 
-internal fun colors(
-    black: Color = Color(0xFF343434),
-    white: Color = Color(0xFFFCFCFC),
-    background: Color = Color(0xFFfffbf3),
+internal fun darkColors(
+    onBackground: Color = Color(0xFFfffbf3),
+    background: Color = Color(0xFF111111),
     blue: Color = Color(0xFF609DED),
-    lightBlue: Color = Color(0xFFBCD9FF),
+    lightBlue: Color = Color(0xFFBCD9FF).copy(alpha = 0.5f),
     yellow: Color = Color(0xFFFFCB46),
-    lightYellow: Color = Color(0xFFFFECBC),
-    darkGray: Color = Color(0xFFB9B9B9),
-    gray: Color = Color(0xFF9C9C9C).copy(alpha = 0.5f),
-    softGray: Color = Color(0xFFF2F2F2),
+    lightYellow: Color = Color(0xFFFFECBC).copy(alpha = 0.5f),
     green: Color = Color(0xFF2ED22A),
-    softGreen: Color = Color(0xFFC2F8B9),
+    softGreen: Color = Color(0xFFC2F8B9).copy(alpha = 0.5f),
     red: Color = Color(0xFFF45C5C),
-    softRed: Color = Color(0xFFFFD0BC),
+    softRed: Color = Color(0xFFFFD0BC).copy(alpha = 0.5f),
 ): QuizAppColor = QuizAppColor(
-    black = black,
-    white = white,
     background = background,
+    onBackground = onBackground,
     blue = blue,
     lightBlue = lightBlue,
     yellow = yellow,
     lightYellow = lightYellow,
-    darkGray = darkGray,
-    gray = gray,
-    softGray = softGray,
     green = green,
     softGreen = softGreen,
     red = red,
@@ -41,29 +34,22 @@ internal fun colors(
 )
 
 class QuizAppColor(
-    black: Color,
-    white: Color,
     background: Color,
+    onBackground: Color,
     blue: Color,
     lightBlue: Color,
     yellow: Color,
     lightYellow: Color,
-    darkGray: Color,
-    gray: Color,
-    softGray: Color,
     green: Color,
     softGreen: Color,
     red: Color,
     softRed: Color,
 ) {
-    private var _black: Color by mutableStateOf(black)
-    val black: Color = _black
-
-    private var _white: Color by mutableStateOf(white)
-    val white: Color = _white
-
     private var _background: Color by mutableStateOf(background)
     val background: Color = _background
+
+    private var _onBackground: Color by mutableStateOf(onBackground)
+    val onBackground: Color = _onBackground
 
     private var _blue: Color by mutableStateOf(blue)
     val blue: Color = _blue
@@ -77,15 +63,6 @@ class QuizAppColor(
     private var _lightYellow: Color by mutableStateOf(lightYellow)
     val lightYellow: Color = _lightYellow
 
-    private var _darkGray: Color by mutableStateOf(darkGray)
-    val darkGray: Color = _darkGray
-
-    private var _gray: Color by mutableStateOf(gray)
-    val gray: Color = _gray
-
-    private var _softGray: Color by mutableStateOf(softGray)
-    val softGray: Color = _softGray
-
     private var _green: Color by mutableStateOf(green)
     val green: Color = _green
 
@@ -98,3 +75,27 @@ class QuizAppColor(
     private var _softRed: Color by mutableStateOf(softRed)
     val softRed: Color = _softRed
 }
+
+internal fun lightColors(
+    background: Color = Color(0xFFfffbf3),
+    onBackground: Color = Color(0xFF111111),
+    blue: Color = Color(0xFF609DED),
+    lightBlue: Color = Color(0xFFBCD9FF),
+    yellow: Color = Color(0xFFFFCB46),
+    lightYellow: Color = Color(0xFFFFECBC),
+    green: Color = Color(0xFF2ED22A),
+    softGreen: Color = Color(0xFFC2F8B9),
+    red: Color = Color(0xFFF45C5C),
+    softRed: Color = Color(0xFFFFD0BC),
+): QuizAppColor = QuizAppColor(
+    background = background,
+    onBackground = onBackground,
+    blue = blue,
+    lightBlue = lightBlue,
+    yellow = yellow,
+    lightYellow = lightYellow,
+    green = green,
+    softGreen = softGreen,
+    red = red,
+    softRed = softRed,
+)

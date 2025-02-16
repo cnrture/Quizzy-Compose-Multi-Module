@@ -61,10 +61,10 @@ fun QuizAppButton(
                 enabled = isEnable,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = QuizAppTheme.colors.blue,
-                    disabledContainerColor = QuizAppTheme.colors.gray,
+                    disabledContainerColor = QuizAppTheme.colors.onBackground.copy(alpha = 0.2f),
                 ),
                 shape = CircleShape,
-                border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.black),
+                border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.onBackground),
                 contentPadding = paddingValues,
             ) {
                 icon?.let {
@@ -77,7 +77,7 @@ fun QuizAppButton(
                 }
                 QuizAppText(
                     text = text,
-                    color = QuizAppTheme.colors.white,
+                    color = QuizAppTheme.colors.background,
                     style = textStyle,
                 )
             }
@@ -90,9 +90,9 @@ fun QuizAppButton(
                     .then(modifier),
                 onClick = onClick,
                 enabled = isEnable,
-                colors = ButtonDefaults.buttonColors(QuizAppTheme.colors.white),
+                colors = ButtonDefaults.buttonColors(QuizAppTheme.colors.background),
                 shape = CircleShape,
-                border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.black),
+                border = BorderStroke(width = 2.dp, color = QuizAppTheme.colors.onBackground),
                 contentPadding = paddingValues,
             ) {
                 icon?.let {

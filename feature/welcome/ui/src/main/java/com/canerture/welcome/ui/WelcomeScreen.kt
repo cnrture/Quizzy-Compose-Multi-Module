@@ -123,7 +123,7 @@ internal fun WelcomeContent(
         ) {
             HorizontalDivider(
                 modifier = Modifier.weight(1f),
-                color = QuizAppTheme.colors.black,
+                color = QuizAppTheme.colors.onBackground,
                 thickness = 2.dp,
             )
             QuizAppText(
@@ -134,7 +134,7 @@ internal fun WelcomeContent(
             )
             HorizontalDivider(
                 modifier = Modifier.weight(1f),
-                color = QuizAppTheme.colors.black,
+                color = QuizAppTheme.colors.onBackground,
                 thickness = 2.dp,
             )
         }

@@ -1,5 +1,6 @@
 package com.canerture.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -8,7 +9,7 @@ object QuizAppTheme {
     val colors: QuizAppColor
         @Composable
         @ReadOnlyComposable
-        get() = LocalColors.current
+        get() = if (isSystemInDarkTheme()) LocalDarkColors.current else LocalLightColors.current
 
     val icons: QuizAppIcons
         @Composable
@@ -24,7 +25,7 @@ object QuizAppTheme {
 @Composable
 fun QuizAppTheme(content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        LocalColors provides QuizAppTheme.colors,
+        LocalLightColors provides QuizAppTheme.colors,
         LocalIcons provides QuizAppTheme.icons,
         LocalTypography provides QuizAppTheme.typography,
     ) {

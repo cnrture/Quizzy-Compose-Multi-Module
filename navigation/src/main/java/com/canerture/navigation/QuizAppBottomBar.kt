@@ -41,7 +41,7 @@ fun QuizAppBottomBar(
     val currentRoute = navBackStackEntry?.destination?.route
     NavigationBar(
         modifier = Modifier.padding(horizontal = 16.dp),
-        containerColor = QuizAppTheme.colors.white,
+        containerColor = QuizAppTheme.colors.background,
     ) {
         tabList.forEach { navItem ->
             val isSelected = currentRoute == navItem.route.getRoute()
@@ -51,7 +51,7 @@ fun QuizAppBottomBar(
                         .wrapContentSize()
                         .weight(if (isSelected) 1f else 0.5f)
                         .background(
-                            color = if (isSelected) QuizAppTheme.colors.blue else QuizAppTheme.colors.white,
+                            color = if (isSelected) QuizAppTheme.colors.blue else QuizAppTheme.colors.background,
                             shape = RoundedCornerShape(16.dp)
                         )
                         .conditional(isSelected) { boldBorder() }
@@ -75,7 +75,7 @@ fun QuizAppBottomBar(
                         imageVector = ImageVector.vectorResource(
                             if (isSelected) navItem.selectedIcon else navItem.unselectedIcon
                         ),
-                        tint = if (isSelected) QuizAppTheme.colors.white else QuizAppTheme.colors.black,
+                        tint = if (isSelected) QuizAppTheme.colors.background else QuizAppTheme.colors.onBackground,
                         contentDescription = null,
                     )
                     AnimatedVisibility(isSelected) {
@@ -83,7 +83,7 @@ fun QuizAppBottomBar(
                             modifier = Modifier.padding(start = 8.dp),
                             text = stringResource(navItem.title),
                             style = QuizAppTheme.typography.paragraph2,
-                            color = QuizAppTheme.colors.white,
+                            color = QuizAppTheme.colors.background,
                         )
                     }
                 }

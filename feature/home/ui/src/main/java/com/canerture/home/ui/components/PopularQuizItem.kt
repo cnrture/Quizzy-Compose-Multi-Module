@@ -37,7 +37,7 @@ internal fun PopularQuizItem(
             .fillMaxWidth()
             .padding(horizontal = 32.dp)
             .background(
-                color = QuizAppTheme.colors.white,
+                color = QuizAppTheme.colors.background,
                 shape = RoundedCornerShape(16.dp),
             )
             .boldBorder()
@@ -56,7 +56,7 @@ internal fun PopularQuizItem(
         }
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
-            color = QuizAppTheme.colors.black,
+            color = QuizAppTheme.colors.onBackground,
             thickness = 2.dp,
         )
         Column(

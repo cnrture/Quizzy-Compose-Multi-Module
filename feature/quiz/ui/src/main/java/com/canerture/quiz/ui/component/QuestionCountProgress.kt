@@ -29,7 +29,7 @@ internal fun QuestionCountProgress(
         QuizAppText(
             text = "$currentQuestion/$totalQuestion",
             style = QuizAppTheme.typography.heading7,
-            color = QuizAppTheme.colors.black,
+            color = QuizAppTheme.colors.onBackground,
             modifier = Modifier.align(Alignment.Center),
         )
     }

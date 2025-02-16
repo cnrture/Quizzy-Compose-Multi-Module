@@ -34,7 +34,7 @@ internal fun RankItem(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = QuizAppTheme.colors.white,
+                color = QuizAppTheme.colors.background,
                 shape = RoundedCornerShape(16.dp),
             )
             .boldBorder()
@@ -58,13 +58,14 @@ internal fun RankItem(
         QuizAppText(
             text = stringResource(R.string.nickname, username),
             style = QuizAppTheme.typography.paragraph2,
-            color = QuizAppTheme.colors.darkGray,
+            color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
         )
         Spacer(modifier = Modifier.weight(1f))
         Icon(
             modifier = Modifier.size(16.dp),
             imageVector = QuizAppTheme.icons.trophy,
             contentDescription = stringResource(R.string.trophy),
+            tint = QuizAppTheme.colors.onBackground,
         )
         Spacer(modifier = Modifier.width(8.dp))
         QuizAppText(

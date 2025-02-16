@@ -9,7 +9,7 @@ import com.canerture.ui.theme.QuizAppTheme
 @Composable
 internal fun OptionState.toBgColor(): Color {
     return when (this) {
-        OptionState.UNSELECTED -> QuizAppTheme.colors.white
+        OptionState.UNSELECTED -> QuizAppTheme.colors.background
         OptionState.CORRECT -> QuizAppTheme.colors.softGreen
         OptionState.INCORRECT -> QuizAppTheme.colors.softRed
     }
@@ -27,7 +27,7 @@ internal fun OptionState.toIcon(): ImageVector? {
 @Composable
 internal fun OptionState.toIconColor(): Color {
     return when (this) {
-        OptionState.UNSELECTED -> QuizAppTheme.colors.black
+        OptionState.UNSELECTED -> QuizAppTheme.colors.onBackground
         OptionState.CORRECT -> QuizAppTheme.colors.green
         OptionState.INCORRECT -> QuizAppTheme.colors.red
     }

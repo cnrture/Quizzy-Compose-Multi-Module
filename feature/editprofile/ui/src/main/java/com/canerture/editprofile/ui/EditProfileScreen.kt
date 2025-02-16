@@ -112,7 +112,7 @@ internal fun EditProfileContent(
             modifier = Modifier
                 .size(180.dp)
                 .background(
-                    color = QuizAppTheme.colors.white,
+                    color = QuizAppTheme.colors.background,
                     shape = CircleShape,
                 )
                 .boldBorder(100)
