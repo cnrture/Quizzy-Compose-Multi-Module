@@ -57,26 +57,31 @@ This project is organized into the following modules:
 - **Navigation Module**: Handles the navigation logic for transitions between screens in the app.
 
 ## Screenshots
-
+  
 | Splash | Welcome | Register |
 | - | - | - |
 |<img src="https://github.com/user-attachments/assets/13b2e431-635d-4611-bab5-8a260fbbe682" width = "250"/>|<img src="https://github.com/user-attachments/assets/27f45ac8-5256-4e85-980c-3479047d0113" width = "250"/>|<img src="https://github.com/user-attachments/assets/819d13c2-d55e-4644-bab0-f698723db5db" width = "250"/>|
+|<img src="https://github.com/user-attachments/assets/8b495ef6-24b1-4b43-a6be-6171e7e99b22" width = "250"/>|<img src="https://github.com/user-attachments/assets/5945488d-37eb-45dd-a4a6-bd211f1147c5" width = "250"/>|<img src="https://github.com/user-attachments/assets/b1a709ce-ccdc-4107-b45f-55f82676688f" width = "250"/>|
 
 | Login | Forgot Password | Home |
 | - | - | - |
 |<img src="https://github.com/user-attachments/assets/d4573963-8545-42ee-8761-05288720ca69" width = "250"/>|<img src="https://github.com/user-attachments/assets/20be6c31-b68b-4339-9232-0a562a39c866" width = "250"/>|<img src="https://github.com/user-attachments/assets/a2c6df3a-4a1a-4d7f-8fcb-76d34b1809d0" width = "250"/>|
+|<img src="https://github.com/user-attachments/assets/fa6a5bb1-1f0e-4433-b700-8f64a30e2164" width = "250"/>|<img src="https://github.com/user-attachments/assets/ee10c649-812c-4c40-bd37-f353294a7e74" width = "250"/>|<img src="https://github.com/user-attachments/assets/d0d74778-83cb-49e8-8e01-519c5c5da4bb" width = "250"/>|
 
 | Favorites | Leaderboard | Search |
 | - | - | - |
 |<img src="https://github.com/user-attachments/assets/679ea085-0422-425f-a82e-be369e6f97ab" width = "250"/>|<img src="https://github.com/user-attachments/assets/6a738fb7-d63e-417f-b651-7aeb027e105b" width = "250"/>|<img src="https://github.com/user-attachments/assets/d647c5df-5ad2-4f72-b32a-6fcb3d268c0e" width = "250"/>|
+|<img src="" width = "250"/>|<img src="" width = "250"/>|<img src="" width = "250"/>|
 
 | Detail | Quiz | Summary |
 | - | - | - |
 |<img src="https://github.com/user-attachments/assets/71092b18-49bf-4741-b045-cbfbf166588f" width = "250"/>|<img src="https://github.com/user-attachments/assets/3dc28579-0d5d-495f-984e-e7a5d974bedb" width = "250"/>|<img src="https://github.com/user-attachments/assets/66f4173f-6ac2-4c95-8c5c-d81eed998cd6" width = "250"/>|
+|<img src="" width = "250"/>|<img src="" width = "250"/>|<img src="" width = "250"/>|
 
 | Profile | Edit Profile | Select Avatar |
 | - | - | - |
 |<img src="https://github.com/user-attachments/assets/bc1f28cc-661f-4b80-89ba-4794b69c1fe2" width = "250"/>|<img src="https://github.com/user-attachments/assets/6db9f4de-1286-49f8-b1b2-c7d74abdf411" width = "250"/>|<img src="https://github.com/user-attachments/assets/3647aea0-d9ef-4b9a-8cfc-ffa75585fbb2" width = "250"/>|
+|<img src="" width = "250"/>|<img src="" width = "250"/>|<img src="" width = "250"/>|
 
 ### Installation
 
