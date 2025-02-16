@@ -97,7 +97,7 @@ This project is organized into the following modules:
 
 - [ ] Add unit tests.
 - [ ] Add UI tests.
-- [ ] Add dark mode support.
+- [x] Add dark mode support.
 
 ## Contribution
 
