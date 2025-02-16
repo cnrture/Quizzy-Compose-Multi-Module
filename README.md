@@ -105,7 +105,7 @@ This project is organized into the following modules:
 - [x] Add dark mode support.
 
 ## 💖 Acknowledgments
-Big thanks to [@kyawlinnthant](https://github.com/kyawlinnthant) for dark mode support! 🎉
+Thanks to [@kyawlinnthant](https://github.com/kyawlinnthant) for dark mode support! 🎉
 
 ## Contribution
 
