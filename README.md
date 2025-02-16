@@ -71,17 +71,17 @@ This project is organized into the following modules:
 | Favorites | Leaderboard | Search |
 | - | - | - |
 |<img src="https://github.com/user-attachments/assets/679ea085-0422-425f-a82e-be369e6f97ab" width = "250"/>|<img src="https://github.com/user-attachments/assets/6a738fb7-d63e-417f-b651-7aeb027e105b" width = "250"/>|<img src="https://github.com/user-attachments/assets/d647c5df-5ad2-4f72-b32a-6fcb3d268c0e" width = "250"/>|
-|<img src="" width = "250"/>|<img src="" width = "250"/>|<img src="" width = "250"/>|
+|<img src="https://github.com/user-attachments/assets/6d4ae4ad-580d-44e4-874a-4651a568c6bc" width = "250"/>|<img src="https://github.com/user-attachments/assets/a7115586-01d8-4044-998d-ca0ee243c23e" width = "250"/>|<img src="https://github.com/user-attachments/assets/84948f85-a1c3-4996-aece-c5011f0673b9" width = "250"/>|
 
 | Detail | Quiz | Summary |
 | - | - | - |
 |<img src="https://github.com/user-attachments/assets/71092b18-49bf-4741-b045-cbfbf166588f" width = "250"/>|<img src="https://github.com/user-attachments/assets/3dc28579-0d5d-495f-984e-e7a5d974bedb" width = "250"/>|<img src="https://github.com/user-attachments/assets/66f4173f-6ac2-4c95-8c5c-d81eed998cd6" width = "250"/>|
-|<img src="" width = "250"/>|<img src="" width = "250"/>|<img src="" width = "250"/>|
+|<img src="https://github.com/user-attachments/assets/5f85c882-dc56-46fd-aed6-d8a49175cfce" width = "250"/>|<img src="https://github.com/user-attachments/assets/c84cb975-c6f1-4d91-ba93-a9c01f87ec81" width = "250"/>|<img src="https://github.com/user-attachments/assets/c7a0e4dd-f319-4de8-926e-9489aecda4c4" width = "250"/>|
 
 | Profile | Edit Profile | Select Avatar |
 | - | - | - |
 |<img src="https://github.com/user-attachments/assets/bc1f28cc-661f-4b80-89ba-4794b69c1fe2" width = "250"/>|<img src="https://github.com/user-attachments/assets/6db9f4de-1286-49f8-b1b2-c7d74abdf411" width = "250"/>|<img src="https://github.com/user-attachments/assets/3647aea0-d9ef-4b9a-8cfc-ffa75585fbb2" width = "250"/>|
-|<img src="" width = "250"/>|<img src="" width = "250"/>|<img src="" width = "250"/>|
+|<img src="https://github.com/user-attachments/assets/e6dac99c-205d-4843-865f-fb4f545ba7fa" width = "250"/>|<img src="https://github.com/user-attachments/assets/9e284370-5f94-4afd-b7f1-1aafafad082f" width = "250"/>|<img src="https://github.com/user-attachments/assets/02d99ffe-c3f7-4f00-a0f5-84933089499a" width = "250"/>|
 
 ### Installation
 
@@ -103,6 +103,9 @@ This project is organized into the following modules:
 - [ ] Add unit tests.
 - [ ] Add UI tests.
 - [x] Add dark mode support.
+
+## 💖 Acknowledgments
+Big thanks to [@kyawlinnthant](https://github.com/kyawlinnthant) for dark mode support! 🎉
 
 ## Contribution
 
