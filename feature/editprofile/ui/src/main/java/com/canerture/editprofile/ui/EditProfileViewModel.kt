@@ -51,7 +51,7 @@ internal class EditProfileViewModel @Inject constructor(
     private fun getAvatars() {
         viewModelScope.launch {
             getAvatarsUseCase().onSuccess {
-                updateUiState { copy(avatars = avatars) }
+                updateUiState { copy(avatars = it) }
             }
         }
     }
