@@ -15,7 +15,7 @@ plugins {
 
 tasks.register("printModulePaths") {
     subprojects {
-        if (subprojects.size == 0) {
+        if (subprojects.isEmpty()) {
             println(this.path)
         }
     }

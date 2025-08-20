@@ -28,6 +28,11 @@ android {
             "\"${localProperties.getProperty("SERVER_CLIENT_ID") ?: "SERVER_CLIENT_ID"}\""
         )
     }
+    kotlin {
+        compilerOptions {
+            freeCompilerArgs = listOf("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
+        }
+    }
 }
 
 dependencies {
