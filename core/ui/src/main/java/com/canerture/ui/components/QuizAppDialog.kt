@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,8 +35,8 @@ fun QuizAppDialog(
     onButtonClick: (() -> Unit)? = null,
 ) {
     val icon = when (isSuccess) {
-        true -> Icons.Rounded.Check
-        false -> Icons.Rounded.Clear
+        true -> QuizAppTheme.icons.check
+        false -> QuizAppTheme.icons.wrong
         else -> null
     }
     val iconBg = if (isSuccess == true) QuizAppTheme.colors.green else QuizAppTheme.colors.red
@@ -71,10 +68,10 @@ fun QuizAppDialog(
                         .padding(8.dp),
                 ) {
                     Icon(
-                        modifier = Modifier.size(64.dp),
+                        modifier = Modifier.size(48.dp),
                         imageVector = it,
                         contentDescription = null,
-                        tint = QuizAppTheme.colors.onBackground,
+                        tint = QuizAppTheme.colors.background,
                     )
                 }
             }
@@ -103,6 +100,7 @@ fun QuizAppDialog(
 @Composable
 fun QuizAppDialogPreview() {
     QuizAppDialog(
+        isSuccess = true,
         message = "This is a sample error message",
     )
 }

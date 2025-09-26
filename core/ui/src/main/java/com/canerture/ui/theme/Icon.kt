@@ -100,4 +100,8 @@ class QuizAppIcons {
     val exit: ImageVector
         @Composable
         get() = ImageVector.vectorResource(id = R.drawable.ic_exit)
+
+    val delete: ImageVector
+        @Composable
+        get() = ImageVector.vectorResource(id = R.drawable.ic_delete)
 }

@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SwipeToDismissBoxState
 import androidx.compose.material3.SwipeToDismissBoxValue
@@ -40,7 +38,7 @@ internal fun DismissBackground(dismissState: SwipeToDismissBoxState) {
         ) {
             Icon(
                 modifier = Modifier.size(32.dp),
-                imageVector = Icons.Default.Delete,
+                imageVector = QuizAppTheme.icons.delete,
                 tint = QuizAppTheme.colors.background,
                 contentDescription = stringResource(R.string.delete),
             )

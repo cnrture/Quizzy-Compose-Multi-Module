@@ -34,17 +34,12 @@ internal fun FavoriteQuizItem(
     onQuizClick: (Int) -> Unit,
     onDelete: (FavoriteModel) -> Unit,
 ) {
-    val dismissState = rememberSwipeToDismissBoxState(
-        confirmValueChange = {
-            if (it == SwipeToDismissBoxValue.EndToStart) {
-                onDelete(item)
-                return@rememberSwipeToDismissBoxState true
-            } else {
-                return@rememberSwipeToDismissBoxState false
-            }
-        },
-        positionalThreshold = { it * .25f },
-    )
+    val dismissState = rememberSwipeToDismissBoxState(SwipeToDismissBoxValue.Settled) {
+        it * .25f
+    }
+    if (dismissState.targetValue == SwipeToDismissBoxValue.EndToStart) {
+        onDelete(item)
+    }
     SwipeToDismissBox(
         state = dismissState,
         backgroundContent = { DismissBackground(dismissState) },
