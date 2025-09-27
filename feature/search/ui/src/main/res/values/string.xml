@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="search_title">Search</string>
     <string name="favorites_title">Favorites</string>
     <string name="question_count">%d Questions</string>
     <string name="hyphen">-</string>

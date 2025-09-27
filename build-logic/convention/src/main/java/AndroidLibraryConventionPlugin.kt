@@ -2,7 +2,6 @@ package com.canerture.convention
 
 import com.android.build.gradle.LibraryExtension
 import com.canerture.convention.com.canerture.config.AppConfig
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
