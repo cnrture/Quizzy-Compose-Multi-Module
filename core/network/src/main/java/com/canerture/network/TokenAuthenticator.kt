@@ -19,7 +19,10 @@ internal class TokenAuthenticator @Inject constructor(
         get() = generateSequence(this) { it.priorResponse }.count()
 
     override fun authenticate(route: Route?, response: Response): Request? {
-        if (response.responseCount > 1) logOut()
+        if (response.responseCount > 1) {
+            logOut()
+            return null
+        }
 
         val header = response.request.headers["Authorization"].orEmpty()
         val token = runBlocking {

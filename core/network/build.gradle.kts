@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.quiz.android.library)
     alias(libs.plugins.quiz.hilt)
@@ -8,6 +10,11 @@ plugins {
 android {
     namespace = "com.canerture.core.network"
 
+    val localProperties = Properties().apply {
+        val propsFile = rootProject.file("local.properties")
+        if (propsFile.exists()) load(propsFile.inputStream())
+    }
+
     defaultConfig {
         buildFeatures {
             buildConfig = true
@@ -16,7 +23,13 @@ android {
         buildConfigField(
             "String",
             "BASE_URL",
-            "\"https://api.canerture.com/quiz/\"",
+            localProperties.getProperty("BASE_URL").orEmpty(), // https://api.candroid.dev/quiz/
+        )
+
+        buildConfigField(
+            "String",
+            "API_KEY",
+            localProperties.getProperty("API_KEY").orEmpty(),
         )
     }
 }

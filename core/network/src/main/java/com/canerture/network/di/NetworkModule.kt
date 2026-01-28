@@ -11,6 +11,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -43,10 +45,26 @@ internal object NetworkModule {
     fun provideOkHttpClient(
         authenticator: TokenAuthenticator,
         chuckerInterceptor: ChuckerInterceptor,
+        dataStoreHelper: DataStoreHelper,
     ): OkHttpClient = OkHttpClient.Builder().apply {
         authenticator(authenticator)
         if (BuildConfig.DEBUG) {
             addInterceptor(chuckerInterceptor)
+        }
+        addInterceptor {
+            val token = runBlocking {
+                dataStoreHelper.getToken().firstOrNull().orEmpty()
+            }
+            val request = it.request().newBuilder()
+                .addHeader("Accept", "application/json")
+                .addHeader("X-API-Key", BuildConfig.API_KEY)
+                .apply {
+                    if (token.isNotEmpty()) {
+                        header("Authorization", "Bearer $token")
+                    }
+                }
+                .build()
+            it.proceed(request)
         }
         readTimeout(TIMEOUT, TimeUnit.SECONDS)
         connectTimeout(TIMEOUT, TimeUnit.SECONDS)
