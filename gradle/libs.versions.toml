@@ -24,7 +24,7 @@ googleid = "1.2.0"
 kotlinxSerialization = "1.10.0"
 moduleGraph = "2.9.0"
 dataStore = "1.2.0"
-chucker = "4.3.0"
+okhttpLogging = "4.12.0"
 coroutines = "1.10.2"
 desugaring = "2.1.5"
 multidex = "2.0.1"
@@ -65,8 +65,7 @@ googleid = { module = "com.google.android.libraries.identity.googleid:googleid",
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 javax-inject = { module = "javax.inject:javax.inject", version = "1" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStore" }
-chucker = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
-chucker-noop = { group = "com.github.chuckerteam.chucker", name = "library-no-op", version.ref = "chucker" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpLogging" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 
 android-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }

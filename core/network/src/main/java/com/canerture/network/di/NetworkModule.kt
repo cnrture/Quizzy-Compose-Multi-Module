@@ -1,21 +1,19 @@
 package com.canerture.network.di
 
-import android.content.Context
 import com.canerture.core.network.BuildConfig
 import com.canerture.datasource.logout.LogoutDataSource
 import com.canerture.datastore.DataStoreHelper
 import com.canerture.network.TokenAuthenticator
-import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import java.util.concurrent.TimeUnit
@@ -29,12 +27,6 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideChuckerInterceptor(
-        @ApplicationContext context: Context,
-    ): ChuckerInterceptor = ChuckerInterceptor(context)
-
-    @Provides
-    @Singleton
     fun provideTokenAuthenticator(
         userRepository: dagger.Lazy<DataStoreHelper>,
         logoutDatasource: dagger.Lazy<LogoutDataSource>,
@@ -44,12 +36,15 @@ internal object NetworkModule {
     @Singleton
     fun provideOkHttpClient(
         authenticator: TokenAuthenticator,
-        chuckerInterceptor: ChuckerInterceptor,
         dataStoreHelper: DataStoreHelper,
     ): OkHttpClient = OkHttpClient.Builder().apply {
         authenticator(authenticator)
         if (BuildConfig.DEBUG) {
-            addInterceptor(chuckerInterceptor)
+            addInterceptor(
+                HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                },
+            )
         }
         addInterceptor {
             val token = runBlocking {
