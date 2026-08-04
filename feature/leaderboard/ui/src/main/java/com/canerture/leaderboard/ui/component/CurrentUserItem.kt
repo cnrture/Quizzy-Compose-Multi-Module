@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.leaderboard.ui.R
 import com.canerture.leaderboard.domain.model.BoardModel
+import com.canerture.leaderboard.ui.LeaderboardTestTags
 import com.canerture.ui.components.QuizzyAsyncImage
 import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
@@ -39,6 +40,7 @@ internal fun CurrentUserItem(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         QuizzyText(
+            testTag = LeaderboardTestTags.CURRENT_USER_RANK,
             text = item.rank,
             style = QuizAppTheme.typography.heading5,
         )
@@ -52,11 +54,13 @@ internal fun CurrentUserItem(
                 )
                 .boldBorder(width = 1.dp)
                 .padding(4.dp),
+            testTag = LeaderboardTestTags.CURRENT_USER_AVATAR,
             imageUrl = item.avatarUrl,
             contentDescription = stringResource(R.string.avatar),
         )
         QuizzySpacer(8.dp)
         QuizzyText(
+            testTag = LeaderboardTestTags.CURRENT_USER_USERNAME,
             text = stringResource(R.string.nickname, item.username),
             style = QuizAppTheme.typography.paragraph3,
             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
@@ -69,6 +73,7 @@ internal fun CurrentUserItem(
         )
         QuizzySpacer(4.dp)
         QuizzyText(
+            testTag = LeaderboardTestTags.CURRENT_USER_SCORE,
             text = stringResource(R.string.score, item.score),
             style = QuizAppTheme.typography.heading7,
         )

@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.home.ui.R
 import com.canerture.home.domain.model.PopularQuizModel
+import com.canerture.home.ui.HomeTestTags
 import com.canerture.ui.components.QuizzyAsyncImage
 import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
@@ -49,6 +50,7 @@ internal fun PopularQuizItem(
         ) {
             QuizzyAsyncImage(
                 modifier = Modifier.fillMaxWidth(),
+                testTag = HomeTestTags.POPULAR_QUIZ_ITEM_IMAGE,
                 imageUrl = quiz.imageUrl,
                 contentDescription = quiz.name,
             )
@@ -62,6 +64,7 @@ internal fun PopularQuizItem(
             modifier = Modifier.padding(16.dp),
         ) {
             QuizzyText(
+                testTag = HomeTestTags.POPULAR_QUIZ_ITEM_NAME,
                 text = quiz.name,
                 style = QuizAppTheme.typography.heading3,
             )
@@ -72,14 +75,17 @@ internal fun PopularQuizItem(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 QuizzyText(
+                    testTag = HomeTestTags.POPULAR_QUIZ_ITEM_QUESTION_COUNT,
                     text = stringResource(R.string.question_count, quiz.questionCount),
                     style = QuizAppTheme.typography.subheading3,
                 )
                 QuizzyText(
+                    testTag = HomeTestTags.POPULAR_QUIZ_ITEM_HYPHEN,
                     text = stringResource(R.string.hyphen),
                     style = QuizAppTheme.typography.subheading1,
                 )
                 QuizzyText(
+                    testTag = HomeTestTags.POPULAR_QUIZ_ITEM_CATEGORY,
                     text = quiz.category,
                     style = QuizAppTheme.typography.subheading3,
                 )

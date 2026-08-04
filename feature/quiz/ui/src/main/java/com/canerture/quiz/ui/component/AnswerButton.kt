@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.canerture.feature.quiz.ui.R
 import com.canerture.quiz.domain.model.OptionModel
 import com.canerture.quiz.domain.model.OptionState
+import com.canerture.quiz.ui.QuizTestTags
 import com.canerture.quiz.ui.common.rememberShake
 import com.canerture.quiz.ui.common.shake
 import com.canerture.quiz.ui.common.toBgColor
@@ -71,6 +72,7 @@ internal fun AnswerButton(
             ),
     ) {
         QuizzyText(
+            testTag = QuizTestTags.ANSWER_OPTION,
             text = optionModel.option,
             style = QuizAppTheme.typography.heading5,
         )

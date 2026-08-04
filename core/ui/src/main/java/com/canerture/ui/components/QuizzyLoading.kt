@@ -11,7 +11,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.testTag
 import com.canerture.ui.theme.QuizAppTheme
+
+const val QUIZZY_LOADING_TEST_TAG = "QUIZZY_LOADING"
 
 @Composable
 fun QuizzyLoading() {
@@ -19,6 +22,7 @@ fun QuizzyLoading() {
         modifier = Modifier
             .fillMaxSize()
             .background(QuizAppTheme.colors.onBackground.copy(alpha = 0.5f))
+            .testTag(QUIZZY_LOADING_TEST_TAG)
             .clickable(
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() }

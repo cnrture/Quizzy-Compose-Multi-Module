@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -23,6 +24,7 @@ import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
 fun QuizzyToolbar(
+    testTag: String,
     title: String? = null,
     titleSpan: String? = null,
     titleStyle: TextStyle = QuizAppTheme.typography.heading2,
@@ -33,6 +35,7 @@ fun QuizzyToolbar(
 ) {
     Box(
         modifier = Modifier
+            .testTag(testTag)
             .fillMaxWidth()
             .padding(horizontal = 32.dp, vertical = 24.dp),
         contentAlignment = Alignment.Center,
@@ -41,6 +44,7 @@ fun QuizzyToolbar(
             Box(
                 modifier = Modifier
                     .align(Alignment.CenterStart)
+                    .testTag("$testTag.back")
                     .size(24.dp)
                     .clickable(
                         indication = null,
@@ -60,6 +64,7 @@ fun QuizzyToolbar(
             if (titleSpan != null) {
                 QuizzyText(
                     modifier = Modifier.align(Alignment.CenterStart),
+                    testTag = "$testTag.title",
                     fullText = title,
                     spanTexts = listOf(titleSpan),
                     style = titleStyle,
@@ -67,6 +72,7 @@ fun QuizzyToolbar(
             } else {
                 QuizzyText(
                     modifier = Modifier.align(Alignment.CenterStart),
+                    testTag = "$testTag.title",
                     text = title,
                     style = titleStyle,
                 )
@@ -84,6 +90,7 @@ fun QuizzyToolbar(
             Box(
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
+                    .testTag("$testTag.endIcon")
                     .size(24.dp)
                     .clickable(
                         indication = null,
@@ -107,22 +114,25 @@ fun QuizzyToolbar(
 private fun QuizzyToolbarPreview() {
     Column {
         QuizzyToolbar(
+            testTag = "preview.toolbar1",
             onBackClick = { },
             endIcon = QuizAppTheme.icons.settings,
             onEndIconClick = { },
         )
         QuizzySpacer(12.dp)
         QuizzyToolbar(
+            testTag = "preview.toolbar2",
             title = "Title",
             endIcon = QuizAppTheme.icons.settings,
             onEndIconClick = { },
         )
         QuizzySpacer(12.dp)
         QuizzyToolbar(
+            testTag = "preview.toolbar3",
             title = "Title",
             content = {
                 Row {
-                    QuizzyText(text = "Content")
+                    QuizzyText(testTag = "preview.toolbar3.content", text = "Content")
                 }
             },
             endIcon = QuizAppTheme.icons.settings,

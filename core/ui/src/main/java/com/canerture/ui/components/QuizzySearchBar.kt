@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -26,6 +27,7 @@ import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
 fun QuizzySearchBar(
+    testTag: String,
     modifier: Modifier = Modifier,
     value: String = "",
     onClick: (() -> Unit)? = null,
@@ -35,6 +37,7 @@ fun QuizzySearchBar(
         modifier = modifier
             .fillMaxWidth()
             .height(56.dp)
+            .testTag(testTag)
             .clip(RoundedCornerShape(16.dp))
             .boldBorder()
             .background(QuizAppTheme.colors.onBackground.copy(alpha = 0.1f)),
@@ -63,6 +66,7 @@ fun QuizzySearchBar(
                     )
                     if (value.isBlank()) {
                         QuizzyText(
+                            testTag = "$testTag.placeholder",
                             text = stringResource(R.string.search),
                             style = QuizAppTheme.typography.paragraph1,
                             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f)
@@ -80,6 +84,7 @@ fun QuizzySearchBar(
 @Composable
 private fun QuizzySearchBarPreview() {
     QuizzySearchBar(
+        testTag = "preview.searchBar",
         value = "QuizAppSearchBar",
         onValueChange = {},
     )

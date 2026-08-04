@@ -14,9 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.canerture.feature.leaderboard.ui.R
 import com.canerture.leaderboard.domain.model.BoardModel
+import com.canerture.leaderboard.ui.LeaderboardTestTags
+import com.canerture.ui.components.QuizzyAsyncImage
 import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
@@ -33,11 +34,12 @@ internal fun UserItem(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         QuizzyText(
+            testTag = LeaderboardTestTags.USER_ITEM_RANK,
             text = item.rank,
             style = QuizAppTheme.typography.heading5,
         )
         QuizzySpacer(16.dp)
-        AsyncImage(
+        QuizzyAsyncImage(
             modifier = Modifier
                 .size(32.dp)
                 .background(
@@ -46,11 +48,13 @@ internal fun UserItem(
                 )
                 .boldBorder(width = 1.dp)
                 .padding(4.dp),
-            model = item.avatarUrl,
-            contentDescription = null,
+            testTag = LeaderboardTestTags.USER_ITEM_AVATAR,
+            imageUrl = item.avatarUrl,
+            contentDescription = stringResource(R.string.avatar)
         )
         QuizzySpacer(8.dp)
         QuizzyText(
+            testTag = LeaderboardTestTags.USER_ITEM_USERNAME,
             text = stringResource(R.string.nickname, item.username),
             style = QuizAppTheme.typography.paragraph3,
             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
@@ -64,6 +68,7 @@ internal fun UserItem(
         )
         QuizzySpacer(4.dp)
         QuizzyText(
+            testTag = LeaderboardTestTags.USER_ITEM_SCORE,
             text = stringResource(R.string.score, item.score),
             style = QuizAppTheme.typography.heading7,
         )

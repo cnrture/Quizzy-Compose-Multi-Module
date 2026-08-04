@@ -43,6 +43,7 @@ internal fun SearchScreen(
     QuizzyScaffold(
         topBar = {
             QuizzyToolbar(
+                testTag = SearchTestTags.TOOLBAR,
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
         },
@@ -70,6 +71,7 @@ internal fun SearchContent(
     ) {
         QuizzySearchBar(
             modifier = Modifier.padding(horizontal = 32.dp),
+            testTag = SearchTestTags.SEARCH_BAR,
             value = uiState.query,
             onValueChange = { onAction(UiAction.OnQueryChange(it)) },
         )

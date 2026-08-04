@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.ui.theme.QuizAppTheme
@@ -24,6 +25,7 @@ enum class QuizzyButtonSize { EXTRA_SMALL, SMALL, MEDIUM, LARGE }
 fun QuizzyButton(
     modifier: Modifier = Modifier,
     text: String,
+    testTag: String,
     isEnable: Boolean = true,
     type: QuizzyButtonType = QuizzyButtonType.PRIMARY,
     size: QuizzyButtonSize = QuizzyButtonSize.MEDIUM,
@@ -54,7 +56,8 @@ fun QuizzyButton(
             Button(
                 modifier = Modifier
                     .then(modifier)
-                    .height(height),
+                    .height(height)
+                    .testTag(testTag),
                 onClick = onClick,
                 enabled = isEnable,
                 colors = ButtonDefaults.buttonColors(
@@ -74,6 +77,7 @@ fun QuizzyButton(
                     QuizzySpacer(8.dp)
                 }
                 QuizzyText(
+                    testTag = "$testTag.text",
                     text = text,
                     color = QuizAppTheme.colors.background,
                     style = textStyle,
@@ -85,7 +89,8 @@ fun QuizzyButton(
             Button(
                 modifier = Modifier
                     .height(height)
-                    .then(modifier),
+                    .then(modifier)
+                    .testTag(testTag),
                 onClick = onClick,
                 enabled = isEnable,
                 colors = ButtonDefaults.buttonColors(QuizAppTheme.colors.background),
@@ -102,6 +107,7 @@ fun QuizzyButton(
                     QuizzySpacer(8.dp)
                 }
                 QuizzyText(
+                    testTag = "$testTag.text",
                     text = text,
                     style = textStyle,
                 )
@@ -117,6 +123,7 @@ private fun QuizzyButtonPreview() {
         Column {
             QuizzyButton(
                 text = "Primary Button",
+                testTag = "primary_button",
                 type = QuizzyButtonType.PRIMARY,
                 size = QuizzyButtonSize.SMALL,
                 onClick = { }
@@ -124,6 +131,7 @@ private fun QuizzyButtonPreview() {
             QuizzySpacer(16.dp)
             QuizzyButton(
                 text = "Outlined Button",
+                testTag = "outlined_button",
                 type = QuizzyButtonType.PRIMARY,
                 size = QuizzyButtonSize.MEDIUM,
                 onClick = { }
@@ -131,6 +139,7 @@ private fun QuizzyButtonPreview() {
             QuizzySpacer(16.dp)
             QuizzyButton(
                 text = "Primary Button",
+                testTag = "primary_button",
                 type = QuizzyButtonType.PRIMARY,
                 size = QuizzyButtonSize.LARGE,
                 onClick = { }
@@ -138,6 +147,7 @@ private fun QuizzyButtonPreview() {
             QuizzySpacer(16.dp)
             QuizzyButton(
                 text = "Primary Button",
+                testTag = "primary_button",
                 type = QuizzyButtonType.SECONDARY,
                 size = QuizzyButtonSize.SMALL,
                 onClick = { }
@@ -145,6 +155,7 @@ private fun QuizzyButtonPreview() {
             QuizzySpacer(16.dp)
             QuizzyButton(
                 text = "Outlined Button",
+                testTag = "outlined_button",
                 type = QuizzyButtonType.SECONDARY,
                 size = QuizzyButtonSize.MEDIUM,
                 icon = QuizAppTheme.icons.google,
@@ -153,6 +164,7 @@ private fun QuizzyButtonPreview() {
             QuizzySpacer(16.dp)
             QuizzyButton(
                 text = "Primary Button",
+                testTag = "primary_button",
                 type = QuizzyButtonType.SECONDARY,
                 size = QuizzyButtonSize.LARGE,
                 icon = QuizAppTheme.icons.google,

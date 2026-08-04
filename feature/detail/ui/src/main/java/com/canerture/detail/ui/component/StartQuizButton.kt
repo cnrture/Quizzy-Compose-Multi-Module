@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.canerture.detail.ui.DetailTestTags
 import com.canerture.feature.detail.ui.R
 import com.canerture.ui.components.QuizzyButton
 import com.canerture.ui.theme.QuizAppTheme
@@ -30,6 +31,7 @@ internal fun StartQuizButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp, vertical = 16.dp),
+            testTag = DetailTestTags.START_QUIZ_BUTTON,
             text = stringResource(R.string.start_quiz),
             onClick = onClick,
         )

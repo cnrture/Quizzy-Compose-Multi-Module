@@ -63,6 +63,7 @@ internal fun DetailScreen(
     QuizzyScaffold(
         topBar = {
             QuizzyToolbar(
+                testTag = DetailTestTags.TOOLBAR,
                 endIcon = if (uiState.isFavorite) QuizAppTheme.icons.starSelected else QuizAppTheme.icons.starUnselected,
                 onEndIconClick = { onAction(UiAction.OnFavoriteClick) },
                 onBackClick = { onAction(UiAction.OnBackClick) },
@@ -88,6 +89,7 @@ internal fun DetailScreen(
 
     if (uiState.dialogState != null) {
         QuizzyDialog(
+            testTag = DetailTestTags.DIALOG,
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnBackClick) },
@@ -110,16 +112,19 @@ internal fun DetailContent(
                 .aspectRatio(1f)
                 .clip(RoundedCornerShape(16.dp))
                 .boldBorder(),
+            testTag = DetailTestTags.QUIZ_IMAGE,
             imageUrl = quiz.imageUrl,
             contentDescription = stringResource(R.string.quiz_image),
         )
         QuizzySpacer(24.dp)
         QuizzyText(
+            testTag = DetailTestTags.CATEGORY_TEXT,
             text = quiz.category,
             style = QuizAppTheme.typography.subheading2,
         )
         QuizzySpacer(8.dp)
         QuizzyText(
+            testTag = DetailTestTags.NAME_TEXT,
             text = quiz.name,
             style = QuizAppTheme.typography.heading2,
         )
@@ -136,6 +141,7 @@ internal fun DetailContent(
             )
             QuizzySpacer(8.dp)
             QuizzyText(
+                testTag = DetailTestTags.SCORE_TEXT,
                 text = stringResource(R.string.score, quiz.score),
                 style = QuizAppTheme.typography.subheading2,
             )
@@ -150,11 +156,13 @@ internal fun DetailContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 QuizzyText(
+                    testTag = DetailTestTags.QUESTION_COUNT_TEXT,
                     text = quiz.questionCountStr,
                     style = QuizAppTheme.typography.heading3,
                 )
                 QuizzySpacer(4.dp)
                 QuizzyText(
+                    testTag = DetailTestTags.QUESTION_LABEL_TEXT,
                     text = stringResource(R.string.question),
                     style = QuizAppTheme.typography.paragraph2,
                 )
@@ -169,11 +177,13 @@ internal fun DetailContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 QuizzyText(
+                    testTag = DetailTestTags.PLAYED_COUNT_TEXT,
                     text = quiz.playedCountStr,
                     style = QuizAppTheme.typography.heading3,
                 )
                 QuizzySpacer(4.dp)
                 QuizzyText(
+                    testTag = DetailTestTags.PLAYED_LABEL_TEXT,
                     text = stringResource(R.string.played),
                     style = QuizAppTheme.typography.paragraph2,
                 )
@@ -188,11 +198,13 @@ internal fun DetailContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 QuizzyText(
+                    testTag = DetailTestTags.FAVORITE_COUNT_TEXT,
                     text = quiz.favoriteCountStr,
                     style = QuizAppTheme.typography.heading3,
                 )
                 QuizzySpacer(4.dp)
                 QuizzyText(
+                    testTag = DetailTestTags.FAVORITE_LABEL_TEXT,
                     text = stringResource(R.string.favorites),
                     style = QuizAppTheme.typography.paragraph2,
                 )
@@ -200,11 +212,13 @@ internal fun DetailContent(
         }
         QuizzySpacer(24.dp)
         QuizzyText(
+            testTag = DetailTestTags.DESCRIPTION_TITLE_TEXT,
             text = stringResource(R.string.description),
             style = QuizAppTheme.typography.heading4,
         )
         QuizzySpacer(8.dp)
         QuizzyText(
+            testTag = DetailTestTags.DESCRIPTION_TEXT,
             text = quiz.description,
             style = QuizAppTheme.typography.paragraph2,
         )

@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.category.domain.model.QuizModel
+import com.canerture.category.ui.CategoryTestTags
 import com.canerture.feature.category.ui.R
 import com.canerture.ui.components.QuizzyAsyncImage
 import com.canerture.ui.components.QuizzySpacer
@@ -48,6 +49,7 @@ internal fun QuizItem(
             QuizzyAsyncImage(
                 modifier = Modifier.fillMaxWidth(),
                 imageUrl = quiz.imageUrl,
+                testTag = CategoryTestTags.QUIZ_ITEM_IMAGE,
                 contentDescription = quiz.name,
             )
         }
@@ -60,6 +62,7 @@ internal fun QuizItem(
             modifier = Modifier.padding(16.dp),
         ) {
             QuizzyText(
+                testTag = CategoryTestTags.QUIZ_ITEM_NAME_TEXT,
                 text = quiz.name,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
@@ -67,6 +70,7 @@ internal fun QuizItem(
             )
             QuizzySpacer(8.dp)
             QuizzyText(
+                testTag = CategoryTestTags.QUIZ_ITEM_QUESTION_COUNT_TEXT,
                 text = stringResource(R.string.question_count, quiz.questionCount),
                 style = QuizAppTheme.typography.subheading3,
             )

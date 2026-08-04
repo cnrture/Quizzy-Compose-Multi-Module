@@ -46,22 +46,22 @@ name: "Login — valid credentials navigate home"
 #       EMAIL: "${EMAIL}"
 #       PASSWORD: "${PASSWORD}"
 
-# Act
+# Act — ids come from LoginTestTags / HomeTestTags
 - tapOn:
-    id: "login.email"
+    id: "login.emailField"
 - inputText: "${EMAIL}"
 - tapOn:
-    id: "login.button"
+    id: "login.loginButton"
 
 # Wait for the async effect (login → navigate) to land
 - extendedWaitUntil:
     visible:
-      id: "home.title"
+      id: "home.categoriesTitle"
     timeout: 10000
 
 # Assert — never omit
 - assertVisible:
-    id: "home.title"
+    id: "home.categoriesTitle"
 ```
 
 Rules:

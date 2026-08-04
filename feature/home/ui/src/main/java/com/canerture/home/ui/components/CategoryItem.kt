@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.home.ui.R
 import com.canerture.home.domain.model.CategoryModel
+import com.canerture.home.ui.HomeTestTags
 import com.canerture.ui.components.QuizzyAsyncImage
 import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
@@ -51,11 +52,13 @@ internal fun CategoryItem(
                 .height(124.dp)
                 .boldBorder(16)
                 .clip(RoundedCornerShape(16.dp)),
+            testTag = HomeTestTags.CATEGORY_ITEM_IMAGE,
             imageUrl = category.imageUrl,
             contentDescription = category.name,
         )
         QuizzySpacer(16.dp)
         QuizzyText(
+            testTag = HomeTestTags.CATEGORY_ITEM_NAME,
             text = category.name,
             style = QuizAppTheme.typography.heading5,
             maxLines = 1,
@@ -63,6 +66,7 @@ internal fun CategoryItem(
         )
         QuizzySpacer(12.dp)
         QuizzyText(
+            testTag = HomeTestTags.CATEGORY_ITEM_QUIZ_COUNT,
             text = stringResource(R.string.quiz_count, category.quizCount),
             style = QuizAppTheme.typography.heading6,
             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),

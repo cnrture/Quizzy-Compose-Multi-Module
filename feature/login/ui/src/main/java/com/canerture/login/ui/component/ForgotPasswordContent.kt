@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.login.ui.R
+import com.canerture.login.ui.LoginTestTags
 import com.canerture.ui.components.QuizzyButton
 import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
@@ -27,22 +28,26 @@ internal fun ForgotPasswordContent(
             .padding(start = 32.dp, end = 32.dp, bottom = 32.dp),
     ) {
         QuizzyText(
+            testTag = LoginTestTags.FORGOT_PASSWORD_TITLE,
             text = stringResource(R.string.forgot_password_title),
             style = QuizAppTheme.typography.heading2,
         )
         QuizzySpacer(12.dp)
         QuizzyText(
+            testTag = LoginTestTags.FORGOT_PASSWORD_MESSAGE,
             text = stringResource(R.string.forgot_password_message),
             style = QuizAppTheme.typography.subheading1,
         )
         QuizzySpacer(12.dp)
         QuizzyTextField(
+            testTag = LoginTestTags.FORGOT_PASSWORD_EMAIL_FIELD,
             value = email,
             onValueChange = { onEmailChange(it) },
             label = stringResource(R.string.forgot_password_email),
         )
         QuizzySpacer(32.dp)
         QuizzyButton(
+            testTag = LoginTestTags.FORGOT_PASSWORD_SEND_BUTTON,
             text = stringResource(R.string.send_reset_link),
             onClick = { onSendResetLinkClick() },
         )

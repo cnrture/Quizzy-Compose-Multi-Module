@@ -1,70 +1,87 @@
 # Selectors & Test Tags
 
-Maestro identifies elements by `id:`. In a Compose app that `id` comes from `Modifier.testTag("x")` — but **only** because `QuizzyScaffold` turns on the bridge (`Modifier.semantics { testTagsAsResourceId = true }`). So every tag has to line up in three places:
+Maestro identifies elements by `id:`, which in Compose is produced by a `testTag` semantics property surfaced through `QuizzyScaffold`'s bridge (`Modifier.semantics { testTagsAsResourceId = true }`). Quizzy does **not** expose this through `Modifier` and does **not** leave it optional: every `Quizzy*` component takes a **required `testTag: String` parameter**, and the values live in a per-screen `<Feature>TestTags` constants object. Flows assert on those exact strings.
 
-1. A **constant** in the screen's `object <Feature>TestTags` (the source of truth).
-2. A **`Modifier.testTag(<constant>)`** applied on the target composable, inside the scaffold tree.
-3. The tag **actually present** in the rendered tree on-device (verify overlays live).
+## 1. Every Quizzy* component requires a testTag
 
-## 1. The test-tag constants object
+The `core:ui` components take `testTag` as a **mandatory** parameter (not via `modifier`). Passing it is enforced by the compiler — a screen won't build until every call supplies one.
 
-One `internal object <Feature>TestTags` per screen, in the screen's `:ui` package. String values are dotted `screen.section.element`, matching the screen name.
+```kotlin
+QuizzyText(testTag = LoginTestTags.WELCOME_TEXT, text = stringResource(R.string.welcome), style = ...)
+QuizzyTextField(testTag = LoginTestTags.EMAIL_FIELD, value = uiState.email, label = ..., onValueChange = ...)
+QuizzyButton(modifier = Modifier.fillMaxWidth(), testTag = LoginTestTags.LOGIN_BUTTON, text = ..., onClick = ...)
+```
+
+`modifier` (when present) is separate — keep it; add `testTag` as its own argument.
+
+**Exceptions** — two components do not take a caller `testTag`:
+
+- `QuizzySpacer` — decorative spacing, never a test target.
+- `QuizzyLoading` — takes no parameters; it carries a fixed tag constant `QUIZZY_LOADING_TEST_TAG` = `"QUIZZY_LOADING"`. Assert the loading state with `id: "QUIZZY_LOADING"`.
+
+`QuizzyScaffold` also takes no `testTag`; it only provides the bridge for the content tree.
+
+## 2. The `<Feature>TestTags` constants object
+
+Each screen owns an `internal object <Feature>TestTags` in its `:ui` package (next to the `Screen`), holding one `const val` per tagged element. This is the single source of truth shared by the screen and the Maestro flow.
 
 ```kotlin
 internal object LoginTestTags {
-    const val EMAIL_FIELD = "login.email"
-    const val PASSWORD_FIELD = "login.password"
-    const val LOGIN_BUTTON = "login.button"
-    const val ERROR_DIALOG = "login.errorDialog"
+    const val TOOLBAR = "login.toolbar"
+    const val WELCOME_TEXT = "login.welcomeText"
+    const val EMAIL_FIELD = "login.emailField"
+    const val PASSWORD_FIELD = "login.passwordField"
+    const val LOGIN_BUTTON = "login.loginButton"
+    const val DIALOG = "login.dialog"
+
+    // Bottom sheet / sub-component elements use a section segment
+    const val FORGOT_PASSWORD_EMAIL_FIELD = "login.forgotPassword.emailField"
+    const val FORGOT_PASSWORD_SEND_BUTTON = "login.forgotPassword.sendButton"
 }
 ```
 
-This replaces the free-typed string in the flow: the `.yaml` uses `id: "login.email"`, the screen uses `Modifier.testTag(LoginTestTags.EMAIL_FIELD)`, and they are the same string by construction.
+- Value format: `screen.elementName` in camelCase (`home.categoriesTitle`, `quiz.answerOption1`). For a sub-component or sheet, add a section segment: `screen.section.element`.
+- Constant name: `SCREAMING_SNAKE_CASE`; value: dotted camelCase.
+- Prefix every value with the screen name so tags are globally unique and greppable.
+- Sub-component files in a different package (e.g. `.../ui/components/`) `import` the screen's `<Feature>TestTags`.
+- **Repeated list items get indexed, unique tags** — `"${QuizTestTags.ANSWER_OPTION}$index"`, `avatarItem0`, `avatarItem1`. Never reuse one tag value on two rendered elements.
 
-## 2. Applying the tag on the screen
+## 3. Composite components — root tag, derived children
 
-Quizzy's `Quizzy*` components all take `modifier: Modifier = Modifier` as their first parameter, so a screen can tag them at the call site:
+`QuizzyDialog`, `QuizzyToolbar`, `QuizzyTextField`, and `QuizzySearchBar` are composites: the caller passes **one root `testTag`**, and `core:ui` derives the inner element tags by appending a fixed suffix. The caller never tags the inner elements.
 
-```kotlin
-QuizzyTextField(
-    modifier = Modifier.testTag(LoginTestTags.EMAIL_FIELD),
-    value = uiState.email,
-    label = stringResource(R.string.login_email),
-    onValueChange = onEmailChange,
-)
+| Composite | Caller passes | Derived inner tags (in `core:ui`) |
+|---|---|---|
+| `QuizzyDialog(testTag = X)` | `X` | `X.message` (text), `X.button` (OK button) |
+| `QuizzyToolbar(testTag = X)` | `X` | `X.back`, `X.title`, `X.endIcon` |
+| `QuizzyTextField(testTag = X)` | `X` | `X.label` |
+| `QuizzySearchBar(testTag = X)` | `X` | `X.placeholder` |
+| `QuizzyButton(testTag = X)` | `X` | `X.text` (button label) |
+| `QuizzyCheckBox(testTag = X)` | `X` | `X.label` |
 
-QuizzyButton(
-    modifier = Modifier
-        .fillMaxWidth()
-        .testTag(LoginTestTags.LOGIN_BUTTON),
-    text = stringResource(R.string.login),
-    onClick = onLoginClick,
-)
+So a Maestro flow tapping a dialog's OK button uses the derived id:
+
+```yaml
+- assertVisible:
+    id: "login.dialog.message"
+- tapOn:
+    id: "login.dialog.button"
 ```
 
-## 3. Convention: `Quizzy*` components should forward a testTag
-
-For a tag to reach Maestro, the `modifier` you pass must land on the node that actually renders the interactive element. Some wrappers forward `modifier` to an inner node rather than the outer one, which can drop the tag. The rule for `core:ui`:
-
-> **A `Quizzy*` component that a test needs to target must accept a `modifier` and forward it to its outermost interactive node** (the `Button`, the `TextField`, the clickable `Row`), so a caller's `Modifier.testTag(...)` survives. When adding a new interactive `Quizzy*` component, treat this as a requirement, not an option.
-
-When you rely on a component's forwarded tag, **verify it live** (view hierarchy inspection): a `testTag` that passes source review can still be dropped if the wrapper forwards `modifier` to the wrong slot. This is the single most common Maestro failure mode.
-
-> This skill documents the convention; it does not itself modify `core:ui`. When a component genuinely doesn't forward its modifier, fix the component (a `core:ui` change) and note it — don't work around it with a brittle `text:` selector.
+You do **not** add `.message`/`.button` constants to `<Feature>TestTags` — only the root (`DIALOG = "login.dialog"`). The suffix is guaranteed by `core:ui`. Reference derived ids as string literals in the flow, or document them in the screen's `_index.md`.
 
 ## 4. Overlays: dialogs & bottom sheets
 
-`QuizzyScaffold` provides the `testTagsAsResourceId` bridge for its content tree. A `QuizzyDialog` or `ModalBottomSheet` may render **outside** that tree, so its tags aren't guaranteed to surface. When tagging a dialog/sheet element, verify on-device that the `id:` resolves; if it doesn't, the overlay's root needs its own `Modifier.semantics { testTagsAsResourceId = true }`.
+`QuizzyScaffold` provides the `testTagsAsResourceId` bridge for its content tree. A `QuizzyDialog` or `ModalBottomSheet` may render **outside** that tree, so verify on-device that its `id:` (root and derived) resolves. If it doesn't, the overlay's root needs its own `Modifier.semantics { testTagsAsResourceId = true }` — a `core:ui` change, not a workaround in the flow.
 
-## 5. Naming
+## 5. Adding a tag when one is missing
 
-- Format: `screen.section.element` — lowercase, dot-separated (`home.category.item`, `quiz.answer.option1`, `detail.startButton`).
-- Prefix every tag with the screen name so tags are globally unique and greppable.
-- Keep the constant name SCREAMING_SNAKE_CASE; keep the string value dotted.
+Because the parameter is mandatory, a new screen can't compile without tags — they already exist. When you need a **new** element tagged (a newly added button), add a `const val` to that screen's `<Feature>TestTags` and pass it at the call site. Do not modify `core:ui` for this; only add a component or fix a broken modifier-forward there if a tag genuinely fails to surface live.
 
 ## Don't
 
-- Use a raw `text:` selector for an interactive element — copy and locale change; a tag doesn't.
-- Invent a tag string in the `.yaml` that has no matching constant + `testTag` on the screen.
-- Assume a forwarded tag works without a live hierarchy check, especially for dialogs and sheets.
-- Reuse the same tag value on two different elements — Maestro will match the first and your assertion becomes ambiguous.
+- Use a raw `text:` selector for assertions — Quizzy standardizes on `id:` (testTag) everywhere, including static text.
+- Free-type a tag string at the call site — reference a `<Feature>TestTags` constant.
+- Add `.message`/`.button`/`.title` constants for composite children — pass only the root tag; the suffix is derived in `core:ui`.
+- Reuse one tag value across two rendered elements — index list items instead.
+- Assume an overlay's derived tag surfaces without a live hierarchy check.

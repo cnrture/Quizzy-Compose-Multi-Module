@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.canerture.editprofile.domain.model.AvatarModel
+import com.canerture.editprofile.ui.EditProfileTestTags
 import com.canerture.feature.editprofile.ui.R
 import com.canerture.ui.components.QuizzyAsyncImage
 import com.canerture.ui.components.QuizzyButton
@@ -55,6 +56,7 @@ internal fun AvatarsDialog(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             QuizzyText(
+                testTag = EditProfileTestTags.AVATARS_DIALOG_TITLE,
                 text = stringResource(R.string.select_avatar),
                 style = QuizAppTheme.typography.heading3,
             )
@@ -77,6 +79,7 @@ internal fun AvatarsDialog(
                             .clickable { onSelectAvatar(avatars[index]) }
                             .padding(16.dp),
                         imageUrl = avatars[index].url,
+                        testTag = "${EditProfileTestTags.AVATARS_DIALOG_AVATAR_ITEM}$index",
                         contentDescription = stringResource(R.string.profile_image),
                     )
                 }
@@ -84,6 +87,7 @@ internal fun AvatarsDialog(
             QuizzySpacer(16.dp)
             QuizzyButton(
                 modifier = Modifier.fillMaxWidth(),
+                testTag = EditProfileTestTags.AVATARS_DIALOG_CLOSE_BUTTON,
                 size = QuizzyButtonSize.SMALL,
                 text = stringResource(R.string.close),
                 onClick = onDismiss,

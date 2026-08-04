@@ -58,6 +58,7 @@ internal fun QuizScreen(
     QuizzyScaffold(
         topBar = {
             QuizzyToolbar(
+                testTag = QuizTestTags.TOOLBAR,
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
         },
@@ -79,6 +80,7 @@ internal fun QuizScreen(
 
     if (uiState.dialogState != null) {
         QuizzyDialog(
+            testTag = QuizTestTags.DIALOG,
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnBackClick) },
@@ -113,6 +115,7 @@ internal fun QuizContent(
         QuizzySpacer(36.dp)
         QuizzyText(
             modifier = Modifier.fillMaxWidth(),
+            testTag = QuizTestTags.QUESTION_TEXT,
             text = uiState.question?.question.orEmpty(),
             style = QuizAppTheme.typography.heading4,
             textAlign = TextAlign.Center,
@@ -129,6 +132,7 @@ internal fun QuizContent(
         Spacer(modifier = Modifier.weight(1f))
         QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
+            testTag = QuizTestTags.NEXT_BUTTON,
             text = stringResource(R.string.next),
             isEnable = uiState.isNextButtonEnable,
             onClick = onNextClick,

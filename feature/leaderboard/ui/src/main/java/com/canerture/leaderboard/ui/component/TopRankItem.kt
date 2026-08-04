@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.leaderboard.ui.R
+import com.canerture.leaderboard.ui.LeaderboardTestTags
 import com.canerture.ui.components.QuizzyAsyncImage
 import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
@@ -53,6 +54,7 @@ internal fun TopRankItem(
                     )
                     .boldBorder(100)
                     .padding(12.dp),
+                testTag = LeaderboardTestTags.TOP_RANK_AVATAR,
                 imageUrl = avatarUrl,
                 contentDescription = username,
             )
@@ -81,6 +83,7 @@ internal fun TopRankItem(
                 contentAlignment = Alignment.Center,
             ) {
                 QuizzyText(
+                    testTag = LeaderboardTestTags.TOP_RANK_NUMBER,
                     text = rank.toString(),
                     style = QuizAppTheme.typography.heading3,
                 )
@@ -88,6 +91,7 @@ internal fun TopRankItem(
         }
         QuizzySpacer(32.dp)
         QuizzyText(
+            testTag = LeaderboardTestTags.TOP_RANK_USERNAME,
             text = stringResource(R.string.nickname, username),
             style = QuizAppTheme.typography.heading7,
             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
@@ -104,6 +108,7 @@ internal fun TopRankItem(
             )
             QuizzySpacer(8.dp)
             QuizzyText(
+                testTag = LeaderboardTestTags.TOP_RANK_SCORE,
                 text = stringResource(R.string.score, score),
                 style = QuizAppTheme.typography.heading7,
             )

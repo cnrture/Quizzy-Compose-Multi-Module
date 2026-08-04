@@ -12,6 +12,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -28,6 +29,7 @@ data class DialogState(
 
 @Composable
 fun QuizzyDialog(
+    testTag: String,
     message: String? = null,
     isSuccess: Boolean? = null,
     isCancelable: Boolean = true,
@@ -49,6 +51,7 @@ fun QuizzyDialog(
     ) {
         Column(
             modifier = Modifier
+                .testTag(testTag)
                 .fillMaxWidth()
                 .background(
                     color = QuizAppTheme.colors.background,
@@ -76,11 +79,13 @@ fun QuizzyDialog(
                 }
             }
             QuizzyText(
+                testTag = "$testTag.message",
                 text = if (message.isNullOrEmpty()) stringResource(R.string.success) else message,
                 style = QuizAppTheme.typography.subheading2,
                 textAlign = TextAlign.Center,
             )
             QuizzyButton(
+                testTag = "$testTag.button",
                 type = QuizzyButtonType.PRIMARY,
                 size = QuizzyButtonSize.MEDIUM,
                 text = stringResource(R.string.okay),
@@ -100,6 +105,7 @@ fun QuizzyDialog(
 @Composable
 fun QuizzyDialogPreview() {
     QuizzyDialog(
+        testTag = "preview.dialog",
         isSuccess = true,
         message = "This is a sample error message",
     )

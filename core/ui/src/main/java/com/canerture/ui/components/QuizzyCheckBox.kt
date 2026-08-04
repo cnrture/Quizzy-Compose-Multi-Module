@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -29,6 +30,7 @@ fun QuizzyCheckBox(
     modifier: Modifier = Modifier,
     isChecked: Boolean = false,
     text: String? = null,
+    testTag: String,
     style: TextStyle = QuizAppTheme.typography.paragraph2,
     onCheckedChange: (Boolean) -> Unit,
 ) {
@@ -38,7 +40,7 @@ fun QuizzyCheckBox(
     )
 
     Row(
-        modifier = modifier,
+        modifier = modifier.testTag(testTag),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(
@@ -71,6 +73,7 @@ fun QuizzyCheckBox(
         text?.let {
             QuizzySpacer(8.dp)
             QuizzyText(
+                testTag = "$testTag.label",
                 text = it,
                 style = style,
             )
@@ -83,12 +86,14 @@ fun QuizzyCheckBox(
 private fun QuizzyCheckBoxPreview() {
     Column {
         QuizzyCheckBox(
+            testTag = "checkbox",
             isChecked = false,
             text = "Check me",
             onCheckedChange = {}
         )
         QuizzySpacer(16.dp)
         QuizzyCheckBox(
+            testTag = "checkbox",
             isChecked = true,
             text = "Check me",
             onCheckedChange = {}

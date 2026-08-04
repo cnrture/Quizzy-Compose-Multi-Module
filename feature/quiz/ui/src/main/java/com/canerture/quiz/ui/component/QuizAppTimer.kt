@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.quiz.ui.R
+import com.canerture.quiz.ui.QuizTestTags
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.theme.QuizAppTheme
 
@@ -106,11 +107,13 @@ internal fun QuizAppTimer(
         }
         if (currentTime == 0 && !isRunning) {
             QuizzyText(
+                testTag = QuizTestTags.TIMER_TIMES_UP_TEXT,
                 text = stringResource(R.string.times_up),
                 style = QuizAppTheme.typography.heading5,
             )
         } else {
             QuizzyText(
+                testTag = QuizTestTags.TIMER_COUNTDOWN_TEXT,
                 text = currentTime.toString(),
                 style = QuizAppTheme.typography.heading1,
             )

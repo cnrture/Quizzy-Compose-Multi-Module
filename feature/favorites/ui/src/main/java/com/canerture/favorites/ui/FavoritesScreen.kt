@@ -43,7 +43,10 @@ internal fun FavoritesScreen(
 
     QuizzyScaffold(
         topBar = {
-            QuizzyToolbar(title = stringResource(R.string.favorites_title))
+            QuizzyToolbar(
+                testTag = FavoritesTestTags.TOOLBAR,
+                title = stringResource(R.string.favorites_title),
+            )
         },
     ) { paddingValues ->
         FavoritesContent(
@@ -60,6 +63,7 @@ internal fun FavoritesScreen(
 
     if (uiState.dialogState != null) {
         QuizzyDialog(
+            testTag = FavoritesTestTags.DIALOG,
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnDialogDismiss) },

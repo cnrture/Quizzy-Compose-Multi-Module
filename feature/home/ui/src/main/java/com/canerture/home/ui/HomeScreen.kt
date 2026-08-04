@@ -59,6 +59,7 @@ internal fun HomeScreen(
     QuizzyScaffold(
         topBar = {
             QuizzyToolbar(
+                testTag = HomeTestTags.TOOLBAR,
                 title = stringResource(R.string.welcome_message, uiState.username),
                 titleSpan = uiState.username,
             )
@@ -92,6 +93,7 @@ internal fun HomeContent(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         QuizzySearchBar(
+            testTag = HomeTestTags.SEARCH_BAR,
             modifier = Modifier.padding(horizontal = 32.dp),
             onClick = onSearchClick,
         )
@@ -119,6 +121,7 @@ internal fun ColumnScope.Categories(
         modifier = Modifier
             .align(Alignment.Start)
             .padding(start = 32.dp),
+        testTag = HomeTestTags.CATEGORIES_TITLE,
         text = stringResource(R.string.categories),
         style = QuizAppTheme.typography.heading4,
         color = QuizAppTheme.colors.onBackground
@@ -151,6 +154,7 @@ internal fun ColumnScope.PopularQuizzes(
         modifier = Modifier
             .align(Alignment.Start)
             .padding(start = 32.dp),
+        testTag = HomeTestTags.POPULAR_QUIZZES_TITLE,
         text = stringResource(R.string.popular_quizzes),
         style = QuizAppTheme.typography.heading4,
     )

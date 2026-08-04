@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -25,6 +26,7 @@ import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
 fun QuizzyTextField(
+    testTag: String,
     modifier: Modifier = Modifier,
     value: String,
     label: String,
@@ -70,11 +72,13 @@ fun QuizzyTextField(
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
-            .then(modifier),
+            .then(modifier)
+            .testTag(testTag),
         value = value,
         onValueChange = onValueChange,
         label = {
             QuizzyText(
+                testTag = "$testTag.label",
                 text = label,
                 style = QuizAppTheme.typography.paragraph1,
                 color = QuizAppTheme.colors.onBackground
@@ -104,6 +108,7 @@ fun QuizzyTextField(
 private fun QuizzyTextFieldPreview() {
     Column {
         QuizzyTextField(
+            testTag = "preview.textField1",
             value = "",
             label = "Email or Username",
             onValueChange = {},
@@ -111,6 +116,7 @@ private fun QuizzyTextFieldPreview() {
         )
         QuizzySpacer(16.dp)
         QuizzyTextField(
+            testTag = "preview.textField2",
             value = "",
             label = "Password",
             onValueChange = {},

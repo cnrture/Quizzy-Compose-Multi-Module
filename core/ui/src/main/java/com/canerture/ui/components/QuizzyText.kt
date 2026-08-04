@@ -4,6 +4,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -18,6 +19,7 @@ import com.canerture.ui.theme.QuizAppTheme
 fun QuizzyText(
     modifier: Modifier = Modifier,
     text: String,
+    testTag: String,
     color: Color = QuizAppTheme.colors.onBackground,
     style: TextStyle = QuizAppTheme.typography.paragraph2,
     overflow: TextOverflow = TextOverflow.Clip,
@@ -25,8 +27,8 @@ fun QuizzyText(
     textAlign: TextAlign? = null,
 ) {
     Text(
+        modifier = modifier.testTag(testTag),
         text = text,
-        modifier = modifier,
         color = color,
         textAlign = textAlign,
         style = style,
@@ -40,11 +42,13 @@ fun QuizzyText(
     modifier: Modifier = Modifier,
     fullText: String,
     spanTexts: List<String>,
+    testTag: String,
     color: Color = QuizAppTheme.colors.onBackground,
     style: TextStyle = QuizAppTheme.typography.paragraph2,
     textAlign: TextAlign? = null,
 ) {
     Text(
+        modifier = modifier.testTag(testTag),
         text = buildAnnotatedString {
             withStyle(style = style.toSpanStyle()) {
                 append(fullText)
@@ -62,7 +66,6 @@ fun QuizzyText(
                 }
             }
         },
-        modifier = modifier,
         color = color,
         textAlign = textAlign,
         style = style
@@ -73,6 +76,7 @@ fun QuizzyText(
 @Composable
 private fun QuizzyTextPreview() {
     QuizzyText(
-        text = "QuizAppText"
+        text = "QuizAppText",
+        testTag = "quizzy_text"
     )
 }

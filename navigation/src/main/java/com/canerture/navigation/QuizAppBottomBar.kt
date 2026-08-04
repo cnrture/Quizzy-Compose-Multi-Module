@@ -81,6 +81,7 @@ fun QuizAppBottomBar(
                     AnimatedVisibility(isSelected) {
                         QuizzyText(
                             modifier = Modifier.padding(start = 8.dp),
+                            testTag = BottomBarTestTags.tabLabel(navItem),
                             text = stringResource(navItem.title),
                             style = QuizAppTheme.typography.paragraph2,
                             color = QuizAppTheme.colors.background,

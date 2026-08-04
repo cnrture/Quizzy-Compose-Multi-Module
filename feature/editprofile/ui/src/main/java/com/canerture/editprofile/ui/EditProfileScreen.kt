@@ -53,8 +53,10 @@ internal fun EditProfileScreen(
     QuizzyScaffold(
         topBar = {
             QuizzyToolbar(
+                testTag = EditProfileTestTags.TOOLBAR,
                 content = {
                     QuizzyText(
+                        testTag = EditProfileTestTags.TITLE,
                         text = stringResource(R.string.edit_profile),
                         style = QuizAppTheme.typography.heading2,
                     )
@@ -89,6 +91,7 @@ internal fun EditProfileScreen(
 
     if (uiState.dialogState != null) {
         QuizzyDialog(
+            testTag = EditProfileTestTags.DIALOG,
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnDialogDismiss) },
@@ -120,10 +123,12 @@ internal fun EditProfileContent(
                 .boldBorder(100)
                 .padding(24.dp),
             imageUrl = uiState.avatarUrl,
+            testTag = EditProfileTestTags.AVATAR_IMAGE,
             contentDescription = stringResource(R.string.profile_image),
         )
         QuizzySpacer(12.dp)
         QuizzyButton(
+            testTag = EditProfileTestTags.CHANGE_AVATAR_BUTTON,
             text = stringResource(R.string.change_avatar),
             size = QuizzyButtonSize.EXTRA_SMALL,
             type = QuizzyButtonType.SECONDARY,
@@ -131,6 +136,7 @@ internal fun EditProfileContent(
         )
         QuizzySpacer(48.dp)
         QuizzyTextField(
+            testTag = EditProfileTestTags.EMAIL_FIELD,
             value = uiState.email,
             label = stringResource(R.string.email),
             icon = QuizAppTheme.icons.email,
@@ -138,6 +144,7 @@ internal fun EditProfileContent(
         )
         QuizzySpacer(24.dp)
         QuizzyTextField(
+            testTag = EditProfileTestTags.USERNAME_FIELD,
             value = uiState.username,
             label = stringResource(R.string.username),
             icon = QuizAppTheme.icons.sign,
@@ -145,6 +152,7 @@ internal fun EditProfileContent(
         )
         QuizzySpacer(24.dp)
         QuizzyTextField(
+            testTag = EditProfileTestTags.PASSWORD_FIELD,
             value = uiState.password,
             label = stringResource(R.string.password),
             icon = QuizAppTheme.icons.lock,
@@ -154,6 +162,7 @@ internal fun EditProfileContent(
         Spacer(modifier = Modifier.weight(1f))
         QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
+            testTag = EditProfileTestTags.SAVE_BUTTON,
             text = stringResource(R.string.save),
             onClick = onSaveClick,
         )

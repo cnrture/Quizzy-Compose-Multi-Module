@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.search.ui.R
 import com.canerture.search.domain.model.QuizModel
+import com.canerture.search.ui.SearchTestTags
 import com.canerture.ui.components.QuizzyAsyncImage
 import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
@@ -47,6 +48,7 @@ internal fun QuizItem(
                 .height(112.dp)
                 .aspectRatio(1f)
                 .clip(RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp)),
+            testTag = SearchTestTags.QUIZ_ITEM_IMAGE,
             imageUrl = item.imageUrl,
             contentDescription = item.name,
         )
@@ -55,6 +57,7 @@ internal fun QuizItem(
         ) {
             Column {
                 QuizzyText(
+                    testTag = SearchTestTags.QUIZ_ITEM_NAME_TEXT,
                     text = item.name,
                     style = QuizAppTheme.typography.heading3,
                 )
@@ -63,14 +66,17 @@ internal fun QuizItem(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     QuizzyText(
+                        testTag = SearchTestTags.QUIZ_ITEM_QUESTION_COUNT_TEXT,
                         text = stringResource(R.string.question_count, item.questionCount),
                         style = QuizAppTheme.typography.subheading3,
                     )
                     QuizzyText(
+                        testTag = SearchTestTags.QUIZ_ITEM_SEPARATOR_TEXT,
                         text = stringResource(R.string.hyphen),
                         style = QuizAppTheme.typography.subheading1,
                     )
                     QuizzyText(
+                        testTag = SearchTestTags.QUIZ_ITEM_CATEGORY_TEXT,
                         text = item.category,
                         style = QuizAppTheme.typography.subheading3,
                         maxLines = 1,

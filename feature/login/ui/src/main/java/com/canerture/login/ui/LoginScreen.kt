@@ -61,6 +61,7 @@ internal fun LoginScreen(
     QuizzyScaffold(
         topBar = {
             QuizzyToolbar(
+                testTag = LoginTestTags.TOOLBAR,
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
         },
@@ -83,6 +84,7 @@ internal fun LoginScreen(
 
     if (uiState.dialogState != null) {
         QuizzyDialog(
+            testTag = LoginTestTags.DIALOG,
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnDialogDismiss) },
@@ -127,16 +129,19 @@ internal fun LoginContent(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         QuizzyText(
+            testTag = LoginTestTags.WELCOME_TEXT,
             text = stringResource(R.string.welcome),
             style = QuizAppTheme.typography.heading1,
         )
         QuizzySpacer(8.dp)
         QuizzyText(
+            testTag = LoginTestTags.MESSAGE_TEXT,
             text = stringResource(R.string.login_message),
             style = QuizAppTheme.typography.paragraph1,
         )
         QuizzySpacer(40.dp)
         QuizzyTextField(
+            testTag = LoginTestTags.EMAIL_FIELD,
             value = uiState.email,
             label = stringResource(R.string.login_email),
             icon = QuizAppTheme.icons.email,
@@ -144,6 +149,7 @@ internal fun LoginContent(
         )
         QuizzySpacer(24.dp)
         QuizzyTextField(
+            testTag = LoginTestTags.PASSWORD_FIELD,
             value = uiState.password,
             label = stringResource(R.string.password),
             icon = QuizAppTheme.icons.lock,
@@ -155,6 +161,7 @@ internal fun LoginContent(
             modifier = Modifier
                 .align(Alignment.End)
                 .noRippleClickable { onForgotPasswordClick() },
+            testTag = LoginTestTags.FORGOT_PASSWORD_TEXT,
             text = stringResource(R.string.forgot_password),
             style = QuizAppTheme.typography.heading6,
             color = QuizAppTheme.colors.blue,
@@ -162,12 +169,14 @@ internal fun LoginContent(
         QuizzySpacer(40.dp)
         QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
+            testTag = LoginTestTags.LOGIN_BUTTON,
             text = stringResource(R.string.login),
             onClick = { onLoginClick() },
         )
         QuizzySpacer(24.dp)
         QuizzyText(
             modifier = Modifier.noRippleClickable { onRegisterClick() },
+            testTag = LoginTestTags.REGISTER_TEXT,
             fullText = stringResource(R.string.dont_have_an_account),
             spanTexts = listOf(stringResource(R.string.dont_have_an_account_span)),
             style = QuizAppTheme.typography.paragraph2,
@@ -175,6 +184,7 @@ internal fun LoginContent(
         )
         QuizzySpacer(40.dp)
         QuizzyText(
+            testTag = LoginTestTags.POLICY_TEXT,
             fullText = stringResource(R.string.policy),
             spanTexts = listOf(
                 stringResource(R.string.privacy_policy_span),

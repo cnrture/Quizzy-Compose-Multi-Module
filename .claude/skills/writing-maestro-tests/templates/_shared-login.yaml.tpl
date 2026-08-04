@@ -19,9 +19,10 @@
 #     It ends by asserting one stable Home anchor so auth failures surface fast.
 #   - Quizzy startup: Splash -> (token? MainFlow : LoginFlow). A fresh
 #     clearState launch has no token, so Splash routes to Welcome -> Login.
-#   - Requires that Welcome/Login screens carry the referenced test tags
-#     (welcome.loginButton, login.email, login.password, login.button,
-#     home.title). Add them per rules/selectors-and-testtags.md if missing.
+#   - Uses the real test tags from WelcomeTestTags / LoginTestTags / HomeTestTags
+#     (welcome.emailButton, login.emailField, login.passwordField,
+#     login.loginButton, home.categoriesTitle). These already exist on the
+#     screens — see rules/selectors-and-testtags.md.
 
 appId: com.canerture.quizappcompose
 name: "Shared — login with EMAIL/PASSWORD"
@@ -30,21 +31,22 @@ name: "Shared — login with EMAIL/PASSWORD"
     clearState: true
 
 # Splash lands on Welcome for a fresh (unauthenticated) launch.
+# The "continue with email" button (welcome.emailButton) navigates to Login.
 - tapOn:
-    id: "welcome.loginButton"
+    id: "welcome.emailButton"
 
 # Email + password entry on the Login screen.
 - tapOn:
-    id: "login.email"
+    id: "login.emailField"
 - inputText: "${EMAIL}"
 - tapOn:
-    id: "login.password"
+    id: "login.passwordField"
 - inputText: "${PASSWORD}"
 - tapOn:
-    id: "login.button"
+    id: "login.loginButton"
 
 # Land on Home — assert one stable anchor so auth failures surface immediately.
 - extendedWaitUntil:
     visible:
-      id: "home.title"
+      id: "home.categoriesTitle"
     timeout: 15000

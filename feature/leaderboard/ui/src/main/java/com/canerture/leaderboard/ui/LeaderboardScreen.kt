@@ -34,7 +34,10 @@ internal fun LeaderboardScreen(
 ) {
     QuizzyScaffold(
         topBar = {
-            QuizzyToolbar(title = stringResource(R.string.leaderboard_title))
+            QuizzyToolbar(
+                testTag = LeaderboardTestTags.TOOLBAR,
+                title = stringResource(R.string.leaderboard_title),
+            )
         },
     ) { paddingValues ->
         LeaderboardContent(
@@ -50,6 +53,7 @@ internal fun LeaderboardScreen(
 
     if (uiState.dialogState != null) {
         QuizzyDialog(
+            testTag = LeaderboardTestTags.DIALOG,
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnDialogDismiss) },

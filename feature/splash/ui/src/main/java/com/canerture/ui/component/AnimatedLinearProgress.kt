@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.canerture.ui.SplashTestTags
 import com.canerture.ui.components.QuizzyLinearProgress
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.theme.QuizAppTheme
@@ -39,10 +40,12 @@ internal fun AnimatedLinearProgress() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp),
+            testTag = SplashTestTags.PROGRESS,
             thickness = 28.dp,
             value = progressValue
         )
         QuizzyText(
+            testTag = SplashTestTags.PROGRESS_VALUE_TEXT,
             text = "$progressValue%",
             style = QuizAppTheme.typography.subheading2,
             modifier = Modifier.padding(8.dp)

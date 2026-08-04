@@ -7,6 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.canerture.quiz.ui.QuizTestTags
 import com.canerture.ui.components.QuizzyLinearProgress
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.theme.QuizAppTheme
@@ -19,6 +20,7 @@ internal fun QuestionCountProgress(
     Box {
         QuizzyLinearProgress(
             modifier = Modifier.fillMaxWidth(),
+            testTag = QuizTestTags.QUESTION_COUNT_PROGRESS,
             value = currentQuestion,
             maxValue = totalQuestion,
             thickness = 30.dp,
@@ -27,6 +29,7 @@ internal fun QuestionCountProgress(
             progressColor = QuizAppTheme.colors.blue,
         )
         QuizzyText(
+            testTag = QuizTestTags.QUESTION_COUNT_TEXT,
             text = "$currentQuestion/$totalQuestion",
             style = QuizAppTheme.typography.heading7,
             color = QuizAppTheme.colors.onBackground,

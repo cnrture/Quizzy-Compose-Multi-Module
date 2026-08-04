@@ -14,6 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.search.ui.R
+import com.canerture.search.ui.SearchTestTags
 import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.theme.QuizAppTheme
@@ -35,6 +36,7 @@ internal fun EmptyScreenContent() {
         )
         QuizzySpacer(48.dp)
         QuizzyText(
+            testTag = SearchTestTags.EMPTY_MESSAGE_TEXT,
             text = stringResource(R.string.empty_content),
             style = QuizAppTheme.typography.heading2,
             color = QuizAppTheme.colors.red,

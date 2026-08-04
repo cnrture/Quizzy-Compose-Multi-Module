@@ -86,6 +86,7 @@ class MainActivity : ComponentActivity() {
                 }
                 if (uiState.isShowNoNetworkDialog) {
                     QuizzyDialog(
+                        testTag = "main.noNetworkDialog",
                         isSuccess = false,
                         isCancelable = false,
                         message = stringResource(R.string.no_network_connection),

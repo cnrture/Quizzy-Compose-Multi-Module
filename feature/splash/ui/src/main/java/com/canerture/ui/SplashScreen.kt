@@ -69,6 +69,7 @@ internal fun SplashScreen(
                 contentDescription = stringResource(R.string.logo),
             )
             QuizzyText(
+                testTag = SplashTestTags.APP_NAME_TEXT,
                 text = stringResource(R.string.app_name),
                 style = QuizAppTheme.typography.heading1,
             )
@@ -77,6 +78,7 @@ internal fun SplashScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),
+                testTag = SplashTestTags.TITLE_TEXT,
                 text = stringResource(R.string.splash_screen_title),
                 style = QuizAppTheme.typography.heading2,
                 textAlign = TextAlign.Center,

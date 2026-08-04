@@ -58,6 +58,7 @@ internal fun CategoryScreen(
     QuizzyScaffold(
         topBar = {
             QuizzyToolbar(
+                testTag = CategoryTestTags.TOOLBAR,
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
         },
@@ -75,6 +76,7 @@ internal fun CategoryScreen(
 
     if (uiState.dialogState != null) {
         QuizzyDialog(
+            testTag = CategoryTestTags.DIALOG,
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnBackClick) },
@@ -106,16 +108,19 @@ internal fun CategoryContent(
                     .boldBorder()
                     .aspectRatio(1f),
                 imageUrl = uiState.imageUrl,
+                testTag = CategoryTestTags.CATEGORY_IMAGE,
                 contentDescription = uiState.title,
             )
             QuizzySpacer(16.dp)
             Column {
                 QuizzyText(
+                    testTag = CategoryTestTags.TITLE_TEXT,
                     text = uiState.title,
                     style = QuizAppTheme.typography.heading4,
                 )
                 QuizzySpacer(16.dp)
                 QuizzyText(
+                    testTag = CategoryTestTags.QUESTION_COUNT_TEXT,
                     text = stringResource(id = R.string.question_count, uiState.quizzes.size),
                     style = QuizAppTheme.typography.heading5,
                 )

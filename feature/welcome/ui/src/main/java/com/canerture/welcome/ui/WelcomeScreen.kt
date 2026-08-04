@@ -72,6 +72,7 @@ internal fun WelcomeScreen(
 
     if (uiState.dialogState != null) {
         QuizzyDialog(
+            testTag = WelcomeTestTags.DIALOG,
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnDismissDialog) },
@@ -98,11 +99,13 @@ internal fun WelcomeContent(
         )
         QuizzySpacer(40.dp)
         QuizzyText(
+            testTag = WelcomeTestTags.APP_NAME_TEXT,
             text = stringResource(R.string.app_name),
             style = QuizAppTheme.typography.heading1,
         )
         QuizzySpacer(24.dp)
         QuizzyText(
+            testTag = WelcomeTestTags.TITLE_TEXT,
             text = stringResource(R.string.welcome_title),
             style = QuizAppTheme.typography.paragraph1,
             textAlign = TextAlign.Center,
@@ -110,6 +113,7 @@ internal fun WelcomeContent(
         QuizzySpacer(64.dp)
         QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
+            testTag = WelcomeTestTags.GOOGLE_BUTTON,
             text = stringResource(R.string.continue_with_google),
             type = QuizzyButtonType.SECONDARY,
             icon = QuizAppTheme.icons.google,
@@ -127,6 +131,7 @@ internal fun WelcomeContent(
             )
             QuizzyText(
                 modifier = Modifier.padding(horizontal = 16.dp),
+                testTag = WelcomeTestTags.OR_TEXT,
                 text = stringResource(R.string.or),
                 style = QuizAppTheme.typography.paragraph1,
                 textAlign = TextAlign.Center,
@@ -140,6 +145,7 @@ internal fun WelcomeContent(
         QuizzySpacer(40.dp)
         QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
+            testTag = WelcomeTestTags.EMAIL_BUTTON,
             text = stringResource(R.string.sign_in_with_email),
             type = QuizzyButtonType.PRIMARY,
             onClick = { onAction(UiAction.OnLoginClick) },
@@ -149,6 +155,7 @@ internal fun WelcomeContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .noRippleClickable { onAction(UiAction.OnRegisterClick) },
+            testTag = WelcomeTestTags.REGISTER_TEXT,
             fullText = stringResource(R.string.dont_have_an_account),
             spanTexts = listOf(stringResource(R.string.dont_have_an_account_span)),
             style = QuizAppTheme.typography.paragraph2,
@@ -157,6 +164,7 @@ internal fun WelcomeContent(
         QuizzySpacer(40.dp)
         QuizzyText(
             modifier = Modifier.fillMaxWidth(),
+            testTag = WelcomeTestTags.POLICY_TEXT,
             fullText = stringResource(R.string.policy),
             spanTexts = listOf(
                 stringResource(R.string.privacy_policy_span),

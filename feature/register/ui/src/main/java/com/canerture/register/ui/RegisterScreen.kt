@@ -49,6 +49,7 @@ internal fun RegisterScreen(
     QuizzyScaffold(
         topBar = {
             QuizzyToolbar(
+                testTag = RegisterTestTags.TOOLBAR,
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
         },
@@ -72,6 +73,7 @@ internal fun RegisterScreen(
 
     if (uiState.dialogState != null) {
         QuizzyDialog(
+            testTag = RegisterTestTags.DIALOG,
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnDialogDismiss) },
@@ -95,16 +97,19 @@ internal fun RegisterContent(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         QuizzyText(
+            testTag = RegisterTestTags.WELCOME_TEXT,
             text = stringResource(R.string.welcome),
             style = QuizAppTheme.typography.heading1,
         )
         QuizzySpacer(8.dp)
         QuizzyText(
+            testTag = RegisterTestTags.MESSAGE_TEXT,
             text = stringResource(R.string.register_message),
             style = QuizAppTheme.typography.paragraph1,
         )
         QuizzySpacer(40.dp)
         QuizzyTextField(
+            testTag = RegisterTestTags.EMAIL_FIELD,
             value = uiState.email,
             label = stringResource(R.string.register_email),
             icon = QuizAppTheme.icons.email,
@@ -113,6 +118,7 @@ internal fun RegisterContent(
         )
         QuizzySpacer(12.dp)
         QuizzyTextField(
+            testTag = RegisterTestTags.USERNAME_FIELD,
             value = uiState.username,
             label = stringResource(R.string.register_username),
             icon = QuizAppTheme.icons.profileUnselected,
@@ -120,6 +126,7 @@ internal fun RegisterContent(
         )
         QuizzySpacer(12.dp)
         QuizzyTextField(
+            testTag = RegisterTestTags.PASSWORD_FIELD,
             value = uiState.password,
             label = stringResource(R.string.password),
             icon = QuizAppTheme.icons.lock,
@@ -128,6 +135,7 @@ internal fun RegisterContent(
         )
         QuizzySpacer(12.dp)
         QuizzyTextField(
+            testTag = RegisterTestTags.PASSWORD_AGAIN_FIELD,
             value = uiState.passwordAgain,
             label = stringResource(R.string.register_confirm_password),
             icon = QuizAppTheme.icons.lock,
@@ -137,6 +145,7 @@ internal fun RegisterContent(
         QuizzySpacer(40.dp)
         QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
+            testTag = RegisterTestTags.REGISTER_BUTTON,
             text = stringResource(R.string.register),
             isEnable = uiState.isButtonEnable,
             onClick = { onRegisterClick() },
@@ -144,6 +153,7 @@ internal fun RegisterContent(
         QuizzySpacer(24.dp)
         QuizzyText(
             modifier = Modifier.noRippleClickable { onLoginClick() },
+            testTag = RegisterTestTags.LOGIN_TEXT,
             fullText = stringResource(R.string.already_have_an_account),
             spanTexts = listOf(stringResource(R.string.already_have_an_account_span)),
             style = QuizAppTheme.typography.paragraph2,
@@ -151,6 +161,7 @@ internal fun RegisterContent(
         )
         QuizzySpacer(40.dp)
         QuizzyText(
+            testTag = RegisterTestTags.POLICY_TEXT,
             fullText = stringResource(R.string.policy),
             spanTexts = listOf(
                 stringResource(R.string.privacy_policy_span),

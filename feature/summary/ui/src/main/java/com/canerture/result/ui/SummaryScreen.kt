@@ -71,6 +71,7 @@ internal fun SummaryScreen(
         QuizzyScaffold(
             topBar = {
                 QuizzyToolbar(
+                    testTag = SummaryTestTags.TOOLBAR,
                     title = stringResource(R.string.summary_title),
                     endIcon = QuizAppTheme.icons.close,
                     onEndIconClick = { onAction(UiAction.OnCloseClick) },
@@ -145,12 +146,14 @@ internal fun SummaryContent(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             QuizzyText(
+                testTag = SummaryTestTags.RESULT_TEXT,
                 text = resultText,
                 style = QuizAppTheme.typography.heading3,
                 textAlign = TextAlign.Center,
             )
             QuizzySpacer(16.dp)
             QuizzyText(
+                testTag = SummaryTestTags.SCORE_TEXT,
                 fullText = stringResource(R.string.summary_score, uiState.score),
                 spanTexts = listOf(stringResource(R.string.summary_score_span, uiState.score)),
                 style = QuizAppTheme.typography.paragraph1,
@@ -163,10 +166,12 @@ internal fun SummaryContent(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     QuizzyText(
+                        testTag = SummaryTestTags.CORRECT_COUNT_TEXT,
                         text = uiState.correctAnswers,
                         style = QuizAppTheme.typography.heading2,
                     )
                     QuizzyText(
+                        testTag = SummaryTestTags.CORRECT_LABEL_TEXT,
                         text = stringResource(R.string.correct),
                         style = QuizAppTheme.typography.paragraph2,
                     )
@@ -180,10 +185,12 @@ internal fun SummaryContent(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     QuizzyText(
+                        testTag = SummaryTestTags.WRONG_COUNT_TEXT,
                         text = uiState.wrongAnswers,
                         style = QuizAppTheme.typography.heading2,
                     )
                     QuizzyText(
+                        testTag = SummaryTestTags.WRONG_LABEL_TEXT,
                         text = stringResource(R.string.wrong),
                         style = QuizAppTheme.typography.paragraph2,
                     )
@@ -193,6 +200,7 @@ internal fun SummaryContent(
         QuizzySpacer(48.dp)
         QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
+            testTag = SummaryTestTags.PLAY_AGAIN_BUTTON,
             text = stringResource(R.string.play_again),
             onClick = { onPlayAgainClick() },
         )

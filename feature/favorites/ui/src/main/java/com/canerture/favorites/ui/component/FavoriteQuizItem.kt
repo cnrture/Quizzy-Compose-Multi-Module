@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.favorites.domain.model.FavoriteModel
+import com.canerture.favorites.ui.FavoritesTestTags
 import com.canerture.feature.favorites.ui.R
 import com.canerture.ui.components.QuizzyAsyncImage
 import com.canerture.ui.components.QuizzyText
@@ -61,6 +62,7 @@ internal fun FavoriteQuizItem(
                         .height(112.dp)
                         .aspectRatio(1f)
                         .clip(RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp)),
+                    testTag = FavoritesTestTags.ITEM_IMAGE,
                     imageUrl = item.imageUrl,
                     contentDescription = item.name,
                 )
@@ -69,6 +71,7 @@ internal fun FavoriteQuizItem(
                 ) {
                     Column {
                         QuizzyText(
+                            testTag = FavoritesTestTags.ITEM_NAME_TEXT,
                             text = item.name,
                             style = QuizAppTheme.typography.heading3,
                         )
@@ -77,14 +80,17 @@ internal fun FavoriteQuizItem(
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             QuizzyText(
+                                testTag = FavoritesTestTags.ITEM_QUESTION_COUNT_TEXT,
                                 text = stringResource(R.string.question_count, item.questionCount),
                                 style = QuizAppTheme.typography.subheading3,
                             )
                             QuizzyText(
+                                testTag = FavoritesTestTags.ITEM_HYPHEN_TEXT,
                                 text = stringResource(R.string.hyphen),
                                 style = QuizAppTheme.typography.subheading1,
                             )
                             QuizzyText(
+                                testTag = FavoritesTestTags.ITEM_CATEGORY_TEXT,
                                 text = item.category,
                                 style = QuizAppTheme.typography.subheading3,
                                 maxLines = 1,

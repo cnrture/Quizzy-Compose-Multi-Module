@@ -32,10 +32,11 @@ allowed-tools:
 
 ## Prerequisites (state of the project)
 
-Two facts drive everything here:
+Three facts drive everything here:
 
-1. **The test-tag bridge is already on.** `QuizzyScaffold` applies `Modifier.semantics { testTagsAsResourceId = true }`, so any `Modifier.testTag("x")` inside a scaffolded screen becomes a Maestro `id:` selector automatically. Content outside the scaffold tree (dialogs, bottom sheets rendered as overlays) may not inherit it — verify those live.
-2. **No test tags exist yet.** Screens currently have zero `testTag` calls, and there is no `.maestro/` directory. The first time you test a screen you will **add** the tags (see `rules/selectors-and-testtags.md`) before writing the flow.
+1. **The test-tag bridge is on.** `QuizzyScaffold` applies `Modifier.semantics { testTagsAsResourceId = true }`, so a component's `testTag` inside a scaffolded screen becomes a Maestro `id:` selector automatically. Content outside the scaffold tree (dialogs, bottom sheets rendered as overlays) may not inherit it — verify those live.
+2. **Test tags are mandatory and already applied.** Every `Quizzy*` component takes a **required `testTag` parameter**, and every screen already passes one from a per-screen `<Feature>TestTags` object (e.g. `LoginTestTags`). So the selectors you need almost always exist already — you read them from `<Feature>TestTags`, you rarely add new ones. See `rules/selectors-and-testtags.md`.
+3. **No `.maestro/` flows exist yet.** There is no `.maestro/` directory; you create the flows (and the shared login) per screen.
 
 There is no deep-link infrastructure in Quizzy, so flows reach screens by tapping through the UI (or starting authenticated via the shared login flow) — never via an `openLink:` deep link.
 
@@ -63,19 +64,23 @@ From the `Contract`:
 
 Keep the list realistic: **happy path first**, then the handful of edge cases the screen can actually reach (empty result, invalid input, error dialog). Quizzy screens have a single data-class `UiState` (no `Loading/Success/Error` sealed hierarchy), so the "states" are just field combinations — `isLoading = true`, `dialogState != null`, a populated list vs an empty one.
 
-### 3. Define the test-tag selectors
+### 3. Read the test-tag selectors
 
-Every element a flow taps or asserts needs a stable selector. Collect them in a per-screen `object <Feature>TestTags` (the source of truth) and apply them with `Modifier.testTag(...)`. See `rules/selectors-and-testtags.md` for the full rule, including the convention that `core:ui` `Quizzy*` components should accept and forward a `testTag`.
+The selectors already exist. Every `Quizzy*` component takes a required `testTag`, and each screen declares its values in a per-screen `internal object <Feature>TestTags` next to the `Screen`. Open that object and use its constants as your `id:` selectors.
 
 ```kotlin
 internal object LoginTestTags {
-    const val EMAIL_FIELD = "login.email"
-    const val PASSWORD_FIELD = "login.password"
-    const val LOGIN_BUTTON = "login.button"
+    const val TOOLBAR = "login.toolbar"
+    const val EMAIL_FIELD = "login.emailField"
+    const val PASSWORD_FIELD = "login.passwordField"
+    const val LOGIN_BUTTON = "login.loginButton"
+    const val DIALOG = "login.dialog"
 }
 ```
 
-If a tag you need is missing from the screen, **add it first**, then write the flow. A flow that references a non-existent tag is a broken flow.
+For **composite** components you pass one root tag and `core:ui` derives the children — e.g. `QuizzyDialog(testTag = DIALOG)` yields `login.dialog.message` and `login.dialog.button`. So a flow can assert on `login.dialog.button` even though only `DIALOG` is in the constants object. The suffix table is in `rules/selectors-and-testtags.md`.
+
+Only if you need to target a **brand-new** element (one just added to the screen) do you add a `const val` to `<Feature>TestTags` and pass it at the call site — never modify `core:ui`.
 
 ### 4. Write the flow(s)
 
@@ -90,20 +95,22 @@ name: "Login — valid credentials navigate home"
 - launchApp:
     clearState: true
 - tapOn:
-    id: "login.email"
+    id: "login.emailField"
 - inputText: "${EMAIL}"
 - tapOn:
-    id: "login.password"
+    id: "login.passwordField"
 - inputText: "${PASSWORD}"
 - tapOn:
-    id: "login.button"
+    id: "login.loginButton"
 - extendedWaitUntil:
     visible:
-      id: "home.title"
+      id: "home.categoriesTitle"
     timeout: 10000
 - assertVisible:
-    id: "home.title"
+    id: "home.categoriesTitle"
 ```
+
+(The ids come straight from `LoginTestTags` / `HomeTestTags` — `home.categoriesTitle` is a stable anchor that is always visible on Home.)
 
 ### 5. Update the screen's `_index.md`
 
@@ -132,8 +139,8 @@ Never hardcode real credentials in a flow — pass them via `env` from a documen
 
 ## Don't
 
-- Reference a `testTag` that isn't applied on the screen — add it first.
-- Use raw `text:` selectors for interactive elements — use `id:` bound to a `<Feature>TestTags` constant (text can change with copy/locale).
+- Reference a tag string that isn't in the screen's `<Feature>TestTags` (or a documented composite-derived suffix) — a flow pointing at a non-existent id is broken.
+- Use raw `text:` selectors — Quizzy standardizes on `id:` (testTag) for everything, including static text; assert on a `<Feature>TestTags` constant.
 - Reach a screen via `openLink:`/deep link — Quizzy has none; tap through the UI or start authenticated.
 - Pack multiple scenarios into one `.yaml` — one flow per file.
 - End a flow without an assertion — a flow with no `assertVisible`/`assertNotVisible` tests nothing.
@@ -141,6 +148,6 @@ Never hardcode real credentials in a flow — pass them via `env` from a documen
 
 ## Related Skills
 
-- [[composing-screens]] — Where `Modifier.testTag(...)` is applied on the screen and its `Quizzy*` components.
+- [[composing-screens]] — Where the required `testTag` and the `<Feature>TestTags` object are applied on the screen and its `Quizzy*` components.
 - [[best-practices]] — The `Contract` (UiState/UiAction/UiEffect) that the scenario list is derived from.
 - [[managing-navigation]] — The route and `UiEffect.Navigate*` a successful flow lands on.

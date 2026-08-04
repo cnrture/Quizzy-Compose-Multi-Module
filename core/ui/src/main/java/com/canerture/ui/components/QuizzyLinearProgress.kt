@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -20,6 +21,7 @@ import com.canerture.ui.theme.QuizAppTheme
 fun QuizzyLinearProgress(
     modifier: Modifier = Modifier,
     value: Int,
+    testTag: String,
     maxValue: Int = 100,
     thickness: Dp = 24.dp,
     isBordered: Boolean = true,
@@ -30,6 +32,7 @@ fun QuizzyLinearProgress(
     Canvas(
         modifier = modifier
             .height(thickness)
+            .testTag(testTag)
             .conditional(isBordered) {
                 boldBorder(100)
             }
@@ -53,7 +56,11 @@ fun QuizzyLinearProgress(
 private fun Preview() {
     QuizAppTheme {
         Surface(modifier = Modifier.background(QuizAppTheme.colors.background)) {
-            QuizzyLinearProgress(value = 50, modifier = Modifier.fillMaxWidth())
+            QuizzyLinearProgress(
+                modifier = Modifier.fillMaxWidth(),
+                value = 50,
+                testTag = "linear_progress",
+            )
         }
     }
 }

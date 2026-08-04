@@ -125,9 +125,16 @@ internal fun LoginScreenPreview(
 
 Effects are `emptyFlow()` in previews; navigation callbacks are no-ops. The `*PreviewProvider` supplies `UiState` variations.
 
-## testTag
+## testTag (required)
 
-`QuizzyScaffold` already sets `testTagsAsResourceId = true`, so a `Modifier.testTag("...")` inside the scaffold tree resolves as a Maestro `id:` selector. Screens have no tags yet; add them when a screen gets Maestro coverage. When you do, use per-screen `<Feature>TestTags` constants rather than free strings — see [[writing-maestro-tests]].
+Every `Quizzy*` component takes a **required `testTag: String`** parameter — a screen won't compile without one on each call. Values come from a per-screen `internal object <Feature>TestTags` (next to the `Screen`), one `const val` per element, dotted camelCase (`login.emailField`). Pass it as its own argument, alongside `modifier` when present:
+
+```kotlin
+QuizzyButton(modifier = Modifier.fillMaxWidth(), testTag = LoginTestTags.LOGIN_BUTTON, text = ..., onClick = ...)
+QuizzyDialog(testTag = LoginTestTags.DIALOG, message = ..., onDismiss = ...)   // composite: children derived by core:ui
+```
+
+`QuizzySpacer` and `QuizzyLoading` are the exceptions (no caller `testTag`). `QuizzyScaffold`'s `testTagsAsResourceId = true` bridge surfaces these tags to Maestro as `id:` selectors. For the full convention (composite suffix derivation, indexed list items) see [[writing-maestro-tests]].
 
 ## Don't
 
@@ -143,4 +150,4 @@ Effects are `emptyFlow()` in previews; navigation callbacks are no-ops. The `*Pr
 - [[managing-navigation]] — Route + `NavGraphBuilder` extension that mounts this screen
 - [[best-practices]] — ViewModel/Contract/MVI conventions behind the screen
 - [[creating-features]] — Full feature scaffold including the screen
-- [[writing-maestro-tests]] — Where `Modifier.testTag(...)` is applied for Maestro `id:` selectors
+- [[writing-maestro-tests]] — The `<Feature>TestTags` convention and how the required `testTag` becomes a Maestro `id:` selector

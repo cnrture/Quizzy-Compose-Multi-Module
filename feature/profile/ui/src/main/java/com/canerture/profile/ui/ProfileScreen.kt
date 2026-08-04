@@ -56,6 +56,7 @@ internal fun ProfileScreen(
     QuizzyScaffold(
         topBar = {
             QuizzyToolbar(
+                testTag = ProfileTestTags.TOOLBAR,
                 title = stringResource(R.string.profile_title),
                 endIcon = QuizAppTheme.icons.exit,
                 onEndIconClick = { onAction(UiAction.OnLogoutClick) },
@@ -94,17 +95,20 @@ internal fun ProfileContent(
                 )
                 .boldBorder(100)
                 .padding(24.dp),
+            testTag = ProfileTestTags.AVATAR_IMAGE,
             imageUrl = uiState.profile?.avatarUrl.orEmpty(),
             contentDescription = "",
         )
         QuizzySpacer(32.dp)
         QuizzyText(
+            testTag = ProfileTestTags.USERNAME_TEXT,
             text = stringResource(R.string.nickname, uiState.profile?.username.orEmpty()),
             style = QuizAppTheme.typography.heading3,
             color = QuizAppTheme.colors.onBackground,
         )
         QuizzySpacer(24.dp)
         QuizzyButton(
+            testTag = ProfileTestTags.EDIT_PROFILE_BUTTON,
             text = stringResource(R.string.edit_profile),
             type = QuizzyButtonType.SECONDARY,
             size = QuizzyButtonSize.SMALL,
@@ -113,6 +117,7 @@ internal fun ProfileContent(
         QuizzySpacer(48.dp)
         QuizzyText(
             modifier = Modifier.align(Alignment.Start),
+            testTag = ProfileTestTags.YOUR_RANK_TITLE,
             text = stringResource(R.string.your_rank),
             style = QuizAppTheme.typography.heading3,
             color = QuizAppTheme.colors.onBackground,
