@@ -29,6 +29,7 @@ import com.canerture.ui.components.QuizAppButtonType
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
@@ -48,23 +49,25 @@ internal fun ProfileScreen(
         when (effect) {
             is UiEffect.NavigateEditProfile -> onNavigateEditProfile()
             is UiEffect.Logout -> onLogout()
-            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
+            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(QuizAppTheme.colors.background),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        QuizAppToolbar(
-            title = stringResource(R.string.profile_title),
-            endIcon = QuizAppTheme.icons.exit,
-            onEndIconClick = { onAction(UiAction.OnLogoutClick) },
-        )
-        Spacer(modifier = Modifier.height(16.dp))
+    QuizzyScaffold(
+        topBar = {
+            QuizAppToolbar(
+                title = stringResource(R.string.profile_title),
+                endIcon = QuizAppTheme.icons.exit,
+                onEndIconClick = { onAction(UiAction.OnLogoutClick) },
+            )
+        },
+    ) { paddingValues ->
         ProfileContent(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(start = 32.dp, end = 32.dp, top = 16.dp),
             uiState = uiState,
             onEditProfileClick = { onAction(UiAction.OnEditProfileClick) },
         )
@@ -77,11 +80,10 @@ internal fun ProfileScreen(
 internal fun ProfileContent(
     uiState: UiState,
     onEditProfileClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 32.dp),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         QuizAppAsyncImage(

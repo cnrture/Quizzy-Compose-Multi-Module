@@ -1,6 +1,5 @@
 package com.canerture.login.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,6 +30,7 @@ import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppTextField
 import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
@@ -59,16 +59,18 @@ internal fun LoginScreen(
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val coroutineScope = rememberCoroutineScope()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(QuizAppTheme.colors.background),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        QuizAppToolbar(
-            onBackClick = { onAction(UiAction.OnBackClick) },
-        )
+    QuizzyScaffold(
+        topBar = {
+            QuizAppToolbar(
+                onBackClick = { onAction(UiAction.OnBackClick) },
+            )
+        },
+    ) { paddingValues ->
         LoginContent(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(horizontal = 32.dp),
             uiState = uiState,
             onEmailChange = { onAction(UiAction.OnEmailChange(it)) },
             onPasswordChange = { onAction(UiAction.OnPasswordChange(it)) },
@@ -125,11 +127,10 @@ internal fun LoginContent(
     onRegisterClick: () -> Unit,
     onLoginClick: () -> Unit,
     onForgotPasswordClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 32.dp),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         QuizAppText(

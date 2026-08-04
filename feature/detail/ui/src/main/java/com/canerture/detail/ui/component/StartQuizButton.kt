@@ -1,8 +1,6 @@
 package com.canerture.detail.ui.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
@@ -17,14 +15,10 @@ import com.canerture.ui.components.QuizAppButton
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-internal fun BoxScope.StartQuizButton(
+internal fun StartQuizButton(
     onClick: () -> Unit,
 ) {
-    Box(
-        modifier = Modifier
-            .align(Alignment.BottomCenter)
-            .background(QuizAppTheme.colors.background),
-    ) {
+    Box {
         HorizontalDivider(
             modifier = Modifier
                 .fillMaxWidth()

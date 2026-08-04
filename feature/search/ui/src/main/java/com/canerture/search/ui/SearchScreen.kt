@@ -1,6 +1,5 @@
 package com.canerture.search.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -23,8 +21,8 @@ import com.canerture.search.ui.component.QuizItem
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppSearchBar
 import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
-import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
@@ -43,22 +41,17 @@ internal fun SearchScreen(
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(QuizAppTheme.colors.background),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        QuizAppToolbar(
-            onBackClick = { onAction(UiAction.OnBackClick) },
-        )
-        QuizAppSearchBar(
-            modifier = Modifier.padding(horizontal = 32.dp),
-            value = uiState.query,
-            onValueChange = { onAction(UiAction.OnQueryChange(it)) },
-        )
-        Spacer(modifier = Modifier.height(24.dp))
+    QuizzyScaffold(
+        topBar = {
+            QuizAppToolbar(
+                onBackClick = { onAction(UiAction.OnBackClick) },
+            )
+        },
+    ) { paddingValues ->
         SearchContent(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
             uiState = uiState,
             onAction = onAction,
         )
@@ -71,19 +64,31 @@ internal fun SearchScreen(
 internal fun SearchContent(
     uiState: UiState,
     onAction: (UiAction) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    if (uiState.quizList.isEmpty() && !uiState.isLoading) {
-        EmptyScreenContent()
-    } else {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(horizontal = 32.dp),
-        ) {
-            items(uiState.quizList) { quiz ->
-                QuizItem(
-                    item = quiz,
-                    onQuizClick = { onAction(UiAction.OnQuizClick(quiz.id)) },
-                )
+    Column(
+        modifier = modifier,
+    ) {
+        QuizAppSearchBar(
+            modifier = Modifier.padding(horizontal = 32.dp),
+            value = uiState.query,
+            onValueChange = { onAction(UiAction.OnQueryChange(it)) },
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+
+        if (uiState.quizList.isEmpty() && !uiState.isLoading) {
+            EmptyScreenContent()
+        } else {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(horizontal = 32.dp),
+            ) {
+                items(uiState.quizList) { quiz ->
+                    QuizItem(
+                        item = quiz,
+                        onQuizClick = { onAction(UiAction.OnQuizClick(quiz.id)) },
+                    )
+                }
             }
         }
     }

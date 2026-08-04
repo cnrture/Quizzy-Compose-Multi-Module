@@ -1,7 +1,6 @@
 package com.canerture.welcome.ui
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +28,7 @@ import com.canerture.ui.components.QuizAppButtonType
 import com.canerture.ui.components.QuizAppDialog
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
@@ -55,18 +55,18 @@ internal fun WelcomeScreen(
         }
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(QuizAppTheme.colors.background),
-    ) {
-        Image(
+    QuizzyScaffold {
+        Box(
             modifier = Modifier.fillMaxSize(),
-            imageVector = QuizAppTheme.icons.starPattern,
-            contentScale = ContentScale.FillWidth,
-            contentDescription = null,
-        )
-        WelcomeContent(onAction)
+        ) {
+            Image(
+                modifier = Modifier.fillMaxSize(),
+                imageVector = QuizAppTheme.icons.starPattern,
+                contentScale = ContentScale.FillWidth,
+                contentDescription = null,
+            )
+            WelcomeContent(onAction)
+        }
     }
 
     if (uiState.isLoading) QuizAppLoading()

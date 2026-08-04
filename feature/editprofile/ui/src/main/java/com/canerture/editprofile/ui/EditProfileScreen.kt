@@ -30,6 +30,7 @@ import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppTextField
 import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
@@ -49,22 +50,24 @@ internal fun EditProfileScreen(
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(QuizAppTheme.colors.background),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        QuizAppToolbar(
-            content = {
-                QuizAppText(
-                    text = stringResource(R.string.edit_profile),
-                    style = QuizAppTheme.typography.heading2,
-                )
-            },
-            onBackClick = { onAction(UiAction.OnBackClick) },
-        )
+    QuizzyScaffold(
+        topBar = {
+            QuizAppToolbar(
+                content = {
+                    QuizAppText(
+                        text = stringResource(R.string.edit_profile),
+                        style = QuizAppTheme.typography.heading2,
+                    )
+                },
+                onBackClick = { onAction(UiAction.OnBackClick) },
+            )
+        },
+    ) { paddingValues ->
         EditProfileContent(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(32.dp),
             uiState = uiState,
             onEmailChange = { onAction(UiAction.OnEmailChange(it)) },
             onUsernameChange = { onAction(UiAction.OnUsernameChange(it)) },
@@ -101,11 +104,10 @@ internal fun EditProfileContent(
     onPasswordChange: (String) -> Unit,
     onChangeAvatarClick: () -> Unit,
     onSaveClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(32.dp),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         QuizAppAsyncImage(

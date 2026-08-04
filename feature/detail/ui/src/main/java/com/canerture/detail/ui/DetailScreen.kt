@@ -1,8 +1,6 @@
 package com.canerture.detail.ui
 
 import android.widget.Toast
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -38,6 +36,7 @@ import com.canerture.ui.components.QuizAppDialog
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
@@ -57,32 +56,32 @@ internal fun DetailScreen(
         when (effect) {
             UiEffect.NavigateBack -> onNavigateBack()
             is UiEffect.NavigateQuiz -> onNavigateQuiz(effect.id)
-            is UiEffect.ShowToast -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
+            is UiEffect.ShowToast -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
-    Box(
-        modifier = Modifier.fillMaxSize(),
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(QuizAppTheme.colors.background),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+    QuizzyScaffold(
+        topBar = {
             QuizAppToolbar(
                 endIcon = if (uiState.isFavorite) QuizAppTheme.icons.starSelected else QuizAppTheme.icons.starUnselected,
                 onEndIconClick = { onAction(UiAction.OnFavoriteClick) },
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
-            if (uiState.quiz != null) {
-                DetailContent(
-                    quiz = uiState.quiz,
-                )
-            }
-        }
-        StartQuizButton(
-            onClick = { onAction(UiAction.OnStartQuizClick) },
+        },
+        bottomBar = {
+            StartQuizButton(
+                onClick = { onAction(UiAction.OnStartQuizClick) },
+            )
+        },
+    ) { paddingValues ->
+        DetailContent(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 32.dp),
+            quiz = uiState.quiz,
         )
     }
 
@@ -99,13 +98,13 @@ internal fun DetailScreen(
 
 @Composable
 internal fun DetailContent(
-    quiz: QuizDetailModel,
+    quiz: QuizDetailModel?,
+    modifier: Modifier = Modifier,
 ) {
+    if (quiz == null) return
+
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 32.dp),
+        modifier = modifier,
     ) {
         QuizAppAsyncImage(
             modifier = Modifier

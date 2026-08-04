@@ -1,7 +1,6 @@
 package com.canerture.quiz.ui
 
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,6 +35,7 @@ import com.canerture.ui.components.QuizAppDialog
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
@@ -61,35 +61,37 @@ internal fun QuizScreen(
                 effect.score
             )
 
-            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
+            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT)
+                .show()
+
             UiEffect.ResetTimer -> timerState = TimerState.RESET
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(QuizAppTheme.colors.background),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        QuizAppToolbar(
-            onBackClick = { onAction(UiAction.OnBackClick) },
-        )
-        if (uiState.question != null) {
-            QuizContent(
-                uiState = uiState,
-                timerState = timerState,
-                onOptionSelect = {
-                    onAction(UiAction.OnOptionSelect(it))
-                    timerState = TimerState.STOP
-                },
-                onNextClick = { onAction(UiAction.OnNextClick) },
-                onTimeOut = {
-                    onAction(UiAction.OnTimeOut)
-                    timerState = TimerState.STOP
-                },
+    QuizzyScaffold(
+        topBar = {
+            QuizAppToolbar(
+                onBackClick = { onAction(UiAction.OnBackClick) },
             )
-        }
+        },
+    ) { paddingValues ->
+        QuizContent(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(horizontal = 32.dp),
+            uiState = uiState,
+            timerState = timerState,
+            onOptionSelect = {
+                onAction(UiAction.OnOptionSelect(it))
+                timerState = TimerState.STOP
+            },
+            onNextClick = { onAction(UiAction.OnNextClick) },
+            onTimeOut = {
+                onAction(UiAction.OnTimeOut)
+                timerState = TimerState.STOP
+            },
+        )
     }
 
     if (uiState.isLoading) QuizAppLoading()
@@ -110,11 +112,10 @@ internal fun QuizContent(
     onOptionSelect: (OptionModel) -> Unit,
     onNextClick: () -> Unit,
     onTimeOut: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 32.dp),
+        modifier = modifier,
     ) {
         QuestionCountProgress(
             currentQuestion = uiState.quizNumber,

@@ -19,6 +19,7 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -33,6 +34,7 @@ import com.canerture.ui.components.QuizAppButton
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
@@ -65,16 +67,22 @@ internal fun SummaryScreen(
             contentScale = ContentScale.FillWidth,
             contentDescription = null,
         )
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            QuizAppToolbar(
-                title = stringResource(R.string.summary_title),
-                endIcon = QuizAppTheme.icons.close,
-                onEndIconClick = { onAction(UiAction.OnCloseClick) },
-            )
+
+        QuizzyScaffold(
+            topBar = {
+                QuizAppToolbar(
+                    title = stringResource(R.string.summary_title),
+                    endIcon = QuizAppTheme.icons.close,
+                    onEndIconClick = { onAction(UiAction.OnCloseClick) },
+                )
+            },
+            containerColor = Color.Transparent,
+        ) { paddingValues ->
             SummaryContent(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .padding(horizontal = 32.dp),
                 uiState = uiState,
                 onPlayAgainClick = { onAction(UiAction.OnPlayAgainClick) },
             )
@@ -88,6 +96,7 @@ internal fun SummaryScreen(
 internal fun SummaryContent(
     uiState: UiState,
     onPlayAgainClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val resultText = when (uiState.state) {
         SummaryState.EQUAL -> stringResource(R.string.summary_equal)
@@ -100,9 +109,7 @@ internal fun SummaryContent(
         else -> QuizAppTheme.icons.sad
     }
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 32.dp),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {

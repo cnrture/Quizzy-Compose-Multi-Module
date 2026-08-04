@@ -1,7 +1,6 @@
 package com.canerture.leaderboard.ui
 
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,8 +27,8 @@ import com.canerture.leaderboard.ui.component.TopRankItem
 import com.canerture.leaderboard.ui.component.UserItem
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
-import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
@@ -41,21 +40,23 @@ internal fun LeaderboardScreen(
     val context = LocalContext.current
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
-            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
+            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(QuizAppTheme.colors.background),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        QuizAppToolbar(
-            title = stringResource(R.string.leaderboard_title),
-        )
-        Spacer(modifier = Modifier.height(16.dp))
+    QuizzyScaffold(
+        topBar = {
+            QuizAppToolbar(
+                title = stringResource(R.string.leaderboard_title),
+            )
+        },
+    ) { paddingValues ->
         LeaderboardContent(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(start = 32.dp, end = 32.dp, top = 16.dp),
             uiState = uiState,
         )
     }
@@ -66,11 +67,10 @@ internal fun LeaderboardScreen(
 @Composable
 internal fun LeaderboardContent(
     uiState: UiState,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 32.dp),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(

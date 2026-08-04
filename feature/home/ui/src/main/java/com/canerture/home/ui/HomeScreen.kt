@@ -1,6 +1,5 @@
 package com.canerture.home.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -31,6 +30,7 @@ import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppSearchBar
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
@@ -49,25 +49,32 @@ internal fun HomeScreen(
         when (effect) {
             UiEffect.NavigateSearch -> onNavigateSearch()
             is UiEffect.NavigateDetail -> onNavigateDetail(effect.id)
-            is UiEffect.NavigateCategory -> onNavigateCategory(effect.id, effect.name, effect.imageUrl)
+            is UiEffect.NavigateCategory -> onNavigateCategory(
+                effect.id,
+                effect.name,
+                effect.imageUrl
+            )
+
             is UiEffect.ShowError -> {
                 // Show error
             }
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(QuizAppTheme.colors.background),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        QuizAppToolbar(
-            title = stringResource(R.string.welcome_message, uiState.username),
-            titleSpan = uiState.username,
-            titleStyle = QuizAppTheme.typography.heading4,
-        )
+    QuizzyScaffold(
+        topBar = {
+            QuizAppToolbar(
+                title = stringResource(R.string.welcome_message, uiState.username),
+                titleSpan = uiState.username,
+                titleStyle = QuizAppTheme.typography.heading4,
+            )
+        },
+    ) { paddingValues ->
         HomeContent(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .verticalScroll(rememberScrollState()),
             uiState = uiState,
             onSearchClick = { onAction(UiAction.OnSearchClick) },
             onQuizClick = { onAction(UiAction.OnQuizClick(it)) },
@@ -84,11 +91,10 @@ internal fun HomeContent(
     onSearchClick: () -> Unit,
     onQuizClick: (Int) -> Unit,
     onCategoryClick: (CategoryModel) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         QuizAppSearchBar(

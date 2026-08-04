@@ -1,6 +1,5 @@
 package com.canerture.category.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -36,6 +35,7 @@ import com.canerture.ui.components.QuizAppDialog
 import com.canerture.ui.components.QuizAppLoading
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
@@ -57,16 +57,17 @@ internal fun CategoryScreen(
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(QuizAppTheme.colors.background),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        QuizAppToolbar(
-            onBackClick = { onAction(UiAction.OnBackClick) },
-        )
+    QuizzyScaffold(
+        topBar = {
+            QuizAppToolbar(
+                onBackClick = { onAction(UiAction.OnBackClick) },
+            )
+        },
+    ) { paddingValues ->
         CategoryContent(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
             uiState = uiState,
             onQuizClick = { onAction(UiAction.OnQuizClick(it)) },
         )
@@ -87,51 +88,57 @@ internal fun CategoryScreen(
 internal fun CategoryContent(
     uiState: UiState,
     onQuizClick: (Int) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 32.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        QuizAppAsyncImage(
+        Row(
             modifier = Modifier
-                .size(144.dp)
-                .clip(RoundedCornerShape(16.dp))
-                .boldBorder()
-                .aspectRatio(1f),
-            imageUrl = uiState.imageUrl,
-            contentDescription = uiState.title,
-        )
-        Spacer(modifier = Modifier.width(16.dp))
-        Column {
-            QuizAppText(
-                text = uiState.title,
-                style = QuizAppTheme.typography.heading4,
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            QuizAppAsyncImage(
+                modifier = Modifier
+                    .size(144.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .boldBorder()
+                    .aspectRatio(1f),
+                imageUrl = uiState.imageUrl,
+                contentDescription = uiState.title,
             )
-            Spacer(modifier = Modifier.height(16.dp))
-            QuizAppText(
-                text = stringResource(id = R.string.question_count, uiState.quizzes.size),
-                style = QuizAppTheme.typography.heading5,
-            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Column {
+                QuizAppText(
+                    text = uiState.title,
+                    style = QuizAppTheme.typography.heading4,
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                QuizAppText(
+                    text = stringResource(id = R.string.question_count, uiState.quizzes.size),
+                    style = QuizAppTheme.typography.heading5,
+                )
+            }
         }
-    }
-    Spacer(modifier = Modifier.height(24.dp))
-    HorizontalDivider(
-        modifier = Modifier.fillMaxWidth(),
-        color = QuizAppTheme.colors.onBackground,
-        thickness = 2.dp,
-    )
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        contentPadding = PaddingValues(20.dp),
-    ) {
-        items(uiState.quizzes) { quiz ->
-            QuizItem(
-                quiz = quiz,
-                onQuizClick = onQuizClick,
-            )
+        Spacer(modifier = Modifier.height(24.dp))
+        HorizontalDivider(
+            modifier = Modifier.fillMaxWidth(),
+            color = QuizAppTheme.colors.onBackground,
+            thickness = 2.dp,
+        )
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            contentPadding = PaddingValues(20.dp),
+        ) {
+            items(uiState.quizzes) { quiz ->
+                QuizItem(
+                    quiz = quiz,
+                    onQuizClick = onQuizClick,
+                )
+            }
         }
     }
 }
