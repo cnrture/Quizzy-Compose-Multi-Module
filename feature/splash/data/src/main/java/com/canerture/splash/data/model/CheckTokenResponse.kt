@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class CheckTokenResponse(
-    val token: String,
+    val token: String? = null,
 )
