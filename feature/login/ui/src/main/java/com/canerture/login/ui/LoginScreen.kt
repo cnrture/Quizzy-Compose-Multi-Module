@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -93,7 +95,9 @@ internal fun LoginScreen(
 
     if (uiState.isForgotPasswordSheetOpen) {
         ModalBottomSheet(
-            modifier = Modifier.navigationBarsPadding(),
+            modifier = Modifier
+                .navigationBarsPadding()
+                .semantics { testTagsAsResourceId = true },
             onDismissRequest = {
                 coroutineScope.launch { bottomSheetState.hide() }
                     .invokeOnCompletion {
