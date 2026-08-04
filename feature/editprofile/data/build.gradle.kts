@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.quiz.feature.editprofile.data"
+    namespace = "com.canerture.feature.editprofile.data"
 }
 
 dependencies {

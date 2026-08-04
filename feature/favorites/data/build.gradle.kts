@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.quiz.feature.favorites.data"
+    namespace = "com.canerture.feature.favorites.data"
 }
 
 dependencies {

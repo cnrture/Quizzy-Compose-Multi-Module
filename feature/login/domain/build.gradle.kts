@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.quiz.jvm.library)
 }
 
-group = "com.quiz.feature.login.domain"
+group = "com.canerture.feature.login.domain"
 
 dependencies {
     implementation(projects.core.common)

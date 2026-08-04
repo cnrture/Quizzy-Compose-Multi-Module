@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.quiz.feature.login.data"
+    namespace = "com.canerture.feature.login.data"
 }
 
 dependencies {

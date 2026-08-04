@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.quiz.feature.splash.data"
+    namespace = "com.canerture.feature.splash.data"
 }
 
 dependencies {

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.quiz.feature.leaderboard.data"
+    namespace = "com.canerture.feature.leaderboard.data"
 }
 
 dependencies {

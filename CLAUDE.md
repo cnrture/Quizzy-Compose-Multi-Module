@@ -22,7 +22,7 @@ Quizzy is a Jetpack Compose quiz app organized as a **multi-module** Android pro
 ./gradlew detekt                       # all modules
 ./gradlew :feature:login:ui:detekt     # single module
 
-# Tests (no test sources exist yet — the roadmap lists tests as TODO)
+# Tests (JVM unit tests exist for feature :ui ViewModels; see core:testing for MainDispatcherRule)
 ./gradlew test                         # JVM unit tests
 ./gradlew connectedAndroidTest         # instrumented tests
 ./gradlew :feature:login:ui:testDebugUnitTest   # single module
@@ -38,7 +38,7 @@ Firebase is required to run the app: place `google-services.json` in `app/`, and
 
 ## Toolchain
 
-Versions are centralized in `gradle/libs.versions.toml`. Do **not** hardcode versions in module build files — add a library/plugin/version there and reference it via `libs.*` or `projects.*` (type-safe project accessors are enabled). SDK/Java levels live in one place: `build-logic/convention/src/main/java/com/canerture/config/AppConfig.kt` (compile/target SDK 36, min SDK 24, Java 21).
+Versions are centralized in `gradle/libs.versions.toml`. Do **not** hardcode versions in module build files — add a library/plugin/version there and reference it via `libs.*` or `projects.*` (type-safe project accessors are enabled). SDK/Java levels live in one place: `build-logic/convention/src/main/java/com/canerture/config/AppConfig.kt` (compile/target SDK 37, min SDK 24, Java 21).
 
 ## Module Architecture
 
@@ -49,7 +49,7 @@ navigation               → NavHost + flow graphs; depends on every feature :ui
 core/
   common                 → Resource<T>, BaseException hierarchy, fold/map/onSuccess helpers (pure Kotlin)
   network                → Retrofit/OkHttp DI, safeApiCall, TokenAuthenticator, Firebase DI
-  ui                     → design system (QuizApp* composables), theme, MVI delegate, Screen interface
+  ui                     → design system (Quizzy* composables), theme (QuizAppTheme), MVI delegate, Screen interface
   datastore              → DataStore preferences wrapper (DataStoreHelper)
   connectivity           → network connectivity listener
   datasource/{logout,profile} → shared cross-feature data sources
@@ -78,7 +78,8 @@ Every module applies a `quiz.*` plugin instead of configuring Android/Kotlin dir
 | `quiz.hilt` | anything using Hilt | KSP + hilt-android/compiler |
 | `quiz.retrofit` | feature `:data` | Retrofit + kotlinx-serialization converter + logging |
 | `quiz.android.firebase` | `app` | Firebase BOM, auth, credentials, Google ID |
-| `quiz.detekt` | applied transitively by others | Detekt (config at `app/config/detekt/detekt.yml`) |
+| `quiz.detekt` | applied transitively by others | Detekt (config at `app/config/detekt/detekt.yml`); `detekt-formatting` also runs ktlint rules, `autoCorrect` ON |
+| `quiz.test` | any module with JVM unit tests | JUnit, MockK, Truth, Turbine, coroutines-test (test deps). `core:testing` (`MainDispatcherRule`) is a separate module dependency |
 
 Plugins are registered in `build-logic/convention/build.gradle.kts` and implemented under `build-logic/convention/src/main/java/`. A feature `:ui` module's build file is typically just the two plugins + its `:domain` dependency, because `quiz.android.feature` already brings in the common deps.
 
@@ -106,6 +107,6 @@ Each screen has a `<Feature>Contract` object declaring `UiState` (data class), `
 ## Conventions
 
 - **Visibility:** ViewModels, Contracts, and Hilt modules inside features are `internal` — keep feature internals hidden; only the route object + `NavGraphBuilder` extension are public API of a `:ui` module.
-- **Naming:** shared composables are prefixed `QuizApp*` (e.g. `QuizAppButton`, `QuizAppDialog`) and live in `core:ui`. Reuse them instead of raw Material components; theme values come from `QuizAppTheme.colors`/`typography`.
-- **Packages:** note the historical inconsistency — namespaces mix `com.canerture.*` and `com.quiz.*` across modules; match the existing package of the module you edit rather than normalizing.
+- **Naming:** shared composables are prefixed `Quizzy*` (e.g. `QuizzyButton`, `QuizzyText`, `QuizzyDialog`, `QuizzyScaffold`, `QuizzyToolbar`) and live in `core:ui`. Reuse them instead of raw Material components. The theme object still keeps its legacy name `QuizAppTheme` — read colors/typography via `QuizAppTheme.colors`/`QuizAppTheme.typography` (not `QuizzyTheme`).
+- **Packages:** all module namespaces and Kotlin packages use the single root `com.canerture.*`. Module `namespace` follows the pattern `com.canerture.feature.<name>.<layer>` (feature modules) / `com.canerture.core.<name>` (core modules); the `app` module is `com.canerture.quizzy`. Note that a module's `namespace` (used for `BuildConfig`/`R`) may differ from its physical Kotlin package (e.g. `feature/quiz/data` namespace is `com.canerture.feature.quiz.data` while its package is `com.canerture.quiz.data.*`) — match the existing package of the file you edit; do not normalize packages. The `applicationId` stays `com.canerture.quizappcompose` (matches `google-services.json`; changing it breaks Firebase).
 - **Detekt** runs with `allRules = true`, `buildUponDefaultConfig = true`, and `autoCorrect = true`, so running it will reformat code.

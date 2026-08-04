@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.quiz.feature.welcome.data"
+    namespace = "com.canerture.feature.welcome.data"
 
     val localProperties = Properties().apply {
         val propsFile = rootProject.file("local.properties")
