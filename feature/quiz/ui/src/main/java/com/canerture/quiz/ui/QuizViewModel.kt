@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.canerture.core.common.fold
 import com.canerture.quiz.domain.model.OptionModel
+import com.canerture.quiz.domain.usecase.CalculateScoreUseCase
 import com.canerture.quiz.domain.usecase.GetQuizUseCase
 import com.canerture.quiz.domain.usecase.SubmitQuizUseCase
 import com.canerture.quiz.domain.usecase.UpdateOptionsUseCase
@@ -25,6 +26,7 @@ internal class QuizViewModel @Inject constructor(
     private val getQuizUseCase: GetQuizUseCase,
     private val updateOptionsUseCase: UpdateOptionsUseCase,
     private val submitQuizUseCase: SubmitQuizUseCase,
+    private val calculateScoreUseCase: CalculateScoreUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel(),
     MVI<UiState, UiAction, UiEffect> by mvi(UiState()) {
@@ -71,7 +73,11 @@ internal class QuizViewModel @Inject constructor(
     private fun submitQuiz() = viewModelScope.launch {
         updateUiState { copy(isLoading = true) }
         val currentUiState = currentUiState
-        val score = currentUiState.score / currentUiState.questions.size * currentUiState.correctAnswers
+        val score = calculateScoreUseCase(
+            maxScore = currentUiState.score,
+            correctAnswers = currentUiState.correctAnswers,
+            totalQuestions = currentUiState.questions.size,
+        )
         submitQuizUseCase(currentUiState.id, score).fold(
             onSuccess = {
                 updateUiState { copy(isLoading = false) }
