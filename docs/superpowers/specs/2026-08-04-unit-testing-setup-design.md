@@ -146,9 +146,14 @@ init bloğunda `state = when { ... }` yerine `state = resolveSummaryState(args.c
 ---
 
 ## 9. Sıradaki Adım
-Bu spec onaylandıktan sonra `writing-plans` ile detaylı implementasyon planı üretilecek:
-1. `resolveSummaryState` refactor'ı (tek dosya).
-2. `libs.versions.toml`'a test kütüphaneleri.
-3. `quiz.test` convention plugin'i.
-4. `MainDispatcherRule` ortak yardımcısı.
-5. Öncelik 1 testleri → Öncelik 2 → devamı.
+Bu spec onaylandıktan sonra `writing-plans` ile detaylı implementasyon planı üretilecek.
+
+**Plan kapsamı (kullanıcı onaylı):** Altyapı + Öncelik 1 + Öncelik 2 — uçtan uca, tek planda.
+
+1. `resolveSummaryState` refactor'ı (tek dosya, §5.2).
+2. `libs.versions.toml`'a test kütüphaneleri (MockK, Truth, coroutines-test, Turbine).
+3. `quiz.test` convention plugin'i (test bağımlılıklarını modüllere uygulayan).
+4. `MainDispatcherRule` ortak yardımcısı (nereye konacağı planda netleşecek — muhtemelen core:ui test veya paylaşımlı test-fixtures).
+5. **Öncelik 1 testleri:** `CalculateScoreUseCase`, `UpdateOptionsUseCase`, `resolveSummaryState`.
+6. **Öncelik 2 testleri:** `QuizViewModel`, `RegisterViewModel`, `LoginViewModel`, `SearchViewModel`, `DetailViewModel`.
+7. Her test modülünün `build.gradle.kts`'ine `quiz.test` plugin uygulaması + `:domain`/gerekli bağımlılıklar.
