@@ -29,12 +29,7 @@ internal class TokenAuthenticator @Inject constructor(
             dataStoreHelper.get().getToken().firstOrNull().orEmpty()
         }
 
-        if (token.isEmpty()) {
-            logOut()
-            return null
-        }
-
-        if (header != "Bearer $token") {
+        if (token.isNotEmpty() && header != "Bearer $token") {
             return response.request.newBuilder()
                 .header("Authorization", "Bearer $token")
                 .build()
