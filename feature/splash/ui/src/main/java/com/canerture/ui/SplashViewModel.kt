@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.milliseconds
 
 @HiltViewModel
 internal class SplashViewModel @Inject constructor(
@@ -22,7 +23,7 @@ internal class SplashViewModel @Inject constructor(
     }
 
     private fun checkUserLoggedIn() = viewModelScope.launch {
-        delay(2000)
+        delay(2000.milliseconds)
         checkUserLoggedInUseCase().fold(
             onSuccess = { emitUiEffect(UiEffect.NavigateHome) },
             onFailure = { emitUiEffect(UiEffect.NavigateWelcome) },

@@ -16,6 +16,7 @@ import com.canerture.ui.components.QuizAppLinearProgress
 import com.canerture.ui.components.QuizAppText
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 internal fun AnimatedLinearProgress() {
@@ -25,7 +26,7 @@ internal fun AnimatedLinearProgress() {
             progressValue = 0
             repeat(100) {
                 progressValue += 1
-                delay(15)
+                delay(15.milliseconds)
             }
         }
     }
