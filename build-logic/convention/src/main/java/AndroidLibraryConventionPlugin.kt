@@ -1,6 +1,6 @@
 package com.canerture.convention
 
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.canerture.convention.com.canerture.config.AppConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -29,7 +29,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     targetCompatibility = AppConfig.JAVA_VERSION
                 }
 
-                defaultConfig.targetSdk = AppConfig.TARGET_SDK
                 defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             }
 
