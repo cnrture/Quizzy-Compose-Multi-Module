@@ -108,30 +108,36 @@ init bloğunda `state = when { ... }` yerine `state = resolveSummaryState(args.c
 - **Ek kütüphaneler:** `kotlinx-coroutines-test`, Turbine (Flow/effect testi için).
 - **Ortak test yardımcıları:** `MainDispatcherRule` (JUnit4 TestWatcher) — her ViewModel testi için
   `Dispatchers.setMain(StandardTestDispatcher())`.
-- **Kapsam (ilk tur):** domain + ui katmanları. data'yı sonraki tura bırak.
+- **Kapsam (KULLANICI GÜNCELLEMESİ):** SADECE ui katmanı — **tüm 14 ViewModel'a test.** Domain use case
+  testleri (saf mantık + delege) bu turda YAZILMAYACAK. `resolveSummaryState` refactor'ı yine yapılır ama
+  ayrı saf-fonksiyon testi olmaz; SummaryViewModel testi içinde `state` alanı üzerinden dolaylı doğrulanır.
 
 ---
 
-## 7. Test Hedefleri (Öncelik Sırası)
+## 7. Test Hedefleri — TÜM 14 ViewModel (Kullanıcı Onaylı Kapsam)
 
-### Öncelik 1 — Saf mantık (mock'suz, en yüksek değer)
-- `CalculateScoreUseCase` — integer division, `totalQuestions<=0` guard, sınır değerleri.
-- `UpdateOptionsUseCase` — 4 dallı `when`, `selectedOption==null` (cevap gösterme) vs seçilmiş doğru/yanlış.
-- `resolveSummaryState` (§5.2 sonrası) — 3 dal: CORRECT / EQUAL / WRONG.
+Her ViewModel'ın kendi `:ui` modülünde `src/test/` altında testi yazılacak. Grup içi sıra değer/karmaşıklığa göre:
 
-### Öncelik 2 — Yüksek değerli ViewModel'ler (mock + dispatcher + Turbine)
-- `QuizViewModel` — soru ilerletme state makinesi, skor+submit, NavigateSummary effect.
-- `RegisterViewModel` — `checkButtonEnabled`, dialog dallanması.
-- `LoginViewModel` — login success/fail effect, reset-password.
-- `SearchViewModel` — query>2 dallanması.
-- `DetailViewModel` — favorite toggle (ekle/sil).
+### Grup A — Gerçek state mantığı (en zengin testler)
+- `QuizViewModel` — soru ilerletme state makinesi, skor+submit, NavigateSummary effect, doğru cevap sayacı.
+- `RegisterViewModel` — `checkButtonEnabled`, success/error dialog dallanması, dismiss→navigasyon.
+- `LoginViewModel` — login success→NavigateHome / fail→dialog, reset-password mail, bottom sheet toggle.
+- `SearchViewModel` — query>2 arama vs ≤2 initial listeye dönüş dallanması.
+- `DetailViewModel` — favorite toggle (isFavorite'e göre ekle/sil) + toast effect.
+- `EditProfileViewModel` — form alan güncellemeleri, avatar seçimi, saveProfile avatar-id çözümleme.
 
-### Öncelik 3 — Orta (data-yükle + fold + effect)
-- Home, Profile, Favorites, Category, Leaderboard, Welcome, Summary, Splash.
+### Grup B — Data-yükle + fold(success/error) + effect
+- `HomeViewModel` — 3 paralel init yükleme, fold→state / ShowError effect, navigasyon effect'leri.
+- `ProfileViewModel` — getProfile Flow fold, getRank, logout→Logout effect.
+- `FavoritesViewModel` — getFavorites, deleteFavorite→reload.
+- `CategoryViewModel` — init route arg (title/imageUrl) + kategori yükleme.
+- `LeaderboardViewModel` — init tek success mapping (onAction yok).
 
-### Öncelik 3 — Delege use case'ler (düşük değer, kolay coverage)
-- 23 pass-through use case — MockK ile repo mock + `Result.success/failure` + argüman iletimi doğrulaması.
-  (İsteğe bağlı; asıl değer Öncelik 1-2'de.)
+### Grup C — Basit (init/effect ağırlıklı)
+- `WelcomeViewModel` — loginWithGoogle success/fail, navigasyon effect'leri.
+- `SummaryViewModel` — init'te SavedStateHandle→state; `state` alanı 3 senaryo (CORRECT/EQUAL/WRONG) doğrulanır
+  (resolveSummaryState dolaylı kapsanır). onAction navigasyon effect'leri.
+- `SplashViewModel` — `delay` + advanceUntilIdle, checkUserLoggedIn success→NavigateHome / fail→NavigateWelcome.
 
 ---
 
@@ -148,12 +154,13 @@ init bloğunda `state = when { ... }` yerine `state = resolveSummaryState(args.c
 ## 9. Sıradaki Adım
 Bu spec onaylandıktan sonra `writing-plans` ile detaylı implementasyon planı üretilecek.
 
-**Plan kapsamı (kullanıcı onaylı):** Altyapı + Öncelik 1 + Öncelik 2 — uçtan uca, tek planda.
+**Plan kapsamı (kullanıcı onaylı):** Altyapı + **TÜM 14 ViewModel testi** — uçtan uca, tek planda.
+Domain use case testleri bu turda YOK.
 
-1. `resolveSummaryState` refactor'ı (tek dosya, §5.2).
+1. `resolveSummaryState` refactor'ı (tek dosya, §5.2) — onaylandı.
 2. `libs.versions.toml`'a test kütüphaneleri (MockK, Truth, coroutines-test, Turbine).
-3. `quiz.test` convention plugin'i (test bağımlılıklarını modüllere uygulayan).
-4. `MainDispatcherRule` ortak yardımcısı (nereye konacağı planda netleşecek — muhtemelen core:ui test veya paylaşımlı test-fixtures).
-5. **Öncelik 1 testleri:** `CalculateScoreUseCase`, `UpdateOptionsUseCase`, `resolveSummaryState`.
-6. **Öncelik 2 testleri:** `QuizViewModel`, `RegisterViewModel`, `LoginViewModel`, `SearchViewModel`, `DetailViewModel`.
-7. Her test modülünün `build.gradle.kts`'ine `quiz.test` plugin uygulaması + `:domain`/gerekli bağımlılıklar.
+3. `quiz.test` convention plugin'i (test bağımlılıklarını feature `:ui` modüllerine uygulayan).
+4. `MainDispatcherRule` ortak yardımcısı (nereye konacağı planda netleşecek — paylaşımlı test yardımcısı,
+   muhtemelen core:ui veya ayrı bir test-fixtures modülü; her `:ui` test'inden erişilebilir olmalı).
+5. Her feature `:ui` modülüne `quiz.test` plugin uygulaması + `src/test/` kurulumu.
+6. **TÜM 14 ViewModel testi** (§7 Grup A → B → C sırasıyla).
