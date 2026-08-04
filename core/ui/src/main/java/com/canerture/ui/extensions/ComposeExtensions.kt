@@ -12,6 +12,9 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.repeatOnLifecycle
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
 
@@ -26,9 +29,12 @@ val <T> Flow<T>.collectWithLifecycle: @Composable (result: (T) -> Unit) -> Unit
 fun <T> Flow<T>.CollectWithLaunchedEffect(
     result: (T) -> Unit,
 ) {
-    LaunchedEffect(Unit) {
-        collect { effect ->
-            result(effect)
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(this, lifecycleOwner) {
+        lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            collect { effect ->
+                result(effect)
+            }
         }
     }
 }

@@ -36,6 +36,7 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
                     "implementation"(libs.findLibrary("compose-ui-tooling-preview").get())
                     "debugImplementation"(libs.findLibrary("compose-ui-tooling").get())
                     "implementation"(libs.findLibrary("coil-compose").get())
+                    "implementation"(libs.findLibrary("lifecycle-runtime-compose").get())
                 }
             }
         }

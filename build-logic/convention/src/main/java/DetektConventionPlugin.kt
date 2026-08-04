@@ -11,16 +11,14 @@ class DetektConventionPlugin : Plugin<Project> {
         with(project) {
             pluginManager.apply("io.gitlab.arturbosch.detekt")
 
-            allprojects {
-                configure<DetektExtension> {
-                    toolVersion = "1.23.6"
-                    autoCorrect = true
-                    buildUponDefaultConfig = true
-                    config.setFrom("$rootDir/app/config/detekt/detekt.yml")
-                    source.setFrom("src/main/java", "src/main/kotlin")
-                    parallel = false
-                    allRules = true
-                }
+            configure<DetektExtension> {
+                toolVersion = libs.findVersion("detekt").get().requiredVersion
+                autoCorrect = true
+                buildUponDefaultConfig = true
+                config.setFrom("$rootDir/app/config/detekt/detekt.yml")
+                source.setFrom("src/main/java", "src/main/kotlin")
+                parallel = false
+                allRules = true
             }
 
             dependencies {
