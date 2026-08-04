@@ -1,0 +1,29 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Register — screen renders with all fields"
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "welcome.registerText"
+    timeout: 20000
+- tapOn:
+    id: "welcome.registerText"
+- extendedWaitUntil:
+    visible:
+      id: "register.emailField"
+    timeout: 10000
+- assertVisible:
+    id: "register.usernameField"
+- assertVisible:
+    id: "register.passwordField"
+- assertVisible:
+    id: "register.passwordAgainField"
+- assertVisible:
+    id: "register.registerButton"
+- assertVisible:
+    id: "register.loginText"
+- assertVisible:
+    id: "register.toolbar.back"

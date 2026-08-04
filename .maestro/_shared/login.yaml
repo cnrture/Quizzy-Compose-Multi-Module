@@ -1,0 +1,47 @@
+# Shared login flow — reused by every authenticated screen's flow.
+#
+# Usage from a screen flow:
+#   - runFlow:
+#       file: ../_shared/login.yaml
+#
+# EMAIL / PASSWORD come from .maestro/.env (git-ignored). Run the suite with:
+#   maestro test --env-file .maestro/.env .maestro/<screen>/
+#
+# Setup only — no regression assertions; ends by asserting one stable Home anchor
+# so auth failures surface immediately. A fresh clearState launch has no token,
+# so Splash routes to Welcome -> Login.
+
+appId: com.canerture.quizappcompose
+name: "Shared — login with EMAIL/PASSWORD"
+---
+- launchApp:
+    clearState: true
+
+# Splash lands on Welcome for a fresh (unauthenticated) launch.
+# "Sign in with Email" (welcome.emailButton) navigates to Login.
+- extendedWaitUntil:
+    visible:
+      id: "welcome.emailButton"
+    timeout: 20000
+- tapOn:
+    id: "welcome.emailButton"
+
+# Email + password entry on the Login screen.
+- extendedWaitUntil:
+    visible:
+      id: "login.emailField"
+    timeout: 10000
+- tapOn:
+    id: "login.emailField"
+- inputText: "${EMAIL}"
+- tapOn:
+    id: "login.passwordField"
+- inputText: "${PASSWORD}"
+- tapOn:
+    id: "login.loginButton"
+
+# Land on Home — assert one stable anchor so auth failures surface immediately.
+- extendedWaitUntil:
+    visible:
+      id: "home.categoriesTitle"
+    timeout: 20000

@@ -1,0 +1,23 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Welcome — screen renders with all entry points"
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "welcome.emailButton"
+    timeout: 20000
+- assertVisible:
+    id: "welcome.appNameText"
+- assertVisible:
+    id: "welcome.titleText"
+- assertVisible:
+    id: "welcome.googleButton"
+- assertVisible:
+    id: "welcome.emailButton"
+- assertVisible:
+    id: "welcome.registerText"
+- assertVisible:
+    id: "welcome.policyText"

@@ -1,0 +1,15 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Home — screen renders after login"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- assertVisible:
+    id: "home.toolbar"
+- assertVisible:
+    id: "home.searchBar"
+- assertVisible:
+    id: "home.categoriesTitle"
+- assertVisible:
+    id: "home.popularQuizzesTitle"

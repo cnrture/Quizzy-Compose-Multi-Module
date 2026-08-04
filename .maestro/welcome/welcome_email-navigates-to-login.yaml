@@ -1,0 +1,19 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Welcome — 'Sign in with Email' navigates to Login"
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "welcome.emailButton"
+    timeout: 20000
+- tapOn:
+    id: "welcome.emailButton"
+- extendedWaitUntil:
+    visible:
+      id: "login.emailField"
+    timeout: 10000
+- assertVisible:
+    id: "login.loginButton"

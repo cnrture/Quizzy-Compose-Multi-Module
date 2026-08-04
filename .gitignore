@@ -15,3 +15,6 @@
 local.properties
 /.idea
 /app/google-services.json
+
+# Maestro test credentials (never commit)
+.maestro/.env

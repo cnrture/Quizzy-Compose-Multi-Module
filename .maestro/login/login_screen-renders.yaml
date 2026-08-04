@@ -1,0 +1,27 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Login — screen renders with email/password/login"
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "welcome.emailButton"
+    timeout: 20000
+- tapOn:
+    id: "welcome.emailButton"
+- extendedWaitUntil:
+    visible:
+      id: "login.emailField"
+    timeout: 10000
+- assertVisible:
+    id: "login.passwordField"
+- assertVisible:
+    id: "login.forgotPasswordText"
+- assertVisible:
+    id: "login.loginButton"
+- assertVisible:
+    id: "login.registerText"
+- assertVisible:
+    id: "login.toolbar.back"

@@ -1,0 +1,25 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Register — 'Sign In' link navigates to Login"
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "welcome.registerText"
+    timeout: 20000
+- tapOn:
+    id: "welcome.registerText"
+- extendedWaitUntil:
+    visible:
+      id: "register.loginText"
+    timeout: 10000
+- tapOn:
+    id: "register.loginText"
+- extendedWaitUntil:
+    visible:
+      id: "login.emailField"
+    timeout: 10000
+- assertVisible:
+    id: "login.loginButton"

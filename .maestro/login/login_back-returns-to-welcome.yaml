@@ -1,0 +1,25 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Login — back button returns to Welcome"
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: "welcome.emailButton"
+    timeout: 20000
+- tapOn:
+    id: "welcome.emailButton"
+- extendedWaitUntil:
+    visible:
+      id: "login.toolbar.back"
+    timeout: 10000
+- tapOn:
+    id: "login.toolbar.back"
+- extendedWaitUntil:
+    visible:
+      id: "welcome.emailButton"
+    timeout: 10000
+- assertVisible:
+    id: "welcome.googleButton"
