@@ -1,8 +1,5 @@
 package com.canerture.editprofile.data.repository
 
-import com.canerture.core.common.Resource
-import com.canerture.core.common.map
-import com.canerture.core.common.onSuccess
 import com.canerture.datasource.profile.ProfileDataSource
 import com.canerture.editprofile.data.mapper.toModel
 import com.canerture.editprofile.data.model.ProfileRequest
@@ -20,7 +17,7 @@ internal class EditProfileRepositoryImpl @Inject constructor(
     private val profileDataSource: ProfileDataSource,
 ) : EditProfileRepository {
 
-    override suspend fun getAvatars(): Resource<List<AvatarModel>> {
+    override suspend fun getAvatars(): Result<List<AvatarModel>> {
         return safeApiCall { api.getAvatars() }.map {
             it.data.toModel()
         }
@@ -35,7 +32,7 @@ internal class EditProfileRepositoryImpl @Inject constructor(
         username: String,
         password: String,
         avatarId: Int,
-    ): Resource<String> {
+    ): Result<String> {
         val request = ProfileRequest(email, username, password, avatarId)
         return safeApiCall { api.saveProfile(request) }.onSuccess {
             profileDataSource.save(it.data.toModel())

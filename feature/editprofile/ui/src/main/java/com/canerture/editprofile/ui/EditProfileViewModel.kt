@@ -2,8 +2,6 @@ package com.canerture.editprofile.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.canerture.core.common.fold
-import com.canerture.core.common.onSuccess
 import com.canerture.core.common.orZero
 import com.canerture.editprofile.domain.usecase.GetAvatarsUseCase
 import com.canerture.editprofile.domain.usecase.GetProfileUseCase
@@ -36,13 +34,24 @@ internal class EditProfileViewModel @Inject constructor(
             when (uiAction) {
                 UiAction.OnBackClick -> emitUiEffect(UiEffect.NavigateBack)
                 UiAction.OnChangeAvatarClick -> updateUiState { copy(isAvatarsDialogVisible = true) }
-                UiAction.OnDialogDismiss -> updateUiState { copy(dialogState = null, isAvatarsDialogVisible = false) }
+                UiAction.OnDialogDismiss -> updateUiState {
+                    copy(
+                        dialogState = null,
+                        isAvatarsDialogVisible = false
+                    )
+                }
+
                 UiAction.OnSaveClick -> saveProfile()
                 is UiAction.OnEmailChange -> updateUiState { copy(email = uiAction.email) }
                 is UiAction.OnUsernameChange -> updateUiState { copy(username = uiAction.username) }
                 is UiAction.OnPasswordChange -> updateUiState { copy(password = uiAction.password) }
                 is UiAction.OnAvatarSelected -> {
-                    updateUiState { copy(avatarUrl = uiAction.avatar.url, isAvatarsDialogVisible = false) }
+                    updateUiState {
+                        copy(
+                            avatarUrl = uiAction.avatar.url,
+                            isAvatarsDialogVisible = false
+                        )
+                    }
                 }
             }
         }
@@ -74,17 +83,28 @@ internal class EditProfileViewModel @Inject constructor(
         viewModelScope.launch {
             updateUiState { copy(isLoading = true) }
             val selectedAvatarId = currentUiState.selectedAvatar?.id
-            val foundAvatarId = currentUiState.avatars.find { it.url == currentUiState.avatarUrl }?.id.orZero()
+            val foundAvatarId =
+                currentUiState.avatars.find { it.url == currentUiState.avatarUrl }?.id.orZero()
             saveProfileUseCase(
                 email = currentUiState.email,
                 username = currentUiState.username,
                 password = currentUiState.password,
                 avatarId = selectedAvatarId ?: foundAvatarId,
             ).fold(
-                onSuccess = { updateUiState { copy(dialogState = DialogState(it, true), isLoading = false) } },
-                onError = {
+                onSuccess = {
                     updateUiState {
-                        copy(dialogState = DialogState(it.message.orEmpty(), false), isLoading = false)
+                        copy(
+                            dialogState = DialogState(it, true),
+                            isLoading = false,
+                        )
+                    }
+                },
+                onFailure = {
+                    updateUiState {
+                        copy(
+                            dialogState = DialogState(it.message.orEmpty(), false),
+                            isLoading = false,
+                        )
                     }
                 }
             )

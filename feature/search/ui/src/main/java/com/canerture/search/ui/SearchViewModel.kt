@@ -2,7 +2,6 @@ package com.canerture.search.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.canerture.core.common.fold
 import com.canerture.search.domain.usecase.SearchQuizUseCase
 import com.canerture.search.ui.SearchContract.UiAction
 import com.canerture.search.ui.SearchContract.UiEffect
@@ -44,7 +43,7 @@ internal class SearchViewModel @Inject constructor(
         updateUiState { copy(isLoading = true) }
         searchQuizUseCase("").fold(
             onSuccess = { updateUiState { copy(initialQuizList = it, quizList = it, isLoading = false) } },
-            onError = { updateUiState { copy(initialQuizList = emptyList(), isLoading = false) } }
+            onFailure = { updateUiState { copy(initialQuizList = emptyList(), isLoading = false) } }
         )
     }
 
@@ -52,7 +51,7 @@ internal class SearchViewModel @Inject constructor(
         updateUiState { copy(isLoading = true) }
         searchQuizUseCase(currentUiState.query).fold(
             onSuccess = { updateUiState { copy(quizList = it, isLoading = false) } },
-            onError = { updateUiState { copy(quizList = emptyList(), isLoading = false) } }
+            onFailure = { updateUiState { copy(quizList = emptyList(), isLoading = false) } }
         )
     }
 }

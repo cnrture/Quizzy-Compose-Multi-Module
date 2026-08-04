@@ -1,7 +1,5 @@
 package com.canerture.splash.data.repository
 
-import com.canerture.core.common.Resource
-import com.canerture.core.common.onSuccess
 import com.canerture.core.common.toUnit
 import com.canerture.datasource.profile.ProfileDataSource
 import com.canerture.datastore.DataStoreHelper
@@ -19,7 +17,7 @@ internal class SplashRepositoryImpl @Inject constructor(
     private val profileDataSource: ProfileDataSource,
 ) : SplashRepository {
 
-    override suspend fun checkUserLoggedIn(): Resource<Unit> {
+    override suspend fun checkUserLoggedIn(): Result<Unit> {
         val token = dataStore.getToken().firstOrNull().orEmpty()
         return safeApiCall { api.checkToken(CheckTokenRequest(token)) }.onSuccess {
             dataStore.saveToken(it.data?.token.orEmpty())
@@ -27,7 +25,7 @@ internal class SplashRepositoryImpl @Inject constructor(
         }.toUnit()
     }
 
-    private suspend fun getUser(): Resource<Unit> {
+    private suspend fun getUser(): Result<Unit> {
         return safeApiCall { api.getUser() }.onSuccess {
             profileDataSource.save(it.data.toModel())
         }.toUnit()

@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.canerture.core.common.fold
 import com.canerture.core.common.orZero
 import com.canerture.detail.domain.usecase.AddFavoriteUseCase
 import com.canerture.detail.domain.usecase.DeleteFavoriteUseCase
@@ -48,7 +47,7 @@ internal class DetailViewModel @Inject constructor(
         updateUiState { copy(isLoading = true) }
         getQuizDetailUseCase(id).fold(
             onSuccess = { updateUiState { copy(quiz = it, isFavorite = it.isFavorite, isLoading = false) } },
-            onError = {
+            onFailure = {
                 updateUiState { copy(dialogState = DialogState(it.message, false), isLoading = false) }
             }
         )
@@ -63,7 +62,7 @@ internal class DetailViewModel @Inject constructor(
                     updateUiState { copy(isFavorite = false, isLoading = false) }
                     emitUiEffect(UiEffect.ShowToast(it))
                 },
-                onError = {
+                onFailure = {
                     updateUiState { copy(isLoading = false) }
                     emitUiEffect(UiEffect.ShowToast(it.message.orEmpty()))
                 }
@@ -74,7 +73,7 @@ internal class DetailViewModel @Inject constructor(
                     updateUiState { copy(isFavorite = true, isLoading = false) }
                     emitUiEffect(UiEffect.ShowToast(it))
                 },
-                onError = {
+                onFailure = {
                     updateUiState { copy(isLoading = false) }
                     emitUiEffect(UiEffect.ShowToast(it.message.orEmpty()))
                 }

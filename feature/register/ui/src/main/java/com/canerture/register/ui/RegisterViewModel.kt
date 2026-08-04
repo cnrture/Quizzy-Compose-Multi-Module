@@ -2,7 +2,6 @@ package com.canerture.register.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.canerture.core.common.fold
 import com.canerture.register.domain.usecase.RegisterUseCase
 import com.canerture.register.ui.RegisterContract.UiAction
 import com.canerture.register.ui.RegisterContract.UiEffect
@@ -65,7 +64,7 @@ internal class RegisterViewModel @Inject constructor(
         updateUiState { copy(isLoading = true) }
         registerUseCase(currentUiState.email, currentUiState.username, currentUiState.password).fold(
             onSuccess = { updateUiState { setSuccessDialog(it) } },
-            onError = { updateUiState { setErrorDialog(it.message) } }
+            onFailure = { updateUiState { setErrorDialog(it.message) } }
         )
     }
 }

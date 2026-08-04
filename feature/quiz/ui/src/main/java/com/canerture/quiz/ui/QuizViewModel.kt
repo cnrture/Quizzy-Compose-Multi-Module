@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.canerture.core.common.fold
 import com.canerture.quiz.domain.model.OptionModel
 import com.canerture.quiz.domain.usecase.CalculateScoreUseCase
 import com.canerture.quiz.domain.usecase.GetQuizUseCase
@@ -64,7 +63,7 @@ internal class QuizViewModel @Inject constructor(
                     )
                 }
             },
-            onError = {
+            onFailure = {
                 updateUiState { copy(dialogState = DialogState(it.message, false), isLoading = false) }
             }
         )
@@ -90,7 +89,7 @@ internal class QuizViewModel @Inject constructor(
                     )
                 )
             },
-            onError = {
+            onFailure = {
                 updateUiState { copy(isLoading = false) }
                 emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
             }

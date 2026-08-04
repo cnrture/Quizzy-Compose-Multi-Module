@@ -2,7 +2,6 @@ package com.canerture.leaderboard.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.canerture.core.common.fold
 import com.canerture.leaderboard.domain.usecase.GetLeaderboardUseCase
 import com.canerture.leaderboard.ui.LeaderboardContract.UiEffect
 import com.canerture.leaderboard.ui.LeaderboardContract.UiState
@@ -38,7 +37,7 @@ internal class LeaderboardViewModel @Inject constructor(
                         )
                     }
                 },
-                onError = {
+                onFailure = {
                     updateUiState { copy(isLoading = false) }
                     emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
                 }

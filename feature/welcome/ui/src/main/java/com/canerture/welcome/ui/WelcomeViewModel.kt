@@ -2,7 +2,6 @@ package com.canerture.welcome.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.canerture.core.common.Resource
 import com.canerture.ui.components.DialogState
 import com.canerture.ui.delegate.mvi.MVI
 import com.canerture.ui.delegate.mvi.mvi
@@ -33,14 +32,16 @@ internal class WelcomeViewModel @Inject constructor(
 
     private fun loginWithGoogle() = viewModelScope.launch {
         updateUiState { copy(isLoading = true) }
-        when (val result = loginWithGoogleUseCase()) {
-            is Resource.Success -> emitUiEffect(UiEffect.NavigateHome)
-            is Resource.Error -> updateUiState {
-                copy(
-                    isLoading = false,
-                    dialogState = DialogState(result.exception.message, false),
-                )
-            }
-        }
+        loginWithGoogleUseCase().fold(
+            onSuccess = { emitUiEffect(UiEffect.NavigateHome) },
+            onFailure = {
+                updateUiState {
+                    copy(
+                        isLoading = false,
+                        dialogState = DialogState(it.message, false),
+                    )
+                }
+            },
+        )
     }
 }

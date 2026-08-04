@@ -1,8 +1,5 @@
 package com.canerture.login.data.repository
 
-import com.canerture.core.common.Resource
-import com.canerture.core.common.map
-import com.canerture.core.common.onSuccess
 import com.canerture.core.common.toUnit
 import com.canerture.datasource.logout.LogoutDataSource
 import com.canerture.datasource.profile.ProfileDataSource
@@ -22,7 +19,7 @@ internal class LoginRepositoryImpl @Inject constructor(
     private val profileDataSource: ProfileDataSource,
 ) : LoginRepository {
 
-    override suspend fun login(email: String, password: String): Resource<Unit> {
+    override suspend fun login(email: String, password: String): Result<Unit> {
         val request = LoginRequest(email, password)
         return safeApiCall { api.login(request) }.onSuccess {
             dataStore.saveToken(it.data?.token.orEmpty())
@@ -33,12 +30,14 @@ internal class LoginRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun sendResetPasswordMail(email: String): Resource<String> {
+    override suspend fun sendResetPasswordMail(email: String): Result<String> {
         val request = ResetPasswordRequest(email)
         return safeApiCall { api.sendResetPasswordMail(request) }.map { it.message.orEmpty() }
     }
 
-    private suspend fun getUser(): Resource<Unit> {
-        return safeApiCall { api.getUser() }.onSuccess { profileDataSource.save(it.data.toModel()) }.toUnit()
+    private suspend fun getUser(): Result<Unit> {
+        return safeApiCall { api.getUser() }.onSuccess {
+            profileDataSource.save(it.data.toModel())
+        }.toUnit()
     }
 }

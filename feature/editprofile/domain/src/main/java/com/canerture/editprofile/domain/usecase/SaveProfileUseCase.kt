@@ -1,6 +1,5 @@
 package com.canerture.editprofile.domain.usecase
 
-import com.canerture.core.common.Resource
 import com.canerture.editprofile.domain.repository.EditProfileRepository
 import javax.inject.Inject
 
@@ -12,5 +11,5 @@ class SaveProfileUseCase @Inject constructor(
         username: String,
         password: String,
         avatarId: Int,
-    ): Resource<String> = repository.saveProfile(email, username, password, avatarId)
+    ): Result<String> = repository.saveProfile(email, username, password, avatarId)
 }

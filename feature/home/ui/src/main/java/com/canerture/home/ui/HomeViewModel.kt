@@ -2,7 +2,6 @@ package com.canerture.home.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.canerture.core.common.fold
 import com.canerture.home.domain.usecase.GetCategoriesUseCase
 import com.canerture.home.domain.usecase.GetPopularQuizzesUseCase
 import com.canerture.home.domain.usecase.GetUsernameUseCase
@@ -46,7 +45,7 @@ internal class HomeViewModel @Inject constructor(
         updateUiState { copy(isLoading = true) }
         getCategoriesUseCase().fold(
             onSuccess = { updateUiState { copy(categories = it, isLoading = false) } },
-            onError = {
+            onFailure = {
                 updateUiState { copy(isLoading = false) }
                 emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
             }
@@ -57,7 +56,7 @@ internal class HomeViewModel @Inject constructor(
         updateUiState { copy(isLoading = true) }
         getPopularQuizzesUseCase().fold(
             onSuccess = { updateUiState { copy(popularQuizzes = it, isLoading = false) } },
-            onError = {
+            onFailure = {
                 updateUiState { copy(isLoading = false) }
                 emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
             }

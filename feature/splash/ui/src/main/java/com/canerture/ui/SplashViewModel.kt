@@ -2,7 +2,6 @@ package com.canerture.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.canerture.core.common.fold
 import com.canerture.splash.domain.usecase.CheckUserLoggedInUseCase
 import com.canerture.ui.SplashContract.UiEffect
 import com.canerture.ui.delegate.mvi.MVI
@@ -26,7 +25,7 @@ internal class SplashViewModel @Inject constructor(
         delay(2000)
         checkUserLoggedInUseCase().fold(
             onSuccess = { emitUiEffect(UiEffect.NavigateHome) },
-            onError = { emitUiEffect(UiEffect.NavigateWelcome) },
+            onFailure = { emitUiEffect(UiEffect.NavigateWelcome) },
         )
     }
 }

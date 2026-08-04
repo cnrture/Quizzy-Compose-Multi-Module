@@ -1,8 +1,5 @@
 package com.canerture.profile.data.repository
 
-import com.canerture.core.common.Resource
-import com.canerture.core.common.map
-import com.canerture.core.common.onSuccess
 import com.canerture.datasource.profile.ProfileDataSource
 import com.canerture.datastore.DataStoreHelper
 import com.canerture.network.safeApiCall
@@ -20,17 +17,17 @@ internal class ProfileRepositoryImpl @Inject constructor(
     private val profileDataSource: ProfileDataSource,
     private val dataStoreHelper: DataStoreHelper,
 ) : ProfileRepository {
-    override fun getProfile(): Flow<Resource<ProfileModel>> {
+    override fun getProfile(): Flow<Result<ProfileModel>> {
         return profileDataSource.get().map {
             if (it.username.isNotEmpty()) {
-                Resource.Success(it.toModel())
+                Result.success(it.toModel())
             } else {
                 getProfileFromApi()
             }
         }
     }
 
-    override suspend fun getRank(): Resource<RankModel> {
+    override suspend fun getRank(): Result<RankModel> {
         return safeApiCall { api.getRank() }.map { it.data.toModel() }
     }
 
@@ -39,7 +36,7 @@ internal class ProfileRepositoryImpl @Inject constructor(
         dataStoreHelper.clear()
     }
 
-    private suspend fun getProfileFromApi(): Resource<ProfileModel> {
+    private suspend fun getProfileFromApi(): Result<ProfileModel> {
         return safeApiCall { api.getProfile() }.map {
             it.data.toModel()
         }.onSuccess {

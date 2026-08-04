@@ -9,7 +9,6 @@ import com.canerture.category.ui.CategoryContract.UiAction
 import com.canerture.category.ui.CategoryContract.UiEffect
 import com.canerture.category.ui.CategoryContract.UiState
 import com.canerture.category.ui.navigation.Category
-import com.canerture.core.common.fold
 import com.canerture.ui.components.DialogState
 import com.canerture.ui.delegate.mvi.MVI
 import com.canerture.ui.delegate.mvi.mvi
@@ -44,8 +43,13 @@ internal class CategoryViewModel @Inject constructor(
             updateUiState { copy(isLoading = true) }
             getQuizzesByCategoryUseCase(categoryId).fold(
                 onSuccess = { updateUiState { copy(quizzes = it, isLoading = false) } },
-                onError = {
-                    updateUiState { copy(dialogState = DialogState(it.message, false), isLoading = false) }
+                onFailure = {
+                    updateUiState {
+                        copy(
+                            dialogState = DialogState(it.message, false),
+                            isLoading = false
+                        )
+                    }
                 }
             )
         }

@@ -6,9 +6,7 @@ import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
 import com.canerture.core.common.AuthorizationException
-import com.canerture.core.common.Resource
 import com.canerture.core.common.UnknownException
-import com.canerture.core.common.onSuccess
 import com.canerture.core.common.toUnit
 import com.canerture.datasource.profile.ProfileDataSource
 import com.canerture.datastore.DataStoreHelper
@@ -37,12 +35,12 @@ internal class WelcomeRepositoryImpl @Inject constructor(
 
     private val credentialManager = CredentialManager.create(context)
 
-    override suspend fun loginWithGoogle(): Resource<Unit> {
-        val tokenResource = getIdToken()
-        if (tokenResource is Resource.Error) return Resource.Error(tokenResource.exception)
+    override suspend fun loginWithGoogle(): Result<Unit> {
+        val tokenResult = getIdToken()
+        tokenResult.exceptionOrNull()?.let { return Result.failure(it) }
 
         return safeApiCall {
-            val token = (tokenResource as Resource.Success).data
+            val token = tokenResult.getOrNull().orEmpty()
             api.loginWithGoogle(GoogleLoginRequest(token))
         }.onSuccess {
             dataStore.saveToken(it.data?.token.orEmpty())
@@ -50,16 +48,16 @@ internal class WelcomeRepositoryImpl @Inject constructor(
         }.toUnit()
     }
 
-    private suspend fun getIdToken(): Resource<String> {
+    private suspend fun getIdToken(): Result<String> {
         try {
             val result = buildCredentialRequest()
             return handleSingIn(result)
         } catch (e: Exception) {
-            return Resource.Error(UnknownException(e.localizedMessage.orEmpty()))
+            return Result.failure(UnknownException(e.localizedMessage.orEmpty()))
         }
     }
 
-    private suspend fun handleSingIn(result: GetCredentialResponse): Resource<String> {
+    private suspend fun handleSingIn(result: GetCredentialResponse): Result<String> {
         val credential = result.credential
 
         if (
@@ -72,15 +70,15 @@ internal class WelcomeRepositoryImpl @Inject constructor(
                 val authResult = firebaseAuth.signInWithCredential(authCredential).await()
 
                 return if (authResult.user != null) {
-                    Resource.Success(tokenCredential.idToken)
+                    Result.success(tokenCredential.idToken)
                 } else {
-                    Resource.Error(AuthorizationException())
+                    Result.failure(AuthorizationException())
                 }
             } catch (e: GoogleIdTokenParsingException) {
-                return Resource.Error(UnknownException(e.localizedMessage.orEmpty()))
+                return Result.failure(UnknownException(e.localizedMessage.orEmpty()))
             }
         } else {
-            return Resource.Error(UnknownException())
+            return Result.failure(UnknownException())
         }
     }
 
@@ -97,7 +95,7 @@ internal class WelcomeRepositoryImpl @Inject constructor(
         return credentialManager.getCredential(context, request)
     }
 
-    private suspend fun getUser(): Resource<Unit> {
+    private suspend fun getUser(): Result<Unit> {
         return safeApiCall { api.getUser() }.onSuccess {
             profileDataSource.save(it.data.toModel())
         }.toUnit()

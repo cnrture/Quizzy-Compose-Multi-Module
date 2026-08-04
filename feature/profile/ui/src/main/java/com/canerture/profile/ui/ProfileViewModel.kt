@@ -2,7 +2,6 @@ package com.canerture.profile.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.canerture.core.common.fold
 import com.canerture.profile.domain.usecase.GetProfileUseCase
 import com.canerture.profile.domain.usecase.GetRankUseCase
 import com.canerture.profile.domain.usecase.LogoutUseCase
@@ -40,10 +39,10 @@ internal class ProfileViewModel @Inject constructor(
     private fun getProfile() {
         viewModelScope.launch {
             updateUiState { copy(isLoading = true) }
-            getProfileUseCase().collect { resource ->
-                resource.fold(
+            getProfileUseCase().collect { Result ->
+                Result.fold(
                     onSuccess = { updateUiState { copy(profile = it, isLoading = false) } },
-                    onError = {
+                    onFailure = {
                         updateUiState { copy(isLoading = false) }
                         emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
                     }
@@ -57,7 +56,7 @@ internal class ProfileViewModel @Inject constructor(
             updateUiState { copy(isLoading = true) }
             getRankUseCase().fold(
                 onSuccess = { updateUiState { copy(rank = it, isLoading = false) } },
-                onError = {
+                onFailure = {
                     updateUiState { copy(isLoading = false) }
                     emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
                 }

@@ -2,7 +2,6 @@ package com.canerture.login.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.canerture.core.common.fold
 import com.canerture.login.domain.usecase.LoginUseCase
 import com.canerture.login.domain.usecase.SendResetPasswordMailUseCase
 import com.canerture.login.ui.LoginContract.UiAction
@@ -50,7 +49,7 @@ internal class LoginViewModel @Inject constructor(
         updateUiState { copy(isLoading = true) }
         loginUseCase(currentUiState.email, currentUiState.password).fold(
             onSuccess = { emitUiEffect(UiEffect.NavigateHome) },
-            onError = {
+            onFailure = {
                 updateUiState {
                     copy(
                         isLoading = false,
@@ -67,7 +66,7 @@ internal class LoginViewModel @Inject constructor(
             onSuccess = {
                 updateUiState { copy(isLoading = false, dialogState = DialogState(isSuccess = true, message = it)) }
             },
-            onError = {
+            onFailure = {
                 updateUiState {
                     copy(isLoading = false, dialogState = DialogState(isSuccess = false, message = it.message))
                 }

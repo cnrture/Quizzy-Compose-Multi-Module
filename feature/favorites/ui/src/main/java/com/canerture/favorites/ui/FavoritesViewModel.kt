@@ -2,7 +2,6 @@ package com.canerture.favorites.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.canerture.core.common.fold
 import com.canerture.favorites.domain.model.FavoriteModel
 import com.canerture.favorites.domain.usecase.DeleteFavoriteUseCase
 import com.canerture.favorites.domain.usecase.GetFavoritesUseCase
@@ -39,7 +38,7 @@ internal class FavoritesViewModel @Inject constructor(
         updateUiState { copy(isLoading = true) }
         getFavoritesUseCase().fold(
             onSuccess = { updateUiState { copy(favorites = it, isLoading = false) } },
-            onError = { updateUiState { copy(isLoading = false) } }
+            onFailure = { updateUiState { copy(isLoading = false) } }
         )
     }
 
@@ -47,7 +46,7 @@ internal class FavoritesViewModel @Inject constructor(
         updateUiState { copy(isLoading = true) }
         deleteFavoriteUseCase(item.id).fold(
             onSuccess = { getFavorites() },
-            onError = {
+            onFailure = {
                 updateUiState { copy(isLoading = false) }
                 emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
             }
