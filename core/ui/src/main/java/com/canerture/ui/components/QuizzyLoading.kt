@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun QuizAppLoading() {
+fun QuizzyLoading() {
     Box(
         modifier = Modifier
             .fillMaxSize()

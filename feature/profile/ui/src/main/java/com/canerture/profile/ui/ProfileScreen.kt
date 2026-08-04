@@ -22,13 +22,13 @@ import com.canerture.profile.ui.ProfileContract.UiAction
 import com.canerture.profile.ui.ProfileContract.UiEffect
 import com.canerture.profile.ui.ProfileContract.UiState
 import com.canerture.profile.ui.component.RankItem
-import com.canerture.ui.components.QuizAppAsyncImage
-import com.canerture.ui.components.QuizAppButton
-import com.canerture.ui.components.QuizAppButtonSize
-import com.canerture.ui.components.QuizAppButtonType
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppText
-import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzyButton
+import com.canerture.ui.components.QuizzyButtonSize
+import com.canerture.ui.components.QuizzyButtonType
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyText
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
@@ -56,7 +56,7 @@ internal fun ProfileScreen(
 
     QuizzyScaffold(
         topBar = {
-            QuizAppToolbar(
+            QuizzyToolbar(
                 title = stringResource(R.string.profile_title),
                 endIcon = QuizAppTheme.icons.exit,
                 onEndIconClick = { onAction(UiAction.OnLogoutClick) },
@@ -73,7 +73,7 @@ internal fun ProfileScreen(
         )
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 }
 
 @Composable
@@ -86,7 +86,7 @@ internal fun ProfileContent(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        QuizAppAsyncImage(
+        QuizzyAsyncImage(
             modifier = Modifier
                 .size(180.dp)
                 .background(
@@ -99,20 +99,20 @@ internal fun ProfileContent(
             contentDescription = "",
         )
         Spacer(modifier = Modifier.height(32.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.nickname, uiState.profile?.username.orEmpty()),
             style = QuizAppTheme.typography.heading3,
             color = QuizAppTheme.colors.onBackground,
         )
         Spacer(modifier = Modifier.height(24.dp))
-        QuizAppButton(
+        QuizzyButton(
             text = stringResource(R.string.edit_profile),
-            type = QuizAppButtonType.SECONDARY,
-            size = QuizAppButtonSize.SMALL,
+            type = QuizzyButtonType.SECONDARY,
+            size = QuizzyButtonSize.SMALL,
             onClick = onEditProfileClick,
         )
         Spacer(modifier = Modifier.height(48.dp))
-        QuizAppText(
+        QuizzyText(
             modifier = Modifier.align(Alignment.Start),
             text = stringResource(R.string.your_rank),
             style = QuizAppTheme.typography.heading3,

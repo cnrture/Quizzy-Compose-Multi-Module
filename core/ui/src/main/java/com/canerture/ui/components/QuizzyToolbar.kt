@@ -24,7 +24,7 @@ import com.canerture.core.ui.R
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun QuizAppToolbar(
+fun QuizzyToolbar(
     title: String? = null,
     titleSpan: String? = null,
     titleStyle: TextStyle = QuizAppTheme.typography.heading2,
@@ -60,14 +60,14 @@ fun QuizAppToolbar(
         }
         title?.let {
             if (titleSpan != null) {
-                QuizAppText(
+                QuizzyText(
                     modifier = Modifier.align(Alignment.CenterStart),
                     fullText = title,
                     spanTexts = listOf(titleSpan),
                     style = titleStyle,
                 )
             } else {
-                QuizAppText(
+                QuizzyText(
                     modifier = Modifier.align(Alignment.CenterStart),
                     text = title,
                     style = titleStyle,
@@ -106,25 +106,25 @@ fun QuizAppToolbar(
 
 @PreviewLightDark
 @Composable
-private fun QuizAppToolbarPreview() {
+private fun QuizzyToolbarPreview() {
     Column {
-        QuizAppToolbar(
+        QuizzyToolbar(
             onBackClick = { },
             endIcon = QuizAppTheme.icons.settings,
             onEndIconClick = { },
         )
         Spacer(modifier = Modifier.height(12.dp))
-        QuizAppToolbar(
+        QuizzyToolbar(
             title = "Title",
             endIcon = QuizAppTheme.icons.settings,
             onEndIconClick = { },
         )
         Spacer(modifier = Modifier.height(12.dp))
-        QuizAppToolbar(
+        QuizzyToolbar(
             title = "Title",
             content = {
                 Row {
-                    QuizAppText(text = "Content")
+                    QuizzyText(text = "Content")
                 }
             },
             endIcon = QuizAppTheme.icons.settings,

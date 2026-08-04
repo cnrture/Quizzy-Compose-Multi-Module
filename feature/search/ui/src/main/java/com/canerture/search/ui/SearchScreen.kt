@@ -18,9 +18,9 @@ import com.canerture.search.ui.SearchContract.UiEffect
 import com.canerture.search.ui.SearchContract.UiState
 import com.canerture.search.ui.component.EmptyScreenContent
 import com.canerture.search.ui.component.QuizItem
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppSearchBar
-import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzySearchBar
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import kotlinx.coroutines.flow.Flow
@@ -43,7 +43,7 @@ internal fun SearchScreen(
 
     QuizzyScaffold(
         topBar = {
-            QuizAppToolbar(
+            QuizzyToolbar(
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
         },
@@ -57,7 +57,7 @@ internal fun SearchScreen(
         )
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 }
 
 @Composable
@@ -69,7 +69,7 @@ internal fun SearchContent(
     Column(
         modifier = modifier,
     ) {
-        QuizAppSearchBar(
+        QuizzySearchBar(
             modifier = Modifier.padding(horizontal = 32.dp),
             value = uiState.query,
             onValueChange = { onAction(UiAction.OnQueryChange(it)) },

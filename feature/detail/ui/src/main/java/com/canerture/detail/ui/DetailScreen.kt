@@ -31,11 +31,11 @@ import com.canerture.detail.ui.DetailContract.UiEffect
 import com.canerture.detail.ui.DetailContract.UiState
 import com.canerture.detail.ui.component.StartQuizButton
 import com.canerture.feature.detail.ui.R
-import com.canerture.ui.components.QuizAppAsyncImage
-import com.canerture.ui.components.QuizAppDialog
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppText
-import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzyDialog
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyText
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
@@ -63,7 +63,7 @@ internal fun DetailScreen(
 
     QuizzyScaffold(
         topBar = {
-            QuizAppToolbar(
+            QuizzyToolbar(
                 endIcon = if (uiState.isFavorite) QuizAppTheme.icons.starSelected else QuizAppTheme.icons.starUnselected,
                 onEndIconClick = { onAction(UiAction.OnFavoriteClick) },
                 onBackClick = { onAction(UiAction.OnBackClick) },
@@ -85,10 +85,10 @@ internal fun DetailScreen(
         )
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 
     if (uiState.dialogState != null) {
-        QuizAppDialog(
+        QuizzyDialog(
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnBackClick) },
@@ -106,7 +106,7 @@ internal fun DetailContent(
     Column(
         modifier = modifier,
     ) {
-        QuizAppAsyncImage(
+        QuizzyAsyncImage(
             modifier = Modifier
                 .aspectRatio(1f)
                 .clip(RoundedCornerShape(16.dp))
@@ -115,12 +115,12 @@ internal fun DetailContent(
             contentDescription = stringResource(R.string.quiz_image),
         )
         Spacer(modifier = Modifier.height(24.dp))
-        QuizAppText(
+        QuizzyText(
             text = quiz.category,
             style = QuizAppTheme.typography.subheading2,
         )
         Spacer(modifier = Modifier.height(8.dp))
-        QuizAppText(
+        QuizzyText(
             text = quiz.name,
             style = QuizAppTheme.typography.heading2,
         )
@@ -136,7 +136,7 @@ internal fun DetailContent(
                 tint = QuizAppTheme.colors.lightYellow,
             )
             Spacer(modifier = Modifier.width(8.dp))
-            QuizAppText(
+            QuizzyText(
                 text = stringResource(R.string.score, quiz.score),
                 style = QuizAppTheme.typography.subheading2,
             )
@@ -150,12 +150,12 @@ internal fun DetailContent(
                 modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                QuizAppText(
+                QuizzyText(
                     text = quiz.questionCountStr,
                     style = QuizAppTheme.typography.heading3,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
-                QuizAppText(
+                QuizzyText(
                     text = stringResource(R.string.question),
                     style = QuizAppTheme.typography.paragraph2,
                 )
@@ -169,12 +169,12 @@ internal fun DetailContent(
                 modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                QuizAppText(
+                QuizzyText(
                     text = quiz.playedCountStr,
                     style = QuizAppTheme.typography.heading3,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
-                QuizAppText(
+                QuizzyText(
                     text = stringResource(R.string.played),
                     style = QuizAppTheme.typography.paragraph2,
                 )
@@ -188,24 +188,24 @@ internal fun DetailContent(
                 modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                QuizAppText(
+                QuizzyText(
                     text = quiz.favoriteCountStr,
                     style = QuizAppTheme.typography.heading3,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
-                QuizAppText(
+                QuizzyText(
                     text = stringResource(R.string.favorites),
                     style = QuizAppTheme.typography.paragraph2,
                 )
             }
         }
         Spacer(modifier = Modifier.height(24.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.description),
             style = QuizAppTheme.typography.heading4,
         )
         Spacer(modifier = Modifier.height(8.dp))
-        QuizAppText(
+        QuizzyText(
             text = quiz.description,
             style = QuizAppTheme.typography.paragraph2,
         )

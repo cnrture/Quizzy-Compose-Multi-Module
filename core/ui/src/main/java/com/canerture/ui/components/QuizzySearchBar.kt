@@ -25,7 +25,7 @@ import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun QuizAppSearchBar(
+fun QuizzySearchBar(
     modifier: Modifier = Modifier,
     value: String = "",
     onClick: (() -> Unit)? = null,
@@ -62,7 +62,7 @@ fun QuizAppSearchBar(
                         contentDescription = stringResource(R.string.search_icon),
                     )
                     if (value.isBlank()) {
-                        QuizAppText(
+                        QuizzyText(
                             text = stringResource(R.string.search),
                             style = QuizAppTheme.typography.paragraph1,
                             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f)
@@ -78,8 +78,8 @@ fun QuizAppSearchBar(
 
 @PreviewLightDark
 @Composable
-private fun QuizAppSearchBarPreview() {
-    QuizAppSearchBar(
+private fun QuizzySearchBarPreview() {
+    QuizzySearchBar(
         value = "QuizAppSearchBar",
         onValueChange = {},
     )

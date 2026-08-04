@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.detail.ui.R
-import com.canerture.ui.components.QuizAppButton
+import com.canerture.ui.components.QuizzyButton
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
@@ -26,7 +26,7 @@ internal fun StartQuizButton(
             thickness = 2.dp,
             color = QuizAppTheme.colors.onBackground,
         )
-        QuizAppButton(
+        QuizzyButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp, vertical = 16.dp),

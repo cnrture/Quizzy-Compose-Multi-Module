@@ -24,10 +24,10 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.canerture.editprofile.domain.model.AvatarModel
 import com.canerture.feature.editprofile.ui.R
-import com.canerture.ui.components.QuizAppAsyncImage
-import com.canerture.ui.components.QuizAppButton
-import com.canerture.ui.components.QuizAppButtonSize
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzyButton
+import com.canerture.ui.components.QuizzyButtonSize
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
@@ -55,7 +55,7 @@ internal fun AvatarsDialog(
                 .padding(32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            QuizAppText(
+            QuizzyText(
                 text = stringResource(R.string.select_avatar),
                 style = QuizAppTheme.typography.heading3,
             )
@@ -65,7 +65,7 @@ internal fun AvatarsDialog(
                 columns = GridCells.Fixed(3),
             ) {
                 items(avatars.size) { index ->
-                    QuizAppAsyncImage(
+                    QuizzyAsyncImage(
                         modifier = Modifier
                             .padding(4.dp)
                             .aspectRatio(1f)
@@ -83,9 +83,9 @@ internal fun AvatarsDialog(
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
-            QuizAppButton(
+            QuizzyButton(
                 modifier = Modifier.fillMaxWidth(),
-                size = QuizAppButtonSize.SMALL,
+                size = QuizzyButtonSize.SMALL,
                 text = stringResource(R.string.close),
                 onClick = onDismiss,
             )

@@ -25,7 +25,7 @@ import com.canerture.quiz.ui.common.shake
 import com.canerture.quiz.ui.common.toBgColor
 import com.canerture.quiz.ui.common.toIcon
 import com.canerture.quiz.ui.common.toIconColor
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.conditional
 import com.canerture.ui.theme.QuizAppTheme
@@ -70,7 +70,7 @@ internal fun AnswerButton(
                 horizontal = 24.dp,
             ),
     ) {
-        QuizAppText(
+        QuizzyText(
             text = optionModel.option,
             style = QuizAppTheme.typography.heading5,
         )

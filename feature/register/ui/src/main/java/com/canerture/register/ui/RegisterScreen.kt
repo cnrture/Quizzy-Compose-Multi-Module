@@ -19,12 +19,12 @@ import com.canerture.feature.register.ui.R
 import com.canerture.register.ui.RegisterContract.UiAction
 import com.canerture.register.ui.RegisterContract.UiEffect
 import com.canerture.register.ui.RegisterContract.UiState
-import com.canerture.ui.components.QuizAppButton
-import com.canerture.ui.components.QuizAppDialog
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppText
-import com.canerture.ui.components.QuizAppTextField
-import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyButton
+import com.canerture.ui.components.QuizzyDialog
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyText
+import com.canerture.ui.components.QuizzyTextField
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.extensions.noRippleClickable
@@ -49,7 +49,7 @@ internal fun RegisterScreen(
 
     QuizzyScaffold(
         topBar = {
-            QuizAppToolbar(
+            QuizzyToolbar(
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
         },
@@ -69,10 +69,10 @@ internal fun RegisterScreen(
         )
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 
     if (uiState.dialogState != null) {
-        QuizAppDialog(
+        QuizzyDialog(
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnDialogDismiss) },
@@ -95,17 +95,17 @@ internal fun RegisterContent(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.welcome),
             style = QuizAppTheme.typography.heading1,
         )
         Spacer(modifier = Modifier.height(8.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.register_message),
             style = QuizAppTheme.typography.paragraph1,
         )
         Spacer(modifier = Modifier.height(40.dp))
-        QuizAppTextField(
+        QuizzyTextField(
             value = uiState.email,
             label = stringResource(R.string.register_email),
             icon = QuizAppTheme.icons.email,
@@ -113,14 +113,14 @@ internal fun RegisterContent(
             onValueChange = { onEmailChange(it) },
         )
         Spacer(modifier = Modifier.height(12.dp))
-        QuizAppTextField(
+        QuizzyTextField(
             value = uiState.username,
             label = stringResource(R.string.register_username),
             icon = QuizAppTheme.icons.profileUnselected,
             onValueChange = { onUsernameChange(it) },
         )
         Spacer(modifier = Modifier.height(12.dp))
-        QuizAppTextField(
+        QuizzyTextField(
             value = uiState.password,
             label = stringResource(R.string.password),
             icon = QuizAppTheme.icons.lock,
@@ -128,7 +128,7 @@ internal fun RegisterContent(
             onValueChange = { onPasswordChange(it) },
         )
         Spacer(modifier = Modifier.height(12.dp))
-        QuizAppTextField(
+        QuizzyTextField(
             value = uiState.passwordAgain,
             label = stringResource(R.string.register_confirm_password),
             icon = QuizAppTheme.icons.lock,
@@ -136,14 +136,14 @@ internal fun RegisterContent(
             onValueChange = { onPasswordAgainChange(it) },
         )
         Spacer(modifier = Modifier.height(40.dp))
-        QuizAppButton(
+        QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.register),
             isEnable = uiState.isButtonEnable,
             onClick = { onRegisterClick() },
         )
         Spacer(modifier = Modifier.height(24.dp))
-        QuizAppText(
+        QuizzyText(
             modifier = Modifier.noRippleClickable { onLoginClick() },
             fullText = stringResource(R.string.already_have_an_account),
             spanTexts = listOf(stringResource(R.string.already_have_an_account_span)),
@@ -151,7 +151,7 @@ internal fun RegisterContent(
             textAlign = TextAlign.Center,
         )
         Spacer(modifier = Modifier.height(40.dp))
-        QuizAppText(
+        QuizzyText(
             fullText = stringResource(R.string.policy),
             spanTexts = listOf(
                 stringResource(R.string.privacy_policy_span),

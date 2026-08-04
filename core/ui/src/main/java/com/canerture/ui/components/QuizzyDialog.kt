@@ -27,7 +27,7 @@ data class DialogState(
 )
 
 @Composable
-fun QuizAppDialog(
+fun QuizzyDialog(
     message: String? = null,
     isSuccess: Boolean? = null,
     isCancelable: Boolean = true,
@@ -75,14 +75,14 @@ fun QuizAppDialog(
                     )
                 }
             }
-            QuizAppText(
+            QuizzyText(
                 text = if (message.isNullOrEmpty()) stringResource(R.string.success) else message,
                 style = QuizAppTheme.typography.subheading2,
                 textAlign = TextAlign.Center,
             )
-            QuizAppButton(
-                type = QuizAppButtonType.PRIMARY,
-                size = QuizAppButtonSize.MEDIUM,
+            QuizzyButton(
+                type = QuizzyButtonType.PRIMARY,
+                size = QuizzyButtonSize.MEDIUM,
                 text = stringResource(R.string.okay),
                 onClick = {
                     if (onButtonClick != null) {
@@ -98,8 +98,8 @@ fun QuizAppDialog(
 
 @PreviewLightDark
 @Composable
-fun QuizAppDialogPreview() {
-    QuizAppDialog(
+fun QuizzyDialogPreview() {
+    QuizzyDialog(
         isSuccess = true,
         message = "This is a sample error message",
     )

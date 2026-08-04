@@ -22,8 +22,8 @@ import com.canerture.favorites.ui.FavoritesContract.UiState
 import com.canerture.favorites.ui.component.EmptyScreenContent
 import com.canerture.favorites.ui.component.FavoriteQuizItem
 import com.canerture.feature.favorites.ui.R
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import kotlinx.coroutines.flow.Flow
@@ -47,7 +47,7 @@ internal fun FavoritesScreen(
 
     QuizzyScaffold(
         topBar = {
-            QuizAppToolbar(title = stringResource(R.string.favorites_title))
+            QuizzyToolbar(title = stringResource(R.string.favorites_title))
         },
     ) { paddingValues ->
         FavoritesContent(
@@ -60,7 +60,7 @@ internal fun FavoritesScreen(
         )
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 }
 
 @Composable

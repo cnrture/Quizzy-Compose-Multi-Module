@@ -30,10 +30,10 @@ import com.canerture.feature.summary.ui.R
 import com.canerture.result.ui.SummaryContract.UiAction
 import com.canerture.result.ui.SummaryContract.UiEffect
 import com.canerture.result.ui.SummaryContract.UiState
-import com.canerture.ui.components.QuizAppButton
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppText
-import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyButton
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyText
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
@@ -70,7 +70,7 @@ internal fun SummaryScreen(
 
         QuizzyScaffold(
             topBar = {
-                QuizAppToolbar(
+                QuizzyToolbar(
                     title = stringResource(R.string.summary_title),
                     endIcon = QuizAppTheme.icons.close,
                     onEndIconClick = { onAction(UiAction.OnCloseClick) },
@@ -89,7 +89,7 @@ internal fun SummaryScreen(
         }
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 }
 
 @Composable
@@ -144,13 +144,13 @@ internal fun SummaryContent(
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            QuizAppText(
+            QuizzyText(
                 text = resultText,
                 style = QuizAppTheme.typography.heading3,
                 textAlign = TextAlign.Center,
             )
             Spacer(modifier = Modifier.height(16.dp))
-            QuizAppText(
+            QuizzyText(
                 fullText = stringResource(R.string.summary_score, uiState.score),
                 spanTexts = listOf(stringResource(R.string.summary_score_span, uiState.score)),
                 style = QuizAppTheme.typography.paragraph1,
@@ -162,11 +162,11 @@ internal fun SummaryContent(
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    QuizAppText(
+                    QuizzyText(
                         text = uiState.correctAnswers,
                         style = QuizAppTheme.typography.heading2,
                     )
-                    QuizAppText(
+                    QuizzyText(
                         text = stringResource(R.string.correct),
                         style = QuizAppTheme.typography.paragraph2,
                     )
@@ -179,11 +179,11 @@ internal fun SummaryContent(
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    QuizAppText(
+                    QuizzyText(
                         text = uiState.wrongAnswers,
                         style = QuizAppTheme.typography.heading2,
                     )
-                    QuizAppText(
+                    QuizzyText(
                         text = stringResource(R.string.wrong),
                         style = QuizAppTheme.typography.paragraph2,
                     )
@@ -191,7 +191,7 @@ internal fun SummaryContent(
             }
         }
         Spacer(modifier = Modifier.height(48.dp))
-        QuizAppButton(
+        QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.play_again),
             onClick = { onPlayAgainClick() },

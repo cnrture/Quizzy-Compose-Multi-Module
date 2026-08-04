@@ -19,8 +19,8 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.profile.ui.R
 import com.canerture.profile.domain.model.RankModel
-import com.canerture.ui.components.QuizAppAsyncImage
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
 
@@ -41,12 +41,12 @@ internal fun RankItem(
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        QuizAppText(
+        QuizzyText(
             text = rank.rank,
             style = QuizAppTheme.typography.heading5,
         )
         Spacer(modifier = Modifier.width(16.dp))
-        QuizAppAsyncImage(
+        QuizzyAsyncImage(
             modifier = Modifier
                 .size(32.dp)
                 .clip(CircleShape)
@@ -55,7 +55,7 @@ internal fun RankItem(
             contentDescription = stringResource(R.string.profile_image),
         )
         Spacer(modifier = Modifier.width(8.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.nickname, username),
             style = QuizAppTheme.typography.paragraph2,
             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
@@ -68,7 +68,7 @@ internal fun RankItem(
             tint = QuizAppTheme.colors.onBackground,
         )
         Spacer(modifier = Modifier.width(8.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.score, rank.score),
             style = QuizAppTheme.typography.heading6,
         )

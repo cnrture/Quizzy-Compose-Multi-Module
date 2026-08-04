@@ -28,7 +28,7 @@ import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun QuizAppCheckBox(
+fun QuizzyCheckBox(
     modifier: Modifier = Modifier,
     isChecked: Boolean = false,
     text: String? = null,
@@ -73,7 +73,7 @@ fun QuizAppCheckBox(
         }
         text?.let {
             Spacer(modifier = Modifier.width(8.dp))
-            QuizAppText(
+            QuizzyText(
                 text = it,
                 style = style,
             )
@@ -83,15 +83,15 @@ fun QuizAppCheckBox(
 
 @PreviewLightDark
 @Composable
-private fun QuizAppCheckBoxPreview() {
+private fun QuizzyCheckBoxPreview() {
     Column {
-        QuizAppCheckBox(
+        QuizzyCheckBox(
             isChecked = false,
             text = "Check me",
             onCheckedChange = {}
         )
         Spacer(modifier = Modifier.height(16.dp))
-        QuizAppCheckBox(
+        QuizzyCheckBox(
             isChecked = true,
             text = "Check me",
             onCheckedChange = {}

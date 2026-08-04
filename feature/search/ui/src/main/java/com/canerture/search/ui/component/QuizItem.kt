@@ -20,8 +20,8 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.search.ui.R
 import com.canerture.search.domain.model.QuizModel
-import com.canerture.ui.components.QuizAppAsyncImage
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
@@ -42,7 +42,7 @@ internal fun QuizItem(
             .noRippleClickable { onQuizClick(item.id) },
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        QuizAppAsyncImage(
+        QuizzyAsyncImage(
             modifier = Modifier
                 .height(112.dp)
                 .aspectRatio(1f)
@@ -54,7 +54,7 @@ internal fun QuizItem(
             modifier = Modifier.padding(12.dp),
         ) {
             Column {
-                QuizAppText(
+                QuizzyText(
                     text = item.name,
                     style = QuizAppTheme.typography.heading3,
                 )
@@ -62,15 +62,15 @@ internal fun QuizItem(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    QuizAppText(
+                    QuizzyText(
                         text = stringResource(R.string.question_count, item.questionCount),
                         style = QuizAppTheme.typography.subheading3,
                     )
-                    QuizAppText(
+                    QuizzyText(
                         text = stringResource(R.string.hyphen),
                         style = QuizAppTheme.typography.subheading1,
                     )
-                    QuizAppText(
+                    QuizzyText(
                         text = item.category,
                         style = QuizAppTheme.typography.subheading3,
                         maxLines = 1,

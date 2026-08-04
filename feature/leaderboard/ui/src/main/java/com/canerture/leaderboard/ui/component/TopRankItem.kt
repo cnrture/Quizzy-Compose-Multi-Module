@@ -22,8 +22,8 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.leaderboard.ui.R
-import com.canerture.ui.components.QuizAppAsyncImage
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
 
@@ -43,7 +43,7 @@ internal fun TopRankItem(
         Box(
             contentAlignment = Alignment.Center,
         ) {
-            QuizAppAsyncImage(
+            QuizzyAsyncImage(
                 modifier = Modifier
                     .widthIn(max = width)
                     .aspectRatio(1f)
@@ -80,14 +80,14 @@ internal fun TopRankItem(
                     .boldBorder(100),
                 contentAlignment = Alignment.Center,
             ) {
-                QuizAppText(
+                QuizzyText(
                     text = rank.toString(),
                     style = QuizAppTheme.typography.heading3,
                 )
             }
         }
         Spacer(modifier = Modifier.height(32.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.nickname, username),
             style = QuizAppTheme.typography.heading7,
             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
@@ -103,7 +103,7 @@ internal fun TopRankItem(
                 tint = QuizAppTheme.colors.yellow,
             )
             Spacer(modifier = Modifier.width(8.dp))
-            QuizAppText(
+            QuizzyText(
                 text = stringResource(R.string.score, score),
                 style = QuizAppTheme.typography.heading7,
             )

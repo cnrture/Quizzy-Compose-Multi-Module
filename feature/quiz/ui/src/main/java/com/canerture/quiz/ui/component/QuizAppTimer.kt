@@ -22,7 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.quiz.ui.R
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.theme.QuizAppTheme
 
 internal enum class TimerState {
@@ -105,12 +105,12 @@ internal fun QuizAppTimer(
             )
         }
         if (currentTime == 0 && !isRunning) {
-            QuizAppText(
+            QuizzyText(
                 text = stringResource(R.string.times_up),
                 style = QuizAppTheme.typography.heading5,
             )
         } else {
-            QuizAppText(
+            QuizzyText(
                 text = currentTime.toString(),
                 style = QuizAppTheme.typography.heading1,
             )

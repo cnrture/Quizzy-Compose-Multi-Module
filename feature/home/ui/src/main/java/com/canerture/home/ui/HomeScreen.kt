@@ -26,10 +26,10 @@ import com.canerture.home.ui.HomeContract.UiEffect
 import com.canerture.home.ui.HomeContract.UiState
 import com.canerture.home.ui.components.CategoryItem
 import com.canerture.home.ui.components.PopularQuizItem
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppSearchBar
-import com.canerture.ui.components.QuizAppText
-import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzySearchBar
+import com.canerture.ui.components.QuizzyText
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
@@ -63,7 +63,7 @@ internal fun HomeScreen(
 
     QuizzyScaffold(
         topBar = {
-            QuizAppToolbar(
+            QuizzyToolbar(
                 title = stringResource(R.string.welcome_message, uiState.username),
                 titleSpan = uiState.username,
                 titleStyle = QuizAppTheme.typography.heading4,
@@ -82,7 +82,7 @@ internal fun HomeScreen(
         )
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 }
 
 @Composable
@@ -97,7 +97,7 @@ internal fun HomeContent(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        QuizAppSearchBar(
+        QuizzySearchBar(
             modifier = Modifier.padding(horizontal = 32.dp),
             onClick = onSearchClick,
         )
@@ -121,7 +121,7 @@ internal fun ColumnScope.Categories(
 ) {
     if (categories.isEmpty()) return
 
-    QuizAppText(
+    QuizzyText(
         modifier = Modifier
             .align(Alignment.Start)
             .padding(start = 32.dp),
@@ -153,7 +153,7 @@ internal fun ColumnScope.PopularQuizzes(
 ) {
     if (quizzes.isEmpty()) return
 
-    QuizAppText(
+    QuizzyText(
         modifier = Modifier
             .align(Alignment.Start)
             .padding(start = 32.dp),

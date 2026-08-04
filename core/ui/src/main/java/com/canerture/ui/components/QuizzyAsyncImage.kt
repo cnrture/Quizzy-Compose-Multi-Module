@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
 @Composable
-fun QuizAppAsyncImage(
+fun QuizzyAsyncImage(
     modifier: Modifier = Modifier,
     imageUrl: String,
     contentScale: ContentScale = ContentScale.Crop,
@@ -25,8 +25,8 @@ fun QuizAppAsyncImage(
 
 @PreviewLightDark
 @Composable
-fun QuizAppAsyncImagePreview() {
-    QuizAppAsyncImage(
+fun QuizzyAsyncImagePreview() {
+    QuizzyAsyncImage(
         modifier = Modifier.size(56.dp),
         imageUrl = "https://www.canerture.com/assets/images/canerture_logo.png",
         contentDescription = "Canerture Logo",

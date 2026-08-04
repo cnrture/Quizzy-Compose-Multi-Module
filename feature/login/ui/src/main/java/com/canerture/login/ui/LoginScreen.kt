@@ -24,12 +24,12 @@ import com.canerture.login.ui.LoginContract.UiAction
 import com.canerture.login.ui.LoginContract.UiEffect
 import com.canerture.login.ui.LoginContract.UiState
 import com.canerture.login.ui.component.ForgotPasswordContent
-import com.canerture.ui.components.QuizAppButton
-import com.canerture.ui.components.QuizAppDialog
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppText
-import com.canerture.ui.components.QuizAppTextField
-import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyButton
+import com.canerture.ui.components.QuizzyDialog
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyText
+import com.canerture.ui.components.QuizzyTextField
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.extensions.noRippleClickable
@@ -61,7 +61,7 @@ internal fun LoginScreen(
 
     QuizzyScaffold(
         topBar = {
-            QuizAppToolbar(
+            QuizzyToolbar(
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
         },
@@ -80,10 +80,10 @@ internal fun LoginScreen(
         )
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 
     if (uiState.dialogState != null) {
-        QuizAppDialog(
+        QuizzyDialog(
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = {
@@ -133,24 +133,24 @@ internal fun LoginContent(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.welcome),
             style = QuizAppTheme.typography.heading1,
         )
         Spacer(modifier = Modifier.height(8.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.login_message),
             style = QuizAppTheme.typography.paragraph1,
         )
         Spacer(modifier = Modifier.height(40.dp))
-        QuizAppTextField(
+        QuizzyTextField(
             value = uiState.email,
             label = stringResource(R.string.login_email),
             icon = QuizAppTheme.icons.email,
             onValueChange = { onEmailChange(it) },
         )
         Spacer(modifier = Modifier.height(24.dp))
-        QuizAppTextField(
+        QuizzyTextField(
             value = uiState.password,
             label = stringResource(R.string.password),
             icon = QuizAppTheme.icons.lock,
@@ -158,7 +158,7 @@ internal fun LoginContent(
             onValueChange = { onPasswordChange(it) },
         )
         Spacer(modifier = Modifier.height(24.dp))
-        QuizAppText(
+        QuizzyText(
             modifier = Modifier
                 .align(Alignment.End)
                 .noRippleClickable { onForgotPasswordClick() },
@@ -167,13 +167,13 @@ internal fun LoginContent(
             color = QuizAppTheme.colors.blue,
         )
         Spacer(modifier = Modifier.height(40.dp))
-        QuizAppButton(
+        QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.login),
             onClick = { onLoginClick() },
         )
         Spacer(modifier = Modifier.height(24.dp))
-        QuizAppText(
+        QuizzyText(
             modifier = Modifier.noRippleClickable { onRegisterClick() },
             fullText = stringResource(R.string.dont_have_an_account),
             spanTexts = listOf(stringResource(R.string.dont_have_an_account_span)),
@@ -181,7 +181,7 @@ internal fun LoginContent(
             textAlign = TextAlign.Center,
         )
         Spacer(modifier = Modifier.height(40.dp))
-        QuizAppText(
+        QuizzyText(
             fullText = stringResource(R.string.policy),
             spanTexts = listOf(
                 stringResource(R.string.privacy_policy_span),

@@ -21,8 +21,8 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.home.ui.R
 import com.canerture.home.domain.model.PopularQuizModel
-import com.canerture.ui.components.QuizAppAsyncImage
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
@@ -48,7 +48,7 @@ internal fun PopularQuizItem(
                 .aspectRatio(1f)
                 .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
         ) {
-            QuizAppAsyncImage(
+            QuizzyAsyncImage(
                 modifier = Modifier.fillMaxWidth(),
                 imageUrl = quiz.imageUrl,
                 contentDescription = quiz.name,
@@ -62,7 +62,7 @@ internal fun PopularQuizItem(
         Column(
             modifier = Modifier.padding(16.dp),
         ) {
-            QuizAppText(
+            QuizzyText(
                 text = quiz.name,
                 style = QuizAppTheme.typography.heading3,
             )
@@ -72,15 +72,15 @@ internal fun PopularQuizItem(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                QuizAppText(
+                QuizzyText(
                     text = stringResource(R.string.question_count, quiz.questionCount),
                     style = QuizAppTheme.typography.subheading3,
                 )
-                QuizAppText(
+                QuizzyText(
                     text = stringResource(R.string.hyphen),
                     style = QuizAppTheme.typography.subheading1,
                 )
-                QuizAppText(
+                QuizzyText(
                     text = quiz.category,
                     style = QuizAppTheme.typography.subheading3,
                 )

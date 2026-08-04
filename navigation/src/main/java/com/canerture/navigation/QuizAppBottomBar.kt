@@ -24,7 +24,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.conditional
 import com.canerture.ui.extensions.noRippleClickable
@@ -79,7 +79,7 @@ fun QuizAppBottomBar(
                         contentDescription = null,
                     )
                     AnimatedVisibility(isSelected) {
-                        QuizAppText(
+                        QuizzyText(
                             modifier = Modifier.padding(start = 8.dp),
                             text = stringResource(navItem.title),
                             style = QuizAppTheme.typography.paragraph2,

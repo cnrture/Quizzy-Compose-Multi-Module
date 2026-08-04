@@ -30,11 +30,11 @@ import com.canerture.quiz.ui.component.AnswerButton
 import com.canerture.quiz.ui.component.QuestionCountProgress
 import com.canerture.quiz.ui.component.QuizAppTimer
 import com.canerture.quiz.ui.component.TimerState
-import com.canerture.ui.components.QuizAppButton
-import com.canerture.ui.components.QuizAppDialog
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppText
-import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyButton
+import com.canerture.ui.components.QuizzyDialog
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyText
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
@@ -70,7 +70,7 @@ internal fun QuizScreen(
 
     QuizzyScaffold(
         topBar = {
-            QuizAppToolbar(
+            QuizzyToolbar(
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
         },
@@ -94,10 +94,10 @@ internal fun QuizScreen(
         )
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 
     if (uiState.dialogState != null) {
-        QuizAppDialog(
+        QuizzyDialog(
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnBackClick) },
@@ -130,7 +130,7 @@ internal fun QuizContent(
             onTimeOut = onTimeOut,
         )
         Spacer(modifier = Modifier.height(36.dp))
-        QuizAppText(
+        QuizzyText(
             modifier = Modifier.fillMaxWidth(),
             text = uiState.question?.question.orEmpty(),
             style = QuizAppTheme.typography.heading4,
@@ -146,7 +146,7 @@ internal fun QuizContent(
             Spacer(modifier = Modifier.height(8.dp))
         }
         Spacer(modifier = Modifier.weight(1f))
-        QuizAppButton(
+        QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.next),
             isEnable = uiState.isNextButtonEnable,

@@ -21,15 +21,15 @@ import com.canerture.editprofile.ui.EditProfileContract.UiEffect
 import com.canerture.editprofile.ui.EditProfileContract.UiState
 import com.canerture.editprofile.ui.components.AvatarsDialog
 import com.canerture.feature.editprofile.ui.R
-import com.canerture.ui.components.QuizAppAsyncImage
-import com.canerture.ui.components.QuizAppButton
-import com.canerture.ui.components.QuizAppButtonSize
-import com.canerture.ui.components.QuizAppButtonType
-import com.canerture.ui.components.QuizAppDialog
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppText
-import com.canerture.ui.components.QuizAppTextField
-import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzyButton
+import com.canerture.ui.components.QuizzyButtonSize
+import com.canerture.ui.components.QuizzyButtonType
+import com.canerture.ui.components.QuizzyDialog
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyText
+import com.canerture.ui.components.QuizzyTextField
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
@@ -52,9 +52,9 @@ internal fun EditProfileScreen(
 
     QuizzyScaffold(
         topBar = {
-            QuizAppToolbar(
+            QuizzyToolbar(
                 content = {
-                    QuizAppText(
+                    QuizzyText(
                         text = stringResource(R.string.edit_profile),
                         style = QuizAppTheme.typography.heading2,
                     )
@@ -77,7 +77,7 @@ internal fun EditProfileScreen(
         )
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 
     if (uiState.isAvatarsDialogVisible) {
         AvatarsDialog(
@@ -88,7 +88,7 @@ internal fun EditProfileScreen(
     }
 
     if (uiState.dialogState != null) {
-        QuizAppDialog(
+        QuizzyDialog(
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnDialogDismiss) },
@@ -110,7 +110,7 @@ internal fun EditProfileContent(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        QuizAppAsyncImage(
+        QuizzyAsyncImage(
             modifier = Modifier
                 .size(180.dp)
                 .background(
@@ -123,28 +123,28 @@ internal fun EditProfileContent(
             contentDescription = stringResource(R.string.profile_image),
         )
         Spacer(modifier = Modifier.height(12.dp))
-        QuizAppButton(
+        QuizzyButton(
             text = stringResource(R.string.change_avatar),
-            size = QuizAppButtonSize.EXTRA_SMALL,
-            type = QuizAppButtonType.SECONDARY,
+            size = QuizzyButtonSize.EXTRA_SMALL,
+            type = QuizzyButtonType.SECONDARY,
             onClick = onChangeAvatarClick,
         )
         Spacer(modifier = Modifier.height(48.dp))
-        QuizAppTextField(
+        QuizzyTextField(
             value = uiState.email,
             label = stringResource(R.string.email),
             icon = QuizAppTheme.icons.email,
             onValueChange = { onEmailChange(it) },
         )
         Spacer(modifier = Modifier.height(24.dp))
-        QuizAppTextField(
+        QuizzyTextField(
             value = uiState.username,
             label = stringResource(R.string.username),
             icon = QuizAppTheme.icons.sign,
             onValueChange = { onUsernameChange(it) },
         )
         Spacer(modifier = Modifier.height(24.dp))
-        QuizAppTextField(
+        QuizzyTextField(
             value = uiState.password,
             label = stringResource(R.string.password),
             icon = QuizAppTheme.icons.lock,
@@ -152,7 +152,7 @@ internal fun EditProfileContent(
             onValueChange = { onPasswordChange(it) },
         )
         Spacer(modifier = Modifier.weight(1f))
-        QuizAppButton(
+        QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.save),
             onClick = onSaveClick,

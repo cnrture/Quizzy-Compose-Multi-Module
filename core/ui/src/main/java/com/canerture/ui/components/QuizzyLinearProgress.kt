@@ -17,7 +17,7 @@ import com.canerture.ui.extensions.conditional
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun QuizAppLinearProgress(
+fun QuizzyLinearProgress(
     modifier: Modifier = Modifier,
     value: Int,
     maxValue: Int = 100,
@@ -53,7 +53,7 @@ fun QuizAppLinearProgress(
 private fun Preview() {
     QuizAppTheme {
         Surface(modifier = Modifier.background(QuizAppTheme.colors.background)) {
-            QuizAppLinearProgress(value = 50, modifier = Modifier.fillMaxWidth())
+            QuizzyLinearProgress(value = 50, modifier = Modifier.fillMaxWidth())
         }
     }
 }

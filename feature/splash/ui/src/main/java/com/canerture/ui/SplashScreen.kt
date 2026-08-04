@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.splash.ui.R
 import com.canerture.ui.component.AnimatedLinearProgress
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
@@ -68,12 +68,12 @@ internal fun SplashScreen(
                 tint = Color.Unspecified,
                 contentDescription = stringResource(R.string.logo),
             )
-            QuizAppText(
+            QuizzyText(
                 text = stringResource(R.string.app_name),
                 style = QuizAppTheme.typography.heading1,
             )
             AnimatedLinearProgress()
-            QuizAppText(
+            QuizzyText(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),

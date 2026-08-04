@@ -30,11 +30,11 @@ import com.canerture.category.ui.CategoryContract.UiEffect
 import com.canerture.category.ui.CategoryContract.UiState
 import com.canerture.category.ui.components.QuizItem
 import com.canerture.feature.category.ui.R
-import com.canerture.ui.components.QuizAppAsyncImage
-import com.canerture.ui.components.QuizAppDialog
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppText
-import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzyDialog
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyText
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
@@ -59,7 +59,7 @@ internal fun CategoryScreen(
 
     QuizzyScaffold(
         topBar = {
-            QuizAppToolbar(
+            QuizzyToolbar(
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
         },
@@ -73,10 +73,10 @@ internal fun CategoryScreen(
         )
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 
     if (uiState.dialogState != null) {
-        QuizAppDialog(
+        QuizzyDialog(
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnBackClick) },
@@ -101,7 +101,7 @@ internal fun CategoryContent(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
         ) {
-            QuizAppAsyncImage(
+            QuizzyAsyncImage(
                 modifier = Modifier
                     .size(144.dp)
                     .clip(RoundedCornerShape(16.dp))
@@ -112,12 +112,12 @@ internal fun CategoryContent(
             )
             Spacer(modifier = Modifier.width(16.dp))
             Column {
-                QuizAppText(
+                QuizzyText(
                     text = uiState.title,
                     style = QuizAppTheme.typography.heading4,
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                QuizAppText(
+                QuizzyText(
                     text = stringResource(id = R.string.question_count, uiState.quizzes.size),
                     style = QuizAppTheme.typography.heading5,
                 )

@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.canerture.feature.leaderboard.ui.R
 import com.canerture.leaderboard.domain.model.BoardModel
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
 
@@ -32,7 +32,7 @@ internal fun UserItem(
             .padding(vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        QuizAppText(
+        QuizzyText(
             text = item.rank,
             style = QuizAppTheme.typography.heading5,
         )
@@ -50,7 +50,7 @@ internal fun UserItem(
             contentDescription = null,
         )
         Spacer(modifier = Modifier.width(8.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.nickname, item.username),
             style = QuizAppTheme.typography.paragraph3,
             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
@@ -63,7 +63,7 @@ internal fun UserItem(
             contentDescription = stringResource(R.string.trophy),
         )
         Spacer(modifier = Modifier.width(4.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.score, item.score),
             style = QuizAppTheme.typography.heading7,
         )

@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun QuizAppText(
+fun QuizzyText(
     modifier: Modifier = Modifier,
     text: String,
     color: Color = QuizAppTheme.colors.onBackground,
@@ -36,7 +36,7 @@ fun QuizAppText(
 }
 
 @Composable
-fun QuizAppText(
+fun QuizzyText(
     modifier: Modifier = Modifier,
     fullText: String,
     spanTexts: List<String>,
@@ -71,8 +71,8 @@ fun QuizAppText(
 
 @PreviewLightDark
 @Composable
-private fun QuizAppTextPreview() {
-    QuizAppText(
+private fun QuizzyTextPreview() {
+    QuizzyText(
         text = "QuizAppText"
     )
 }

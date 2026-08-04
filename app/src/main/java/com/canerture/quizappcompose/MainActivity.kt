@@ -25,7 +25,7 @@ import com.canerture.navigation.NavigationItem
 import com.canerture.navigation.QuizAppBottomBar
 import com.canerture.navigation.QuizAppNavGraph
 import com.canerture.navigation.navigateWithPopUpTo
-import com.canerture.ui.components.QuizAppDialog
+import com.canerture.ui.components.QuizzyDialog
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -85,7 +85,7 @@ class MainActivity : ComponentActivity() {
                     )
                 }
                 if (uiState.isShowNoNetworkDialog) {
-                    QuizAppDialog(
+                    QuizzyDialog(
                         isSuccess = false,
                         isCancelable = false,
                         message = stringResource(R.string.no_network_connection),

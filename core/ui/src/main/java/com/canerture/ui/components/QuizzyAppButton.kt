@@ -18,41 +18,41 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.ui.theme.QuizAppTheme
 
-enum class QuizAppButtonType { PRIMARY, SECONDARY }
+enum class QuizzyButtonType { PRIMARY, SECONDARY }
 
-enum class QuizAppButtonSize { EXTRA_SMALL, SMALL, MEDIUM, LARGE }
+enum class QuizzyButtonSize { EXTRA_SMALL, SMALL, MEDIUM, LARGE }
 
 @Composable
-fun QuizAppButton(
+fun QuizzyButton(
     modifier: Modifier = Modifier,
     text: String,
     isEnable: Boolean = true,
-    type: QuizAppButtonType = QuizAppButtonType.PRIMARY,
-    size: QuizAppButtonSize = QuizAppButtonSize.MEDIUM,
+    type: QuizzyButtonType = QuizzyButtonType.PRIMARY,
+    size: QuizzyButtonSize = QuizzyButtonSize.MEDIUM,
     icon: ImageVector? = null,
     onClick: () -> Unit,
 ) {
     val textStyle = when (size) {
-        QuizAppButtonSize.EXTRA_SMALL -> QuizAppTheme.typography.subheading3
-        QuizAppButtonSize.SMALL -> QuizAppTheme.typography.heading6
-        QuizAppButtonSize.MEDIUM -> QuizAppTheme.typography.heading5
-        QuizAppButtonSize.LARGE -> QuizAppTheme.typography.heading4
+        QuizzyButtonSize.EXTRA_SMALL -> QuizAppTheme.typography.subheading3
+        QuizzyButtonSize.SMALL -> QuizAppTheme.typography.heading6
+        QuizzyButtonSize.MEDIUM -> QuizAppTheme.typography.heading5
+        QuizzyButtonSize.LARGE -> QuizAppTheme.typography.heading4
     }
 
     val height = when (size) {
-        QuizAppButtonSize.EXTRA_SMALL -> 34.dp
-        QuizAppButtonSize.SMALL -> 53.dp
-        QuizAppButtonSize.MEDIUM -> 56.dp
-        QuizAppButtonSize.LARGE -> 59.dp
+        QuizzyButtonSize.EXTRA_SMALL -> 34.dp
+        QuizzyButtonSize.SMALL -> 53.dp
+        QuizzyButtonSize.MEDIUM -> 56.dp
+        QuizzyButtonSize.LARGE -> 59.dp
     }
 
     val paddingValues = when (size) {
-        QuizAppButtonSize.EXTRA_SMALL -> PaddingValues(vertical = 8.dp, horizontal = 16.dp)
+        QuizzyButtonSize.EXTRA_SMALL -> PaddingValues(vertical = 8.dp, horizontal = 16.dp)
         else -> PaddingValues(vertical = 16.dp, horizontal = 24.dp)
     }
 
     when (type) {
-        QuizAppButtonType.PRIMARY -> {
+        QuizzyButtonType.PRIMARY -> {
             Button(
                 modifier = Modifier
                     .then(modifier)
@@ -75,7 +75,7 @@ fun QuizAppButton(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                 }
-                QuizAppText(
+                QuizzyText(
                     text = text,
                     color = QuizAppTheme.colors.background,
                     style = textStyle,
@@ -83,7 +83,7 @@ fun QuizAppButton(
             }
         }
 
-        QuizAppButtonType.SECONDARY -> {
+        QuizzyButtonType.SECONDARY -> {
             Button(
                 modifier = Modifier
                     .height(height)
@@ -103,7 +103,7 @@ fun QuizAppButton(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                 }
-                QuizAppText(
+                QuizzyText(
                     text = text,
                     style = textStyle,
                 )
@@ -114,49 +114,49 @@ fun QuizAppButton(
 
 @PreviewLightDark
 @Composable
-private fun QuizAppButtonPreview() {
+private fun QuizzyButtonPreview() {
     QuizAppTheme {
         Column {
-            QuizAppButton(
+            QuizzyButton(
                 text = "Primary Button",
-                type = QuizAppButtonType.PRIMARY,
-                size = QuizAppButtonSize.SMALL,
+                type = QuizzyButtonType.PRIMARY,
+                size = QuizzyButtonSize.SMALL,
                 onClick = { }
             )
             Spacer(modifier = Modifier.height(16.dp))
-            QuizAppButton(
+            QuizzyButton(
                 text = "Outlined Button",
-                type = QuizAppButtonType.PRIMARY,
-                size = QuizAppButtonSize.MEDIUM,
+                type = QuizzyButtonType.PRIMARY,
+                size = QuizzyButtonSize.MEDIUM,
                 onClick = { }
             )
             Spacer(modifier = Modifier.height(16.dp))
-            QuizAppButton(
+            QuizzyButton(
                 text = "Primary Button",
-                type = QuizAppButtonType.PRIMARY,
-                size = QuizAppButtonSize.LARGE,
+                type = QuizzyButtonType.PRIMARY,
+                size = QuizzyButtonSize.LARGE,
                 onClick = { }
             )
             Spacer(modifier = Modifier.height(16.dp))
-            QuizAppButton(
+            QuizzyButton(
                 text = "Primary Button",
-                type = QuizAppButtonType.SECONDARY,
-                size = QuizAppButtonSize.SMALL,
+                type = QuizzyButtonType.SECONDARY,
+                size = QuizzyButtonSize.SMALL,
                 onClick = { }
             )
             Spacer(modifier = Modifier.height(16.dp))
-            QuizAppButton(
+            QuizzyButton(
                 text = "Outlined Button",
-                type = QuizAppButtonType.SECONDARY,
-                size = QuizAppButtonSize.MEDIUM,
+                type = QuizzyButtonType.SECONDARY,
+                size = QuizzyButtonSize.MEDIUM,
                 icon = QuizAppTheme.icons.google,
                 onClick = { }
             )
             Spacer(modifier = Modifier.height(16.dp))
-            QuizAppButton(
+            QuizzyButton(
                 text = "Primary Button",
-                type = QuizAppButtonType.SECONDARY,
-                size = QuizAppButtonSize.LARGE,
+                type = QuizzyButtonType.SECONDARY,
+                size = QuizzyButtonSize.LARGE,
                 icon = QuizAppTheme.icons.google,
                 onClick = { }
             )

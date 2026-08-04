@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
-fun QuizAppTextField(
+fun QuizzyTextField(
     modifier: Modifier = Modifier,
     value: String,
     label: String,
@@ -75,7 +75,7 @@ fun QuizAppTextField(
         value = value,
         onValueChange = onValueChange,
         label = {
-            QuizAppText(
+            QuizzyText(
                 text = label,
                 style = QuizAppTheme.typography.paragraph1,
                 color = QuizAppTheme.colors.onBackground
@@ -102,16 +102,16 @@ fun QuizAppTextField(
 
 @PreviewLightDark
 @Composable
-private fun QuizAppTextFieldPreview() {
+private fun QuizzyTextFieldPreview() {
     Column {
-        QuizAppTextField(
+        QuizzyTextField(
             value = "",
             label = "Email or Username",
             onValueChange = {},
             icon = QuizAppTheme.icons.email,
         )
         Spacer(modifier = Modifier.height(16.dp))
-        QuizAppTextField(
+        QuizzyTextField(
             value = "",
             label = "Password",
             onValueChange = {},

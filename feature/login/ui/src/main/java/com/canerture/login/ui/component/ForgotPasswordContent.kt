@@ -11,9 +11,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.login.ui.R
-import com.canerture.ui.components.QuizAppButton
-import com.canerture.ui.components.QuizAppText
-import com.canerture.ui.components.QuizAppTextField
+import com.canerture.ui.components.QuizzyButton
+import com.canerture.ui.components.QuizzyText
+import com.canerture.ui.components.QuizzyTextField
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
@@ -27,23 +27,23 @@ internal fun ForgotPasswordContent(
             .fillMaxWidth()
             .padding(start = 32.dp, end = 32.dp, bottom = 32.dp),
     ) {
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.forgot_password_title),
             style = QuizAppTheme.typography.heading2,
         )
         Spacer(modifier = Modifier.height(12.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.forgot_password_message),
             style = QuizAppTheme.typography.subheading1,
         )
         Spacer(modifier = Modifier.height(12.dp))
-        QuizAppTextField(
+        QuizzyTextField(
             value = email,
             onValueChange = { onEmailChange(it) },
             label = stringResource(R.string.forgot_password_email),
         )
         Spacer(modifier = Modifier.height(32.dp))
-        QuizAppButton(
+        QuizzyButton(
             text = stringResource(R.string.send_reset_link),
             onClick = { onSendResetLinkClick() },
         )

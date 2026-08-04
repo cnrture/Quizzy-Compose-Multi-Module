@@ -17,8 +17,8 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.home.ui.R
 import com.canerture.home.domain.model.CategoryModel
-import com.canerture.ui.components.QuizAppAsyncImage
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
@@ -44,7 +44,7 @@ internal fun CategoryItem(
             .noRippleClickable { onCategoryClick(category) }
             .padding(16.dp),
     ) {
-        QuizAppAsyncImage(
+        QuizzyAsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(124.dp)
@@ -54,14 +54,14 @@ internal fun CategoryItem(
             contentDescription = category.name,
         )
         Spacer(modifier = Modifier.height(16.dp))
-        QuizAppText(
+        QuizzyText(
             text = category.name,
             style = QuizAppTheme.typography.heading5,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
         Spacer(modifier = Modifier.height(12.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.quiz_count, category.quizCount),
             style = QuizAppTheme.typography.heading6,
             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),

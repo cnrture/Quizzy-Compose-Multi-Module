@@ -25,8 +25,8 @@ import com.canerture.leaderboard.ui.LeaderboardContract.UiState
 import com.canerture.leaderboard.ui.component.CurrentUserItem
 import com.canerture.leaderboard.ui.component.TopRankItem
 import com.canerture.leaderboard.ui.component.UserItem
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppToolbar
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import kotlinx.coroutines.flow.Flow
@@ -47,7 +47,7 @@ internal fun LeaderboardScreen(
 
     QuizzyScaffold(
         topBar = {
-            QuizAppToolbar(
+            QuizzyToolbar(
                 title = stringResource(R.string.leaderboard_title),
             )
         },
@@ -61,7 +61,7 @@ internal fun LeaderboardScreen(
         )
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 }
 
 @Composable

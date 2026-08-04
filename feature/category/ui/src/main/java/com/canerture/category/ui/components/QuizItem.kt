@@ -19,8 +19,8 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.category.domain.model.QuizModel
 import com.canerture.feature.category.ui.R
-import com.canerture.ui.components.QuizAppAsyncImage
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
@@ -46,7 +46,7 @@ internal fun QuizItem(
                 .aspectRatio(1f)
                 .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
         ) {
-            QuizAppAsyncImage(
+            QuizzyAsyncImage(
                 modifier = Modifier.fillMaxWidth(),
                 imageUrl = quiz.imageUrl,
                 contentDescription = quiz.name,
@@ -60,14 +60,14 @@ internal fun QuizItem(
         Column(
             modifier = Modifier.padding(16.dp),
         ) {
-            QuizAppText(
+            QuizzyText(
                 text = quiz.name,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 style = QuizAppTheme.typography.heading4,
             )
             Spacer(modifier = Modifier.height(8.dp))
-            QuizAppText(
+            QuizzyText(
                 text = stringResource(R.string.question_count, quiz.questionCount),
                 style = QuizAppTheme.typography.subheading3,
             )

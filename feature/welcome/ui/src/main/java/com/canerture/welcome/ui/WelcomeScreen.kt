@@ -23,11 +23,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.welcome.ui.R
-import com.canerture.ui.components.QuizAppButton
-import com.canerture.ui.components.QuizAppButtonType
-import com.canerture.ui.components.QuizAppDialog
-import com.canerture.ui.components.QuizAppLoading
-import com.canerture.ui.components.QuizAppText
+import com.canerture.ui.components.QuizzyButton
+import com.canerture.ui.components.QuizzyButtonType
+import com.canerture.ui.components.QuizzyDialog
+import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.extensions.noRippleClickable
@@ -69,10 +69,10 @@ internal fun WelcomeScreen(
         }
     }
 
-    if (uiState.isLoading) QuizAppLoading()
+    if (uiState.isLoading) QuizzyLoading()
 
     if (uiState.dialogState != null) {
-        QuizAppDialog(
+        QuizzyDialog(
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
             onDismiss = { onAction(UiAction.OnDismissDialog) },
@@ -98,21 +98,21 @@ internal fun WelcomeContent(
             contentDescription = stringResource(R.string.logo),
         )
         Spacer(modifier = Modifier.height(40.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.app_name),
             style = QuizAppTheme.typography.heading1,
         )
         Spacer(modifier = Modifier.height(24.dp))
-        QuizAppText(
+        QuizzyText(
             text = stringResource(R.string.welcome_title),
             style = QuizAppTheme.typography.paragraph1,
             textAlign = TextAlign.Center,
         )
         Spacer(modifier = Modifier.height(64.dp))
-        QuizAppButton(
+        QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.continue_with_google),
-            type = QuizAppButtonType.SECONDARY,
+            type = QuizzyButtonType.SECONDARY,
             icon = QuizAppTheme.icons.google,
             onClick = { onAction(UiAction.OnLoginWithGoogleClick) },
         )
@@ -126,7 +126,7 @@ internal fun WelcomeContent(
                 color = QuizAppTheme.colors.onBackground,
                 thickness = 2.dp,
             )
-            QuizAppText(
+            QuizzyText(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = stringResource(R.string.or),
                 style = QuizAppTheme.typography.paragraph1,
@@ -139,14 +139,14 @@ internal fun WelcomeContent(
             )
         }
         Spacer(modifier = Modifier.height(40.dp))
-        QuizAppButton(
+        QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.sign_in_with_email),
-            type = QuizAppButtonType.PRIMARY,
+            type = QuizzyButtonType.PRIMARY,
             onClick = { onAction(UiAction.OnLoginClick) },
         )
         Spacer(modifier = Modifier.height(24.dp))
-        QuizAppText(
+        QuizzyText(
             modifier = Modifier
                 .fillMaxWidth()
                 .noRippleClickable { onAction(UiAction.OnRegisterClick) },
@@ -156,7 +156,7 @@ internal fun WelcomeContent(
             textAlign = TextAlign.Center,
         )
         Spacer(modifier = Modifier.height(40.dp))
-        QuizAppText(
+        QuizzyText(
             modifier = Modifier.fillMaxWidth(),
             fullText = stringResource(R.string.policy),
             spanTexts = listOf(
