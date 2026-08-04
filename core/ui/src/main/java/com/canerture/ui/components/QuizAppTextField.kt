@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.ui.theme.QuizAppTheme
 
@@ -100,7 +100,7 @@ fun QuizAppTextField(
     )
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 private fun QuizAppTextFieldPreview() {
     Column {

@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.favorites.ui.R
 import com.canerture.ui.components.QuizAppText
@@ -44,7 +44,7 @@ internal fun EmptyScreenContent() {
     }
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 internal fun EmptyScreenContentPreview() {
     EmptyScreenContent()

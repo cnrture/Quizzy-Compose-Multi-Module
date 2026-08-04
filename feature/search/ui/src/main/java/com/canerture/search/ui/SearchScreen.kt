@@ -12,7 +12,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.canerture.search.ui.SearchContract.UiAction
@@ -89,7 +89,7 @@ internal fun SearchContent(
     }
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 internal fun SearchScreenPreview(
     @PreviewParameter(SearchPreviewProvider::class) uiState: UiState,

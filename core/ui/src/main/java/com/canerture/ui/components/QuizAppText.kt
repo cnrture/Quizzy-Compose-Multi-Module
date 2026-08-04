@@ -11,7 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.canerture.ui.theme.QuizAppTheme
 
 @Composable
@@ -69,7 +69,7 @@ fun QuizAppText(
     )
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 private fun QuizAppTextPreview() {
     QuizAppText(

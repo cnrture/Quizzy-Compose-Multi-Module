@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.canerture.detail.domain.model.QuizDetailModel
@@ -213,7 +213,7 @@ internal fun DetailContent(
     }
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 internal fun DetailScreenPreview(
     @PreviewParameter(DetailPreviewProvider::class) uiState: UiState,

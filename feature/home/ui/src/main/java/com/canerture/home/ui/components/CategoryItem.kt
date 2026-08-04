@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.home.ui.R
 import com.canerture.home.domain.model.CategoryModel
@@ -70,7 +70,7 @@ internal fun CategoryItem(
     Spacer(modifier = Modifier.width(if (isLastItem) 32.dp else 16.dp))
 }
 
-@Preview(showBackground = true)
+@PreviewLightDark
 @Composable
 internal fun CategoryItemPreview() {
     CategoryItem(
