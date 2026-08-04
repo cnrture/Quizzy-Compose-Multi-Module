@@ -8,6 +8,7 @@ import com.canerture.favorites.domain.usecase.GetFavoritesUseCase
 import com.canerture.favorites.ui.FavoritesContract.UiAction
 import com.canerture.favorites.ui.FavoritesContract.UiEffect
 import com.canerture.favorites.ui.FavoritesContract.UiState
+import com.canerture.ui.components.DialogState
 import com.canerture.ui.delegate.mvi.MVI
 import com.canerture.ui.delegate.mvi.mvi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,6 +31,7 @@ internal class FavoritesViewModel @Inject constructor(
             when (uiAction) {
                 is UiAction.OnQuizClick -> emitUiEffect(UiEffect.NavigateDetail(uiAction.id))
                 is UiAction.OnSwipeDelete -> deleteFavorite(uiAction.item)
+                UiAction.OnDialogDismiss -> updateUiState { copy(dialogState = null) }
             }
         }
     }
@@ -47,8 +49,15 @@ internal class FavoritesViewModel @Inject constructor(
         deleteFavoriteUseCase(item.id).fold(
             onSuccess = { getFavorites() },
             onFailure = {
-                updateUiState { copy(isLoading = false) }
-                emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
+                updateUiState {
+                    copy(
+                        isLoading = false,
+                        dialogState = DialogState(
+                            isSuccess = false,
+                            message = it.message.orEmpty(),
+                        ),
+                    )
+                }
             }
         )
     }

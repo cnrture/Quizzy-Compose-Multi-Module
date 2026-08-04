@@ -17,10 +17,9 @@ fun NavGraphBuilder.leaderboardScreen() {
     composable<Leaderboard> {
         val viewModel = hiltViewModel<LeaderboardViewModel>()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-        val uiEffect = viewModel.uiEffect
         LeaderboardScreen(
             uiState = uiState,
-            uiEffect = uiEffect,
+            onAction = viewModel::onAction,
         )
     }
 }

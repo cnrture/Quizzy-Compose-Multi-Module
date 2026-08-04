@@ -2,6 +2,7 @@ package com.canerture.quiz.ui
 
 import com.canerture.quiz.domain.model.OptionModel
 import com.canerture.quiz.domain.model.QuestionModel
+import com.canerture.quiz.ui.component.TimerState
 import com.canerture.ui.components.DialogState
 
 internal object QuizContract {
@@ -18,6 +19,7 @@ internal object QuizContract {
         val isSelectable: Boolean = true,
         val isNextButtonEnable: Boolean = false,
         val dialogState: DialogState? = null,
+        val timerState: TimerState = TimerState.START,
     )
 
     sealed interface UiAction {
@@ -29,14 +31,11 @@ internal object QuizContract {
 
     sealed interface UiEffect {
         data object NavigateBack : UiEffect
-        data object ResetTimer : UiEffect
         data class NavigateSummary(
             val quizId: Int,
             val correctAnswers: Int,
             val wrongAnswers: Int,
             val score: Int,
         ) : UiEffect
-
-        data class ShowError(val message: String) : UiEffect
     }
 }

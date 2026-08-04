@@ -53,10 +53,6 @@ internal fun HomeScreen(
                 effect.name,
                 effect.imageUrl
             )
-
-            is UiEffect.ShowError -> {
-                // Show error
-            }
         }
     }
 
@@ -65,7 +61,6 @@ internal fun HomeScreen(
             QuizzyToolbar(
                 title = stringResource(R.string.welcome_message, uiState.username),
                 titleSpan = uiState.username,
-                titleStyle = QuizAppTheme.typography.heading4,
             )
         },
     ) { paddingValues ->

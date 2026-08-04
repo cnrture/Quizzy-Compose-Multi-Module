@@ -85,13 +85,7 @@ internal fun LoginScreen(
         QuizzyDialog(
             message = uiState.dialogState.message,
             isSuccess = uiState.dialogState.isSuccess,
-            onDismiss = {
-                if (uiState.dialogState.isSuccess == true) {
-                    onAction(UiAction.OnDialogDismiss)
-                } else {
-                    onAction(UiAction.OnDialogDismiss)
-                }
-            },
+            onDismiss = { onAction(UiAction.OnDialogDismiss) },
         )
     }
 

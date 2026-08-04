@@ -12,6 +12,7 @@ import com.canerture.quiz.domain.usecase.UpdateOptionsUseCase
 import com.canerture.quiz.ui.QuizContract.UiAction
 import com.canerture.quiz.ui.QuizContract.UiEffect
 import com.canerture.quiz.ui.QuizContract.UiState
+import com.canerture.quiz.ui.component.TimerState
 import com.canerture.quiz.ui.navigation.Quiz
 import com.canerture.ui.components.DialogState
 import com.canerture.ui.delegate.mvi.MVI
@@ -64,7 +65,12 @@ internal class QuizViewModel @Inject constructor(
                 }
             },
             onFailure = {
-                updateUiState { copy(dialogState = DialogState(it.message, false), isLoading = false) }
+                updateUiState {
+                    copy(
+                        isLoading = false,
+                        dialogState = DialogState(it.message, false),
+                    )
+                }
             }
         )
     }
@@ -90,8 +96,12 @@ internal class QuizViewModel @Inject constructor(
                 )
             },
             onFailure = {
-                updateUiState { copy(isLoading = false) }
-                emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
+                updateUiState {
+                    copy(
+                        isLoading = false,
+                        dialogState = DialogState(it.message, false),
+                    )
+                }
             }
         )
     }
@@ -109,15 +119,16 @@ internal class QuizViewModel @Inject constructor(
                     quizNumber = quizNumber + 1,
                     isSelectable = true,
                     isNextButtonEnable = false,
+                    timerState = TimerState.RESET,
                 )
             }
-            emitUiEffect(UiEffect.ResetTimer)
         } else {
             submitQuiz()
         }
     }
 
     private fun handleOptionSelect(option: OptionModel) {
+        updateUiState { copy(timerState = TimerState.STOP) }
         updateOptionsUseCase(
             options = currentUiState.options,
             selectedOption = option,
@@ -136,6 +147,7 @@ internal class QuizViewModel @Inject constructor(
     }
 
     private fun handleTimeOut() {
+        updateUiState { copy(timerState = TimerState.STOP) }
         updateOptionsUseCase(
             options = currentUiState.options,
             answer = currentUiState.question?.answer.orEmpty(),

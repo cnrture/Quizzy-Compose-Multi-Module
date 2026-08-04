@@ -18,7 +18,6 @@ internal object HomeContract {
     }
 
     sealed interface UiEffect {
-        data class ShowError(val message: String) : UiEffect
         data object NavigateSearch : UiEffect
         data class NavigateDetail(val id: Int) : UiEffect
         data class NavigateCategory(val id: Int, val name: String, val imageUrl: String) : UiEffect

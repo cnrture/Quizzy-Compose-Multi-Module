@@ -1,6 +1,5 @@
 package com.canerture.quiz.ui
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,13 +7,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -49,8 +43,6 @@ internal fun QuizScreen(
     onNavigateBack: () -> Unit,
     onNavigateSummary: (Int, Int, Int, Int) -> Unit,
 ) {
-    var timerState by remember { mutableStateOf(TimerState.START) }
-    val context = LocalContext.current
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
             is UiEffect.NavigateBack -> onNavigateBack()
@@ -60,11 +52,6 @@ internal fun QuizScreen(
                 effect.wrongAnswers,
                 effect.score
             )
-
-            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT)
-                .show()
-
-            UiEffect.ResetTimer -> timerState = TimerState.RESET
         }
     }
 
@@ -81,16 +68,10 @@ internal fun QuizScreen(
                 .padding(paddingValues)
                 .padding(horizontal = 32.dp),
             uiState = uiState,
-            timerState = timerState,
-            onOptionSelect = {
-                onAction(UiAction.OnOptionSelect(it))
-                timerState = TimerState.STOP
-            },
+            timerState = uiState.timerState,
+            onOptionSelect = { onAction(UiAction.OnOptionSelect(it)) },
             onNextClick = { onAction(UiAction.OnNextClick) },
-            onTimeOut = {
-                onAction(UiAction.OnTimeOut)
-                timerState = TimerState.STOP
-            },
+            onTimeOut = { onAction(UiAction.OnTimeOut) },
         )
     }
 

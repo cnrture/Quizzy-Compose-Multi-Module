@@ -45,10 +45,7 @@ internal class HomeViewModel @Inject constructor(
         updateUiState { copy(isLoading = true) }
         getCategoriesUseCase().fold(
             onSuccess = { updateUiState { copy(categories = it, isLoading = false) } },
-            onFailure = {
-                updateUiState { copy(isLoading = false) }
-                emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
-            }
+            onFailure = { updateUiState { copy(isLoading = false) } },
         )
     }
 
@@ -56,10 +53,7 @@ internal class HomeViewModel @Inject constructor(
         updateUiState { copy(isLoading = true) }
         getPopularQuizzesUseCase().fold(
             onSuccess = { updateUiState { copy(popularQuizzes = it, isLoading = false) } },
-            onFailure = {
-                updateUiState { copy(isLoading = false) }
-                emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
-            }
+            onFailure = { updateUiState { copy(isLoading = false) } },
         )
     }
 

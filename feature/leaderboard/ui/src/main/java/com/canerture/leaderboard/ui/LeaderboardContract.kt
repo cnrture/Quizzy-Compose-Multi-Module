@@ -1,8 +1,14 @@
 package com.canerture.leaderboard.ui
 
 import com.canerture.leaderboard.domain.model.BoardModel
+import com.canerture.ui.components.DialogState
 
 internal object LeaderboardContract {
+
+    sealed interface UiAction {
+        data object OnDialogDismiss : UiAction
+    }
+
     data class UiState(
         val isLoading: Boolean = false,
         val userList: List<BoardModel> = emptyList(),
@@ -10,9 +16,6 @@ internal object LeaderboardContract {
         val firstUser: BoardModel? = null,
         val secondUser: BoardModel? = null,
         val thirdUser: BoardModel? = null,
+        val dialogState: DialogState? = null,
     )
-
-    sealed interface UiEffect {
-        data class ShowError(val message: String) : UiEffect
-    }
 }

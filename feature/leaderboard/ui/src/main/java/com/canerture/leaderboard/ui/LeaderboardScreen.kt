@@ -1,6 +1,5 @@
 package com.canerture.leaderboard.ui
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,43 +11,30 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.leaderboard.ui.R
-import com.canerture.leaderboard.ui.LeaderboardContract.UiEffect
+import com.canerture.leaderboard.ui.LeaderboardContract.UiAction
 import com.canerture.leaderboard.ui.LeaderboardContract.UiState
 import com.canerture.leaderboard.ui.component.CurrentUserItem
 import com.canerture.leaderboard.ui.component.TopRankItem
 import com.canerture.leaderboard.ui.component.UserItem
+import com.canerture.ui.components.QuizzyDialog
 import com.canerture.ui.components.QuizzyLoading
 import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyToolbar
-import com.canerture.ui.extensions.collectWithLifecycle
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 internal fun LeaderboardScreen(
     uiState: UiState,
-    uiEffect: Flow<UiEffect>,
+    onAction: (UiAction) -> Unit,
 ) {
-    val context = LocalContext.current
-    uiEffect.collectWithLifecycle { effect ->
-        when (effect) {
-            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT)
-                .show()
-        }
-    }
-
     QuizzyScaffold(
         topBar = {
-            QuizzyToolbar(
-                title = stringResource(R.string.leaderboard_title),
-            )
+            QuizzyToolbar(title = stringResource(R.string.leaderboard_title))
         },
     ) { paddingValues ->
         LeaderboardContent(
@@ -61,6 +47,14 @@ internal fun LeaderboardScreen(
     }
 
     if (uiState.isLoading) QuizzyLoading()
+
+    if (uiState.dialogState != null) {
+        QuizzyDialog(
+            message = uiState.dialogState.message,
+            isSuccess = uiState.dialogState.isSuccess,
+            onDismiss = { onAction(UiAction.OnDialogDismiss) },
+        )
+    }
 }
 
 @Composable
@@ -125,6 +119,6 @@ internal fun LeaderboardScreenPreview(
 ) {
     LeaderboardScreen(
         uiState = uiState,
-        uiEffect = emptyFlow(),
+        onAction = {},
     )
 }

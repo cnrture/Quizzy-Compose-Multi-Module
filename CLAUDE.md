@@ -47,7 +47,7 @@ build-logic/convention   → Gradle convention plugins (the build DSL for every 
 app                      → entry point: MainApplication, MainActivity, MainViewModel; wires feature :data + :navigation
 navigation               → NavHost + flow graphs; depends on every feature :ui
 core/
-  common                 → Resource<T>, BaseException hierarchy, fold/map/onSuccess helpers (pure Kotlin)
+  common                 → BaseException hierarchy, Result<T> helpers (pure Kotlin; uses Kotlin stdlib Result, not a custom Resource type)
   network                → Retrofit/OkHttp DI, safeApiCall, TokenAuthenticator, Firebase DI
   ui                     → design system (Quizzy* composables), theme (QuizAppTheme), MVI delegate, Screen interface
   datastore              → DataStore preferences wrapper (DataStoreHelper)
@@ -100,7 +100,7 @@ Each screen has a `<Feature>Contract` object declaring `UiState` (data class), `
 
 **Type-safe navigation** — each feature `:ui` exposes a `@Serializable` route object implementing `core:ui`'s `Screen` interface plus a `NavGraphBuilder.<feature>Screen(onNavigate...)` extension that wires `hiltViewModel()` and collects state. The `navigation` module composes these into `LoginFlow` / `MainFlow` graphs (`QuizAppNavGraph`, `LoginFlowNavGraph`, `MainFlowNavGraph`). Cross-flow transitions use the `navigateWithPopUpTo(screen, popUp)` helper. Navigation callbacks are passed *down* into screens; a screen never holds a `NavController`.
 
-**Error handling** — network calls in `:data` go through `safeApiCall { api... }` (`core:network`), which maps HTTP/IO exceptions to `Resource.Error(BaseException)` (`BadRequestException`, `AuthorizationException`, `NotFoundException`, `NetworkException`, `UnknownException`). Repositories return `Resource<T>`; use cases pass it through; ViewModels consume it with `fold(onSuccess = { }, onError = { })` from `core:common`.
+**Error handling** — network calls in `:data` go through `safeApiCall { api... }` (`core:network`), which returns Kotlin stdlib **`Result<T>`**: success wraps the API value, failure wraps a `BaseException` (`BadRequestException`, `AuthorizationException`, `NotFoundException`, `NetworkException`, `UnknownException`) mapped from the HTTP code / IO error. Repositories return `Result<T>`; use cases pass it through; ViewModels consume it with `fold(onSuccess = { }, onFailure = { })` (the stdlib `Result` names — note `onFailure`, not `onError`).
 
 **DI** — Hilt throughout. Repository interfaces (`:domain`) are bound to impls (`:data`) via `@Binds` in a feature `RepositoryModule`; feature `:data` also has `NetworkModule` providing its Retrofit API. Shared infra DI lives in `core:network` (`NetworkModule`, `FirebaseModule`), `core:datastore`, `core:connectivity`.
 

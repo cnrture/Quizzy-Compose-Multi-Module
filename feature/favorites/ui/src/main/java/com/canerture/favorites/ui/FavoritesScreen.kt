@@ -1,6 +1,5 @@
 package com.canerture.favorites.ui
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,7 +9,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -22,9 +20,10 @@ import com.canerture.favorites.ui.FavoritesContract.UiState
 import com.canerture.favorites.ui.component.EmptyScreenContent
 import com.canerture.favorites.ui.component.FavoriteQuizItem
 import com.canerture.feature.favorites.ui.R
+import com.canerture.ui.components.QuizzyDialog
 import com.canerture.ui.components.QuizzyLoading
-import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.extensions.collectWithLifecycle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -36,12 +35,9 @@ internal fun FavoritesScreen(
     onAction: (UiAction) -> Unit,
     onNavigateDetail: (Int) -> Unit,
 ) {
-    val context = LocalContext.current
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
             is UiEffect.NavigateDetail -> onNavigateDetail(effect.id)
-            is UiEffect.ShowError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT)
-                .show()
         }
     }
 
@@ -61,6 +57,14 @@ internal fun FavoritesScreen(
     }
 
     if (uiState.isLoading) QuizzyLoading()
+
+    if (uiState.dialogState != null) {
+        QuizzyDialog(
+            message = uiState.dialogState.message,
+            isSuccess = uiState.dialogState.isSuccess,
+            onDismiss = { onAction(UiAction.OnDialogDismiss) },
+        )
+    }
 }
 
 @Composable
