@@ -3,9 +3,7 @@ package com.canerture.ui.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -73,7 +71,7 @@ fun QuizzyButton(
                         tint = Color.Unspecified,
                         contentDescription = text,
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    QuizzySpacer(8.dp)
                 }
                 QuizzyText(
                     text = text,
@@ -101,7 +99,7 @@ fun QuizzyButton(
                         tint = Color.Unspecified,
                         contentDescription = text,
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    QuizzySpacer(8.dp)
                 }
                 QuizzyText(
                     text = text,
@@ -123,28 +121,28 @@ private fun QuizzyButtonPreview() {
                 size = QuizzyButtonSize.SMALL,
                 onClick = { }
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            QuizzySpacer(16.dp)
             QuizzyButton(
                 text = "Outlined Button",
                 type = QuizzyButtonType.PRIMARY,
                 size = QuizzyButtonSize.MEDIUM,
                 onClick = { }
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            QuizzySpacer(16.dp)
             QuizzyButton(
                 text = "Primary Button",
                 type = QuizzyButtonType.PRIMARY,
                 size = QuizzyButtonSize.LARGE,
                 onClick = { }
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            QuizzySpacer(16.dp)
             QuizzyButton(
                 text = "Primary Button",
                 type = QuizzyButtonType.SECONDARY,
                 size = QuizzyButtonSize.SMALL,
                 onClick = { }
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            QuizzySpacer(16.dp)
             QuizzyButton(
                 text = "Outlined Button",
                 type = QuizzyButtonType.SECONDARY,
@@ -152,7 +150,7 @@ private fun QuizzyButtonPreview() {
                 icon = QuizAppTheme.icons.google,
                 onClick = { }
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            QuizzySpacer(16.dp)
             QuizzyButton(
                 text = "Primary Button",
                 type = QuizzyButtonType.SECONDARY,

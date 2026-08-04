@@ -4,10 +4,8 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -27,10 +25,11 @@ import com.canerture.home.ui.HomeContract.UiState
 import com.canerture.home.ui.components.CategoryItem
 import com.canerture.home.ui.components.PopularQuizItem
 import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.components.QuizzySearchBar
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.components.QuizzyToolbar
-import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
@@ -101,12 +100,12 @@ internal fun HomeContent(
             modifier = Modifier.padding(horizontal = 32.dp),
             onClick = onSearchClick,
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         Categories(
             categories = uiState.categories,
             onCategoryClick = onCategoryClick,
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         PopularQuizzes(
             quizzes = uiState.popularQuizzes,
             onQuizClick = onQuizClick,
@@ -129,7 +128,7 @@ internal fun ColumnScope.Categories(
         style = QuizAppTheme.typography.heading4,
         color = QuizAppTheme.colors.onBackground
     )
-    Spacer(modifier = Modifier.height(16.dp))
+    QuizzySpacer(16.dp)
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -160,7 +159,7 @@ internal fun ColumnScope.PopularQuizzes(
         text = stringResource(R.string.popular_quizzes),
         style = QuizAppTheme.typography.heading4,
     )
-    Spacer(modifier = Modifier.height(16.dp))
+    QuizzySpacer(16.dp)
     quizzes.forEach { quiz ->
         PopularQuizItem(
             quiz = quiz,

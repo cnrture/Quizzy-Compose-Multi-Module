@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.HorizontalDivider
@@ -27,8 +25,9 @@ import com.canerture.ui.components.QuizzyButton
 import com.canerture.ui.components.QuizzyButtonType
 import com.canerture.ui.components.QuizzyDialog
 import com.canerture.ui.components.QuizzyLoading
-import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.components.QuizzyScaffold
+import com.canerture.ui.components.QuizzySpacer
+import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
@@ -97,18 +96,18 @@ internal fun WelcomeContent(
             tint = Color.Unspecified,
             contentDescription = stringResource(R.string.logo),
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        QuizzySpacer(40.dp)
         QuizzyText(
             text = stringResource(R.string.app_name),
             style = QuizAppTheme.typography.heading1,
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         QuizzyText(
             text = stringResource(R.string.welcome_title),
             style = QuizAppTheme.typography.paragraph1,
             textAlign = TextAlign.Center,
         )
-        Spacer(modifier = Modifier.height(64.dp))
+        QuizzySpacer(64.dp)
         QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.continue_with_google),
@@ -116,7 +115,7 @@ internal fun WelcomeContent(
             icon = QuizAppTheme.icons.google,
             onClick = { onAction(UiAction.OnLoginWithGoogleClick) },
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        QuizzySpacer(40.dp)
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -138,14 +137,14 @@ internal fun WelcomeContent(
                 thickness = 2.dp,
             )
         }
-        Spacer(modifier = Modifier.height(40.dp))
+        QuizzySpacer(40.dp)
         QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.sign_in_with_email),
             type = QuizzyButtonType.PRIMARY,
             onClick = { onAction(UiAction.OnLoginClick) },
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         QuizzyText(
             modifier = Modifier
                 .fillMaxWidth()
@@ -155,7 +154,7 @@ internal fun WelcomeContent(
             style = QuizAppTheme.typography.paragraph2,
             textAlign = TextAlign.Center,
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        QuizzySpacer(40.dp)
         QuizzyText(
             modifier = Modifier.fillMaxWidth(),
             fullText = stringResource(R.string.policy),

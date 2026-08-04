@@ -2,9 +2,7 @@ package com.canerture.search.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,9 +17,10 @@ import com.canerture.search.ui.SearchContract.UiState
 import com.canerture.search.ui.component.EmptyScreenContent
 import com.canerture.search.ui.component.QuizItem
 import com.canerture.ui.components.QuizzyLoading
-import com.canerture.ui.components.QuizzySearchBar
-import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
+import com.canerture.ui.components.QuizzySearchBar
+import com.canerture.ui.components.QuizzySpacer
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.extensions.collectWithLifecycle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -74,7 +73,7 @@ internal fun SearchContent(
             value = uiState.query,
             onValueChange = { onAction(UiAction.OnQueryChange(it)) },
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
 
         if (uiState.quizList.isEmpty() && !uiState.isLoading) {
             EmptyScreenContent()

@@ -3,9 +3,7 @@ package com.canerture.profile.ui
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -27,9 +25,10 @@ import com.canerture.ui.components.QuizzyButton
 import com.canerture.ui.components.QuizzyButtonSize
 import com.canerture.ui.components.QuizzyButtonType
 import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyScaffold
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.components.QuizzyToolbar
-import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
@@ -98,27 +97,27 @@ internal fun ProfileContent(
             imageUrl = uiState.profile?.avatarUrl.orEmpty(),
             contentDescription = "",
         )
-        Spacer(modifier = Modifier.height(32.dp))
+        QuizzySpacer(32.dp)
         QuizzyText(
             text = stringResource(R.string.nickname, uiState.profile?.username.orEmpty()),
             style = QuizAppTheme.typography.heading3,
             color = QuizAppTheme.colors.onBackground,
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         QuizzyButton(
             text = stringResource(R.string.edit_profile),
             type = QuizzyButtonType.SECONDARY,
             size = QuizzyButtonSize.SMALL,
             onClick = onEditProfileClick,
         )
-        Spacer(modifier = Modifier.height(48.dp))
+        QuizzySpacer(48.dp)
         QuizzyText(
             modifier = Modifier.align(Alignment.Start),
             text = stringResource(R.string.your_rank),
             style = QuizAppTheme.typography.heading3,
             color = QuizAppTheme.colors.onBackground,
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        QuizzySpacer(16.dp)
         if (uiState.rank != null) {
             RankItem(
                 rank = uiState.rank,

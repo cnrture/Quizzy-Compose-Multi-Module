@@ -3,14 +3,12 @@ package com.canerture.detail.ui
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -34,9 +32,10 @@ import com.canerture.feature.detail.ui.R
 import com.canerture.ui.components.QuizzyAsyncImage
 import com.canerture.ui.components.QuizzyDialog
 import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyScaffold
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.components.QuizzyToolbar
-import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
@@ -114,17 +113,17 @@ internal fun DetailContent(
             imageUrl = quiz.imageUrl,
             contentDescription = stringResource(R.string.quiz_image),
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         QuizzyText(
             text = quiz.category,
             style = QuizAppTheme.typography.subheading2,
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        QuizzySpacer(8.dp)
         QuizzyText(
             text = quiz.name,
             style = QuizAppTheme.typography.heading2,
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        QuizzySpacer(8.dp)
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -135,13 +134,13 @@ internal fun DetailContent(
                 contentDescription = stringResource(R.string.trophy_icon),
                 tint = QuizAppTheme.colors.lightYellow,
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            QuizzySpacer(8.dp)
             QuizzyText(
                 text = stringResource(R.string.score, quiz.score),
                 style = QuizAppTheme.typography.subheading2,
             )
         }
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -154,7 +153,7 @@ internal fun DetailContent(
                     text = quiz.questionCountStr,
                     style = QuizAppTheme.typography.heading3,
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                QuizzySpacer(4.dp)
                 QuizzyText(
                     text = stringResource(R.string.question),
                     style = QuizAppTheme.typography.paragraph2,
@@ -173,7 +172,7 @@ internal fun DetailContent(
                     text = quiz.playedCountStr,
                     style = QuizAppTheme.typography.heading3,
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                QuizzySpacer(4.dp)
                 QuizzyText(
                     text = stringResource(R.string.played),
                     style = QuizAppTheme.typography.paragraph2,
@@ -192,19 +191,19 @@ internal fun DetailContent(
                     text = quiz.favoriteCountStr,
                     style = QuizAppTheme.typography.heading3,
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                QuizzySpacer(4.dp)
                 QuizzyText(
                     text = stringResource(R.string.favorites),
                     style = QuizAppTheme.typography.paragraph2,
                 )
             }
         }
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         QuizzyText(
             text = stringResource(R.string.description),
             style = QuizAppTheme.typography.heading4,
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        QuizzySpacer(8.dp)
         QuizzyText(
             text = quiz.description,
             style = QuizAppTheme.typography.paragraph2,

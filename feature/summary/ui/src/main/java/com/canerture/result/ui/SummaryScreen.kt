@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -32,9 +31,10 @@ import com.canerture.result.ui.SummaryContract.UiEffect
 import com.canerture.result.ui.SummaryContract.UiState
 import com.canerture.ui.components.QuizzyButton
 import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyScaffold
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.components.QuizzyToolbar
-import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
@@ -132,7 +132,7 @@ internal fun SummaryContent(
                 contentDescription = stringResource(R.string.summary_icon),
             )
         }
-        Spacer(modifier = Modifier.height(48.dp))
+        QuizzySpacer(48.dp)
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -149,13 +149,13 @@ internal fun SummaryContent(
                 style = QuizAppTheme.typography.heading3,
                 textAlign = TextAlign.Center,
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            QuizzySpacer(16.dp)
             QuizzyText(
                 fullText = stringResource(R.string.summary_score, uiState.score),
                 spanTexts = listOf(stringResource(R.string.summary_score_span, uiState.score)),
                 style = QuizAppTheme.typography.paragraph1,
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            QuizzySpacer(16.dp)
             Row(
                 horizontalArrangement = Arrangement.spacedBy(32.dp),
             ) {
@@ -190,7 +190,7 @@ internal fun SummaryContent(
                 }
             }
         }
-        Spacer(modifier = Modifier.height(48.dp))
+        QuizzySpacer(48.dp)
         QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.play_again),

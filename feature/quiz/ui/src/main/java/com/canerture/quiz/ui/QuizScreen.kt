@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -33,9 +32,10 @@ import com.canerture.quiz.ui.component.TimerState
 import com.canerture.ui.components.QuizzyButton
 import com.canerture.ui.components.QuizzyDialog
 import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyScaffold
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.components.QuizzyToolbar
-import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
 import kotlinx.coroutines.flow.Flow
@@ -121,7 +121,7 @@ internal fun QuizContent(
             currentQuestion = uiState.quizNumber,
             totalQuestion = uiState.questions.size,
         )
-        Spacer(modifier = Modifier.height(48.dp))
+        QuizzySpacer(48.dp)
         QuizAppTimer(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
@@ -129,21 +129,21 @@ internal fun QuizContent(
             state = timerState,
             onTimeOut = onTimeOut,
         )
-        Spacer(modifier = Modifier.height(36.dp))
+        QuizzySpacer(36.dp)
         QuizzyText(
             modifier = Modifier.fillMaxWidth(),
             text = uiState.question?.question.orEmpty(),
             style = QuizAppTheme.typography.heading4,
             textAlign = TextAlign.Center,
         )
-        Spacer(modifier = Modifier.height(32.dp))
+        QuizzySpacer(32.dp)
         uiState.options.forEach { option ->
             AnswerButton(
                 optionModel = option,
                 isSelectable = uiState.isSelectable,
                 onOptionSelect = { onOptionSelect(it) },
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            QuizzySpacer(8.dp)
         }
         Spacer(modifier = Modifier.weight(1f))
         QuizzyButton(
@@ -152,7 +152,7 @@ internal fun QuizContent(
             isEnable = uiState.isNextButtonEnable,
             onClick = onNextClick,
         )
-        Spacer(modifier = Modifier.height(32.dp))
+        QuizzySpacer(32.dp)
     }
 }
 

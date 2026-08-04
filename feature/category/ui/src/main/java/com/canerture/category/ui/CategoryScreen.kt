@@ -4,14 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -33,9 +30,10 @@ import com.canerture.feature.category.ui.R
 import com.canerture.ui.components.QuizzyAsyncImage
 import com.canerture.ui.components.QuizzyDialog
 import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyScaffold
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.components.QuizzyToolbar
-import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
@@ -110,20 +108,20 @@ internal fun CategoryContent(
                 imageUrl = uiState.imageUrl,
                 contentDescription = uiState.title,
             )
-            Spacer(modifier = Modifier.width(16.dp))
+            QuizzySpacer(16.dp)
             Column {
                 QuizzyText(
                     text = uiState.title,
                     style = QuizAppTheme.typography.heading4,
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                QuizzySpacer(16.dp)
                 QuizzyText(
                     text = stringResource(id = R.string.question_count, uiState.quizzes.size),
                     style = QuizAppTheme.typography.heading5,
                 )
             }
         }
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
             color = QuizAppTheme.colors.onBackground,

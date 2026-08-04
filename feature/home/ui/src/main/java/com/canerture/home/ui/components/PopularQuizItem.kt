@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
@@ -22,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.canerture.feature.home.ui.R
 import com.canerture.home.domain.model.PopularQuizModel
 import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.noRippleClickable
@@ -66,7 +65,7 @@ internal fun PopularQuizItem(
                 text = quiz.name,
                 style = QuizAppTheme.typography.heading3,
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            QuizzySpacer(8.dp)
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
@@ -87,7 +86,7 @@ internal fun PopularQuizItem(
             }
         }
     }
-    Spacer(modifier = Modifier.height(16.dp))
+    QuizzySpacer(16.dp)
 }
 
 @PreviewLightDark

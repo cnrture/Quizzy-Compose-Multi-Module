@@ -1,10 +1,8 @@
 package com.canerture.register.ui
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,10 +20,11 @@ import com.canerture.register.ui.RegisterContract.UiState
 import com.canerture.ui.components.QuizzyButton
 import com.canerture.ui.components.QuizzyDialog
 import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyScaffold
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.components.QuizzyTextField
 import com.canerture.ui.components.QuizzyToolbar
-import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
@@ -99,12 +98,12 @@ internal fun RegisterContent(
             text = stringResource(R.string.welcome),
             style = QuizAppTheme.typography.heading1,
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        QuizzySpacer(8.dp)
         QuizzyText(
             text = stringResource(R.string.register_message),
             style = QuizAppTheme.typography.paragraph1,
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        QuizzySpacer(40.dp)
         QuizzyTextField(
             value = uiState.email,
             label = stringResource(R.string.register_email),
@@ -112,14 +111,14 @@ internal fun RegisterContent(
             keyboardType = KeyboardType.Email,
             onValueChange = { onEmailChange(it) },
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        QuizzySpacer(12.dp)
         QuizzyTextField(
             value = uiState.username,
             label = stringResource(R.string.register_username),
             icon = QuizAppTheme.icons.profileUnselected,
             onValueChange = { onUsernameChange(it) },
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        QuizzySpacer(12.dp)
         QuizzyTextField(
             value = uiState.password,
             label = stringResource(R.string.password),
@@ -127,7 +126,7 @@ internal fun RegisterContent(
             isPassword = true,
             onValueChange = { onPasswordChange(it) },
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        QuizzySpacer(12.dp)
         QuizzyTextField(
             value = uiState.passwordAgain,
             label = stringResource(R.string.register_confirm_password),
@@ -135,14 +134,14 @@ internal fun RegisterContent(
             isPassword = true,
             onValueChange = { onPasswordAgainChange(it) },
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        QuizzySpacer(40.dp)
         QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.register),
             isEnable = uiState.isButtonEnable,
             onClick = { onRegisterClick() },
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         QuizzyText(
             modifier = Modifier.noRippleClickable { onLoginClick() },
             fullText = stringResource(R.string.already_have_an_account),
@@ -150,7 +149,7 @@ internal fun RegisterContent(
             style = QuizAppTheme.typography.paragraph2,
             textAlign = TextAlign.Center,
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        QuizzySpacer(40.dp)
         QuizzyText(
             fullText = stringResource(R.string.policy),
             spanTexts = listOf(

@@ -4,10 +4,8 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -26,8 +24,9 @@ import com.canerture.leaderboard.ui.component.CurrentUserItem
 import com.canerture.leaderboard.ui.component.TopRankItem
 import com.canerture.leaderboard.ui.component.UserItem
 import com.canerture.ui.components.QuizzyLoading
-import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.components.QuizzyScaffold
+import com.canerture.ui.components.QuizzySpacer
+import com.canerture.ui.components.QuizzyToolbar
 import com.canerture.ui.extensions.collectWithLifecycle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -103,7 +102,7 @@ internal fun LeaderboardContent(
                 rank = 3,
             )
         }
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         if (uiState.currentUser != null) {
             CurrentUserItem(
                 item = uiState.currentUser,

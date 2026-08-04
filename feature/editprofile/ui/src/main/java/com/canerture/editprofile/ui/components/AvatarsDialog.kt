@@ -3,11 +3,9 @@ package com.canerture.editprofile.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -27,6 +25,7 @@ import com.canerture.feature.editprofile.ui.R
 import com.canerture.ui.components.QuizzyAsyncImage
 import com.canerture.ui.components.QuizzyButton
 import com.canerture.ui.components.QuizzyButtonSize
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.noRippleClickable
@@ -59,7 +58,7 @@ internal fun AvatarsDialog(
                 text = stringResource(R.string.select_avatar),
                 style = QuizAppTheme.typography.heading3,
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            QuizzySpacer(16.dp)
             LazyVerticalGrid(
                 modifier = Modifier.weight(1f),
                 columns = GridCells.Fixed(3),
@@ -82,7 +81,7 @@ internal fun AvatarsDialog(
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(16.dp))
+            QuizzySpacer(16.dp)
             QuizzyButton(
                 modifier = Modifier.fillMaxWidth(),
                 size = QuizzyButtonSize.SMALL,

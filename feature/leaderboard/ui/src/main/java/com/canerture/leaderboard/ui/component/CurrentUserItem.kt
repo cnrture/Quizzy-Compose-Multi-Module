@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -16,9 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.canerture.feature.leaderboard.ui.R
 import com.canerture.leaderboard.domain.model.BoardModel
+import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
@@ -42,8 +42,8 @@ internal fun CurrentUserItem(
             text = item.rank,
             style = QuizAppTheme.typography.heading5,
         )
-        Spacer(modifier = Modifier.width(16.dp))
-        AsyncImage(
+        QuizzySpacer(16.dp)
+        QuizzyAsyncImage(
             modifier = Modifier
                 .size(32.dp)
                 .background(
@@ -52,10 +52,10 @@ internal fun CurrentUserItem(
                 )
                 .boldBorder(width = 1.dp)
                 .padding(4.dp),
-            model = item.avatarUrl,
-            contentDescription = null,
+            imageUrl = item.avatarUrl,
+            contentDescription = stringResource(R.string.avatar),
         )
-        Spacer(modifier = Modifier.width(8.dp))
+        QuizzySpacer(8.dp)
         QuizzyText(
             text = stringResource(R.string.nickname, item.username),
             style = QuizAppTheme.typography.paragraph3,
@@ -67,7 +67,7 @@ internal fun CurrentUserItem(
             imageVector = QuizAppTheme.icons.trophy,
             contentDescription = null,
         )
-        Spacer(modifier = Modifier.width(4.dp))
+        QuizzySpacer(4.dp)
         QuizzyText(
             text = stringResource(R.string.score, item.score),
             style = QuizAppTheme.typography.heading7,

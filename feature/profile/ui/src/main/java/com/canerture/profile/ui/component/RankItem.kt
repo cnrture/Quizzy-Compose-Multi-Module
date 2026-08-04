@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.canerture.feature.profile.ui.R
 import com.canerture.profile.domain.model.RankModel
 import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
@@ -45,7 +45,7 @@ internal fun RankItem(
             text = rank.rank,
             style = QuizAppTheme.typography.heading5,
         )
-        Spacer(modifier = Modifier.width(16.dp))
+        QuizzySpacer(16.dp)
         QuizzyAsyncImage(
             modifier = Modifier
                 .size(32.dp)
@@ -54,7 +54,7 @@ internal fun RankItem(
             imageUrl = avatarUrl,
             contentDescription = stringResource(R.string.profile_image),
         )
-        Spacer(modifier = Modifier.width(8.dp))
+        QuizzySpacer(8.dp)
         QuizzyText(
             text = stringResource(R.string.nickname, username),
             style = QuizAppTheme.typography.paragraph2,
@@ -67,7 +67,7 @@ internal fun RankItem(
             contentDescription = stringResource(R.string.trophy),
             tint = QuizAppTheme.colors.onBackground,
         )
-        Spacer(modifier = Modifier.width(8.dp))
+        QuizzySpacer(8.dp)
         QuizzyText(
             text = stringResource(R.string.score, rank.score),
             style = QuizAppTheme.typography.heading6,

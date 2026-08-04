@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.canerture.feature.search.ui.R
 import com.canerture.search.domain.model.QuizModel
 import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.noRippleClickable
@@ -80,7 +80,7 @@ internal fun QuizItem(
             }
         }
     }
-    Spacer(modifier = Modifier.height(16.dp))
+    QuizzySpacer(16.dp)
 }
 
 @PreviewLightDark

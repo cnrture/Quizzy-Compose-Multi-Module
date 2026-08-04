@@ -2,9 +2,7 @@ package com.canerture.favorites.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -16,6 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.favorites.ui.R
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.theme.QuizAppTheme
 
@@ -34,7 +33,7 @@ internal fun EmptyScreenContent() {
             tint = QuizAppTheme.colors.red,
             contentDescription = stringResource(R.string.empty_content_icon),
         )
-        Spacer(modifier = Modifier.height(48.dp))
+        QuizzySpacer(48.dp)
         QuizzyText(
             text = stringResource(R.string.empty_content),
             style = QuizAppTheme.typography.heading2,

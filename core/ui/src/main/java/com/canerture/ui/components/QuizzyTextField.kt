@@ -2,9 +2,7 @@ package com.canerture.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
@@ -50,7 +48,8 @@ fun QuizzyTextField(
     }
 
     var visibility by remember { mutableStateOf(false) }
-    val visualTransformation = if (visibility) VisualTransformation.None else PasswordVisualTransformation()
+    val visualTransformation =
+        if (visibility) VisualTransformation.None else PasswordVisualTransformation()
 
     val trailingIcon: @Composable (() -> Unit)? = if (isPassword) {
         {
@@ -110,7 +109,7 @@ private fun QuizzyTextFieldPreview() {
             onValueChange = {},
             icon = QuizAppTheme.icons.email,
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        QuizzySpacer(16.dp)
         QuizzyTextField(
             value = "",
             label = "Password",

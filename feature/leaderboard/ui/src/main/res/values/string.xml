@@ -5,4 +5,5 @@
     <string name="score">%1$s Point</string>
 
     <string name="trophy">Trophy Icon</string>
+    <string name="avatar">Avatar</string>
 </resources>

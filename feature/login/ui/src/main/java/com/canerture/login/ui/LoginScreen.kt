@@ -1,10 +1,8 @@
 package com.canerture.login.ui
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,10 +25,11 @@ import com.canerture.login.ui.component.ForgotPasswordContent
 import com.canerture.ui.components.QuizzyButton
 import com.canerture.ui.components.QuizzyDialog
 import com.canerture.ui.components.QuizzyLoading
+import com.canerture.ui.components.QuizzyScaffold
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.components.QuizzyTextField
 import com.canerture.ui.components.QuizzyToolbar
-import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.extensions.noRippleClickable
 import com.canerture.ui.theme.QuizAppTheme
@@ -137,19 +136,19 @@ internal fun LoginContent(
             text = stringResource(R.string.welcome),
             style = QuizAppTheme.typography.heading1,
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        QuizzySpacer(8.dp)
         QuizzyText(
             text = stringResource(R.string.login_message),
             style = QuizAppTheme.typography.paragraph1,
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        QuizzySpacer(40.dp)
         QuizzyTextField(
             value = uiState.email,
             label = stringResource(R.string.login_email),
             icon = QuizAppTheme.icons.email,
             onValueChange = { onEmailChange(it) },
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         QuizzyTextField(
             value = uiState.password,
             label = stringResource(R.string.password),
@@ -157,7 +156,7 @@ internal fun LoginContent(
             isPassword = true,
             onValueChange = { onPasswordChange(it) },
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         QuizzyText(
             modifier = Modifier
                 .align(Alignment.End)
@@ -166,13 +165,13 @@ internal fun LoginContent(
             style = QuizAppTheme.typography.heading6,
             color = QuizAppTheme.colors.blue,
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        QuizzySpacer(40.dp)
         QuizzyButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.login),
             onClick = { onLoginClick() },
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        QuizzySpacer(24.dp)
         QuizzyText(
             modifier = Modifier.noRippleClickable { onRegisterClick() },
             fullText = stringResource(R.string.dont_have_an_account),
@@ -180,7 +179,7 @@ internal fun LoginContent(
             style = QuizAppTheme.typography.paragraph2,
             textAlign = TextAlign.Center,
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        QuizzySpacer(40.dp)
         QuizzyText(
             fullText = stringResource(R.string.policy),
             spanTexts = listOf(

@@ -2,7 +2,6 @@ package com.canerture.home.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -18,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.canerture.feature.home.ui.R
 import com.canerture.home.domain.model.CategoryModel
 import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.extensions.noRippleClickable
@@ -30,8 +30,9 @@ internal fun CategoryItem(
     isLastItem: Boolean,
     onCategoryClick: (CategoryModel) -> Unit,
 ) {
-    if (index == 0) Spacer(modifier = Modifier.width(32.dp))
-    val bgColor = if (index % 2 == 0) QuizAppTheme.colors.lightBlue else QuizAppTheme.colors.lightYellow
+    if (index == 0) QuizzySpacer(32.dp)
+    val bgColor =
+        if (index % 2 == 0) QuizAppTheme.colors.lightBlue else QuizAppTheme.colors.lightYellow
     Column(
         modifier = Modifier
             .width(160.dp)
@@ -53,21 +54,21 @@ internal fun CategoryItem(
             imageUrl = category.imageUrl,
             contentDescription = category.name,
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        QuizzySpacer(16.dp)
         QuizzyText(
             text = category.name,
             style = QuizAppTheme.typography.heading5,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        QuizzySpacer(12.dp)
         QuizzyText(
             text = stringResource(R.string.quiz_count, category.quizCount),
             style = QuizAppTheme.typography.heading6,
             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
         )
     }
-    Spacer(modifier = Modifier.width(if (isLastItem) 32.dp else 16.dp))
+    QuizzySpacer(if (isLastItem) 32.dp else 16.dp)
 }
 
 @PreviewLightDark

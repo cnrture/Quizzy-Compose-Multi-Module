@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -23,6 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.leaderboard.ui.R
 import com.canerture.ui.components.QuizzyAsyncImage
+import com.canerture.ui.components.QuizzySpacer
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.extensions.boldBorder
 import com.canerture.ui.theme.QuizAppTheme
@@ -86,13 +86,13 @@ internal fun TopRankItem(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(32.dp))
+        QuizzySpacer(32.dp)
         QuizzyText(
             text = stringResource(R.string.nickname, username),
             style = QuizAppTheme.typography.heading7,
             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        QuizzySpacer(16.dp)
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -102,7 +102,7 @@ internal fun TopRankItem(
                 contentDescription = null,
                 tint = QuizAppTheme.colors.yellow,
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            QuizzySpacer(8.dp)
             QuizzyText(
                 text = stringResource(R.string.score, score),
                 style = QuizAppTheme.typography.heading7,
