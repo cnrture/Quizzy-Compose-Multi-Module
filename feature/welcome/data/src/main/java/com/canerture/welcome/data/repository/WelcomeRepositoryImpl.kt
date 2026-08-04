@@ -10,6 +10,7 @@ import com.canerture.core.common.UnknownException
 import com.canerture.core.common.toUnit
 import com.canerture.datasource.profile.ProfileDataSource
 import com.canerture.datastore.DataStoreHelper
+import com.canerture.feature.welcome.data.BuildConfig
 import com.canerture.network.safeApiCall
 import com.canerture.welcome.data.mapper.toModel
 import com.canerture.welcome.data.model.GoogleLoginRequest
@@ -20,7 +21,6 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.canerture.feature.welcome.data.BuildConfig
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
