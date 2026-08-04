@@ -28,11 +28,7 @@ internal class SummaryViewModel @Inject constructor(
                 correctAnswers = args.correctAnswers.toString(),
                 wrongAnswers = args.wrongAnswers.toString(),
                 score = args.score,
-                state = when {
-                    args.correctAnswers > args.wrongAnswers -> SummaryState.CORRECT
-                    args.correctAnswers == args.wrongAnswers -> SummaryState.EQUAL
-                    else -> SummaryState.WRONG
-                }
+                state = resolveSummaryState(args.correctAnswers, args.wrongAnswers),
             )
         }
     }
@@ -45,4 +41,10 @@ internal class SummaryViewModel @Inject constructor(
             }
         }
     }
+}
+
+internal fun resolveSummaryState(correctAnswers: Int, wrongAnswers: Int): SummaryState = when {
+    correctAnswers > wrongAnswers -> SummaryState.CORRECT
+    correctAnswers == wrongAnswers -> SummaryState.EQUAL
+    else -> SummaryState.WRONG
 }

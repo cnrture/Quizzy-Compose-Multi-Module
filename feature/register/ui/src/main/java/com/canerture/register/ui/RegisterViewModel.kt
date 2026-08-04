@@ -27,23 +27,30 @@ internal class RegisterViewModel @Inject constructor(
                 }
 
                 is UiAction.OnEmailChange -> {
-                    updateUiState { copy(email = uiAction.email, isButtonEnable = checkButtonEnabled()) }
+                    updateUiState {
+                        val updated = copy(email = uiAction.email)
+                        updated.copy(isButtonEnable = updated.checkButtonEnabled())
+                    }
                 }
 
                 is UiAction.OnUsernameChange -> {
-                    updateUiState { copy(username = uiAction.username, isButtonEnable = checkButtonEnabled()) }
+                    updateUiState {
+                        val updated = copy(username = uiAction.username)
+                        updated.copy(isButtonEnable = updated.checkButtonEnabled())
+                    }
                 }
 
                 is UiAction.OnPasswordChange -> {
-                    updateUiState { copy(password = uiAction.password, isButtonEnable = checkButtonEnabled()) }
+                    updateUiState {
+                        val updated = copy(password = uiAction.password)
+                        updated.copy(isButtonEnable = updated.checkButtonEnabled())
+                    }
                 }
 
                 is UiAction.OnPasswordAgainChange -> {
                     updateUiState {
-                        copy(
-                            passwordAgain = uiAction.passwordAgain,
-                            isButtonEnable = checkButtonEnabled()
-                        )
+                        val updated = copy(passwordAgain = uiAction.passwordAgain)
+                        updated.copy(isButtonEnable = updated.checkButtonEnabled())
                     }
                 }
 

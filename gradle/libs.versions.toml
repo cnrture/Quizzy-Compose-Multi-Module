@@ -28,6 +28,9 @@ okhttpLogging = "5.4.0"
 coroutines = "1.11.0"
 desugaring = "2.1.5"
 multidex = "2.0.1"
+mockk = "1.14.5"
+turbine = "1.2.1"
+truth = "1.4.4"
 
 [libraries]
 desugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugaring" }
@@ -67,6 +70,10 @@ javax-inject = { module = "javax.inject:javax.inject", version = "1" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStore" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpLogging" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
 
 android-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 compose-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
@@ -97,3 +104,4 @@ quiz-hilt = { id = "quiz.hilt" }
 quiz-detekt = { id = "quiz.detekt" }
 quiz-retrofit = { id = "quiz.retrofit" }
 quiz-jvm-library = { id = "quiz.jvm.library" }
+quiz-test = { id = "quiz.test" }
