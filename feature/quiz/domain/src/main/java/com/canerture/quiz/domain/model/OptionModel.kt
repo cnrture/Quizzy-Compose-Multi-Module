@@ -6,4 +6,5 @@ import androidx.compose.runtime.Immutable
 data class OptionModel(
     val option: String,
     val state: OptionState,
+    val id: Int = -1,
 )

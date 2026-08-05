@@ -28,9 +28,10 @@ internal fun List<QuestionResponse>?.toQuestionModel(): List<QuestionModel> {
 }
 
 internal fun List<String>?.toModel(): List<OptionModel> {
-    return this?.map {
+    return this?.mapIndexed { index, option ->
         OptionModel(
-            option = it,
+            id = index,
+            option = option,
             state = OptionState.UNSELECTED,
         )
     }.orEmpty()

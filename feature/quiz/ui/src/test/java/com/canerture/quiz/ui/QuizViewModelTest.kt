@@ -51,8 +51,8 @@ class QuizViewModelTest {
         unmockkStatic("androidx.navigation.SavedStateHandleKt")
     }
 
-    private val option1 = OptionModel(option = "Option A", state = OptionState.UNSELECTED)
-    private val option2 = OptionModel(option = "Option B", state = OptionState.UNSELECTED)
+    private val option1 = OptionModel(option = "Option A", state = OptionState.UNSELECTED, id = 0)
+    private val option2 = OptionModel(option = "Option B", state = OptionState.UNSELECTED, id = 1)
     private val question = QuestionModel(
         question = "What?",
         options = listOf(option1, option2),
@@ -99,6 +99,30 @@ class QuizViewModelTest {
 
         assertThat(viewModel.currentUiState.correctAnswers).isEqualTo(1)
         assertThat(viewModel.currentUiState.isSelectable).isFalse()
+    }
+
+    @Test
+    fun `duplicate option texts only mark the real answer as correct`() = runTest {
+        val realAnswer = OptionModel(option = "Same", state = OptionState.UNSELECTED, id = 0)
+        val impostor = OptionModel(option = "Same", state = OptionState.UNSELECTED, id = 1)
+        val quiz = quizModel.copy(
+            questions = listOf(
+                question.copy(
+                    options = listOf(realAnswer, impostor),
+                    answer = "Same"
+                )
+            ),
+        )
+        val viewModel = createViewModel(quiz = quiz)
+        advanceUntilIdle()
+
+        viewModel.onAction(UiAction.OnOptionSelect(impostor))
+        advanceUntilIdle()
+
+        val options = viewModel.currentUiState.options
+        assertThat(options.single { it.id == realAnswer.id }.state).isEqualTo(OptionState.CORRECT)
+        assertThat(options.single { it.id == impostor.id }.state).isEqualTo(OptionState.INCORRECT)
+        assertThat(viewModel.currentUiState.correctAnswers).isEqualTo(0)
     }
 
     @Test

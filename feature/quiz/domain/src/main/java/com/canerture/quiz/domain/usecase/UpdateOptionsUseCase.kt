@@ -11,23 +11,12 @@ class UpdateOptionsUseCase @Inject constructor() {
         answer: String,
         selectedOption: OptionModel? = null,
     ): Pair<List<OptionModel>, Boolean> {
-        val correctOption = options.find { it.option == answer }
-        var isCorrect = true
+        val correctId = options.firstOrNull { it.option == answer }?.id
+        val isCorrect = selectedOption == null || selectedOption.id == correctId
         val updatedOptions = options.map {
             when {
-                selectedOption == null && it.option == correctOption?.option -> {
-                    it.copy(state = OptionState.CORRECT)
-                }
-
-                it.option != correctOption?.option && it.option == selectedOption?.option -> {
-                    isCorrect = false
-                    it.copy(state = OptionState.INCORRECT)
-                }
-
-                it.option == correctOption?.option -> {
-                    it.copy(state = OptionState.CORRECT)
-                }
-
+                it.id == correctId -> it.copy(state = OptionState.CORRECT)
+                it.id == selectedOption?.id -> it.copy(state = OptionState.INCORRECT)
                 else -> it
             }
         }
