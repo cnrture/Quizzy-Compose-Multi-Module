@@ -16,7 +16,10 @@ import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -40,7 +43,9 @@ fun QuizAppBottomBar(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     NavigationBar(
-        modifier = Modifier.padding(horizontal = 16.dp),
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .semantics { testTagsAsResourceId = true },
         containerColor = QuizAppTheme.colors.background,
     ) {
         tabList.forEach { navItem ->
@@ -49,6 +54,7 @@ fun QuizAppBottomBar(
                 Row(
                     modifier = Modifier
                         .wrapContentSize()
+                        .testTag(BottomBarTestTags.tabLabel(navItem))
                         .weight(if (isSelected) 1f else 0.5f)
                         .background(
                             color = if (isSelected) QuizAppTheme.colors.blue else QuizAppTheme.colors.background,
@@ -81,7 +87,7 @@ fun QuizAppBottomBar(
                     AnimatedVisibility(isSelected) {
                         QuizzyText(
                             modifier = Modifier.padding(start = 8.dp),
-                            testTag = BottomBarTestTags.tabLabel(navItem),
+                            testTag = "${BottomBarTestTags.tabLabel(navItem)}.label",
                             text = stringResource(navItem.title),
                             style = QuizAppTheme.typography.paragraph2,
                             color = QuizAppTheme.colors.background,
