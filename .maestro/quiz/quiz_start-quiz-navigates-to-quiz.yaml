@@ -1,0 +1,32 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Quiz — Detail Start Quiz navigates into the Quiz screen"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Popular quizzes are the last section on Home and load from the network, so the
+# first item can sit below the fold. Scroll it into view before tapping.
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.name"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.name"
+- extendedWaitUntil:
+    visible:
+      id: "detail.startQuizButton"
+    timeout: 15000
+# We are on Detail; Quiz elements are not yet present.
+- assertNotVisible:
+    id: "quiz.questionText"
+- tapOn:
+    id: "detail.startQuizButton"
+# NavigateQuiz effect lands on the Quiz screen once getQuiz() resolves.
+- extendedWaitUntil:
+    visible:
+      id: "quiz.questionText"
+    timeout: 15000
+- assertVisible:
+    id: "quiz.toolbar"

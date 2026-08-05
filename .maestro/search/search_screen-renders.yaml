@@ -1,0 +1,21 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Search — screen renders after navigating from Home"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Enter Search from Home's search bar (home.searchBar -> onNavigateSearch).
+- tapOn:
+    id: "home.searchBar"
+# Search screen chrome: toolbar back + search bar are always present.
+- extendedWaitUntil:
+    visible:
+      id: "search.searchBar"
+    timeout: 10000
+- assertVisible:
+    id: "search.toolbar.back"
+- assertVisible:
+    id: "search.searchBar"
+- assertVisible:
+    id: "search.searchBar.placeholder"

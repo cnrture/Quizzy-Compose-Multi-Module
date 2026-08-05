@@ -1,0 +1,28 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "EditProfile — Change avatar opens the avatars dialog"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.ProfileScreen"
+- extendedWaitUntil:
+    visible:
+      id: "profile.editProfileButton"
+    timeout: 10000
+- tapOn:
+    id: "profile.editProfileButton"
+- extendedWaitUntil:
+    visible:
+      id: "editProfile.changeAvatarButton"
+    timeout: 10000
+# OnChangeAvatarClick -> isAvatarsDialogVisible = true -> AvatarsDialog overlay.
+- tapOn:
+    id: "editProfile.changeAvatarButton"
+- extendedWaitUntil:
+    visible:
+      id: "editProfile.avatarsDialog.title"
+    timeout: 10000
+- assertVisible:
+    id: "editProfile.avatarsDialog.closeButton"

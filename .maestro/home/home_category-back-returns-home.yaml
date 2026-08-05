@@ -1,0 +1,34 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Home — back from Category returns to Home"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- scrollUntilVisible:
+    element:
+      id: "home.categoryItem.name"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.categoryItem.name"
+- extendedWaitUntil:
+    visible:
+      id: "category.toolbar"
+    timeout: 15000
+# Toolbar back pops Category back to Home (category.toolbar -> category.toolbar.back).
+- tapOn:
+    id: "category.toolbar.back"
+- extendedWaitUntil:
+    visible:
+      id: "home.categoriesTitle"
+    timeout: 15000
+# Home may retain its scrolled position on return; bring the top search bar back into
+# view before asserting it (no-op if already visible).
+- scrollUntilVisible:
+    element:
+      id: "home.searchBar"
+    direction: UP
+    timeout: 15000
+- assertVisible:
+    id: "home.searchBar"

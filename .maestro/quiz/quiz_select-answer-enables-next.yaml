@@ -1,0 +1,38 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Quiz — selecting an answer reveals result and keeps Next available"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Popular quizzes are the last section on Home and load from the network, so the
+# first item can sit below the fold. Scroll it into view before tapping.
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.name"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.name"
+- extendedWaitUntil:
+    visible:
+      id: "detail.startQuizButton"
+    timeout: 15000
+- tapOn:
+    id: "detail.startQuizButton"
+- extendedWaitUntil:
+    visible:
+      id: "quiz.questionText"
+    timeout: 15000
+# All answer options share the same testTag (quiz.answerOption); Maestro taps
+# the first rendered option. OnOptionSelect sets isSelectable=false and
+# isNextButtonEnable=true.
+- tapOn:
+    id: "quiz.answerOption"
+# After selecting, the question and options remain visible with the result state.
+- assertVisible:
+    id: "quiz.answerOption"
+- assertVisible:
+    id: "quiz.nextButton"
+- assertVisible:
+    id: "quiz.questionText"

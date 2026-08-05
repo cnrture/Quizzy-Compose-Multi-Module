@@ -1,0 +1,32 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Home — back from Detail returns to Home"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.name"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.name"
+- extendedWaitUntil:
+    visible:
+      id: "detail.toolbar"
+    timeout: 15000
+# Toolbar back pops Detail back to Home (detail.toolbar -> detail.toolbar.back).
+- tapOn:
+    id: "detail.toolbar.back"
+# Home may retain its scrolled-down position on return; scroll the top search bar back
+# into view first, then assert the top-of-screen anchors.
+- scrollUntilVisible:
+    element:
+      id: "home.searchBar"
+    direction: UP
+    timeout: 15000
+- assertVisible:
+    id: "home.searchBar"
+- assertVisible:
+    id: "home.categoriesTitle"

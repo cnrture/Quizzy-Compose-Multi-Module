@@ -1,0 +1,21 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Category — Home category tap opens the Category screen"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# From Home, tap a category name to trigger onNavigateCategory.
+- extendedWaitUntil:
+    visible:
+      id: "home.categoryItem.name"
+    timeout: 15000
+- tapOn:
+    id: "home.categoryItem.name"
+# The Category toolbar confirms we landed on the new screen.
+- extendedWaitUntil:
+    visible:
+      id: "category.toolbar"
+    timeout: 15000
+- assertVisible:
+    id: "category.titleText"

@@ -1,0 +1,27 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Category — tapping a quiz item opens Detail"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- extendedWaitUntil:
+    visible:
+      id: "home.categoryItem.image"
+    timeout: 15000
+- tapOn:
+    id: "home.categoryItem.image"
+# Tap the first quiz in the grid -> onNavigateDetail.
+- extendedWaitUntil:
+    visible:
+      id: "category.quizItem.image"
+    timeout: 15000
+- tapOn:
+    id: "category.quizItem.image"
+# Detail screen confirms navigation.
+- extendedWaitUntil:
+    visible:
+      id: "detail.toolbar"
+    timeout: 15000
+- assertVisible:
+    id: "detail.startQuizButton"

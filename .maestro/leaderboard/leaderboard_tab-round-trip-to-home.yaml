@@ -1,0 +1,27 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Leaderboard — round trip back to Home tab"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Go to Leaderboard...
+- tapOn:
+    id: "bottomBar.tab.LeaderboardScreen"
+- extendedWaitUntil:
+    visible:
+      id: "leaderboard.toolbar"
+    timeout: 15000
+- assertVisible:
+    id: "leaderboard.toolbar"
+# ...then back to Home via the bottom bar.
+- tapOn:
+    id: "bottomBar.tab.HomeScreen"
+- extendedWaitUntil:
+    visible:
+      id: "home.categoriesTitle"
+    timeout: 15000
+- assertVisible:
+    id: "home.categoriesTitle"
+- assertNotVisible:
+    id: "leaderboard.toolbar"

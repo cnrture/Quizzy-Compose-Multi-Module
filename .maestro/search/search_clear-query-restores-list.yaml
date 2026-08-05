@@ -1,0 +1,34 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Search — clearing the query restores the initial list"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "home.searchBar"
+- extendedWaitUntil:
+    visible:
+      id: "search.searchBar"
+    timeout: 10000
+# First drive into the empty state with an implausible query (>2 chars).
+- tapOn:
+    id: "search.searchBar"
+- inputText: "zzxxqqnomatch"
+- extendedWaitUntil:
+    visible:
+      id: "search.emptyMessageText"
+    timeout: 15000
+- assertVisible:
+    id: "search.emptyMessageText"
+# Clearing the field drops query length to <=2, which restores initialQuizList.
+- eraseText
+- scrollUntilVisible:
+    element:
+      id: "search.quizItem.nameText"
+    direction: DOWN
+    timeout: 15000
+- assertVisible:
+    id: "search.quizItem.nameText"
+- assertNotVisible:
+    id: "search.emptyMessageText"

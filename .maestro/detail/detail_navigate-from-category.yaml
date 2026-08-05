@@ -1,0 +1,27 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Detail — reached via Category -> quiz item"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Home -> tap a category -> Category screen -> tap a quiz item -> Detail.
+- extendedWaitUntil:
+    visible:
+      id: "home.categoryItem.image"
+    timeout: 20000
+- tapOn:
+    id: "home.categoryItem.image"
+- extendedWaitUntil:
+    visible:
+      id: "category.quizItem.image"
+    timeout: 20000
+- tapOn:
+    id: "category.quizItem.image"
+# Same Detail screen, different entry chain.
+- extendedWaitUntil:
+    visible:
+      id: "detail.startQuizButton"
+    timeout: 20000
+- assertVisible:
+    id: "detail.toolbar"

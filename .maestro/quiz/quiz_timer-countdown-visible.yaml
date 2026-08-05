@@ -1,0 +1,34 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Quiz — countdown timer is visible on an active question"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Popular quizzes are the last section on Home and load from the network, so the
+# first item can sit below the fold. Scroll it into view before tapping.
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.name"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.name"
+- extendedWaitUntil:
+    visible:
+      id: "detail.startQuizButton"
+    timeout: 15000
+- tapOn:
+    id: "detail.startQuizButton"
+- extendedWaitUntil:
+    visible:
+      id: "quiz.questionText"
+    timeout: 15000
+# The timer starts counting immediately (TimerState.START); the countdown text
+# is shown while currentTime > 0. Assert on it right after the question renders.
+- extendedWaitUntil:
+    visible:
+      id: "quiz.timerCountdownText"
+    timeout: 5000
+- assertVisible:
+    id: "quiz.timerCountdownText"

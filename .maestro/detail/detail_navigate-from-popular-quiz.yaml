@@ -1,0 +1,21 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Detail — tapping a popular quiz name navigates to Detail"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Tap the popular quiz name (instead of the image) to reach Detail.
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.name"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.name"
+- extendedWaitUntil:
+    visible:
+      id: "detail.startQuizButton"
+    timeout: 20000
+- assertVisible:
+    id: "detail.toolbar"

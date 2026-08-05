@@ -1,0 +1,24 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Search — tapping a quiz item opens Detail"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "home.searchBar"
+# Wait for the initial list, then tap the first rendered quiz item.
+- scrollUntilVisible:
+    element:
+      id: "search.quizItem.nameText"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "search.quizItem.nameText"
+# OnQuizClick -> NavigateDetail -> Detail screen (detail.toolbar).
+- extendedWaitUntil:
+    visible:
+      id: "detail.toolbar"
+    timeout: 15000
+- assertVisible:
+    id: "detail.startQuizButton"

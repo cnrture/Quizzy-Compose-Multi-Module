@@ -91,13 +91,37 @@ Rules:
 
 ## Running
 
+Needs a booted emulator with the app installed (`./gradlew installDebug`). There is no `--dry-run` in this Maestro version — run against the device. For authenticated flows use `.maestro/run.sh`, which injects `.maestro/.env` credentials as `-e KEY=VALUE` flags.
+
 ```bash
-# Syntax check without a device
-maestro test --dry-run .maestro/login/login_valid-credentials.yaml
+# Pre-auth flow / folder (no credentials)
+maestro --device emulator-5554 test .maestro/welcome/
 
-# Run a screen's whole folder (needs an emulator + installed app)
-maestro test .maestro/login/
+# Authenticated flows (runner injects .env)
+.maestro/run.sh .maestro/home/
 
-# Run only smoke flows
-maestro test --include-tags=smoke .maestro/
+# Only smoke flows
+.maestro/run.sh --include-tags=smoke .maestro/
 ```
+
+## Async, scrolling & list items (learned the hard way)
+
+- **Below-the-fold list items need `scrollUntilVisible`, not `extendedWaitUntil`.** `extendedWaitUntil` waits for the node to *exist in the tree*; it does **not** scroll it into the tappable viewport. A `tapOn`/`assertVisible` on an item that exists but is off-screen fails. Use:
+
+  ```yaml
+  - scrollUntilVisible:
+      element:
+        id: "home.popularQuizItem.name"
+      direction: DOWN
+      timeout: 15000
+  - tapOn:
+      id: "home.popularQuizItem.name"
+  ```
+
+  Home is one vertical-scroll column (searchBar → categories → popular quizzes), so popular-quiz items start below the fold. Returning from a pushed screen keeps the scroll position — scroll `UP` to `home.searchBar` before asserting top anchors.
+
+- **Do NOT put `extendedWaitUntil(sameId)` right before `scrollUntilVisible(sameId)`.** The wait can never see an off-screen item, so it hangs until timeout and fails before the scroll ever runs. `scrollUntilVisible` already waits for existence + visibility — let it do both.
+
+- **`when:` conditionals race the async load — don't branch on data that is still loading.** `runFlow: when: visible:` evaluates **instantly** against the current tree. If the list hasn't rendered yet, the check sees the initial/empty state and takes the wrong branch. For a screen that is "list OR empty state" depending on account data, prefer **two separate deterministic flows** (one that `extendedWaitUntil`s the item, one that asserts the empty state) over a single branching flow — each waits for its own state, and exactly one matches the account.
+
+- **Static text can be asserted with `text:`** when you need a value the tags don't distinguish (e.g. confirming a specific quiz name survived a filter). The house rule is `id:`-first, but `text:` is fine for a one-off content assertion on stable, single-language copy.

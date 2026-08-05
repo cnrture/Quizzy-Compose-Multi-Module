@@ -1,0 +1,35 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "EditProfile — screen renders all fields after navigating from Profile"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Home -> Profile tab -> Edit profile button
+- tapOn:
+    id: "bottomBar.tab.ProfileScreen"
+- extendedWaitUntil:
+    visible:
+      id: "profile.editProfileButton"
+    timeout: 10000
+- tapOn:
+    id: "profile.editProfileButton"
+# EditProfile screen — assert every field is rendered.
+- extendedWaitUntil:
+    visible:
+      id: "editProfile.emailField"
+    timeout: 10000
+- assertVisible:
+    id: "editProfile.title"
+- assertVisible:
+    id: "editProfile.avatarImage"
+- assertVisible:
+    id: "editProfile.changeAvatarButton"
+- assertVisible:
+    id: "editProfile.usernameField"
+- assertVisible:
+    id: "editProfile.passwordField"
+- assertVisible:
+    id: "editProfile.saveButton"
+- assertVisible:
+    id: "editProfile.toolbar.back"

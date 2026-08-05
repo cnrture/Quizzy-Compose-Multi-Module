@@ -1,0 +1,28 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Search — typing a query filters the list locally"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "home.searchBar"
+# Initial list loads from the quizzes endpoint (client-side search).
+- extendedWaitUntil:
+    visible:
+      id: "search.quizItem.nameText"
+    timeout: 15000
+# A non-matching quiz is present before filtering.
+- assertVisible:
+    text: "Famous Musicians Quiz"
+# Type a query that matches only History quizzes; debounce (300ms) then filter.
+- tapOn:
+    id: "search.searchBar"
+- inputText: "History"
+- extendedWaitUntil:
+    visible:
+      text: "World History Quiz"
+    timeout: 10000
+# The non-matching quiz is filtered out.
+- assertNotVisible:
+    text: "Famous Musicians Quiz"

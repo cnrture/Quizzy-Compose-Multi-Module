@@ -1,0 +1,44 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Favorites — item opens Detail if present, else empty state renders"
+---
+# Data-state-independent, single flow: whichever state the account is in, the matching
+# branch runs and asserts. Both branches live inside runFlow: when: blocks (each ending
+# in its own assertion), so the one that does NOT match is skipped rather than failing.
+# The list loads fast enough that by the time the toolbar is asserted the content branch
+# has rendered, so the when: checks evaluate against the settled screen (not a race).
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.FavoritesScreen"
+- extendedWaitUntil:
+    visible:
+      id: "favorites.toolbar"
+    timeout: 15000
+
+# Branch A — favorites present: tap the first row (OnQuizClick -> NavigateDetail).
+- runFlow:
+    when:
+      visible:
+        id: "favorites.item.nameText"
+    commands:
+      - tapOn:
+          id: "favorites.item.nameText"
+      - extendedWaitUntil:
+          visible:
+            id: "detail.toolbar"
+          timeout: 15000
+      - assertVisible:
+          id: "detail.toolbar"
+
+# Branch B — no favorites: the empty state renders instead.
+- runFlow:
+    when:
+      visible:
+        id: "favorites.emptyText"
+    commands:
+      - assertVisible:
+          id: "favorites.emptyText"
+      - assertNotVisible:
+          id: "favorites.item.nameText"

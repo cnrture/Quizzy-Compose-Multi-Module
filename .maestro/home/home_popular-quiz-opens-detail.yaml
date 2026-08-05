@@ -1,0 +1,23 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Home — tapping a popular quiz opens the Detail screen"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Popular quizzes load from the network; wait for the first quiz name to render.
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.name"
+    direction: DOWN
+    timeout: 15000
+# Tap the first popular quiz item (shared tag -> Maestro taps the first match).
+- tapOn:
+    id: "home.popularQuizItem.name"
+# OnQuizClick -> NavigateDetail -> Detail screen (toolbar + start-quiz button render).
+- extendedWaitUntil:
+    visible:
+      id: "detail.toolbar"
+    timeout: 15000
+- assertVisible:
+    id: "detail.startQuizButton"

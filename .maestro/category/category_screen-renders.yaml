@@ -1,0 +1,25 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Category — screen renders after tapping a Home category"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Open a category from Home. Items reuse one tag, so Maestro taps the first.
+- extendedWaitUntil:
+    visible:
+      id: "home.categoryItem.image"
+    timeout: 15000
+- tapOn:
+    id: "home.categoryItem.image"
+# Category screen header elements render.
+- extendedWaitUntil:
+    visible:
+      id: "category.toolbar"
+    timeout: 15000
+- assertVisible:
+    id: "category.categoryImage"
+- assertVisible:
+    id: "category.titleText"
+- assertVisible:
+    id: "category.questionCountText"

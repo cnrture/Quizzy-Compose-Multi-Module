@@ -1,0 +1,23 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Profile — logout returns to the Welcome auth screen"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.ProfileScreen"
+- extendedWaitUntil:
+    visible:
+      id: "profile.toolbar.endIcon"
+    timeout: 10000
+# The toolbar end icon (exit) triggers logout.
+- tapOn:
+    id: "profile.toolbar.endIcon"
+# Logout clears the token and routes back to the Welcome auth screen.
+- extendedWaitUntil:
+    visible:
+      id: "welcome.emailButton"
+    timeout: 20000
+- assertVisible:
+    id: "welcome.emailButton"

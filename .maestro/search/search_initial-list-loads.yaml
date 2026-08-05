@@ -1,0 +1,25 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Search — initial quiz list loads on entry"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "home.searchBar"
+# On entry SearchViewModel loads the initial list (searchQuizUseCase("")),
+# so quiz items render before any query is typed.
+- extendedWaitUntil:
+    visible:
+      id: "search.quizItem.nameText"
+    timeout: 15000
+# Item may sit below the fold; bring it into view before asserting.
+- scrollUntilVisible:
+    element:
+      id: "search.quizItem.image"
+    direction: DOWN
+    timeout: 15000
+- assertVisible:
+    id: "search.quizItem.image"
+- assertVisible:
+    id: "search.quizItem.nameText"

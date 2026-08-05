@@ -1,0 +1,29 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "EditProfile — toolbar back returns to Profile"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.ProfileScreen"
+- extendedWaitUntil:
+    visible:
+      id: "profile.editProfileButton"
+    timeout: 10000
+- tapOn:
+    id: "profile.editProfileButton"
+- extendedWaitUntil:
+    visible:
+      id: "editProfile.toolbar.back"
+    timeout: 10000
+# Composite QuizzyToolbar(testTag = editProfile.toolbar) derives .back in core:ui.
+- tapOn:
+    id: "editProfile.toolbar.back"
+# Popped back to Profile.
+- extendedWaitUntil:
+    visible:
+      id: "profile.editProfileButton"
+    timeout: 10000
+- assertVisible:
+    id: "profile.editProfileButton"

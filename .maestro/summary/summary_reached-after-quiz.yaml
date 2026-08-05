@@ -1,0 +1,73 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Summary — reached automatically after finishing a quiz"
+---
+# Summary has no route of its own to tap to: it is pushed only by the Quiz
+# screen once every question is answered (quiz -> onNavigateSummary). So the only
+# honest way to reach it is to actually play a quiz end-to-end. This flow is
+# DATA-DEPENDENT: it needs a real backend quiz with questions to load, and the
+# number of questions is not known ahead of time. That is why it is `regression`,
+# not `smoke` — the login smoke path already guards the auth-backed entry.
+
+# 1. Start authenticated on Home.
+- runFlow:
+    file: ../_shared/login.yaml
+
+# 2. Open a popular quiz from Home -> Detail.
+#    Popular quizzes live at the bottom of Home's vertically-scrolling Column
+#    (searchBar -> categories -> popular quizzes), so the first item can start
+#    below the fold. Wait for it to load, then scroll it into view before tapping.
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.name"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.name"
+
+# 3. Detail -> start the quiz.
+- extendedWaitUntil:
+    visible:
+      id: "detail.startQuizButton"
+    timeout: 20000
+- tapOn:
+    id: "detail.startQuizButton"
+
+# 4. Quiz loads its first question.
+- extendedWaitUntil:
+    visible:
+      id: "quiz.questionText"
+    timeout: 20000
+
+# 5. Answer questions until the Quiz auto-navigates to Summary.
+#    `quiz.answerOption` is NOT indexed (every option shares the tag), so tapOn
+#    hits the first option; then Next advances. We loop enough times to outlast a
+#    typical quiz; once the last question is answered the Quiz pushes Summary and
+#    the remaining taps no-op because the quiz ids are gone. `optional` keeps the
+#    loop from failing on the iterations after Summary already appeared.
+- repeat:
+    times: 15
+    commands:
+      - tapOn:
+          id: "quiz.answerOption"
+          optional: true
+      - tapOn:
+          id: "quiz.nextButton"
+          optional: true
+
+# 6. Land on Summary — assert the result card, score and play-again render.
+- extendedWaitUntil:
+    visible:
+      id: "summary.resultText"
+    timeout: 20000
+- assertVisible:
+    id: "summary.toolbar"
+- assertVisible:
+    id: "summary.scoreText"
+- assertVisible:
+    id: "summary.correctCountText"
+- assertVisible:
+    id: "summary.wrongCountText"
+- assertVisible:
+    id: "summary.playAgainButton"

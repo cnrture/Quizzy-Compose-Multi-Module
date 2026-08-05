@@ -1,0 +1,23 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "EditProfile — Profile edit button navigates to EditProfile"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.ProfileScreen"
+# Confirm we are on Profile before tapping Edit profile.
+- extendedWaitUntil:
+    visible:
+      id: "profile.editProfileButton"
+    timeout: 10000
+- tapOn:
+    id: "profile.editProfileButton"
+# The EditProfile toolbar title is the destination anchor.
+- extendedWaitUntil:
+    visible:
+      id: "editProfile.title"
+    timeout: 10000
+- assertVisible:
+    id: "editProfile.saveButton"

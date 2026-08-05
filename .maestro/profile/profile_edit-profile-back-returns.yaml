@@ -1,0 +1,28 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Profile — back from Edit Profile returns to Profile"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.ProfileScreen"
+- extendedWaitUntil:
+    visible:
+      id: "profile.editProfileButton"
+    timeout: 10000
+- tapOn:
+    id: "profile.editProfileButton"
+- extendedWaitUntil:
+    visible:
+      id: "editProfile.toolbar.back"
+    timeout: 10000
+# Toolbar back returns to Profile.
+- tapOn:
+    id: "editProfile.toolbar.back"
+- extendedWaitUntil:
+    visible:
+      id: "profile.toolbar"
+    timeout: 10000
+- assertVisible:
+    id: "profile.editProfileButton"

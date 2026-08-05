@@ -1,0 +1,27 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Detail — Start Quiz button navigates to the Quiz screen"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.image"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.image"
+- extendedWaitUntil:
+    visible:
+      id: "detail.startQuizButton"
+    timeout: 20000
+- tapOn:
+    id: "detail.startQuizButton"
+# Start Quiz launches the Quiz screen (does not solve it) — assert the Quiz toolbar.
+- extendedWaitUntil:
+    visible:
+      id: "quiz.toolbar"
+    timeout: 20000
+- assertVisible:
+    id: "quiz.questionText"

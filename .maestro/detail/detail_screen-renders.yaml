@@ -1,0 +1,31 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Detail — screen renders after tapping a popular quiz"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# From Home, tap the first popular quiz item's image -> Detail.
+# PopularQuizItem tags are not indexed, so Maestro taps the first match.
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.image"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.image"
+# Wait for Detail to load, then assert the core elements are visible.
+- extendedWaitUntil:
+    visible:
+      id: "detail.toolbar"
+    timeout: 20000
+- assertVisible:
+    id: "detail.quizImage"
+- assertVisible:
+    id: "detail.nameText"
+- assertVisible:
+    id: "detail.categoryText"
+- assertVisible:
+    id: "detail.descriptionTitleText"
+- assertVisible:
+    id: "detail.startQuizButton"

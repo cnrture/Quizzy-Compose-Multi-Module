@@ -1,0 +1,24 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Profile — screen renders after login"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Reach Profile via the bottom bar tab.
+- tapOn:
+    id: "bottomBar.tab.ProfileScreen"
+- extendedWaitUntil:
+    visible:
+      id: "profile.toolbar"
+    timeout: 10000
+- assertVisible:
+    id: "profile.toolbar"
+- assertVisible:
+    id: "profile.avatarImage"
+- assertVisible:
+    id: "profile.usernameText"
+- assertVisible:
+    id: "profile.editProfileButton"
+- assertVisible:
+    id: "profile.yourRankTitle"

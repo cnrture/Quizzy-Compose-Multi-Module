@@ -1,0 +1,19 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Home — tapping the search bar opens Search"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Home is up. The search bar navigates to the Search screen (OnSearchClick -> NavigateSearch).
+- assertVisible:
+    id: "home.searchBar"
+- tapOn:
+    id: "home.searchBar"
+# Search screen anchor — its own toolbar + search bar render.
+- extendedWaitUntil:
+    visible:
+      id: "search.searchBar"
+    timeout: 15000
+- assertVisible:
+    id: "search.toolbar"

@@ -1,0 +1,22 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Search — toolbar back returns to Home"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "home.searchBar"
+- extendedWaitUntil:
+    visible:
+      id: "search.toolbar.back"
+    timeout: 10000
+# OnBackClick -> NavigateBack -> popBackStack() to Home.
+- tapOn:
+    id: "search.toolbar.back"
+- extendedWaitUntil:
+    visible:
+      id: "home.categoriesTitle"
+    timeout: 10000
+- assertVisible:
+    id: "home.searchBar"

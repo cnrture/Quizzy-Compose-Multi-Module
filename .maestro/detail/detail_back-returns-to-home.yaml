@@ -1,0 +1,27 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Detail — toolbar back returns to Home"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.image"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.image"
+- extendedWaitUntil:
+    visible:
+      id: "detail.toolbar.back"
+    timeout: 20000
+- tapOn:
+    id: "detail.toolbar.back"
+# Back pops to Home — assert a stable Home anchor.
+- extendedWaitUntil:
+    visible:
+      id: "home.categoriesTitle"
+    timeout: 10000
+- assertVisible:
+    id: "home.categoriesTitle"

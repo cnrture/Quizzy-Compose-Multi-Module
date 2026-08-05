@@ -70,9 +70,20 @@ So a Maestro flow tapping a dialog's OK button uses the derived id:
 
 You do **not** add `.message`/`.button` constants to `<Feature>TestTags` — only the root (`DIALOG = "login.dialog"`). The suffix is guaranteed by `core:ui`. Reference derived ids as string literals in the flow, or document them in the screen's `_index.md`.
 
-## 4. Overlays: dialogs & bottom sheets
+## 4. Overlays need their own bridge (Dialog, BottomSheet, NavigationBar)
 
-`QuizzyScaffold` provides the `testTagsAsResourceId` bridge for its content tree. A `QuizzyDialog` or `ModalBottomSheet` may render **outside** that tree, so verify on-device that its `id:` (root and derived) resolves. If it doesn't, the overlay's root needs its own `Modifier.semantics { testTagsAsResourceId = true }` — a `core:ui` change, not a workaround in the flow.
+`QuizzyScaffold`'s `testTagsAsResourceId` bridge covers **only its content subtree**. Any component that renders in a separate subtree does **not** inherit it and its tags will not surface as Maestro `id:`s until it carries its own bridge. Confirmed cases in this codebase:
+
+| Overlay | Where | Fix |
+|---|---|---|
+| `QuizzyDialog` (Compose `Dialog`) | `core:ui` | `Modifier.semantics { testTagsAsResourceId = true }` on its root `Column` |
+| `ModalBottomSheet` | wherever used (e.g. Login's reset sheet) | same `Modifier.semantics { ... }` on the sheet's `modifier` |
+| `NavigationBar` (bottom bar) | `navigation/QuizAppBottomBar` | same on the `NavigationBar` `modifier` |
+| Any custom `Dialog` (e.g. `AvatarsDialog`) | feature `:ui` | same on its root |
+
+Symptom: the overlay is clearly on screen (its text shows) but a `hierarchy` dump shows **zero** of its tags. The fix is a `core:ui`/feature code change — a bridge on the overlay root — never a `text:` selector workaround in the flow. After adding the bridge, rebuild + reinstall and re-pull the hierarchy to confirm the ids appear.
+
+Also for the bottom bar specifically: the **clickable element must carry the tag**. Tagging only an inner label fails when the label sits in `AnimatedVisibility(isSelected)` (invisible for unselected tabs) — the tappable `Row` itself needs the `testTag`.
 
 ## 5. Adding a tag when one is missing
 

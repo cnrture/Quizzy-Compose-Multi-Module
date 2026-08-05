@@ -34,7 +34,7 @@ allowed-tools:
 
 Three facts drive everything here:
 
-1. **The test-tag bridge is on.** `QuizzyScaffold` applies `Modifier.semantics { testTagsAsResourceId = true }`, so a component's `testTag` inside a scaffolded screen becomes a Maestro `id:` selector automatically. Content outside the scaffold tree (dialogs, bottom sheets rendered as overlays) may not inherit it — verify those live.
+1. **The test-tag bridge is on — but only for the scaffold tree.** `QuizzyScaffold` applies `Modifier.semantics { testTagsAsResourceId = true }`, so a component's `testTag` inside a scaffolded screen becomes a Maestro `id:` selector automatically. **Overlays do NOT inherit it** — a Compose `Dialog`, a `ModalBottomSheet`, and a Material `NavigationBar` each render in their own subtree and their tags will not surface until that overlay carries its own bridge. This is verified, not hypothetical (it broke the bottom-bar tabs, the error dialog, and the avatars dialog until each got its own `Modifier.semantics { testTagsAsResourceId = true }`). See `rules/selectors-and-testtags.md`.
 2. **Test tags are mandatory and already applied.** Every `Quizzy*` component takes a **required `testTag` parameter**, and every screen already passes one from a per-screen `<Feature>TestTags` object (e.g. `LoginTestTags`). So the selectors you need almost always exist already — you read them from `<Feature>TestTags`, you rarely add new ones. See `rules/selectors-and-testtags.md`.
 3. **No `.maestro/` flows exist yet.** There is no `.maestro/` directory; you create the flows (and the shared login) per screen.
 
@@ -118,10 +118,21 @@ A short Markdown manifest per screen folder listing each flow, its purpose, and 
 
 ### 6. Verify
 
-- Syntax: `maestro test --dry-run .maestro/<screen>/<flow>.yaml` (or the Maestro MCP `check_flow_syntax` tool if it is connected in this session).
-- Run: `maestro test .maestro/<screen>/` once a device/emulator is up and the app is installed.
+Run against a booted emulator with the app installed (build first with `./gradlew installDebug`). Authenticated flows need the test credentials, which live in `.maestro/.env` (git-ignored):
+
+```bash
+# Pre-auth flows (no credentials needed)
+maestro --device emulator-5554 test .maestro/welcome/
+
+# Authenticated flows — use the runner that injects .env as -e KEY=VALUE args
+.maestro/run.sh .maestro/home/
+```
+
+> **This Maestro version (1.41) has no `--dry-run` and no `--env-file`.** There is no offline syntax check — run against the device. Credentials are passed as repeated `--env KEY=VALUE` flags; `.maestro/run.sh` reads `.maestro/.env` and builds those flags. **Never collapse the `-e` flags into one string** (e.g. via `tr '\n' ' '`) — the shell then feeds `KEY=VALUE -e KEY2=VALUE2` as a single value and the credential lands in the wrong field. Use a bash array (see `run.sh`).
 
 There is no Maestro MCP server wired into this project by default. If one is connected in the session, prefer its tools for running and inspecting the view hierarchy; otherwise author from source and run via the `maestro` CLI, and say so in the report.
+
+When a `testTag` you expect is missing on-device, pull the live tree to see what actually surfaced: `maestro --device emulator-5554 hierarchy` (then grep for the id). This is the fastest way to catch an overlay whose tag did not bridge (see `rules/selectors-and-testtags.md`).
 
 ## Auth
 

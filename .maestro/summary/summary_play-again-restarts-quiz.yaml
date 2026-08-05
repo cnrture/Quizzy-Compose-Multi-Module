@@ -1,0 +1,64 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Summary — Play Again restarts the same quiz"
+---
+# Continues the only reachable Summary path (see summary_reached-after-quiz.yaml)
+# and exercises OnPlayAgainClick -> UiEffect.NavigateQuiz(quizId), which pushes the
+# Quiz screen again. DATA-DEPENDENT for the same reason: it must play a real quiz
+# to reach Summary first, so this is `regression`, not `smoke`.
+
+# 1. Start authenticated on Home.
+- runFlow:
+    file: ../_shared/login.yaml
+
+# 2. Home -> Detail -> Quiz.
+#    Popular quizzes sit at the bottom of Home's vertically-scrolling Column, so
+#    the first item can start below the fold. Wait for it to load, then scroll it
+#    into view before tapping.
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.name"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.name"
+- extendedWaitUntil:
+    visible:
+      id: "detail.startQuizButton"
+    timeout: 20000
+- tapOn:
+    id: "detail.startQuizButton"
+- extendedWaitUntil:
+    visible:
+      id: "quiz.questionText"
+    timeout: 20000
+
+# 3. Solve the quiz to reach Summary (unindexed answerOption -> first option).
+- repeat:
+    times: 15
+    commands:
+      - tapOn:
+          id: "quiz.answerOption"
+          optional: true
+      - tapOn:
+          id: "quiz.nextButton"
+          optional: true
+
+# 4. On Summary, tap Play Again.
+- extendedWaitUntil:
+    visible:
+      id: "summary.playAgainButton"
+    timeout: 20000
+- tapOn:
+    id: "summary.playAgainButton"
+
+# 5. NavigateQuiz pushes the Quiz screen again — assert a fresh question renders.
+- extendedWaitUntil:
+    visible:
+      id: "quiz.questionText"
+    timeout: 20000
+- assertVisible:
+    id: "quiz.questionText"
+- assertNotVisible:
+    id: "summary.playAgainButton"

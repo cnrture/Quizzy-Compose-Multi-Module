@@ -1,0 +1,25 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Profile — bottom bar tab navigates in and back to Home"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Home is the start destination; switch to Profile via the bottom bar.
+- tapOn:
+    id: "bottomBar.tab.ProfileScreen"
+- extendedWaitUntil:
+    visible:
+      id: "profile.toolbar"
+    timeout: 10000
+- assertVisible:
+    id: "profile.toolbar"
+# Switch back to Home via the bottom bar.
+- tapOn:
+    id: "bottomBar.tab.HomeScreen"
+- extendedWaitUntil:
+    visible:
+      id: "home.categoriesTitle"
+    timeout: 10000
+- assertVisible:
+    id: "home.categoriesTitle"

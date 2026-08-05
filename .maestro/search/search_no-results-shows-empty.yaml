@@ -1,0 +1,27 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Search — a query with no matches shows the empty state"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "home.searchBar"
+# Wait for the initial quizzes list to load before filtering.
+- extendedWaitUntil:
+    visible:
+      id: "search.quizItem.nameText"
+    timeout: 15000
+# An implausible query matches no name/category, so the local filter empties the
+# list and EmptyScreenContent (search.emptyMessageText) renders.
+- tapOn:
+    id: "search.searchBar"
+- inputText: "zzxxqqnomatch"
+- extendedWaitUntil:
+    visible:
+      id: "search.emptyMessageText"
+    timeout: 15000
+- assertVisible:
+    id: "search.emptyMessageText"
+- assertNotVisible:
+    id: "search.quizItem.nameText"

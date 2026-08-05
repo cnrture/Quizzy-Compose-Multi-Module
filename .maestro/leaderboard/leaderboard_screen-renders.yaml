@@ -1,0 +1,23 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Leaderboard — screen renders after tab switch"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Reach Leaderboard from the bottom bar (Home is the start destination).
+- tapOn:
+    id: "bottomBar.tab.LeaderboardScreen"
+# Toolbar is a stable anchor that is always visible on Leaderboard.
+- extendedWaitUntil:
+    visible:
+      id: "leaderboard.toolbar"
+    timeout: 15000
+- assertVisible:
+    id: "leaderboard.toolbar"
+# The top-3 podium is always composed, so its avatars/rank numbers render
+# regardless of data. This confirms the screen body drew.
+- assertVisible:
+    id: "leaderboard.topRank.avatar"
+- assertVisible:
+    id: "leaderboard.topRank.rankNumber"

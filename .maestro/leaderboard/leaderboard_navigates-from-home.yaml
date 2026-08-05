@@ -1,0 +1,22 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Leaderboard — bottom bar tab replaces Home"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Home is visible right after login (shared flow asserts home.categoriesTitle).
+- assertVisible:
+    id: "home.categoriesTitle"
+# Switch tabs to Leaderboard.
+- tapOn:
+    id: "bottomBar.tab.LeaderboardScreen"
+- extendedWaitUntil:
+    visible:
+      id: "leaderboard.toolbar"
+    timeout: 15000
+# Leaderboard is up and Home content is gone.
+- assertVisible:
+    id: "leaderboard.toolbar"
+- assertNotVisible:
+    id: "home.categoriesTitle"

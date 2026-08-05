@@ -1,0 +1,30 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "EditProfile — avatars dialog Close button dismisses it"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.ProfileScreen"
+- extendedWaitUntil:
+    visible:
+      id: "profile.editProfileButton"
+    timeout: 10000
+- tapOn:
+    id: "profile.editProfileButton"
+- extendedWaitUntil:
+    visible:
+      id: "editProfile.changeAvatarButton"
+    timeout: 10000
+- tapOn:
+    id: "editProfile.changeAvatarButton"
+- extendedWaitUntil:
+    visible:
+      id: "editProfile.avatarsDialog.closeButton"
+    timeout: 10000
+# OnDismiss -> isAvatarsDialogVisible = false -> overlay gone.
+- tapOn:
+    id: "editProfile.avatarsDialog.closeButton"
+- assertNotVisible:
+    id: "editProfile.avatarsDialog.title"

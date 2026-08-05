@@ -1,0 +1,21 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Favorites — bottom-bar tab opens the Favorites screen"
+---
+# Start authenticated on Home (shared login ends on home.categoriesTitle).
+- runFlow:
+    file: ../_shared/login.yaml
+
+# Tap the Favorites bottom-bar tab to switch to the Favorites destination.
+- tapOn:
+    id: "bottomBar.tab.FavoritesScreen"
+
+# The Favorites toolbar is the one always-present anchor (data-independent:
+# it renders whether the favorites list is populated or empty).
+- extendedWaitUntil:
+    visible:
+      id: "favorites.toolbar"
+    timeout: 15000
+- assertVisible:
+    id: "favorites.toolbar"

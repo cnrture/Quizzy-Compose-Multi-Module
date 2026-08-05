@@ -1,0 +1,24 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Profile — Edit Profile opens the Edit Profile screen"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.ProfileScreen"
+- extendedWaitUntil:
+    visible:
+      id: "profile.editProfileButton"
+    timeout: 10000
+- tapOn:
+    id: "profile.editProfileButton"
+# Lands on the Edit Profile screen.
+- extendedWaitUntil:
+    visible:
+      id: "editProfile.toolbar"
+    timeout: 10000
+- assertVisible:
+    id: "editProfile.toolbar"
+- assertVisible:
+    id: "editProfile.saveButton"

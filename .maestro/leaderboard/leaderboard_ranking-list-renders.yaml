@@ -1,0 +1,43 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Leaderboard — podium, current user and ranking rows render"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.LeaderboardScreen"
+# Wait for the async leaderboard load (GetLeaderboardUseCase) to populate the list.
+- extendedWaitUntil:
+    visible:
+      id: "leaderboard.userItem.username"
+    timeout: 20000
+# Podium (top 3) detail: username + score of the winners.
+- assertVisible:
+    id: "leaderboard.topRank.username"
+- assertVisible:
+    id: "leaderboard.topRank.score"
+# The signed-in user's own rank card renders (currentUser != null after load).
+# It sits below the tall podium, so scroll it into view before asserting.
+- scrollUntilVisible:
+    element:
+      id: "leaderboard.currentUser.rank"
+    direction: DOWN
+    timeout: 15000
+- assertVisible:
+    id: "leaderboard.currentUser.rank"
+- assertVisible:
+    id: "leaderboard.currentUser.username"
+- assertVisible:
+    id: "leaderboard.currentUser.score"
+# At least one ranking row (Maestro matches the first repeated userItem tag).
+# Ranking rows live in the LazyColumn below the fold, so scroll first.
+- scrollUntilVisible:
+    element:
+      id: "leaderboard.userItem.rank"
+    direction: DOWN
+    timeout: 15000
+- assertVisible:
+    id: "leaderboard.userItem.rank"
+- assertVisible:
+    id: "leaderboard.userItem.score"

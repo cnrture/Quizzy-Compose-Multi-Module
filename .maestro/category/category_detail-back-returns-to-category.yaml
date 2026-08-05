@@ -1,0 +1,33 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Category — Detail back returns to Category"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- extendedWaitUntil:
+    visible:
+      id: "home.categoryItem.image"
+    timeout: 15000
+- tapOn:
+    id: "home.categoryItem.image"
+# Category -> Detail via a quiz item.
+- extendedWaitUntil:
+    visible:
+      id: "category.quizItem.image"
+    timeout: 15000
+- tapOn:
+    id: "category.quizItem.image"
+# Detail back -> Category stays on the stack.
+- extendedWaitUntil:
+    visible:
+      id: "detail.toolbar.back"
+    timeout: 15000
+- tapOn:
+    id: "detail.toolbar.back"
+- extendedWaitUntil:
+    visible:
+      id: "category.toolbar"
+    timeout: 15000
+- assertVisible:
+    id: "category.titleText"

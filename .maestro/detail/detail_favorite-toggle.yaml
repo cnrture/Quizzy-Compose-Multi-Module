@@ -1,0 +1,28 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Detail — tapping the favorite icon stays on Detail"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.image"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.image"
+- extendedWaitUntil:
+    visible:
+      id: "detail.toolbar.endIcon"
+    timeout: 20000
+# The toolbar end icon is the favorite star; tapping it toggles favorite and
+# shows a Toast. The screen does not navigate away — assert we are still on Detail.
+- tapOn:
+    id: "detail.toolbar.endIcon"
+- extendedWaitUntil:
+    visible:
+      id: "detail.nameText"
+    timeout: 15000
+- assertVisible:
+    id: "detail.toolbar"

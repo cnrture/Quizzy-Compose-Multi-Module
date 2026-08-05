@@ -1,0 +1,29 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Favorites — Home tab returns to Home (round trip)"
+---
+# Start authenticated on Home, switch to Favorites.
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.FavoritesScreen"
+- extendedWaitUntil:
+    visible:
+      id: "favorites.toolbar"
+    timeout: 15000
+- assertVisible:
+    id: "favorites.toolbar"
+
+# Favorites has no toolbar back button (bottom-bar tab, not a pushed screen);
+# returning to Home is done by selecting the Home tab.
+- tapOn:
+    id: "bottomBar.tab.HomeScreen"
+- extendedWaitUntil:
+    visible:
+      id: "home.categoriesTitle"
+    timeout: 15000
+- assertVisible:
+    id: "home.categoriesTitle"
+- assertNotVisible:
+    id: "favorites.toolbar"

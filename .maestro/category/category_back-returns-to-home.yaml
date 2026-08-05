@@ -1,0 +1,27 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Category — toolbar back returns to Home"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- extendedWaitUntil:
+    visible:
+      id: "home.categoryItem.image"
+    timeout: 15000
+- tapOn:
+    id: "home.categoryItem.image"
+# On Category, tap the derived toolbar back button -> onNavigateBack (popBackStack).
+- extendedWaitUntil:
+    visible:
+      id: "category.toolbar.back"
+    timeout: 15000
+- tapOn:
+    id: "category.toolbar.back"
+# Back on Home.
+- extendedWaitUntil:
+    visible:
+      id: "home.categoriesTitle"
+    timeout: 15000
+- assertVisible:
+    id: "home.categoriesTitle"

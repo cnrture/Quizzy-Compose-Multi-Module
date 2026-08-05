@@ -1,0 +1,24 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Profile — Your Rank section shows the rank item"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.ProfileScreen"
+- extendedWaitUntil:
+    visible:
+      id: "profile.yourRankTitle"
+    timeout: 10000
+- assertVisible:
+    id: "profile.yourRankTitle"
+# The single rank item renders once the profile rank has loaded.
+- extendedWaitUntil:
+    visible:
+      id: "profile.rankItem.usernameText"
+    timeout: 10000
+- assertVisible:
+    id: "profile.rankItem.rankText"
+- assertVisible:
+    id: "profile.rankItem.scoreText"

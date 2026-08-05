@@ -1,0 +1,33 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Detail — question / played / favorite stat blocks render"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.image"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.image"
+- extendedWaitUntil:
+    visible:
+      id: "detail.toolbar"
+    timeout: 20000
+# The three stat columns and their labels.
+- assertVisible:
+    id: "detail.scoreText"
+- assertVisible:
+    id: "detail.questionCountText"
+- assertVisible:
+    id: "detail.questionLabelText"
+- assertVisible:
+    id: "detail.playedCountText"
+- assertVisible:
+    id: "detail.playedLabelText"
+- assertVisible:
+    id: "detail.favoriteCountText"
+- assertVisible:
+    id: "detail.favoriteLabelText"

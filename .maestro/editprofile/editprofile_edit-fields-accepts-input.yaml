@@ -1,0 +1,28 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "EditProfile — username/password fields accept input and Save stays visible"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.ProfileScreen"
+- extendedWaitUntil:
+    visible:
+      id: "profile.editProfileButton"
+    timeout: 10000
+- tapOn:
+    id: "profile.editProfileButton"
+- extendedWaitUntil:
+    visible:
+      id: "editProfile.usernameField"
+    timeout: 10000
+# OnUsernameChange / OnPasswordChange update state; the field keeps its id.
+- tapOn:
+    id: "editProfile.usernameField"
+- inputText: "QuizzyTester"
+- tapOn:
+    id: "editProfile.passwordField"
+- inputText: "newPassword123"
+- assertVisible:
+    id: "editProfile.saveButton"

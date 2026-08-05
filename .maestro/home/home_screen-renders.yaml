@@ -11,5 +11,10 @@ name: "Home — screen renders after login"
     id: "home.searchBar"
 - assertVisible:
     id: "home.categoriesTitle"
+# Popular quizzes load from the network and may lag slightly behind categories.
+- extendedWaitUntil:
+    visible:
+      id: "home.popularQuizzesTitle"
+    timeout: 20000
 - assertVisible:
     id: "home.popularQuizzesTitle"

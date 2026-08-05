@@ -1,0 +1,26 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Category — quiz grid items render"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- extendedWaitUntil:
+    visible:
+      id: "home.categoryItem.image"
+    timeout: 15000
+- tapOn:
+    id: "home.categoryItem.image"
+# Wait for the category header, then assert the quiz grid rows are present.
+- extendedWaitUntil:
+    visible:
+      id: "category.titleText"
+    timeout: 15000
+- extendedWaitUntil:
+    visible:
+      id: "category.quizItem.image"
+    timeout: 15000
+- assertVisible:
+    id: "category.quizItem.nameText"
+- assertVisible:
+    id: "category.quizItem.questionCountText"

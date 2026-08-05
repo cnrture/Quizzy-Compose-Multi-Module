@@ -1,0 +1,19 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Favorites — screen renders toolbar and title after tab switch"
+---
+# Start authenticated on Home, then open Favorites.
+- runFlow:
+    file: ../_shared/login.yaml
+- tapOn:
+    id: "bottomBar.tab.FavoritesScreen"
+
+# Toolbar root and its derived title (QuizzyToolbar -> .title) are stable,
+# data-independent anchors — present for both the populated and empty states.
+- extendedWaitUntil:
+    visible:
+      id: "favorites.toolbar"
+    timeout: 15000
+- assertVisible:
+    id: "favorites.toolbar.title"

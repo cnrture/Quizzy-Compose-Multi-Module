@@ -1,0 +1,39 @@
+appId: com.canerture.quizappcompose
+tags:
+  - smoke
+name: "Quiz — screen renders question, options, progress and next"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+# Home -> Detail via first popular quiz item. Popular quizzes are the last
+# section on Home and load from the network, so the first item can sit below the
+# fold. Scroll it into view before tapping.
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.name"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.name"
+- extendedWaitUntil:
+    visible:
+      id: "detail.startQuizButton"
+    timeout: 15000
+# Detail -> Quiz via Start Quiz. getQuiz() runs a network load before the
+# first question renders, so wait on the question anchor.
+- tapOn:
+    id: "detail.startQuizButton"
+- extendedWaitUntil:
+    visible:
+      id: "quiz.questionText"
+    timeout: 15000
+- assertVisible:
+    id: "quiz.toolbar.back"
+- assertVisible:
+    id: "quiz.questionCountProgress"
+- assertVisible:
+    id: "quiz.questionCountText"
+- assertVisible:
+    id: "quiz.answerOption"
+- assertVisible:
+    id: "quiz.nextButton"

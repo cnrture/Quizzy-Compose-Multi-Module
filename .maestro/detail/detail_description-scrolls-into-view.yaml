@@ -1,0 +1,26 @@
+appId: com.canerture.quizappcompose
+tags:
+  - regression
+name: "Detail — description text scrolls into view"
+---
+- runFlow:
+    file: ../_shared/login.yaml
+- scrollUntilVisible:
+    element:
+      id: "home.popularQuizItem.image"
+    direction: DOWN
+    timeout: 15000
+- tapOn:
+    id: "home.popularQuizItem.image"
+- extendedWaitUntil:
+    visible:
+      id: "detail.descriptionTitleText"
+    timeout: 20000
+# Detail content is inside a vertical scroll; scroll the description body into view.
+- scrollUntilVisible:
+    element:
+      id: "detail.descriptionText"
+    direction: DOWN
+    timeout: 10000
+- assertVisible:
+    id: "detail.descriptionText"
