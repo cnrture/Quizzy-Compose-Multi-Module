@@ -33,7 +33,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             }
             dependencies {
                 add("coreLibraryDesugaring", libs.findLibrary("desugaring").get())
-                add("implementation", libs.findLibrary("androidx-multidex").get())
             }
         }
     }

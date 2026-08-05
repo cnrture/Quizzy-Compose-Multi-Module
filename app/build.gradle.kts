@@ -1,3 +1,6 @@
+import java.util.Properties
+import kotlin.apply
+
 plugins {
     alias(libs.plugins.quiz.android.application)
     alias(libs.plugins.quiz.android.application.compose)
@@ -16,10 +19,43 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    val localPropertiesFile = rootProject.file("local.properties")
+    val localProperties = Properties().apply {
+        load(localPropertiesFile.inputStream())
+    }
+
+    signingConfigs {
+        getByName("debug") {
+            try {
+                storeFile = file(localProperties["KEYSTORE_PATH"] as String)
+                keyAlias = localProperties["KEY_ALIAS"] as String
+                keyPassword = localProperties["KEY_PASSWORD"] as String
+                storePassword = localProperties["KEYSTORE_PASSWORD"] as String
+            } catch (e: Exception) {
+                println("Debug keystore not found, creating a new one. $e")
+            }
+        }
+
+        create("release") {
+            storeFile = file(localProperties["KEYSTORE_PATH"] as String)
+            keyAlias = localProperties["KEY_ALIAS"] as String
+            keyPassword = localProperties["KEY_PASSWORD"] as String
+            storePassword = localProperties["KEYSTORE_PASSWORD"] as String
+        }
+    }
+
     buildTypes {
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug")
+        }
         release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
     packaging {

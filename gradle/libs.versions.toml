@@ -29,14 +29,12 @@ dataStore = "1.2.1"
 okhttpLogging = "5.4.0"
 coroutines = "1.11.0"
 desugaring = "2.1.5"
-multidex = "2.0.1"
 mockk = "1.14.11"
 turbine = "1.2.1"
 truth = "1.4.5"
 
 [libraries]
 desugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugaring" }
-androidx-multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidex" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 junit-ext = { group = "androidx.test.ext", name = "junit", version.ref = "junit-ext" }
