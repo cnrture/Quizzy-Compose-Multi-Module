@@ -63,7 +63,11 @@ internal fun NavGraphBuilder.mainFlowNavigation(navController: NavHostController
         )
         summaryScreen(
             onNavigateBack = { navController.popBackStack() },
-            onNavigateQuiz = { navController.navigate(Quiz(it)) }
+            onNavigateQuiz = {
+                navController.navigate(Quiz(it)) {
+                    popUpTo<Summary> { inclusive = true }
+                }
+            }
         )
         editProfileScreen(
             onNavigateBack = { navController.popBackStack() }

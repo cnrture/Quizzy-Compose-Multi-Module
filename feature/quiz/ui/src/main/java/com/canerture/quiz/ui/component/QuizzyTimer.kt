@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,15 +39,15 @@ internal fun QuizzyTimer(
     state: TimerState,
     onTimeOut: () -> Unit,
 ) {
-    val progressRatio = remember { Animatable(initialValue = 10f) }
+    val progressRatio = remember { Animatable(initialValue = 1f) }
     val circleStyle = Stroke(width = 30f)
     val arcStyle = Stroke(width = 30f, cap = StrokeCap.Round)
     val bgColor = QuizAppTheme.colors.lightBlue.copy(alpha = 0.5f)
     val trackColor = QuizAppTheme.colors.blue
     val lastColor = QuizAppTheme.colors.red
 
-    var currentTime by remember { mutableIntStateOf(10) }
-    var isRunning by remember { mutableStateOf(false) }
+    var currentTime by rememberSaveable { mutableIntStateOf(10) }
+    var isRunning by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(state) {
         when (state) {
@@ -59,6 +60,7 @@ internal fun QuizzyTimer(
 
             TimerState.STOP -> {
                 isRunning = false
+                progressRatio.snapTo(currentTime / 10f)
             }
 
             else -> {

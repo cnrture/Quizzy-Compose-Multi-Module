@@ -16,7 +16,7 @@ object QuizAppTheme {
         @ReadOnlyComposable
         get() = LocalIcons.current
 
-    val typography: ESimTypography
+    val typography: QuizzyTypography
         @Composable
         @ReadOnlyComposable
         get() = LocalTypography.current

@@ -25,9 +25,7 @@ internal class LoginRepositoryImpl @Inject constructor(
             dataStore.saveToken(it.data?.token.orEmpty())
             logoutDatasource.save(null)
             getUser()
-        }.map {
-            it.message.orEmpty()
-        }
+        }.toUnit()
     }
 
     override suspend fun sendResetPasswordMail(email: String): Result<String> {

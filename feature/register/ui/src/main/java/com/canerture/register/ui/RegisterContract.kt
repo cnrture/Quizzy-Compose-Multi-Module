@@ -1,5 +1,6 @@
 package com.canerture.register.ui
 
+import com.canerture.core.common.isValidEmail
 import com.canerture.ui.components.DialogState
 
 internal object RegisterContract {
@@ -19,8 +20,8 @@ internal object RegisterContract {
             return copy(dialogState = DialogState(isSuccess = false, message = message), isLoading = false)
         }
 
-        fun checkButtonEnabled() = email.isNotEmpty() && username.isNotEmpty() &&
-            password.isNotEmpty() && passwordAgain.isNotEmpty()
+        fun checkButtonEnabled() = email.isValidEmail() && username.isNotEmpty() &&
+            password.isNotEmpty() && password == passwordAgain
     }
 
     sealed interface UiAction {

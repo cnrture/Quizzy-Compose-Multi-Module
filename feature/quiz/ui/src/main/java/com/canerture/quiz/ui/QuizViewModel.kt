@@ -61,6 +61,7 @@ internal class QuizViewModel @Inject constructor(
                         question = it.questions.firstOrNull(),
                         options = it.questions.firstOrNull()?.options.orEmpty(),
                         quizNumber = 1,
+                        timerState = TimerState.RESET,
                     )
                 }
             },

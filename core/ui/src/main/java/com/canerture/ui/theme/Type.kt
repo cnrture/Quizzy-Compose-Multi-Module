@@ -10,7 +10,7 @@ import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.sp
 import com.canerture.core.ui.R
 
-internal val LocalTypography = staticCompositionLocalOf { ESimTypography() }
+internal val LocalTypography = staticCompositionLocalOf { QuizzyTypography() }
 
 val Poppins = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),
@@ -19,7 +19,7 @@ val Poppins = FontFamily(
     Font(R.font.poppins_bold, FontWeight.Bold),
 )
 
-class ESimTypography {
+class QuizzyTypography {
     val heading1: TextStyle
         @Composable
         get() = TextStyle(

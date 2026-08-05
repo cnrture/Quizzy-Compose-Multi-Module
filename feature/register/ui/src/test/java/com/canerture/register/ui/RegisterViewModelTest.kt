@@ -38,6 +38,32 @@ class RegisterViewModelTest {
     }
 
     @Test
+    fun `mismatched passwords keep button disabled`() = runTest {
+        val viewModel = createViewModel()
+
+        viewModel.onAction(UiAction.OnEmailChange("test@test.com"))
+        viewModel.onAction(UiAction.OnUsernameChange("username"))
+        viewModel.onAction(UiAction.OnPasswordChange("password"))
+        viewModel.onAction(UiAction.OnPasswordAgainChange("different"))
+        advanceUntilIdle()
+
+        assertThat(viewModel.currentUiState.isButtonEnable).isFalse()
+    }
+
+    @Test
+    fun `invalid email format keeps button disabled`() = runTest {
+        val viewModel = createViewModel()
+
+        viewModel.onAction(UiAction.OnEmailChange("not-an-email"))
+        viewModel.onAction(UiAction.OnUsernameChange("username"))
+        viewModel.onAction(UiAction.OnPasswordChange("password"))
+        viewModel.onAction(UiAction.OnPasswordAgainChange("password"))
+        advanceUntilIdle()
+
+        assertThat(viewModel.currentUiState.isButtonEnable).isFalse()
+    }
+
+    @Test
     fun `filling only some fields keeps button disabled`() = runTest {
         val viewModel = createViewModel()
 

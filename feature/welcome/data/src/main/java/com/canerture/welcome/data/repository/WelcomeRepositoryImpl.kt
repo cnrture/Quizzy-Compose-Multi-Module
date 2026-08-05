@@ -51,13 +51,13 @@ internal class WelcomeRepositoryImpl @Inject constructor(
     private suspend fun getIdToken(): Result<String> {
         try {
             val result = buildCredentialRequest()
-            return handleSingIn(result)
+            return handleSignIn(result)
         } catch (e: Exception) {
             return Result.failure(UnknownException(e.localizedMessage.orEmpty()))
         }
     }
 
-    private suspend fun handleSingIn(result: GetCredentialResponse): Result<String> {
+    private suspend fun handleSignIn(result: GetCredentialResponse): Result<String> {
         val credential = result.credential
 
         if (

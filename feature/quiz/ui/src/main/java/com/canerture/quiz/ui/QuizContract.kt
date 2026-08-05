@@ -19,7 +19,7 @@ internal object QuizContract {
         val isSelectable: Boolean = true,
         val isNextButtonEnable: Boolean = false,
         val dialogState: DialogState? = null,
-        val timerState: TimerState = TimerState.START,
+        val timerState: TimerState = TimerState.STOP,
     )
 
     sealed interface UiAction {

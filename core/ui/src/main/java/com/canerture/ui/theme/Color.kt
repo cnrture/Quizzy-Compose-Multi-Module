@@ -1,8 +1,5 @@
 package com.canerture.ui.theme
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
@@ -33,49 +30,6 @@ internal fun darkColors(
     softRed = softRed,
 )
 
-class QuizAppColor(
-    background: Color,
-    onBackground: Color,
-    blue: Color,
-    lightBlue: Color,
-    yellow: Color,
-    lightYellow: Color,
-    green: Color,
-    softGreen: Color,
-    red: Color,
-    softRed: Color,
-) {
-    private var _background: Color by mutableStateOf(background)
-    val background: Color = _background
-
-    private var _onBackground: Color by mutableStateOf(onBackground)
-    val onBackground: Color = _onBackground
-
-    private var _blue: Color by mutableStateOf(blue)
-    val blue: Color = _blue
-
-    private var _lightBlue: Color by mutableStateOf(lightBlue)
-    val lightBlue: Color = _lightBlue
-
-    private var _yellow: Color by mutableStateOf(yellow)
-    val yellow: Color = _yellow
-
-    private var _lightYellow: Color by mutableStateOf(lightYellow)
-    val lightYellow: Color = _lightYellow
-
-    private var _green: Color by mutableStateOf(green)
-    val green: Color = _green
-
-    private var _softGreen: Color by mutableStateOf(softGreen)
-    val softGreen: Color = _softGreen
-
-    private var _red: Color by mutableStateOf(red)
-    val red: Color = _red
-
-    private var _softRed: Color by mutableStateOf(softRed)
-    val softRed: Color = _softRed
-}
-
 internal fun lightColors(
     background: Color = Color(0xFFfffbf3),
     onBackground: Color = Color(0xFF111111),
@@ -98,4 +52,17 @@ internal fun lightColors(
     softGreen = softGreen,
     red = red,
     softRed = softRed,
+)
+
+data class QuizAppColor(
+    val background: Color,
+    val onBackground: Color,
+    val blue: Color,
+    val lightBlue: Color,
+    val yellow: Color,
+    val lightYellow: Color,
+    val green: Color,
+    val softGreen: Color,
+    val red: Color,
+    val softRed: Color,
 )
