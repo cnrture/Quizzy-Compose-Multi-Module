@@ -6,12 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -28,6 +26,7 @@ import com.canerture.navigation.QuizAppBottomBar
 import com.canerture.navigation.QuizAppNavGraph
 import com.canerture.navigation.navigateWithPopUpTo
 import com.canerture.ui.components.QuizzyDialog
+import com.canerture.ui.components.QuizzyScaffold
 import com.canerture.ui.extensions.collectWithLifecycle
 import com.canerture.ui.theme.QuizAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,33 +59,31 @@ class MainActivity : ComponentActivity() {
             }
 
             QuizAppTheme {
-                Box {
-                    Scaffold(
-                        modifier = Modifier.fillMaxSize(),
-                        containerColor = QuizAppTheme.colors.background,
-                        content = { innerPadding ->
-                            QuizAppNavGraph(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(innerPadding),
-                                navController = navController,
-                            )
-                        },
-                        bottomBar = {
-                            AnimatedVisibility(isBottomBarVisible) {
-                                Column {
-                                    HorizontalDivider(
-                                        thickness = 2.dp,
-                                        color = QuizAppTheme.colors.onBackground,
-                                    )
-                                    QuizAppBottomBar(
-                                        navController = navController,
-                                    )
-                                }
+                QuizzyScaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    containerColor = QuizAppTheme.colors.background,
+                    content = { innerPadding ->
+                        QuizAppNavGraph(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(innerPadding),
+                            navController = navController,
+                        )
+                    },
+                    bottomBar = {
+                        AnimatedVisibility(isBottomBarVisible) {
+                            Column {
+                                HorizontalDivider(
+                                    thickness = 2.dp,
+                                    color = QuizAppTheme.colors.onBackground,
+                                )
+                                QuizAppBottomBar(
+                                    navController = navController,
+                                )
                             }
                         }
-                    )
-                }
+                    }
+                )
                 if (uiState.isShowNoNetworkDialog) {
                     QuizzyDialog(
                         testTag = MainTestTags.NO_NETWORK_DIALOG,
