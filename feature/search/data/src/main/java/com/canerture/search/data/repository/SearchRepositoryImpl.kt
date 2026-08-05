@@ -11,7 +11,7 @@ internal class SearchRepositoryImpl @Inject constructor(
     private val api: SearchApi,
 ) : SearchRepository {
 
-    override suspend fun searchQuiz(query: String): Result<List<QuizModel>> {
-        return safeApiCall { api.searchQuiz(query) }.map { it.data.toModel() }
+    override suspend fun getQuizzes(): Result<List<QuizModel>> {
+        return safeApiCall { api.getQuizzes() }.map { it.data.toModel() }
     }
 }

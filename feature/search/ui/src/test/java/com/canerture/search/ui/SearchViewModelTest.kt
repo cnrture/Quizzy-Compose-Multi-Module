@@ -2,7 +2,7 @@ package com.canerture.search.ui
 
 import app.cash.turbine.test
 import com.canerture.search.domain.model.QuizModel
-import com.canerture.search.domain.usecase.SearchQuizUseCase
+import com.canerture.search.domain.usecase.GetQuizzesUseCase
 import com.canerture.search.ui.SearchContract.UiAction
 import com.canerture.search.ui.SearchContract.UiEffect
 import com.canerture.testing.MainDispatcherRule
@@ -10,6 +10,7 @@ import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -20,12 +21,12 @@ class SearchViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val searchQuizUseCase: SearchQuizUseCase = mockk()
+    private val getQuizzesUseCase: GetQuizzesUseCase = mockk()
 
-    private fun quizModel(id: Int = 1) = QuizModel(
+    private fun quizModel(id: Int, name: String = "quiz $id", category: String = "category") = QuizModel(
         id = id,
-        name = "quiz $id",
-        category = "category",
+        name = name,
+        category = category,
         questionCount = 10,
         imageUrl = "url",
     )
@@ -33,12 +34,12 @@ class SearchViewModelTest {
     private fun createViewModel(
         initialList: List<QuizModel> = listOf(quizModel(1), quizModel(2)),
     ): SearchViewModel {
-        coEvery { searchQuizUseCase("") } returns Result.success(initialList)
-        return SearchViewModel(searchQuizUseCase)
+        coEvery { getQuizzesUseCase() } returns Result.success(initialList)
+        return SearchViewModel(getQuizzesUseCase)
     }
 
     @Test
-    fun `init sets initialQuizList and quizList`() = runTest {
+    fun `init loads quizzes into initialQuizList and quizList`() = runTest {
         val initialList = listOf(quizModel(1), quizModel(2))
         val viewModel = createViewModel(initialList)
         advanceUntilIdle()
@@ -50,32 +51,54 @@ class SearchViewModelTest {
     }
 
     @Test
-    fun `OnQueryChange with length greater than 2 searches quiz`() = runTest {
-        val viewModel = createViewModel()
-        advanceUntilIdle()
-
-        val searchResults = listOf(quizModel(9))
-        coEvery { searchQuizUseCase("abc") } returns Result.success(searchResults)
-
-        viewModel.onAction(UiAction.OnQueryChange("abc"))
-        advanceUntilIdle()
-
-        assertThat(viewModel.currentUiState.quizList).isEqualTo(searchResults)
-        assertThat(viewModel.currentUiState.query).isEqualTo("abc")
-    }
-
-    @Test
-    fun `OnQueryChange with length less than or equal to 2 resets to initial list`() = runTest {
-        val initialList = listOf(quizModel(1), quizModel(2))
+    fun `query filters the initial list locally by name without hitting the api again`() = runTest {
+        val initialList = listOf(
+            quizModel(1, name = "Kotlin Basics"),
+            quizModel(2, name = "Android Advanced"),
+        )
         val viewModel = createViewModel(initialList)
         advanceUntilIdle()
 
-        viewModel.onAction(UiAction.OnQueryChange("ab"))
+        viewModel.onAction(UiAction.OnQueryChange("kotlin"))
+        advanceTimeBy(400)
+        advanceUntilIdle()
+
+        assertThat(viewModel.currentUiState.query).isEqualTo("kotlin")
+        assertThat(viewModel.currentUiState.quizList).isEqualTo(listOf(initialList[0]))
+        // api is called exactly once (initial load), never again for a query
+        coVerify(exactly = 1) { getQuizzesUseCase() }
+    }
+
+    @Test
+    fun `query filters by category case-insensitively`() = runTest {
+        val initialList = listOf(
+            quizModel(1, name = "A", category = "Science"),
+            quizModel(2, name = "B", category = "History"),
+        )
+        val viewModel = createViewModel(initialList)
+        advanceUntilIdle()
+
+        viewModel.onAction(UiAction.OnQueryChange("SCIENCE"))
+        advanceTimeBy(400)
+        advanceUntilIdle()
+
+        assertThat(viewModel.currentUiState.quizList).isEqualTo(listOf(initialList[0]))
+    }
+
+    @Test
+    fun `empty query restores the full initial list`() = runTest {
+        val initialList = listOf(quizModel(1, name = "Kotlin"), quizModel(2, name = "Android"))
+        val viewModel = createViewModel(initialList)
+        advanceUntilIdle()
+
+        viewModel.onAction(UiAction.OnQueryChange("kotlin"))
+        advanceTimeBy(400)
+        advanceUntilIdle()
+        viewModel.onAction(UiAction.OnQueryChange(""))
+        advanceTimeBy(400)
         advanceUntilIdle()
 
         assertThat(viewModel.currentUiState.quizList).isEqualTo(initialList)
-        assertThat(viewModel.currentUiState.query).isEqualTo("ab")
-        coVerify(exactly = 1) { searchQuizUseCase(any()) }
     }
 
     @Test
