@@ -35,7 +35,14 @@ internal class SearchViewModel @Inject constructor(
     override fun onAction(uiAction: UiAction) {
         when (uiAction) {
             UiAction.OnBackClick -> viewModelScope.launch { emitUiEffect(UiEffect.NavigateBack) }
-            is UiAction.OnQuizClick -> viewModelScope.launch { emitUiEffect(UiEffect.NavigateDetail(uiAction.id)) }
+            is UiAction.OnQuizClick -> viewModelScope.launch {
+                emitUiEffect(
+                    UiEffect.NavigateDetail(
+                        uiAction.id
+                    )
+                )
+            }
+
             is UiAction.OnQueryChange -> {
                 updateUiState { copy(query = uiAction.query) }
                 queryFlow.value = uiAction.query
@@ -46,8 +53,24 @@ internal class SearchViewModel @Inject constructor(
     private fun getInitialQuizList() = viewModelScope.launch {
         updateUiState { copy(isLoading = true) }
         getQuizzesUseCase().fold(
-            onSuccess = { updateUiState { copy(initialQuizList = it, quizList = it, isLoading = false) } },
-            onFailure = { updateUiState { copy(initialQuizList = emptyList(), quizList = emptyList(), isLoading = false) } },
+            onSuccess = {
+                updateUiState {
+                    copy(
+                        initialQuizList = it,
+                        quizList = it,
+                        isLoading = false,
+                    )
+                }
+            },
+            onFailure = {
+                updateUiState {
+                    copy(
+                        initialQuizList = emptyList(),
+                        quizList = emptyList(),
+                        isLoading = false,
+                    )
+                }
+            },
         )
     }
 
@@ -63,7 +86,7 @@ internal class SearchViewModel @Inject constructor(
         if (trimmed.isEmpty()) return currentUiState.initialQuizList
         return currentUiState.initialQuizList.filter {
             it.name.contains(trimmed, ignoreCase = true) ||
-                it.category.contains(trimmed, ignoreCase = true)
+                    it.category.contains(trimmed, ignoreCase = true)
         }
     }
 

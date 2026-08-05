@@ -515,7 +515,7 @@ formatting:
     active: false
     packagesToUseImportOnDemandProperty: 'java.util.*,kotlinx.android.synthetic.**'
   MaximumLineLength:
-    active: false
+    active: true
     maxLineLength: 120
     ignoreBackTickedIdentifier: false
   Indentation:

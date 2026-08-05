@@ -64,7 +64,11 @@ internal fun DetailScreen(
         topBar = {
             QuizzyToolbar(
                 testTag = DetailTestTags.TOOLBAR,
-                endIcon = if (uiState.isFavorite) QuizAppTheme.icons.starSelected else QuizAppTheme.icons.starUnselected,
+                endIcon = if (uiState.isFavorite) {
+                    QuizAppTheme.icons.starSelected
+                } else {
+                    QuizAppTheme.icons.starUnselected
+                },
                 onEndIconClick = { onAction(UiAction.OnFavoriteClick) },
                 onBackClick = { onAction(UiAction.OnBackClick) },
             )
