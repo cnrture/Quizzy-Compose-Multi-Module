@@ -21,6 +21,13 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
                 stabilityConfigurationFiles.add(
                     rootProject.layout.projectDirectory.file("stability_config.conf")
                 )
+
+                if (project.providers.gradleProperty("quizzy.enableComposeCompilerReports").orNull == "true") {
+                    val reportDir = rootProject.layout.buildDirectory
+                        .dir("compose_reports/${project.path.replace(":", "-").trim('-')}")
+                    metricsDestination.set(reportDir)
+                    reportsDestination.set(reportDir)
+                }
             }
 
             with(extension) {

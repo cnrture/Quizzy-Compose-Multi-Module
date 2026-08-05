@@ -4,8 +4,10 @@ import com.android.build.api.dsl.ApplicationExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
 
 class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -13,6 +15,15 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
             apply(plugin = "org.jetbrains.kotlin.plugin.compose")
 
             val extension = extensions.getByType<ApplicationExtension>()
+
+            extensions.configure<ComposeCompilerGradlePluginExtension> {
+                if (project.providers.gradleProperty("quizzy.enableComposeCompilerReports").orNull == "true") {
+                    val reportDir = rootProject.layout.buildDirectory
+                        .dir("compose_reports/${project.path.replace(":", "-").trim('-')}")
+                    metricsDestination.set(reportDir)
+                    reportsDestination.set(reportDir)
+                }
+            }
 
             with(extension) {
                 buildFeatures {

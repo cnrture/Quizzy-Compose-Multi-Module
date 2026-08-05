@@ -8,8 +8,8 @@ import com.canerture.quiz.navigation.R
 import com.canerture.ui.navigation.Screen
 
 sealed class NavigationItem(
-    var route: Screen,
-    var title: Int,
+    val route: Screen,
+    val title: Int,
     val selectedIcon: Int,
     val unselectedIcon: Int,
 ) {

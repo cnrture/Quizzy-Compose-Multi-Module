@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -24,6 +25,7 @@ import androidx.compose.ui.window.DialogProperties
 import com.canerture.core.ui.R
 import com.canerture.ui.theme.QuizAppTheme
 
+@Immutable
 data class DialogState(
     val message: String? = null,
     val isSuccess: Boolean? = null,

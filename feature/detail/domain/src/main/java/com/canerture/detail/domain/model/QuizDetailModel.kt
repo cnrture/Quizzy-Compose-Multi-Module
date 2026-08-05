@@ -1,5 +1,8 @@
 package com.canerture.detail.domain.model
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 data class QuizDetailModel(
     val id: Int,
     val name: String,
