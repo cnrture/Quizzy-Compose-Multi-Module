@@ -9,11 +9,11 @@ name: "Quiz — countdown timer is visible on an active question"
 # first item can sit below the fold. Scroll it into view before tapping.
 - scrollUntilVisible:
     element:
-      id: "home.popularQuizItem.name"
+      id: "home.popularQuizItem.nameText"
     direction: DOWN
     timeout: 15000
 - tapOn:
-    id: "home.popularQuizItem.name"
+    id: "home.popularQuizItem.nameText"
 - extendedWaitUntil:
     visible:
       id: "detail.startQuizButton"

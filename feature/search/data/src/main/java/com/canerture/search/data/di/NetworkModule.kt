@@ -14,7 +14,7 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideSplashApi(retrofit: Retrofit): SearchApi {
+    fun provideSearchApi(retrofit: Retrofit): SearchApi {
         return retrofit.create(SearchApi::class.java)
     }
 }

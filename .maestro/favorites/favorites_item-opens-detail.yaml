@@ -21,10 +21,10 @@ name: "Favorites — item opens Detail if present, else empty state renders"
 - runFlow:
     when:
       visible:
-        id: "favorites.item.nameText"
+        id: "favorites.quizItem.nameText"
     commands:
       - tapOn:
-          id: "favorites.item.nameText"
+          id: "favorites.quizItem.nameText"
       - extendedWaitUntil:
           visible:
             id: "detail.toolbar"
@@ -41,4 +41,4 @@ name: "Favorites — item opens Detail if present, else empty state renders"
       - assertVisible:
           id: "favorites.emptyText"
       - assertNotVisible:
-          id: "favorites.item.nameText"
+          id: "favorites.quizItem.nameText"

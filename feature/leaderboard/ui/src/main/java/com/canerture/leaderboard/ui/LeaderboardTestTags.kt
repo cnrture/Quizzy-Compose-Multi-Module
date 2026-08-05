@@ -6,7 +6,7 @@ internal object LeaderboardTestTags {
 
     // TopRankItem
     const val TOP_RANK_AVATAR = "leaderboard.topRank.avatar"
-    const val TOP_RANK_NUMBER = "leaderboard.topRank.rankNumber"
+    const val TOP_RANK_RANK = "leaderboard.topRank.rank"
     const val TOP_RANK_USERNAME = "leaderboard.topRank.username"
     const val TOP_RANK_SCORE = "leaderboard.topRank.score"
 

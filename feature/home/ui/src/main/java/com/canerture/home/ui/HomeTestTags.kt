@@ -8,13 +8,13 @@ internal object HomeTestTags {
 
     // Category item
     const val CATEGORY_ITEM_IMAGE = "home.categoryItem.image"
-    const val CATEGORY_ITEM_NAME = "home.categoryItem.name"
-    const val CATEGORY_ITEM_QUIZ_COUNT = "home.categoryItem.quizCount"
+    const val CATEGORY_ITEM_NAME_TEXT = "home.categoryItem.nameText"
+    const val CATEGORY_ITEM_QUIZ_COUNT_TEXT = "home.categoryItem.quizCountText"
 
     // Popular quiz item
     const val POPULAR_QUIZ_ITEM_IMAGE = "home.popularQuizItem.image"
-    const val POPULAR_QUIZ_ITEM_NAME = "home.popularQuizItem.name"
-    const val POPULAR_QUIZ_ITEM_QUESTION_COUNT = "home.popularQuizItem.questionCount"
-    const val POPULAR_QUIZ_ITEM_HYPHEN = "home.popularQuizItem.hyphen"
-    const val POPULAR_QUIZ_ITEM_CATEGORY = "home.popularQuizItem.category"
+    const val POPULAR_QUIZ_ITEM_NAME_TEXT = "home.popularQuizItem.nameText"
+    const val POPULAR_QUIZ_ITEM_QUESTION_COUNT_TEXT = "home.popularQuizItem.questionCountText"
+    const val POPULAR_QUIZ_ITEM_HYPHEN_TEXT = "home.popularQuizItem.hyphenText"
+    const val POPULAR_QUIZ_ITEM_CATEGORY_TEXT = "home.popularQuizItem.categoryText"
 }

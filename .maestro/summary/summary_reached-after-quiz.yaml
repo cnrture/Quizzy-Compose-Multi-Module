@@ -20,11 +20,11 @@ name: "Summary — reached automatically after finishing a quiz"
 #    below the fold. Wait for it to load, then scroll it into view before tapping.
 - scrollUntilVisible:
     element:
-      id: "home.popularQuizItem.name"
+      id: "home.popularQuizItem.nameText"
     direction: DOWN
     timeout: 15000
 - tapOn:
-    id: "home.popularQuizItem.name"
+    id: "home.popularQuizItem.nameText"
 
 # 3. Detail -> start the quiz.
 - extendedWaitUntil:

@@ -8,12 +8,12 @@ name: "Home — tapping a category opens the Category screen"
 # Categories load from the network; wait for the first category name to render.
 - scrollUntilVisible:
     element:
-      id: "home.categoryItem.name"
+      id: "home.categoryItem.nameText"
     direction: DOWN
     timeout: 15000
 # Tap the first category item (tags are shared across items -> Maestro taps the first match).
 - tapOn:
-    id: "home.categoryItem.name"
+    id: "home.categoryItem.nameText"
 # OnCategoryClick -> NavigateCategory -> Category screen (its toolbar + title render).
 - extendedWaitUntil:
     visible:

@@ -64,7 +64,7 @@ internal fun PopularQuizItem(
             modifier = Modifier.padding(16.dp),
         ) {
             QuizzyText(
-                testTag = HomeTestTags.POPULAR_QUIZ_ITEM_NAME,
+                testTag = HomeTestTags.POPULAR_QUIZ_ITEM_NAME_TEXT,
                 text = quiz.name,
                 style = QuizAppTheme.typography.heading3,
             )
@@ -75,17 +75,17 @@ internal fun PopularQuizItem(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 QuizzyText(
-                    testTag = HomeTestTags.POPULAR_QUIZ_ITEM_QUESTION_COUNT,
+                    testTag = HomeTestTags.POPULAR_QUIZ_ITEM_QUESTION_COUNT_TEXT,
                     text = stringResource(R.string.question_count, quiz.questionCount),
                     style = QuizAppTheme.typography.subheading3,
                 )
                 QuizzyText(
-                    testTag = HomeTestTags.POPULAR_QUIZ_ITEM_HYPHEN,
+                    testTag = HomeTestTags.POPULAR_QUIZ_ITEM_HYPHEN_TEXT,
                     text = stringResource(R.string.hyphen),
                     style = QuizAppTheme.typography.subheading1,
                 )
                 QuizzyText(
-                    testTag = HomeTestTags.POPULAR_QUIZ_ITEM_CATEGORY,
+                    testTag = HomeTestTags.POPULAR_QUIZ_ITEM_CATEGORY_TEXT,
                     text = quiz.category,
                     style = QuizAppTheme.typography.subheading3,
                 )

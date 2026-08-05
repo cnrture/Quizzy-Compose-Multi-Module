@@ -85,7 +85,7 @@ fun QuizzySearchBar(
 private fun QuizzySearchBarPreview() {
     QuizzySearchBar(
         testTag = "preview.searchBar",
-        value = "QuizAppSearchBar",
+        value = "QuizzySearchBar",
         onValueChange = {},
     )
 }

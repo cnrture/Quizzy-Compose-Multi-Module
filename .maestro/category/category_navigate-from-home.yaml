@@ -8,10 +8,10 @@ name: "Category — Home category tap opens the Category screen"
 # From Home, tap a category name to trigger onNavigateCategory.
 - extendedWaitUntil:
     visible:
-      id: "home.categoryItem.name"
+      id: "home.categoryItem.nameText"
     timeout: 15000
 - tapOn:
-    id: "home.categoryItem.name"
+    id: "home.categoryItem.nameText"
 # The Category toolbar confirms we landed on the new screen.
 - extendedWaitUntil:
     visible:

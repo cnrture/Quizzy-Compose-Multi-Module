@@ -71,7 +71,7 @@ internal fun QuizItem(
                         style = QuizAppTheme.typography.subheading3,
                     )
                     QuizzyText(
-                        testTag = SearchTestTags.QUIZ_ITEM_SEPARATOR_TEXT,
+                        testTag = SearchTestTags.QUIZ_ITEM_HYPHEN_TEXT,
                         text = stringResource(R.string.hyphen),
                         style = QuizAppTheme.typography.subheading1,
                     )

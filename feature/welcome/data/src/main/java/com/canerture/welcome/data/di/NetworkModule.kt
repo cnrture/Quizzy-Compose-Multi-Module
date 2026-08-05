@@ -14,7 +14,7 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideLoginApi(retrofit: Retrofit): WelcomeApi {
+    fun provideWelcomeApi(retrofit: Retrofit): WelcomeApi {
         return retrofit.create(WelcomeApi::class.java)
     }
 }

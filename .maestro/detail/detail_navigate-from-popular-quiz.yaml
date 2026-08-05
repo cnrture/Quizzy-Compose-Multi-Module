@@ -8,11 +8,11 @@ name: "Detail — tapping a popular quiz name navigates to Detail"
 # Tap the popular quiz name (instead of the image) to reach Detail.
 - scrollUntilVisible:
     element:
-      id: "home.popularQuizItem.name"
+      id: "home.popularQuizItem.nameText"
     direction: DOWN
     timeout: 15000
 - tapOn:
-    id: "home.popularQuizItem.name"
+    id: "home.popularQuizItem.nameText"
 - extendedWaitUntil:
     visible:
       id: "detail.startQuizButton"

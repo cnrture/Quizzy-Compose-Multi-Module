@@ -11,6 +11,6 @@ internal object SearchTestTags {
     const val QUIZ_ITEM_IMAGE = "search.quizItem.image"
     const val QUIZ_ITEM_NAME_TEXT = "search.quizItem.nameText"
     const val QUIZ_ITEM_QUESTION_COUNT_TEXT = "search.quizItem.questionCountText"
-    const val QUIZ_ITEM_SEPARATOR_TEXT = "search.quizItem.separatorText"
+    const val QUIZ_ITEM_HYPHEN_TEXT = "search.quizItem.hyphenText"
     const val QUIZ_ITEM_CATEGORY_TEXT = "search.quizItem.categoryText"
 }

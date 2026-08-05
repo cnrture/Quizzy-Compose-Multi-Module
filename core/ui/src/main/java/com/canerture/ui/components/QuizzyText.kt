@@ -76,7 +76,7 @@ fun QuizzyText(
 @Composable
 private fun QuizzyTextPreview() {
     QuizzyText(
-        text = "QuizAppText",
+        text = "QuizzyText",
         testTag = "quizzy_text"
     )
 }

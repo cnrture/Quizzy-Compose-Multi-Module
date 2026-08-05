@@ -33,7 +33,7 @@ internal enum class TimerState {
 }
 
 @Composable
-internal fun QuizAppTimer(
+internal fun QuizzyTimer(
     modifier: Modifier = Modifier,
     state: TimerState,
     onTimeOut: () -> Unit,
@@ -128,8 +128,8 @@ internal fun QuizAppTimer(
 
 @PreviewLightDark
 @Composable
-internal fun QuizAppTimerPreview() {
-    QuizAppTimer(
+internal fun QuizzyTimerPreview() {
+    QuizzyTimer(
         modifier = Modifier.size(200.dp),
         state = TimerState.START,
         onTimeOut = {},

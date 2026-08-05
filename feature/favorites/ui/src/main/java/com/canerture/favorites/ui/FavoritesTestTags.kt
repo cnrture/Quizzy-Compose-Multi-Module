@@ -8,9 +8,9 @@ internal object FavoritesTestTags {
     const val EMPTY_TEXT = "favorites.emptyText"
 
     // Favorite quiz item
-    const val ITEM_IMAGE = "favorites.item.image"
-    const val ITEM_NAME_TEXT = "favorites.item.nameText"
-    const val ITEM_QUESTION_COUNT_TEXT = "favorites.item.questionCountText"
-    const val ITEM_HYPHEN_TEXT = "favorites.item.hyphenText"
-    const val ITEM_CATEGORY_TEXT = "favorites.item.categoryText"
+    const val ITEM_IMAGE = "favorites.quizItem.image"
+    const val ITEM_NAME_TEXT = "favorites.quizItem.nameText"
+    const val ITEM_QUESTION_COUNT_TEXT = "favorites.quizItem.questionCountText"
+    const val ITEM_HYPHEN_TEXT = "favorites.quizItem.hyphenText"
+    const val ITEM_CATEGORY_TEXT = "favorites.quizItem.categoryText"
 }

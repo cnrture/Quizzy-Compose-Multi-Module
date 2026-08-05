@@ -83,7 +83,7 @@ internal fun TopRankItem(
                 contentAlignment = Alignment.Center,
             ) {
                 QuizzyText(
-                    testTag = LeaderboardTestTags.TOP_RANK_NUMBER,
+                    testTag = LeaderboardTestTags.TOP_RANK_RANK,
                     text = rank.toString(),
                     style = QuizAppTheme.typography.heading3,
                 )

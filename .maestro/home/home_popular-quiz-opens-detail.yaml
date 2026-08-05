@@ -8,12 +8,12 @@ name: "Home — tapping a popular quiz opens the Detail screen"
 # Popular quizzes load from the network; wait for the first quiz name to render.
 - scrollUntilVisible:
     element:
-      id: "home.popularQuizItem.name"
+      id: "home.popularQuizItem.nameText"
     direction: DOWN
     timeout: 15000
 # Tap the first popular quiz item (shared tag -> Maestro taps the first match).
 - tapOn:
-    id: "home.popularQuizItem.name"
+    id: "home.popularQuizItem.nameText"
 # OnQuizClick -> NavigateDetail -> Detail screen (toolbar + start-quiz button render).
 - extendedWaitUntil:
     visible:

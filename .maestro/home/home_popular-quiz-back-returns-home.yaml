@@ -7,11 +7,11 @@ name: "Home — back from Detail returns to Home"
     file: ../_shared/login.yaml
 - scrollUntilVisible:
     element:
-      id: "home.popularQuizItem.name"
+      id: "home.popularQuizItem.nameText"
     direction: DOWN
     timeout: 15000
 - tapOn:
-    id: "home.popularQuizItem.name"
+    id: "home.popularQuizItem.nameText"
 - extendedWaitUntil:
     visible:
       id: "detail.toolbar"

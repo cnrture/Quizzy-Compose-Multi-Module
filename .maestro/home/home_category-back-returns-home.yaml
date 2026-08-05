@@ -7,11 +7,11 @@ name: "Home — back from Category returns to Home"
     file: ../_shared/login.yaml
 - scrollUntilVisible:
     element:
-      id: "home.categoryItem.name"
+      id: "home.categoryItem.nameText"
     direction: DOWN
     timeout: 15000
 - tapOn:
-    id: "home.categoryItem.name"
+    id: "home.categoryItem.nameText"
 - extendedWaitUntil:
     visible:
       id: "category.toolbar"

@@ -20,4 +20,4 @@ name: "Leaderboard — screen renders after tab switch"
 - assertVisible:
     id: "leaderboard.topRank.avatar"
 - assertVisible:
-    id: "leaderboard.topRank.rankNumber"
+    id: "leaderboard.topRank.rank"

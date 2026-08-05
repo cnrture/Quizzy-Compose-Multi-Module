@@ -58,7 +58,7 @@ internal fun CategoryItem(
         )
         QuizzySpacer(16.dp)
         QuizzyText(
-            testTag = HomeTestTags.CATEGORY_ITEM_NAME,
+            testTag = HomeTestTags.CATEGORY_ITEM_NAME_TEXT,
             text = category.name,
             style = QuizAppTheme.typography.heading5,
             maxLines = 1,
@@ -66,7 +66,7 @@ internal fun CategoryItem(
         )
         QuizzySpacer(12.dp)
         QuizzyText(
-            testTag = HomeTestTags.CATEGORY_ITEM_QUIZ_COUNT,
+            testTag = HomeTestTags.CATEGORY_ITEM_QUIZ_COUNT_TEXT,
             text = stringResource(R.string.quiz_count, category.quizCount),
             style = QuizAppTheme.typography.heading6,
             color = QuizAppTheme.colors.onBackground.copy(alpha = 0.5f),

@@ -21,7 +21,7 @@ import com.canerture.quiz.ui.QuizContract.UiEffect
 import com.canerture.quiz.ui.QuizContract.UiState
 import com.canerture.quiz.ui.component.AnswerButton
 import com.canerture.quiz.ui.component.QuestionCountProgress
-import com.canerture.quiz.ui.component.QuizAppTimer
+import com.canerture.quiz.ui.component.QuizzyTimer
 import com.canerture.quiz.ui.component.TimerState
 import com.canerture.ui.components.QuizzyButton
 import com.canerture.ui.components.QuizzyDialog
@@ -105,7 +105,7 @@ internal fun QuizContent(
             totalQuestion = uiState.questions.size,
         )
         QuizzySpacer(48.dp)
-        QuizAppTimer(
+        QuizzyTimer(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .size(164.dp),
