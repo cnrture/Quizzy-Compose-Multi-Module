@@ -1,18 +1,11 @@
-build:
-  maxIssues: 0
-  excludeCorrectable: false
-  weights:
+# Detekt config — only rules that DIFFER from the 1.23.8 default are listed here.
+# The build uses buildUponDefaultConfig = true, so every omitted rule/field falls back
+# to detekt's default (identical behaviour). allRules = true is also on, which means an
+# explicit `active: false` on a rule that is active-by-default MUST stay — deleting it would
+# turn the rule on (and autoCorrect = true could then rewrite code). Kept blocks below are
+# exactly those whose behaviour departs from the default.
 
-config:
-  validation: true
-  warningsAsErrors: false
-  excludes: ''
-
-processors:
-  active: true
-  exclude:
-    - 'DetektProgressListener'
-
+# --- Report output: differs from default (custom exclude lists) ---
 console-reports:
   active: true
   exclude:
@@ -28,484 +21,105 @@ output-reports:
     [ 'TxtOutputReport', 'XmlOutputReport', 'HtmlOutputReport' ]
 
 complexity:
-  active: true
-  ComplexCondition:
-    active: true
-    threshold: 4
   CyclomaticComplexMethod:
-    active: true
-    threshold: 15
-    ignoreAnnotated: ['Composable']
-    ignoreSingleWhenExpression: false
-    ignoreSimpleWhenEntries: false
-    ignoreNestingFunctions: false
-    nestingFunctions:
-      - 'also'
-      - 'apply'
-      - 'forEach'
-      - 'isNotNull'
-      - 'ifNull'
-      - 'let'
-      - 'run'
-      - 'use'
-      - 'with'
-  LargeClass:
-    active: true
-    threshold: 600
+    ignoreAnnotated: ['Composable']            # default: no Composable exemption
   LongMethod:
-    active: true
-    threshold: 80
+    threshold: 80                              # default: 60
     ignoreAnnotated: [ 'Composable' ]
   LongParameterList:
-    active: false
-    functionThreshold: 6
-    constructorThreshold: 7
+    active: false                              # default: true (keep off)
     ignoreAnnotated: [ 'Composable' ]
-    ignoreDefaultParameters: false
-    ignoreDataClasses: true
-    ignoreAnnotatedParameter: [ ]
-  NestedBlockDepth:
-    active: true
-    threshold: 4
   TooManyFunctions:
-    active: false
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    thresholdInFiles: 11
-    thresholdInClasses: 11
-    thresholdInInterfaces: 11
-    thresholdInObjects: 11
-    thresholdInEnums: 11
-    ignoreDeprecated: false
-    ignorePrivate: false
-    ignoreOverridden: false
+    active: false                              # default: true (keep off)
 
 empty-blocks:
-  active: true
-  EmptyCatchBlock:
-    active: true
-    allowedExceptionNameRegex: '_|(ignore|expected).*'
-  EmptyClassBlock:
-    active: true
-  EmptyDefaultConstructor:
-    active: true
-  EmptyDoWhileBlock:
-    active: true
-  EmptyElseBlock:
-    active: true
-  EmptyFinallyBlock:
-    active: true
-  EmptyForBlock:
-    active: true
   EmptyFunctionBlock:
-    active: true
-    ignoreOverridden: true
-  EmptyIfBlock:
-    active: true
-  EmptyInitBlock:
-    active: true
-  EmptyKtFile:
-    active: true
-  EmptySecondaryConstructor:
-    active: true
-  EmptyTryBlock:
-    active: true
-  EmptyWhenBlock:
-    active: true
-  EmptyWhileBlock:
-    active: true
+    ignoreOverridden: true                     # default: false
 
 exceptions:
-  active: true
   TooGenericExceptionCaught:
-    active: false
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    exceptionNames:
-      - 'ArrayIndexOutOfBoundsException'
-      - 'Error'
-      - 'Exception'
-      - 'IllegalMonitorStateException'
-      - 'IndexOutOfBoundsException'
-      - 'NullPointerException'
-      - 'RuntimeException'
-      - 'Throwable'
-    allowedExceptionNameRegex: '_|(ignore|expected).*'
-  TooGenericExceptionThrown:
-    active: true
-    exceptionNames:
-      - 'Error'
-      - 'Exception'
-      - 'RuntimeException'
-      - 'Throwable'
+    active: false                              # default: true (keep off)
   SwallowedException:
-    active: false
+    active: false                              # default: true (keep off)
 
 naming:
-  active: true
-  BooleanPropertyNaming:
-    active: false
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    allowedPattern: '^(is|has|are)'
-  ClassNaming:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    classPattern: '[A-Z][a-zA-Z0-9]*'
-  ConstructorParameterNaming:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    parameterPattern: '[a-z][A-Za-z0-9]*'
-    privateParameterPattern: '[a-z][A-Za-z0-9]*'
-    excludeClassPattern: '$^'
-  EnumNaming:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    enumEntryPattern: '[A-Z][_a-zA-Z0-9]*'
-  ForbiddenClassName:
-    active: false
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    forbiddenName: [ ]
-  FunctionMaxLength:
-    active: false
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    maximumFunctionNameLength: 30
-  FunctionMinLength:
-    active: false
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    minimumFunctionNameLength: 3
   FunctionNaming:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    functionPattern: '([a-z][a-zA-Z0-9]*)|(`.*`)'
-    excludeClassPattern: '$^'
-    ignoreAnnotated: [ 'Composable' ]
-  FunctionParameterNaming:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    parameterPattern: '[a-z][A-Za-z0-9]*'
-    excludeClassPattern: '$^'
+    ignoreAnnotated: [ 'Composable' ]          # default: no Composable exemption
+  VariableNaming:
+    excludes: [ '**/test/**', '**/androidTest/**', '**/theme/**' ]  # default: no theme exemption
+  # active-by-default in 1.23.8; kept off here on purpose.
   InvalidPackageDeclaration:
     active: false
-    rootPackage: ''
-  LambdaParameterNaming:
-    active: false
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    parameterPattern: '[a-z][A-Za-z0-9]*|_'
   MatchingDeclarationName:
     active: false
-    mustBeFirst: false
-  MemberNameEqualsClassName:
-    active: true
-    ignoreOverridden: true
   NoNameShadowing:
     active: false
-  NonBooleanPropertyPrefixedWithIs:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-  ObjectPropertyNaming:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    constantPattern: '[A-Za-z][_A-Za-z0-9]*'
-    propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
-    privatePropertyPattern: '(_)?[A-Za-z][_A-Za-z0-9]*'
-  PackageNaming:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    packagePattern: '[a-z]+(\.[a-z][A-Za-z0-9]*)*'
-  TopLevelPropertyNaming:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    constantPattern: '[A-Z][_A-Z0-9]*'
-    propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
-    privatePropertyPattern: '_?[A-Za-z][_A-Za-z0-9]*'
-  VariableMaxLength:
-    active: false
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    maximumVariableNameLength: 64
-  VariableMinLength:
-    active: false
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    minimumVariableNameLength: 1
-  VariableNaming:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**', '**/theme/**' ]
-    variablePattern: '[a-z][A-Za-z0-9]*'
-    privateVariablePattern: '(_)?[a-z][A-Za-z0-9]*'
-    excludeClassPattern: '$^'
-
-performance:
-  active: true
-  ArrayPrimitive:
-    active: true
-  ForEachOnRange:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-  SpreadOperator:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-  UnnecessaryTemporaryInstantiation:
-    active: true
 
 potential-bugs:
-  active: true
+  # All active-by-default in 1.23.8; kept off here on purpose.
   AvoidReferentialEquality:
-    active: false
-    forbiddenTypePatterns:
-      - 'kotlin.String'
-  CastToNullableType:
-    active: false
-  Deprecation:
-    active: true
-  DontDowncastCollectionTypes:
     active: false
   DoubleMutabilityForCollection:
     active: false
-  ElseCaseInsteadOfExhaustiveWhen:
-    active: true
-  EqualsAlwaysReturnsTrueOrFalse:
-    active: true
-  EqualsWithHashCodeExist:
-    active: true
-  ExitOutsideMain:
-    active: false
-  ExplicitGarbageCollectionCall:
-    active: true
   HasPlatformType:
     active: false
   ImplicitDefaultLocale:
     active: false
-  ImplicitUnitReturnType:
-    active: false
-    allowExplicitReturnType: true
-  InvalidRange:
-    active: true
-  IteratorHasNextCallsNextMethod:
-    active: true
-  IteratorNotThrowingNoSuchElementException:
-    active: true
-  LateinitUsage:
-    active: false
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    ignoreOnClassesPattern: ''
-  MapGetWithNotNullAssertionOperator:
-    active: true
-  MissingPackageDeclaration:
-    active: false
-    excludes: [ '**/*.kts' ]
-  NullableToStringCall:
-    active: false
-  UnconditionalJumpStatementInLoop:
-    active: false
-  UnnecessaryNotNullOperator:
-    active: true
-  UnnecessarySafeCall:
-    active: true
   UnreachableCatchBlock:
     active: false
-  UnreachableCode:
-    active: true
-  UnsafeCallOnNullableType:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-  UnsafeCast:
-    active: true
   UnusedUnaryOperator:
     active: false
   UselessPostfixExpression:
     active: false
-  WrongEqualsTypeParameter:
-    active: true
 
 style:
-  active: true
-  ClassOrdering:
-    active: true
-  CollapsibleIfStatements:
-    active: false
-  DataClassContainsFunctions:
-    active: false
-    conversionFunctionPrefix: ['to']
-  DataClassShouldBeImmutable:
-    active: false
+  MagicNumber:
+    active: false                              # default: true (keep off)
+    ignoreEnums: true                          # default: false
+    ignoreAnnotated: [ 'MigrationQualifier', 'Composable' ]
+  MaxLineLength:
+    ignoreAnnotated: [ 'Composable' ]          # default: no Composable exemption
+  ReturnCount:
+    max: 3                                      # default: 2
+  UnnecessaryAbstractClass:
+    active: false                              # default: true (keep off)
+  UnusedPrivateClass:
+    excludes: [ "**theme/**" ]                 # default: no theme exemption
+  UnusedPrivateMember:
+    allowedNames: '(_|ignored|expected|serialVersionUID)'
+    ignoreAnnotated: [ 'Composable' ]
+  # active-by-default in 1.23.8; kept off here on purpose.
   DestructuringDeclarationWithTooManyEntries:
-    active: false
-    maxDestructuringEntries: 3
-  EqualsNullCall:
-    active: true
-  EqualsOnSignatureLine:
-    active: false
-  ExplicitCollectionElementAccessMethod:
     active: false
   ExplicitItLambdaParameter:
     active: false
-  ExpressionBodySyntax:
-    active: false
-    includeLineWrapping: false
-  ForbiddenImport:
-    active: false
-    imports: [ ]
-    forbiddenPatterns: ''
-  ForbiddenMethodCall:
-    active: false
-    methods:
-      - 'kotlin.io.print'
-      - 'kotlin.io.println'
-      - 'kotlin.io.println'
   ForbiddenVoid:
     active: false
-    ignoreOverridden: false
-    ignoreUsageInGenerics: false
-  FunctionOnlyReturningConstant:
-    active: true
-    ignoreOverridableFunction: true
-    ignoreActualFunction: true
-    excludedFunctions: ['']
   LoopWithTooManyJumpStatements:
     active: false
-    maxJumpCount: 1
-  MagicNumber:
-    active: false
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    ignoreNumbers:
-      - '-1'
-      - '0'
-      - '1'
-      - '2'
-    ignoreHashCodeFunction: true
-    ignorePropertyDeclaration: false
-    ignoreLocalVariableDeclaration: false
-    ignoreConstantDeclaration: true
-    ignoreCompanionObjectPropertyDeclaration: true
-    ignoreAnnotation: false
-    ignoreNamedArgument: true
-    ignoreEnums: true
-    ignoreRanges: false
-    ignoreExtensionFunctions: true
-    ignoreAnnotated: [ 'MigrationQualifier','Composable' ]
-  BracesOnIfStatements:
-    active: false
-  MandatoryBracesLoops:
-    active: false
-  MaxLineLength:
-    active: true
-    maxLineLength: 120
-    excludePackageStatements: true
-    excludeImportStatements: true
-    excludeCommentStatements: false
-    ignoreAnnotated: [ 'Composable' ]
-  MayBeConst:
-    active: true
-  ModifierOrder:
-    active: true
-  MultilineLambdaItParameter:
-    active: false
-  NestedClassesVisibility:
-    active: true
   NewLineAtEndOfFile:
-    active: false
-  NoTabs:
     active: false
   ObjectLiteralToLambda:
     active: false
-  OptionalAbstractKeyword:
-    active: true
-  OptionalUnit:
-    active: false
-  PreferToOverPairSyntax:
-    active: false
-  ProtectedMemberInFinalClass:
-    active: true
-  RedundantExplicitType:
-    active: false
-  RedundantHigherOrderMapUsage:
-    active: true
-  RedundantVisibilityModifierRule:
-    active: false
-  ReturnCount:
-    active: true
-    max: 3
-    excludedFunctions: ['equals']
-    excludeLabeled: false
-    excludeReturnFromLambda: true
-    excludeGuardClauses: false
-  SafeCast:
-    active: true
-  SerialVersionUIDInSerializableClass:
-    active: true
-  SpacingBetweenPackageAndImports:
-    active: false
-  ThrowsCount:
-    active: true
-    max: 2
-    excludeGuardClauses: false
-  TrailingWhitespace:
-    active: false
-  UnderscoresInNumericLiterals:
-    active: false
-    acceptableLength: 4
-  UnnecessaryAbstractClass:
-    active: false
-  UnnecessaryAnnotationUseSiteTarget:
-    active: false
-  UnnecessaryApply:
-    active: true
-  UnnecessaryFilter:
-    active: true
-  UnnecessaryInheritance:
-    active: true
-  UnnecessaryLet:
-    active: true
-  UnnecessaryParentheses:
-    active: false
-  UntilInsteadOfRangeTo:
-    active: false
-  UnusedImports:
-    active: false
-  UnusedPrivateClass:
-    active: true
-    excludes: ["**theme/**"]
-  UnusedPrivateMember:
-    active: true
-    allowedNames: '(_|ignored|expected|serialVersionUID)'
-    ignoreAnnotated: [ 'Composable' ]
-  UseAnyOrNoneInsteadOfFind:
-    active: true
   UseArrayLiteralsInAnnotations:
     active: false
   UseCheckNotNull:
     active: false
   UseCheckOrError:
     active: false
-  UseDataClass:
-    active: false
-    allowVars: false
-  UseEmptyCounterpart:
-    active: false
-  UseIfEmptyOrIfBlank:
-    active: false
-  UseIfInsteadOfWhen:
-    active: false
   UseIsNullOrEmpty:
     active: false
-  UseOrEmpty:
-    active: true
   UseRequire:
     active: false
   UseRequireNotNull:
     active: false
-  UselessCallOnNotNull:
-    active: true
-  UtilityClassWithPublicConstructor:
-    active: true
-  VarCouldBeVal:
-    active: true
   WildcardImport:
-    active: false
-    excludes: [ '**/test/**', '**/androidTest/**' ]
-    excludeImports:
-      - 'java.util.*'
+    active: false                              # default: true (keep off)
 
-
-#  All formatting rules;
-#  https://github.com/detekt/detekt/blob/main/detekt-formatting/src/main/resources/config/config.yml
+# --- Formatting (detekt-formatting / ktlint) ---
+# These are NOT in default-detekt-config.yml (the formatting plugin has its own defaults),
+# so buildUponDefaultConfig does not cover them. Kept as-is; the explicit active: false
+# entries suppress rules that allRules would otherwise turn on.
 formatting:
   FinalNewline:
     active: false
