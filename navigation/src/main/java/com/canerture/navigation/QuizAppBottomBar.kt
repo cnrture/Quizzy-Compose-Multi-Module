@@ -24,6 +24,8 @@ import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -41,7 +43,7 @@ fun QuizAppBottomBar(
     val tabList = NavigationItem.getNavigationItems()
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
+    val currentDestination = navBackStackEntry?.destination
     NavigationBar(
         modifier = Modifier
             .padding(horizontal = 16.dp)
@@ -49,8 +51,9 @@ fun QuizAppBottomBar(
         containerColor = QuizAppTheme.colors.background,
     ) {
         tabList.forEach { navItem ->
-            val isSelected = currentRoute == navItem.route.getRoute()
-            key(navItem.route.getRoute()) {
+            val isSelected =
+                currentDestination?.hierarchy?.any { it.hasRoute(navItem.route::class) } == true
+            key(navItem) {
                 Row(
                     modifier = Modifier
                         .wrapContentSize()

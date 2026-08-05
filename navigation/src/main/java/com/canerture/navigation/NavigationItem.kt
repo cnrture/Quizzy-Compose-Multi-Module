@@ -12,12 +12,14 @@ sealed class NavigationItem(
     val title: Int,
     val selectedIcon: Int,
     val unselectedIcon: Int,
+    val testTagKey: String,
 ) {
     data object HomeScreen : NavigationItem(
         route = Home,
         title = R.string.home,
         selectedIcon = R.drawable.ic_home_selected,
         unselectedIcon = R.drawable.ic_home_unselected,
+        testTagKey = BottomBarTestTags.HOME,
     )
 
     data object FavoritesScreen : NavigationItem(
@@ -25,6 +27,7 @@ sealed class NavigationItem(
         title = R.string.favorites,
         selectedIcon = R.drawable.ic_star_selected,
         unselectedIcon = R.drawable.ic_star_unselected,
+        testTagKey = BottomBarTestTags.FAVORITES,
     )
 
     data object LeaderboardScreen : NavigationItem(
@@ -32,6 +35,7 @@ sealed class NavigationItem(
         title = R.string.leaderboard,
         selectedIcon = R.drawable.ic_leaderboard_selected,
         unselectedIcon = R.drawable.ic_leaderboard_unselected,
+        testTagKey = BottomBarTestTags.LEADERBOARD,
     )
 
     data object ProfileScreen : NavigationItem(
@@ -39,16 +43,10 @@ sealed class NavigationItem(
         title = R.string.profile,
         selectedIcon = R.drawable.ic_profile_selected,
         unselectedIcon = R.drawable.ic_profile_unselected,
+        testTagKey = BottomBarTestTags.PROFILE,
     )
 
     companion object {
-        fun getNavigationRoutes() = listOf(
-            HomeScreen.route.getRoute(),
-            FavoritesScreen.route.getRoute(),
-            LeaderboardScreen.route.getRoute(),
-            ProfileScreen.route.getRoute(),
-        )
-
         fun getNavigationItems() = listOf(HomeScreen, FavoritesScreen, LeaderboardScreen, ProfileScreen)
     }
 }

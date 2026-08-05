@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.canerture.navigation.LoginFlow
@@ -51,10 +53,11 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
-            val visibleBottomSheetScreen = NavigationItem.getNavigationRoutes()
+            val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
-            val bottomBarVisibility =
-                navController.currentBackStackEntryAsState().value?.destination?.route in visibleBottomSheetScreen
+            val isBottomBarVisible = NavigationItem.getNavigationItems().any { item ->
+                currentDestination?.hierarchy?.any { it.hasRoute(item.route::class) } == true
+            }
 
             QuizAppTheme {
                 Box {
@@ -70,7 +73,7 @@ class MainActivity : ComponentActivity() {
                             )
                         },
                         bottomBar = {
-                            AnimatedVisibility(bottomBarVisibility) {
+                            AnimatedVisibility(isBottomBarVisible) {
                                 Column {
                                     HorizontalDivider(
                                         thickness = 2.dp,
