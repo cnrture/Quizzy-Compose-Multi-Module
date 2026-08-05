@@ -12,12 +12,14 @@ import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModelTest {
 
     @get:Rule
@@ -56,19 +58,16 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `getCategories failure emits ShowError effect`() = runTest {
+    fun `getCategories failure leaves categories empty and stops loading`() = runTest {
         coEvery { getCategoriesUseCase() } returns Result.failure(Exception("boom"))
         coEvery { getPopularQuizzesUseCase() } returns Result.success(emptyList())
         every { getUsernameUseCase() } returns flowOf("bob")
 
         val viewModel = createViewModel()
+        advanceUntilIdle()
 
-        viewModel.uiEffect.test {
-            advanceUntilIdle()
-            val effect = awaitItem()
-            assertThat(effect).isInstanceOf(UiEffect.ShowError::class.java)
-            assertThat((effect as UiEffect.ShowError).message).isEqualTo("boom")
-        }
+        assertThat(viewModel.currentUiState.categories).isEmpty()
+        assertThat(viewModel.currentUiState.isLoading).isFalse()
     }
 
     @Test

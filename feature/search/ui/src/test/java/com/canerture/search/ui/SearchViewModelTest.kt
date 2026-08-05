@@ -10,12 +10,15 @@ import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
+import kotlin.time.Duration.Companion.milliseconds
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class SearchViewModelTest {
 
     @get:Rule
@@ -60,7 +63,7 @@ class SearchViewModelTest {
         advanceUntilIdle()
 
         viewModel.onAction(UiAction.OnQueryChange("kotlin"))
-        advanceTimeBy(400)
+        advanceTimeBy(400.milliseconds)
         advanceUntilIdle()
 
         assertThat(viewModel.currentUiState.query).isEqualTo("kotlin")
@@ -79,7 +82,7 @@ class SearchViewModelTest {
         advanceUntilIdle()
 
         viewModel.onAction(UiAction.OnQueryChange("SCIENCE"))
-        advanceTimeBy(400)
+        advanceTimeBy(400.milliseconds)
         advanceUntilIdle()
 
         assertThat(viewModel.currentUiState.quizList).isEqualTo(listOf(initialList[0]))
@@ -92,10 +95,10 @@ class SearchViewModelTest {
         advanceUntilIdle()
 
         viewModel.onAction(UiAction.OnQueryChange("kotlin"))
-        advanceTimeBy(400)
+        advanceTimeBy(400.milliseconds)
         advanceUntilIdle()
         viewModel.onAction(UiAction.OnQueryChange(""))
-        advanceTimeBy(400)
+        advanceTimeBy(400.milliseconds)
         advanceUntilIdle()
 
         assertThat(viewModel.currentUiState.quizList).isEqualTo(initialList)

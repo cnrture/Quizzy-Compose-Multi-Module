@@ -11,11 +11,13 @@ import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class FavoritesViewModelTest {
 
     @get:Rule
@@ -48,6 +50,17 @@ class FavoritesViewModelTest {
     }
 
     @Test
+    fun `init failure keeps favorites empty and stops loading`() = runTest {
+        coEvery { getFavoritesUseCase() } returns Result.failure(Exception("boom"))
+
+        val viewModel = createViewModel()
+        advanceUntilIdle()
+
+        assertThat(viewModel.currentUiState.favorites).isEmpty()
+        assertThat(viewModel.currentUiState.isLoading).isFalse()
+    }
+
+    @Test
     fun `OnSwipeDelete success refetches favorites`() = runTest {
         val item = favoriteModel(3)
         coEvery { getFavoritesUseCase() } returns Result.success(listOf(item))
@@ -63,7 +76,7 @@ class FavoritesViewModelTest {
     }
 
     @Test
-    fun `OnSwipeDelete failure emits ShowError`() = runTest {
+    fun `OnSwipeDelete failure sets error dialogState`() = runTest {
         val item = favoriteModel(4)
         coEvery { getFavoritesUseCase() } returns Result.success(listOf(item))
         val viewModel = createViewModel()
@@ -71,11 +84,32 @@ class FavoritesViewModelTest {
 
         coEvery { deleteFavoriteUseCase(4) } returns Result.failure(Exception("boom"))
 
-        viewModel.uiEffect.test {
-            viewModel.onAction(UiAction.OnSwipeDelete(item))
-            advanceUntilIdle()
-            assertThat(awaitItem()).isEqualTo(UiEffect.ShowError("boom"))
-        }
+        viewModel.onAction(UiAction.OnSwipeDelete(item))
+        advanceUntilIdle()
+
+        val dialogState = viewModel.currentUiState.dialogState
+        assertThat(dialogState).isNotNull()
+        assertThat(dialogState?.isSuccess).isFalse()
+        assertThat(dialogState?.message).isEqualTo("boom")
+        assertThat(viewModel.currentUiState.isLoading).isFalse()
+    }
+
+    @Test
+    fun `OnDialogDismiss clears dialogState`() = runTest {
+        val item = favoriteModel(5)
+        coEvery { getFavoritesUseCase() } returns Result.success(listOf(item))
+        val viewModel = createViewModel()
+        advanceUntilIdle()
+
+        coEvery { deleteFavoriteUseCase(5) } returns Result.failure(Exception("boom"))
+        viewModel.onAction(UiAction.OnSwipeDelete(item))
+        advanceUntilIdle()
+        assertThat(viewModel.currentUiState.dialogState).isNotNull()
+
+        viewModel.onAction(UiAction.OnDialogDismiss)
+        advanceUntilIdle()
+
+        assertThat(viewModel.currentUiState.dialogState).isNull()
     }
 
     @Test
