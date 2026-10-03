@@ -13,6 +13,8 @@ import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,13 +40,12 @@ internal fun FavoriteQuizItem(
     val dismissState = rememberSwipeToDismissBoxState(SwipeToDismissBoxValue.Settled) {
         it * .25f
     }
-    if (dismissState.targetValue == SwipeToDismissBoxValue.EndToStart) {
-        onDelete(item)
-    }
+    val currentOnDelete by rememberUpdatedState(onDelete)
     SwipeToDismissBox(
         state = dismissState,
         backgroundContent = { DismissBackground(dismissState) },
         enableDismissFromStartToEnd = false,
+        onDismiss = { currentOnDelete(item) },
         content = {
             Row(
                 modifier = Modifier

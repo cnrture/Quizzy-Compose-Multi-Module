@@ -88,7 +88,7 @@ internal fun FavoritesContent(
                 contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(uiState.favorites) { favorite ->
+                items(uiState.favorites, key = { it.id }) { favorite ->
                     FavoriteQuizItem(
                         item = favorite,
                         onQuizClick = onItemClick,
