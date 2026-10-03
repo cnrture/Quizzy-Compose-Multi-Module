@@ -11,6 +11,7 @@ import com.canerture.home.ui.HomeContract.UiState
 import com.canerture.ui.delegate.mvi.MVI
 import com.canerture.ui.delegate.mvi.mvi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,8 +24,7 @@ internal class HomeViewModel @Inject constructor(
     MVI<UiState, UiAction, UiEffect> by mvi(UiState()) {
 
     init {
-        getCategories()
-        getPopularQuizzes()
+        loadContent()
         getUsername()
     }
 
@@ -41,20 +41,13 @@ internal class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getCategories() = viewModelScope.launch {
+    private fun loadContent() = viewModelScope.launch {
         updateUiState { copy(isLoading = true) }
-        getCategoriesUseCase().fold(
-            onSuccess = { updateUiState { copy(categories = it, isLoading = false) } },
-            onFailure = { updateUiState { copy(isLoading = false) } },
+        joinAll(
+            launch { getCategoriesUseCase().onSuccess { updateUiState { copy(categories = it) } } },
+            launch { getPopularQuizzesUseCase().onSuccess { updateUiState { copy(popularQuizzes = it) } } },
         )
-    }
-
-    private fun getPopularQuizzes() = viewModelScope.launch {
-        updateUiState { copy(isLoading = true) }
-        getPopularQuizzesUseCase().fold(
-            onSuccess = { updateUiState { copy(popularQuizzes = it, isLoading = false) } },
-            onFailure = { updateUiState { copy(isLoading = false) } },
-        )
+        updateUiState { copy(isLoading = false) }
     }
 
     private fun getUsername() = viewModelScope.launch {

@@ -11,6 +11,7 @@ import com.canerture.profile.ui.ProfileContract.UiState
 import com.canerture.ui.delegate.mvi.MVI
 import com.canerture.ui.delegate.mvi.mvi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,8 +24,7 @@ internal class ProfileViewModel @Inject constructor(
     MVI<UiState, UiAction, UiEffect> by mvi(UiState()) {
 
     init {
-        getProfile()
-        getRank()
+        loadContent()
     }
 
     override fun onAction(uiAction: UiAction) {
@@ -36,32 +36,24 @@ internal class ProfileViewModel @Inject constructor(
         }
     }
 
-    private fun getProfile() {
-        viewModelScope.launch {
-            updateUiState { copy(isLoading = true) }
-            getProfileUseCase().collect { Result ->
-                Result.fold(
-                    onSuccess = { updateUiState { copy(profile = it, isLoading = false) } },
-                    onFailure = {
-                        updateUiState { copy(isLoading = false) }
-                        emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
-                    }
+    private fun loadContent() = viewModelScope.launch {
+        updateUiState { copy(isLoading = true) }
+        val firstProfileLoaded = CompletableDeferred<Unit>()
+        launch {
+            getProfileUseCase().collect { result ->
+                result.fold(
+                    onSuccess = { updateUiState { copy(profile = it) } },
+                    onFailure = { emitUiEffect(UiEffect.ShowError(it.message.orEmpty())) },
                 )
+                firstProfileLoaded.complete(Unit)
             }
         }
-    }
-
-    private fun getRank() {
-        viewModelScope.launch {
-            updateUiState { copy(isLoading = true) }
-            getRankUseCase().fold(
-                onSuccess = { updateUiState { copy(rank = it, isLoading = false) } },
-                onFailure = {
-                    updateUiState { copy(isLoading = false) }
-                    emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
-                }
-            )
-        }
+        getRankUseCase().fold(
+            onSuccess = { updateUiState { copy(rank = it) } },
+            onFailure = { emitUiEffect(UiEffect.ShowError(it.message.orEmpty())) },
+        )
+        firstProfileLoaded.await()
+        updateUiState { copy(isLoading = false) }
     }
 
     private fun logout() {

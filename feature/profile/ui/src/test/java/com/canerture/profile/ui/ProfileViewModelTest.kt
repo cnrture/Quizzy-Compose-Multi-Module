@@ -14,7 +14,10 @@ import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -52,6 +55,26 @@ class ProfileViewModelTest {
 
         assertThat(viewModel.currentUiState.profile).isEqualTo(profile)
         assertThat(viewModel.currentUiState.rank).isEqualTo(rank)
+    }
+
+    @Test
+    fun `stays loading until both profile and rank finish`() = runTest {
+        every { getProfileUseCase() } returns flow {
+            delay(1_000)
+            emit(Result.success(profileModel()))
+        }
+        coEvery { getRankUseCase() } returns Result.success(rankModel())
+
+        val viewModel = createViewModel()
+        advanceTimeBy(500)
+
+        assertThat(viewModel.currentUiState.rank).isNotNull()
+        assertThat(viewModel.currentUiState.isLoading).isTrue()
+
+        advanceUntilIdle()
+
+        assertThat(viewModel.currentUiState.profile).isNotNull()
+        assertThat(viewModel.currentUiState.isLoading).isFalse()
     }
 
     @Test

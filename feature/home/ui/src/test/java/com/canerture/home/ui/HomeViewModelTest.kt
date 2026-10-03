@@ -13,7 +13,9 @@ import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -67,6 +69,27 @@ class HomeViewModelTest {
         advanceUntilIdle()
 
         assertThat(viewModel.currentUiState.categories).isEmpty()
+        assertThat(viewModel.currentUiState.isLoading).isFalse()
+    }
+
+    @Test
+    fun `stays loading until both categories and popular quizzes finish`() = runTest {
+        coEvery { getCategoriesUseCase() } coAnswers {
+            delay(1_000)
+            Result.success(listOf(categoryModel()))
+        }
+        coEvery { getPopularQuizzesUseCase() } returns Result.success(listOf(popularQuizModel()))
+        every { getUsernameUseCase() } returns flowOf("bob")
+
+        val viewModel = createViewModel()
+        advanceTimeBy(500)
+
+        assertThat(viewModel.currentUiState.popularQuizzes).isNotEmpty()
+        assertThat(viewModel.currentUiState.isLoading).isTrue()
+
+        advanceUntilIdle()
+
+        assertThat(viewModel.currentUiState.categories).isNotEmpty()
         assertThat(viewModel.currentUiState.isLoading).isFalse()
     }
 
