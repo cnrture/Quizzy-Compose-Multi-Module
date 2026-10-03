@@ -42,8 +42,10 @@ internal class WelcomeRepositoryImpl @Inject constructor(
         return safeApiCall {
             val token = tokenResult.getOrNull().orEmpty()
             api.loginWithGoogle(GoogleLoginRequest(token))
-        }.onSuccess {
-            dataStore.saveToken(it.data?.token.orEmpty())
+        }.mapCatching {
+            it.data?.token?.takeIf(String::isNotBlank) ?: throw UnknownException()
+        }.onSuccess { token ->
+            dataStore.saveToken(token)
             getUser()
         }.toUnit()
     }

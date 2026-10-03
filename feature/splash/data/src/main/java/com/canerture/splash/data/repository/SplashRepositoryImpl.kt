@@ -1,5 +1,6 @@
 package com.canerture.splash.data.repository
 
+import com.canerture.core.common.UnknownException
 import com.canerture.core.common.toUnit
 import com.canerture.datasource.profile.ProfileDataSource
 import com.canerture.datastore.DataStoreHelper
@@ -19,8 +20,10 @@ internal class SplashRepositoryImpl @Inject constructor(
 
     override suspend fun checkUserLoggedIn(): Result<Unit> {
         val token = dataStore.getToken().firstOrNull().orEmpty()
-        return safeApiCall { api.checkToken(CheckTokenRequest(token)) }.onSuccess {
-            dataStore.saveToken(it.data?.token.orEmpty())
+        return safeApiCall { api.checkToken(CheckTokenRequest(token)) }.mapCatching {
+            it.data?.token?.takeIf(String::isNotBlank) ?: throw UnknownException()
+        }.onSuccess { newToken ->
+            dataStore.saveToken(newToken)
             getUser()
         }.toUnit()
     }

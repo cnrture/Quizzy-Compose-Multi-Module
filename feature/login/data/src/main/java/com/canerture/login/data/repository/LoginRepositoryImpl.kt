@@ -1,5 +1,6 @@
 package com.canerture.login.data.repository
 
+import com.canerture.core.common.UnknownException
 import com.canerture.core.common.toUnit
 import com.canerture.datasource.logout.LogoutDataSource
 import com.canerture.datasource.profile.ProfileDataSource
@@ -21,8 +22,10 @@ internal class LoginRepositoryImpl @Inject constructor(
 
     override suspend fun login(email: String, password: String): Result<Unit> {
         val request = LoginRequest(email, password)
-        return safeApiCall { api.login(request) }.onSuccess {
-            dataStore.saveToken(it.data?.token.orEmpty())
+        return safeApiCall { api.login(request) }.mapCatching {
+            it.data?.token?.takeIf(String::isNotBlank) ?: throw UnknownException()
+        }.onSuccess { token ->
+            dataStore.saveToken(token)
             logoutDatasource.save(null)
             getUser()
         }.toUnit()
