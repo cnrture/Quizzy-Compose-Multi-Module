@@ -19,28 +19,25 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    val localPropertiesFile = rootProject.file("local.properties")
     val localProperties = Properties().apply {
-        load(localPropertiesFile.inputStream())
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            localPropertiesFile.inputStream().use(::load)
+        }
     }
+    val keystoreKeys = listOf("KEYSTORE_PATH", "KEY_ALIAS", "KEY_PASSWORD", "KEYSTORE_PASSWORD")
+    val hasKeystore = keystoreKeys.all { !localProperties.getProperty(it).isNullOrBlank() }
 
     signingConfigs {
-        getByName("debug") {
-            try {
-                storeFile = file(localProperties["KEYSTORE_PATH"] as String)
-                keyAlias = localProperties["KEY_ALIAS"] as String
-                keyPassword = localProperties["KEY_PASSWORD"] as String
-                storePassword = localProperties["KEYSTORE_PASSWORD"] as String
-            } catch (e: Exception) {
-                println("Debug keystore not found, creating a new one. $e")
+        // Without the keystore keys (fresh clone, CI) debug falls back to the default debug keystore
+        // and release stays unsigned instead of failing configuration.
+        if (hasKeystore) {
+            listOf(getByName("debug"), create("release")).forEach { config ->
+                config.storeFile = file(localProperties.getProperty("KEYSTORE_PATH"))
+                config.keyAlias = localProperties.getProperty("KEY_ALIAS")
+                config.keyPassword = localProperties.getProperty("KEY_PASSWORD")
+                config.storePassword = localProperties.getProperty("KEYSTORE_PASSWORD")
             }
-        }
-
-        create("release") {
-            storeFile = file(localProperties["KEYSTORE_PATH"] as String)
-            keyAlias = localProperties["KEY_ALIAS"] as String
-            keyPassword = localProperties["KEY_PASSWORD"] as String
-            storePassword = localProperties["KEYSTORE_PASSWORD"] as String
         }
     }
 
@@ -49,7 +46,9 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
         release {
-            signingConfig = signingConfigs.getByName("release")
+            if (hasKeystore) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
