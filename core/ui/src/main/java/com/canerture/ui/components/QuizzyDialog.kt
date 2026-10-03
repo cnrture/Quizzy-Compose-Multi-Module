@@ -85,7 +85,9 @@ fun QuizzyDialog(
             }
             QuizzyText(
                 testTag = "$testTag.message",
-                text = if (message.isNullOrEmpty()) stringResource(R.string.success) else message,
+                text = message.takeUnless { it.isNullOrEmpty() } ?: stringResource(
+                    if (isSuccess == false) R.string.something_went_wrong else R.string.success,
+                ),
                 style = QuizAppTheme.typography.subheading2,
                 textAlign = TextAlign.Center,
             )
