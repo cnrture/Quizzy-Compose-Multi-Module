@@ -22,7 +22,9 @@ import io.mockk.mockk
 import io.mockk.mockkStatic
 import io.mockk.unmockkStatic
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -82,7 +84,7 @@ class QuizViewModelTest {
     @Test
     fun `init success sets question and options`() = runTest {
         val viewModel = createViewModel()
-        advanceUntilIdle()
+        runCurrent()
 
         assertThat(viewModel.currentUiState.question).isEqualTo(question)
         assertThat(viewModel.currentUiState.options).isEqualTo(question.options)
@@ -92,10 +94,10 @@ class QuizViewModelTest {
     @Test
     fun `OnOptionSelect with correct option increases correctAnswers`() = runTest {
         val viewModel = createViewModel()
-        advanceUntilIdle()
+        runCurrent()
 
         viewModel.onAction(UiAction.OnOptionSelect(option1))
-        advanceUntilIdle()
+        runCurrent()
 
         assertThat(viewModel.currentUiState.correctAnswers).isEqualTo(1)
         assertThat(viewModel.currentUiState.isSelectable).isFalse()
@@ -114,10 +116,10 @@ class QuizViewModelTest {
             ),
         )
         val viewModel = createViewModel(quiz = quiz)
-        advanceUntilIdle()
+        runCurrent()
 
         viewModel.onAction(UiAction.OnOptionSelect(impostor))
-        advanceUntilIdle()
+        runCurrent()
 
         val options = viewModel.currentUiState.options
         assertThat(options.single { it.id == realAnswer.id }.state).isEqualTo(OptionState.CORRECT)
@@ -129,10 +131,10 @@ class QuizViewModelTest {
     fun `OnNextClick on last question submits and emits NavigateSummary`() = runTest {
         coEvery { submitQuizUseCase(any(), any()) } returns Result.success(Unit)
         val viewModel = createViewModel()
-        advanceUntilIdle()
+        runCurrent()
 
         viewModel.onAction(UiAction.OnOptionSelect(option1))
-        advanceUntilIdle()
+        runCurrent()
 
         viewModel.uiEffect.test {
             viewModel.onAction(UiAction.OnNextClick)
@@ -149,7 +151,7 @@ class QuizViewModelTest {
     @Test
     fun `OnBackClick emits NavigateBack`() = runTest {
         val viewModel = createViewModel()
-        advanceUntilIdle()
+        runCurrent()
 
         viewModel.uiEffect.test {
             viewModel.onAction(UiAction.OnBackClick)
@@ -173,5 +175,68 @@ class QuizViewModelTest {
 
         assertThat(viewModel.currentUiState.dialogState?.isSuccess).isFalse()
         assertThat(viewModel.currentUiState.dialogState?.message).isEqualTo("quiz not found")
+    }
+
+    @Test
+    fun `timer starts at full duration and counts down each second`() = runTest {
+        val viewModel = createViewModel()
+        runCurrent()
+
+        assertThat(viewModel.currentUiState.remainingSeconds).isEqualTo(QuizContract.QUESTION_DURATION_SECONDS)
+        assertThat(viewModel.currentUiState.isTimerRunning).isTrue()
+
+        advanceTimeBy(3_000)
+        runCurrent()
+
+        assertThat(viewModel.currentUiState.remainingSeconds).isEqualTo(QuizContract.QUESTION_DURATION_SECONDS - 3)
+    }
+
+    @Test
+    fun `timer reaching zero reveals the answer and enables next`() = runTest {
+        val viewModel = createViewModel()
+        runCurrent()
+
+        advanceTimeBy(QuizContract.QUESTION_DURATION_SECONDS * 1_000L)
+        runCurrent()
+
+        val state = viewModel.currentUiState
+        assertThat(state.remainingSeconds).isEqualTo(0)
+        assertThat(state.isTimerRunning).isFalse()
+        assertThat(state.isSelectable).isFalse()
+        assertThat(state.isNextButtonEnable).isTrue()
+        assertThat(state.correctAnswers).isEqualTo(0)
+        assertThat(state.options.single { it.id == option1.id }.state).isEqualTo(OptionState.CORRECT)
+    }
+
+    @Test
+    fun `selecting an option stops the timer`() = runTest {
+        val viewModel = createViewModel()
+        runCurrent()
+        advanceTimeBy(3_000)
+        runCurrent()
+
+        viewModel.onAction(UiAction.OnOptionSelect(option1))
+        advanceUntilIdle()
+
+        assertThat(viewModel.currentUiState.remainingSeconds).isEqualTo(QuizContract.QUESTION_DURATION_SECONDS - 3)
+        assertThat(viewModel.currentUiState.isTimerRunning).isFalse()
+        assertThat(viewModel.currentUiState.correctAnswers).isEqualTo(1)
+    }
+
+    @Test
+    fun `moving to the next question restarts the timer`() = runTest {
+        val viewModel = createViewModel(quiz = quizModel.copy(questions = listOf(question, question)))
+        runCurrent()
+        advanceTimeBy(4_000)
+        runCurrent()
+        viewModel.onAction(UiAction.OnOptionSelect(option1))
+        runCurrent()
+
+        viewModel.onAction(UiAction.OnNextClick)
+        runCurrent()
+
+        assertThat(viewModel.currentUiState.quizNumber).isEqualTo(2)
+        assertThat(viewModel.currentUiState.remainingSeconds).isEqualTo(QuizContract.QUESTION_DURATION_SECONDS)
+        assertThat(viewModel.currentUiState.isTimerRunning).isTrue()
     }
 }

@@ -9,15 +9,17 @@ import com.canerture.quiz.domain.usecase.CalculateScoreUseCase
 import com.canerture.quiz.domain.usecase.GetQuizUseCase
 import com.canerture.quiz.domain.usecase.SubmitQuizUseCase
 import com.canerture.quiz.domain.usecase.UpdateOptionsUseCase
+import com.canerture.quiz.ui.QuizContract.QUESTION_DURATION_SECONDS
 import com.canerture.quiz.ui.QuizContract.UiAction
 import com.canerture.quiz.ui.QuizContract.UiEffect
 import com.canerture.quiz.ui.QuizContract.UiState
-import com.canerture.quiz.ui.component.TimerState
 import com.canerture.quiz.ui.navigation.Quiz
 import com.canerture.ui.components.DialogState
 import com.canerture.ui.delegate.mvi.MVI
 import com.canerture.ui.delegate.mvi.mvi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,6 +33,8 @@ internal class QuizViewModel @Inject constructor(
 ) : ViewModel(),
     MVI<UiState, UiAction, UiEffect> by mvi(UiState()) {
 
+    private var timerJob: Job? = null
+
     init {
         val args: Quiz = savedStateHandle.toRoute()
         getQuiz(args.id)
@@ -41,7 +45,6 @@ internal class QuizViewModel @Inject constructor(
             when (uiAction) {
                 UiAction.OnBackClick -> emitUiEffect(UiEffect.NavigateBack)
                 UiAction.OnNextClick -> handleNextClick()
-                UiAction.OnTimeOut -> handleTimeOut()
                 is UiAction.OnOptionSelect -> handleOptionSelect(uiAction.option)
             }
         }
@@ -61,9 +64,9 @@ internal class QuizViewModel @Inject constructor(
                         question = it.questions.firstOrNull(),
                         options = it.questions.firstOrNull()?.options.orEmpty(),
                         quizNumber = 1,
-                        timerState = TimerState.RESET,
                     )
                 }
+                startTimer()
             },
             onFailure = {
                 updateUiState {
@@ -120,16 +123,16 @@ internal class QuizViewModel @Inject constructor(
                     quizNumber = quizNumber + 1,
                     isSelectable = true,
                     isNextButtonEnable = false,
-                    timerState = TimerState.RESET,
                 )
             }
+            startTimer()
         } else {
             submitQuiz()
         }
     }
 
     private fun handleOptionSelect(option: OptionModel) {
-        updateUiState { copy(timerState = TimerState.STOP) }
+        stopTimer()
         updateOptionsUseCase(
             options = currentUiState.options,
             selectedOption = option,
@@ -148,7 +151,6 @@ internal class QuizViewModel @Inject constructor(
     }
 
     private fun handleTimeOut() {
-        updateUiState { copy(timerState = TimerState.STOP) }
         updateOptionsUseCase(
             options = currentUiState.options,
             answer = currentUiState.question?.answer.orEmpty(),
@@ -161,5 +163,28 @@ internal class QuizViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    private fun startTimer() {
+        timerJob?.cancel()
+        updateUiState { copy(remainingSeconds = QUESTION_DURATION_SECONDS, isTimerRunning = true) }
+        timerJob = viewModelScope.launch {
+            repeat(QUESTION_DURATION_SECONDS) {
+                delay(TIMER_TICK_MILLIS)
+                updateUiState { copy(remainingSeconds = remainingSeconds - 1) }
+            }
+            updateUiState { copy(isTimerRunning = false) }
+            handleTimeOut()
+        }
+    }
+
+    private fun stopTimer() {
+        timerJob?.cancel()
+        timerJob = null
+        updateUiState { copy(isTimerRunning = false) }
+    }
+
+    private companion object {
+        const val TIMER_TICK_MILLIS = 1_000L
     }
 }

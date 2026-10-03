@@ -22,7 +22,6 @@ import com.canerture.quiz.ui.QuizContract.UiState
 import com.canerture.quiz.ui.component.AnswerButton
 import com.canerture.quiz.ui.component.QuestionCountProgress
 import com.canerture.quiz.ui.component.QuizzyTimer
-import com.canerture.quiz.ui.component.TimerState
 import com.canerture.ui.components.QuizzyButton
 import com.canerture.ui.components.QuizzyDialog
 import com.canerture.ui.components.QuizzyLoading
@@ -69,10 +68,8 @@ internal fun QuizScreen(
                 .padding(paddingValues)
                 .padding(horizontal = 32.dp),
             uiState = uiState,
-            timerState = uiState.timerState,
             onOptionSelect = { onAction(UiAction.OnOptionSelect(it)) },
             onNextClick = { onAction(UiAction.OnNextClick) },
-            onTimeOut = { onAction(UiAction.OnTimeOut) },
         )
     }
 
@@ -91,10 +88,8 @@ internal fun QuizScreen(
 @Composable
 internal fun QuizContent(
     uiState: UiState,
-    timerState: TimerState,
     onOptionSelect: (OptionModel) -> Unit,
     onNextClick: () -> Unit,
-    onTimeOut: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -109,8 +104,8 @@ internal fun QuizContent(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .size(164.dp),
-            state = timerState,
-            onTimeOut = onTimeOut,
+            remainingSeconds = uiState.remainingSeconds,
+            isRunning = uiState.isTimerRunning,
         )
         QuizzySpacer(36.dp)
         QuizzyText(

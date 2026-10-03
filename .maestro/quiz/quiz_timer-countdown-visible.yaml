@@ -24,8 +24,8 @@ name: "Quiz — countdown timer is visible on an active question"
     visible:
       id: "quiz.questionText"
     timeout: 15000
-# The timer starts counting immediately (TimerState.START); the countdown text
-# is shown while currentTime > 0. Assert on it right after the question renders.
+# QuizViewModel starts the countdown as soon as the quiz loads; the countdown text
+# is shown while remainingSeconds > 0. Assert on it right after the question renders.
 - extendedWaitUntil:
     visible:
       id: "quiz.timerCountdownText"

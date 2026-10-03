@@ -9,12 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
@@ -23,65 +18,32 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.canerture.feature.quiz.ui.R
+import com.canerture.quiz.ui.QuizContract.QUESTION_DURATION_SECONDS
 import com.canerture.quiz.ui.QuizTestTags
 import com.canerture.ui.components.QuizzyText
 import com.canerture.ui.theme.QuizAppTheme
 
-internal enum class TimerState {
-    START,
-    STOP,
-    RESET,
-}
-
 @Composable
 internal fun QuizzyTimer(
+    remainingSeconds: Int,
+    isRunning: Boolean,
     modifier: Modifier = Modifier,
-    state: TimerState,
-    onTimeOut: () -> Unit,
 ) {
-    val progressRatio = remember { Animatable(initialValue = 1f) }
+    val progressRatio = remember { Animatable(initialValue = remainingSeconds.toProgressRatio()) }
     val circleStyle = Stroke(width = 30f)
     val arcStyle = Stroke(width = 30f, cap = StrokeCap.Round)
     val bgColor = QuizAppTheme.colors.lightBlue.copy(alpha = 0.5f)
     val trackColor = QuizAppTheme.colors.blue
     val lastColor = QuizAppTheme.colors.red
 
-    var currentTime by rememberSaveable { mutableIntStateOf(10) }
-    var isRunning by rememberSaveable { mutableStateOf(false) }
-
-    LaunchedEffect(state) {
-        when (state) {
-            TimerState.START -> {
-                isRunning = false
-                currentTime = 10
-                progressRatio.snapTo(1f)
-                isRunning = true
-            }
-
-            TimerState.STOP -> {
-                isRunning = false
-                progressRatio.snapTo(currentTime / 10f)
-            }
-
-            else -> {
-                isRunning = true
-                currentTime = 10
-                progressRatio.snapTo(1f)
-            }
-        }
-    }
-
-    LaunchedEffect(isRunning) {
-        if (isRunning) {
-            while (currentTime > 0) {
-                val targetValue = (currentTime - 1).toFloat() / 10
-                progressRatio.animateTo(
-                    targetValue = targetValue,
-                    animationSpec = tween(durationMillis = 1000, easing = LinearEasing),
-                )
-                currentTime -= 1
-            }
-            isRunning = false
+    // The countdown itself lives in QuizViewModel; this only animates the arc between ticks.
+    LaunchedEffect(remainingSeconds, isRunning) {
+        progressRatio.snapTo(remainingSeconds.toProgressRatio())
+        if (isRunning && remainingSeconds > 0) {
+            progressRatio.animateTo(
+                targetValue = (remainingSeconds - 1).toProgressRatio(),
+                animationSpec = tween(durationMillis = TICK_DURATION_MILLIS, easing = LinearEasing),
+            )
         }
     }
 
@@ -100,14 +62,14 @@ internal fun QuizzyTimer(
             )
 
             drawArc(
-                color = if (currentTime <= 3) lastColor else trackColor,
+                color = if (remainingSeconds <= LAST_SECONDS_THRESHOLD) lastColor else trackColor,
                 startAngle = -90f,
                 sweepAngle = 360 * progressRatio.value,
                 useCenter = false,
                 style = arcStyle,
             )
         }
-        if (currentTime == 0 && !isRunning) {
+        if (remainingSeconds == 0) {
             QuizzyText(
                 testTag = QuizTestTags.TIMER_TIMES_UP_TEXT,
                 text = stringResource(R.string.times_up),
@@ -116,14 +78,9 @@ internal fun QuizzyTimer(
         } else {
             QuizzyText(
                 testTag = QuizTestTags.TIMER_COUNTDOWN_TEXT,
-                text = currentTime.toString(),
+                text = remainingSeconds.toString(),
                 style = QuizAppTheme.typography.heading1,
             )
-        }
-        LaunchedEffect(currentTime) {
-            if (currentTime == 0) {
-                onTimeOut()
-            }
         }
     }
 }
@@ -133,7 +90,12 @@ internal fun QuizzyTimer(
 internal fun QuizzyTimerPreview() {
     QuizzyTimer(
         modifier = Modifier.size(200.dp),
-        state = TimerState.START,
-        onTimeOut = {},
+        remainingSeconds = 7,
+        isRunning = false,
     )
 }
+
+private fun Int.toProgressRatio(): Float = this / QUESTION_DURATION_SECONDS.toFloat()
+
+private const val TICK_DURATION_MILLIS = 1_000
+private const val LAST_SECONDS_THRESHOLD = 3

@@ -24,5 +24,5 @@ Reached after login: Home → tap first popular quiz (`home.popularQuizItem.name
 |---|---|
 | Full quiz solve → Summary | Long and fragile: requires answering every question through the timer, and the flow is subject to timing/network. Task explicitly excludes driving the whole quiz to Summary. |
 | Correct vs. incorrect answer states | Answer options share one non-indexed tag and correctness depends on live data; a specific answer cannot be targeted deterministically. |
-| Timeout (`quiz.timerTimesUpText`) path | Requires waiting out the full ~10s countdown without answering; timing-dependent and slow. `OnTimeOut` is covered by JVM ViewModel tests. |
+| Timeout (`quiz.timerTimesUpText`) path | Requires waiting out the full ~10s countdown without answering; timing-dependent and slow. The timeout path is covered by `QuizViewModelTest`. |
 | Load/submit error dialog (`quiz.dialog`) | Only appears when `getQuizUseCase`/`submitQuizUseCase` fails; not reachable from a normal authenticated launch with a healthy backend. |

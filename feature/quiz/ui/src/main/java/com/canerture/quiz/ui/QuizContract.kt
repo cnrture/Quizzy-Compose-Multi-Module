@@ -2,10 +2,11 @@ package com.canerture.quiz.ui
 
 import com.canerture.quiz.domain.model.OptionModel
 import com.canerture.quiz.domain.model.QuestionModel
-import com.canerture.quiz.ui.component.TimerState
 import com.canerture.ui.components.DialogState
 
 internal object QuizContract {
+    const val QUESTION_DURATION_SECONDS = 10
+
     data class UiState(
         val isLoading: Boolean = false,
         val id: Int = 0,
@@ -19,13 +20,13 @@ internal object QuizContract {
         val isSelectable: Boolean = true,
         val isNextButtonEnable: Boolean = false,
         val dialogState: DialogState? = null,
-        val timerState: TimerState = TimerState.STOP,
+        val remainingSeconds: Int = QUESTION_DURATION_SECONDS,
+        val isTimerRunning: Boolean = false,
     )
 
     sealed interface UiAction {
         data object OnBackClick : UiAction
         data object OnNextClick : UiAction
-        data object OnTimeOut : UiAction
         data class OnOptionSelect(val option: OptionModel) : UiAction
     }
 
