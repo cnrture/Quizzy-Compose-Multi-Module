@@ -120,8 +120,8 @@ internal fun CategoryContent(
                 )
                 QuizzySpacer(16.dp)
                 QuizzyText(
-                    testTag = CategoryTestTags.QUESTION_COUNT_TEXT,
-                    text = stringResource(id = R.string.question_count, uiState.quizzes.size),
+                    testTag = CategoryTestTags.QUIZ_COUNT_TEXT,
+                    text = stringResource(id = R.string.quiz_count, uiState.quizzes.size),
                     style = QuizAppTheme.typography.heading5,
                 )
             }

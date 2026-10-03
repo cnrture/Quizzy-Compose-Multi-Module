@@ -22,4 +22,4 @@ name: "Category — screen renders after tapping a Home category"
 - assertVisible:
     id: "category.titleText"
 - assertVisible:
-    id: "category.questionCountText"
+    id: "category.quizCountText"

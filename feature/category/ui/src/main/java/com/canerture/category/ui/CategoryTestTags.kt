@@ -4,7 +4,7 @@ internal object CategoryTestTags {
     const val TOOLBAR = "category.toolbar"
     const val CATEGORY_IMAGE = "category.categoryImage"
     const val TITLE_TEXT = "category.titleText"
-    const val QUESTION_COUNT_TEXT = "category.questionCountText"
+    const val QUIZ_COUNT_TEXT = "category.quizCountText"
     const val DIALOG = "category.dialog"
 
     // Quiz grid item
